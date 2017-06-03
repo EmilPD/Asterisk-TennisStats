@@ -1,4 +1,8 @@
-# Initial Project Structure
+# Team Asterisk - Teamwork Project
+
+**Telerik Academy - Season 8 - Databases Course**
+
+## Initial Project Structure
 
 - TeamAsterisk.DataSources		// here are all XML, JSON and/or Excel Files
 - TeamAsterisk.Reports			// here goes all PDF reports
@@ -15,11 +19,11 @@
 - TeamAsterisk.UnitTests
 
 
-# ATP Tennis Statistics
+## ATP Tennis Statistics
 
-## [Requirements for teamwork](https://github.com/TelerikAcademy/Databases/tree/master/Teamwork/2017)
+### [Requirements for teamwork](https://github.com/TelerikAcademy/Databases/tree/master/Teamwork/2017)
 
-## Data to store in database
+### Data to store in database
 - [Players](http://www.atpworldtour.com/en/rankings/singles)
     - Id (int)
     - FirstName (string)
@@ -62,14 +66,14 @@
     - Id
     - Name (string, clay, grass, hard, ...)
 
-## Optional Data (tables)
+### Optional Data (tables)
 Can Introduse other tables if needed:
 - [Coaches](http://www.atpworldtour.com/en/players/coaches)
 - [Umpires](https://en.wikipedia.org/wiki/List_of_tennis_umpires)
 - [Rounds](https://en.wikipedia.org/wiki/Single-elimination_tournament) (1/16, 1/4)
 - [TournamentSeries](https://en.wikipedia.org/wiki/Association_of_Tennis_Professionals) (250, 500, Grand Slam)
 
-## Data to be Extracted
+### Data to be Extracted
 Possible type of data that can be extracted
 - Players list with data
 - Tournaments schedule by date, town, country
@@ -77,7 +81,7 @@ Possible type of data that can be extracted
 - Head to head matches and statistics
 - Any other combination
 
-## Data to be added
+### Data to be added
 Simple ways to add data
 - New Player
 - New City
