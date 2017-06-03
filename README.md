@@ -1,4 +1,18 @@
-Team
+# Initial Project Structure
+
+TeamAsterisk.DataSources		// here are all XML, JSON and/or Excel Files
+TeamAsterisk.Reports			// here goes all PDF reports
+TeamAsterisk.XMLDataReader		//\
+TeamAsterisk.ExcelDataReader 	//	-- only one is required
+TeamAsterisk.JSONDataReader		///
+TeamAsterisk.ExportToPDF
+TeamAsterisk.Models
+TeamAsterisk.PostgreSQLData
+TeamAsterisk.SQLiteData
+TeamAsterisk.SQLServerData
+TeamAsterisk.Utils
+TeamAsterisk.Client				// WPF or Console App or ASP.NET Web App
+TeamAsterisk.UnitTests
 
 
 # ATP Tennis Statistics
