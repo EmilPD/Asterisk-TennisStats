@@ -20,13 +20,14 @@
 ## [Requirements for teamwork](https://github.com/TelerikAcademy/Databases/tree/master/Teamwork/2017)
 
 ## Data to store in database
-- Players
+- [Players](http://www.atpworldtour.com/en/rankings/singles)
     - Id (int)
     - FirstName (string)
     - LastName (string)
     - Ranking (int)
     - BirthDate (dateTime)
-    - CityId (int, esidence)
+    - CityId (int, residence, country derived from here)
+    - CoachId (optional)
 - Cities
     - Id (int)
     - Name (string)
@@ -35,10 +36,10 @@
 - Countries
     - Id (int)
     - Name (string)
-- Tournaments-Cities
+- Tournaments-Cities ( intermediate table, for many-to-many relation )
     - CityId (int)
     - TournamentId (int)
-- Tournaments
+- [Tournaments](http://www.atpworldtour.com/en/tournaments)
     - Id (int)
     - Name (string)
     - StartDate (dateTime)
@@ -46,24 +47,27 @@
     - SurfaceId ( int, surfaces can be reused in maches )
     - PrizeMoney (money)
     - CityId (int, many to many table)
-- Matches
+- [Matches](http://www.tennis-data.co.uk/alldata.php)
     - Id
     - DatePlayed
-    - FirstPlayerId
-    - SecondPlayerId
-    - Result (string)
     - WinnerId
+    - LoserId
+    - Result (can be represented by games won by each player, or simple)
+        - `6–4, 4–6, 7–6(7–5)` - simple style
+        - Set1, Set2, Set3, Set4, Set5 - more complex style
+        - W1, L1, W2, L2, W3, L3, W4, L4, W5, L5 - every player games won
     - TournamentId
-- Surfaces
+    - SurfaceId (optional)
+- [Surfaces](http://sportsbyapt.com/types-tennis-courts/)
     - Id
     - Name (string, clay, grass, hard, ...)
 
 ## Optional Data (tables)
 Can Introduse other tables if needed:
-- Coaches
-- Umpires
-- Rounds (1/16, 1/4)
-- TournamentRanks (250, 500, Grand Slam)
+- [Coaches](http://www.atpworldtour.com/en/players/coaches)
+- [Umpires](https://en.wikipedia.org/wiki/List_of_tennis_umpires)
+- [Rounds](https://en.wikipedia.org/wiki/Single-elimination_tournament) (1/16, 1/4)
+- [TournamentSeries](https://en.wikipedia.org/wiki/Association_of_Tennis_Professionals) (250, 500, Grand Slam)
 
 ## Data to be Extracted
 Possible type of data that can be extracted
