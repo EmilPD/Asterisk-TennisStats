@@ -29,7 +29,7 @@
     - SurfaceId ( int, surfaces can be reused in maches )
     - PrizeMoney (money)
     - CityId (int, many to many table)
-- Mathes
+- Matches
     - Id
     - DatePlayed
     - FirstPlayerId
