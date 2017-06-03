@@ -60,8 +60,7 @@
         - `6–4, 4–6, 7–6(7–5)` - simple style
         - Set1, Set2, Set3, Set4, Set5 - more complex style
         - W1, L1, W2, L2, W3, L3, W4, L4, W5, L5 - every player games won
-    - TournamentId
-    - SurfaceId (optional)
+    - TournamentId (tousnament defines other details - surface)
 - [Surfaces](http://sportsbyapt.com/types-tennis-courts/)
     - Id
     - Name (string, clay, grass, hard, ...)
