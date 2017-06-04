@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7FAE46C1-B810-4023-8FFE-C870D3463224}</ProjectGuid>
+    <ProjectGuid>{E2C9E82D-7F7B-48E1-935B-6AB976BF3752}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ATPTennisStat.WPFClient</RootNamespace>
