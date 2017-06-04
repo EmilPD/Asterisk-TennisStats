@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ATPTennisStat.Properties
+namespace ATPTennisStat.WPFClient.Properties
 {
 
 
