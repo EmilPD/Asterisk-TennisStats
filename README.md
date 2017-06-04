@@ -18,6 +18,13 @@
 - TeamAsterisk.Client				// WPF or Console App or ASP.NET Web App
 - TeamAsterisk.UnitTests
 
+### Team Members
+
+| Name | Telerik Student system username |
+|:----:|:-----------------------:|
+| [Захари Димитров](https://github.com/) | ----- |
+| [Иван Петров](https://github.com/) | ----- |
+| [Емил Димитров](https://github.com/EmilPD) | qwerty123 |
 
 ## ATP Tennis Statistics
 
