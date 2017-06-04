@@ -86,6 +86,7 @@
 ### Optional Data (tables)
 Can Introduse other tables if needed:
 - [Rounds](https://en.wikipedia.org/wiki/Single-elimination_tournament) (1/16, 1/4)
+- [PointDistribution](https://en.wikipedia.org/wiki/2017_ATP_World_Tour)
 
 ### Data to be Extracted
 Possible type of data that can be extracted
