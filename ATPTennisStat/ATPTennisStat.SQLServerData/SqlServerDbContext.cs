@@ -34,10 +34,11 @@ namespace ATPTennisStat.SQLServerData
             //    .HasMany(c => c.Players);
 
             modelBuilder.Configurations.Add(new CityConfiguration());
+            modelBuilder.Configurations.Add(new CoachConfiguration());
+            modelBuilder.Configurations.Add(new PlayerConfiguration());
             modelBuilder.Configurations.Add(new TournamentCategoryConfiguration());
             modelBuilder.Configurations.Add(new SurfaceConfiguration());
             modelBuilder.Configurations.Add(new UmpireConfiguration());
-            modelBuilder.Configurations.Add(new CoachConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
