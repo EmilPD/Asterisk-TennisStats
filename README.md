@@ -23,7 +23,7 @@
 | Name | Telerik Student system username |
 |:----:|:-----------------------:|
 | [Захари Димитров](https://github.com/) | ----- |
-| [Иван Петров](https://github.com/) | ----- |
+| [Иван Петров](https://github.com/tinmajk) | tinmajk |
 | [Емил Димитров](https://github.com/EmilPD) | qwerty123 |
 
 ## ATP Tennis Statistics
