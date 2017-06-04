@@ -7,7 +7,7 @@ namespace ATPTennisStat.SQLServerData
     public class SqlServerDbContext : DbContext
     {
         public SqlServerDbContext()
-            : base("ATPTennisStatSqlServer14")
+            : base("ATPTennisStatSqlServer")
         {
             //this.Configuration.LazyLoadingEnabled = false;
         }
