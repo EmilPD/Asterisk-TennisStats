@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ATPTennisStat.Models\ATPTennisStat.Models.csproj">
-      <Project>{12DE3FD9-6EBC-408D-AF51-1A7F7C712108}</Project>
+      <Project>{12de3fd9-6ebc-408d-af51-1a7f7c712108}</Project>
       <Name>ATPTennisStat.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\ATPTennisStat.Repositories\ATPTennisStat.Repositories.csproj">
@@ -69,7 +69,7 @@
       <Name>ATPTennisStat.Repositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\ATPTennisStat.SQLServerData\ATPTennisStat.SQLServerData.csproj">
-      <Project>{81FBD9B4-F1C8-4316-8A6B-D932362B6540}</Project>
+      <Project>{81fbd9b4-f1c8-4316-8a6b-d932362b6540}</Project>
       <Name>ATPTennisStat.SQLServerData</Name>
     </ProjectReference>
   </ItemGroup>

@@ -49,13 +49,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityConfigurations\PlayerConfiguration.cs" />
     <Compile Include="EntityConfigurations\CoachConfiguration.cs" />
     <Compile Include="EntityConfigurations\CityConfiguration.cs" />
+    <Compile Include="Migrations\201706041435428_Initial.cs" />
+    <Compile Include="Migrations\201706041435428_Initial.Designer.cs">
+      <DependentUpon>201706041435428_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706041709394_CitiesTableConstraints.cs" />
+    <Compile Include="Migrations\201706041709394_CitiesTableConstraints.Designer.cs">
+      <DependentUpon>201706041709394_CitiesTableConstraints.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706041737493_Add Data Annotations To Tournaments.cs" />
+    <Compile Include="Migrations\201706041737493_Add Data Annotations To Tournaments.Designer.cs">
+      <DependentUpon>201706041737493_Add Data Annotations To Tournaments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706041844173_Add Constraints To Category Umpire Surface.cs" />
+    <Compile Include="Migrations\201706041844173_Add Constraints To Category Umpire Surface.Designer.cs">
+      <DependentUpon>201706041844173_Add Constraints To Category Umpire Surface.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706041948190_Missing Migration.cs" />
+    <Compile Include="Migrations\201706041948190_Missing Migration.Designer.cs">
+      <DependentUpon>201706041948190_Missing Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706041955359_Added Constraints For Coach.cs" />
+    <Compile Include="Migrations\201706041955359_Added Constraints For Coach.Designer.cs">
+      <DependentUpon>201706041955359_Added Constraints For Coach.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SqlServerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerUnitOfWork.cs" />
+    <Compile Include="EntityConfigurations\TournamentCategoryConfiguration.cs" />
+    <Compile Include="EntityConfigurations\SurfaceConfiguration.cs" />
+    <Compile Include="EntityConfigurations\UmpireConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -70,6 +96,26 @@
       <Project>{B4FC6642-8C45-49EC-B3F3-FFA883FADF4F}</Project>
       <Name>ATPTennisStat.Repositories</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201706041435428_Initial.resx">
+      <DependentUpon>201706041435428_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041709394_CitiesTableConstraints.resx">
+      <DependentUpon>201706041709394_CitiesTableConstraints.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041737493_Add Data Annotations To Tournaments.resx">
+      <DependentUpon>201706041737493_Add Data Annotations To Tournaments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041844173_Add Constraints To Category Umpire Surface.resx">
+      <DependentUpon>201706041844173_Add Constraints To Category Umpire Surface.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041948190_Missing Migration.resx">
+      <DependentUpon>201706041948190_Missing Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041955359_Added Constraints For Coach.resx">
+      <DependentUpon>201706041955359_Added Constraints For Coach.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

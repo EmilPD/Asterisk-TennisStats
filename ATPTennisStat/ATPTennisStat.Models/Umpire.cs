@@ -8,8 +8,8 @@
 
         public string LastName { get; set; }
 
-        public ushort YearActiveFrom { get; set; }
+        public short YearActiveFrom { get; set; } // not required
 
-        public virtual Country Country { get; set; }
+        public virtual Country Country { get; set; } // not required
     }
 }

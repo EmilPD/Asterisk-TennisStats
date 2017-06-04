@@ -7,7 +7,7 @@ namespace ATPTennisStat.SQLServerData
     public class SqlServerDbContext : DbContext
     {
         public SqlServerDbContext()
-            : base("ATPTennisStatSqlServer14")
+            : base("ATPTennisStatSqlServer")
         {
             //this.Configuration.LazyLoadingEnabled = false;
         }
@@ -34,6 +34,10 @@ namespace ATPTennisStat.SQLServerData
             //    .HasMany(c => c.Players);
 
             modelBuilder.Configurations.Add(new CityConfiguration());
+            modelBuilder.Configurations.Add(new TournamentCategoryConfiguration());
+            modelBuilder.Configurations.Add(new SurfaceConfiguration());
+            modelBuilder.Configurations.Add(new UmpireConfiguration());
+            modelBuilder.Configurations.Add(new CoachConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
