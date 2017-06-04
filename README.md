@@ -42,14 +42,11 @@
 - Cities
     - Id (int)
     - Name (string)
-    - TournamentId (int, many to many table)
+    - TournamentId (int, Many tournaments can be made in one City)
     - CountryId (int)
 - Countries
     - Id (int)
     - Name (string)
-- Tournaments-Cities ( intermediate table, for many-to-many relation )
-    - CityId (int)
-    - TournamentId (int)
 - [Tournaments](http://www.atpworldtour.com/en/tournaments)
     - Id (int)
     - Name (string)
@@ -57,7 +54,7 @@
     - EndDate (dateTime)
     - SurfaceId ( int, surfaces can be reused in maches )
     - PrizeMoney (money)
-    - CityId (int, many to many table)
+    - CityId (one City can have many Tournaments!)
 - [Matches](http://www.tennis-data.co.uk/alldata.php)
     - Id
     - DatePlayed
