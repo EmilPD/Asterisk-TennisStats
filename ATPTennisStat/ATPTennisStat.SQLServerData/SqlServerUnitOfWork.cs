@@ -1,14 +1,13 @@
-﻿
-
-using ATPTennisStat.Repositories.Contracts;
+﻿using ATPTennisStat.Repositories.Contracts;
+using ATPTennisStat.SQLServerData;
 
 namespace ATPTennisStat.Repositories
 {
-    public class UnitOfWork : IUnitOfWork
+    public class SqlServerUnitOfWork : IUnitOfWork
     {
-        private readonly ATPTennisStatContext context;
+        private readonly SqlServerDbContext context;
 
-        public UnitOfWork(ATPTennisStatContext context)
+        public SqlServerUnitOfWork(SqlServerDbContext context)
         {
             this.context = context;
         }

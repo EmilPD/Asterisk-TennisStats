@@ -59,6 +59,16 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ATPTennisStat.Models\ATPTennisStat.Models.csproj">
+      <Project>{12DE3FD9-6EBC-408D-AF51-1A7F7C712108}</Project>
+      <Name>ATPTennisStat.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.Repositories\ATPTennisStat.Repositories.csproj">
+      <Project>{b4fc6642-8c45-49ec-b3f3-ffa883fadf4f}</Project>
+      <Name>ATPTennisStat.Repositories</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

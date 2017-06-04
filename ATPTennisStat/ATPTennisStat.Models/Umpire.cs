@@ -1,6 +1,6 @@
 ﻿namespace ATPTennisStat.Models
 {
-    class Umpire
+    public class Umpire
     {
         public int Id { get; set; }
 
