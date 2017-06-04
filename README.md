@@ -18,11 +18,11 @@
 - TeamAsterisk.Client				// WPF or Console App or ASP.NET Web App
 - TeamAsterisk.UnitTests
 
-### Team Members
+## Team Members
 
 | Name | Telerik Student system username |
 |:----:|:-----------------------:|
-| [Захари Димитров](https://github.com/) | ----- |
+| [Захари Димитров](https://github.com/zachdimitrov) | ZachD |
 | [Иван Петров](https://github.com/tinmanjk) | tinman |
 | [Емил Димитров](https://github.com/EmilPD) | qwerty123 |
 
