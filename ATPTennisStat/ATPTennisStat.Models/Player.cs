@@ -16,9 +16,9 @@ namespace ATPTennisStat.Models
 
         public string LastName { get; set; }
 
-        public double Height { get; set; }
+        public float Height { get; set; }
 
-        public double Weight { get; set; }
+        public float Weight { get; set; }
 
         public DateTime BirthDate { get; set; }
 

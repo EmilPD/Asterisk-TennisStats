@@ -49,19 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityConfigurations\PlayerConfiguration.cs" />
+    <Compile Include="EntityConfigurations\CoachConfiguration.cs" />
     <Compile Include="EntityConfigurations\CityConfiguration.cs" />
-    <Compile Include="Migrations\201706041435428_Initial.cs" />
-    <Compile Include="Migrations\201706041435428_Initial.Designer.cs">
-      <DependentUpon>201706041435428_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706041709394_CitiesTableConstraints.cs" />
-    <Compile Include="Migrations\201706041709394_CitiesTableConstraints.Designer.cs">
-      <DependentUpon>201706041709394_CitiesTableConstraints.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706041737493_Add Data Annotations To Tournaments.cs" />
-    <Compile Include="Migrations\201706041737493_Add Data Annotations To Tournaments.Designer.cs">
-      <DependentUpon>201706041737493_Add Data Annotations To Tournaments.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SqlServerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,17 +70,6 @@
       <Project>{B4FC6642-8C45-49EC-B3F3-FFA883FADF4F}</Project>
       <Name>ATPTennisStat.Repositories</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706041435428_Initial.resx">
-      <DependentUpon>201706041435428_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706041709394_CitiesTableConstraints.resx">
-      <DependentUpon>201706041709394_CitiesTableConstraints.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706041737493_Add Data Annotations To Tournaments.resx">
-      <DependentUpon>201706041737493_Add Data Annotations To Tournaments.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

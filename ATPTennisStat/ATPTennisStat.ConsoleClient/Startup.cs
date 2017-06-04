@@ -1,9 +1,6 @@
-﻿using ATPTennisStat.Models;
-using ATPTennisStat.Repositories;
-using ATPTennisStat.SQLServerData;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
+using ATPTennisStat.SQLServerData;
 
 namespace ATPTennisStat.ConsoleClient
 {
