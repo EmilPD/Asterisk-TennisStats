@@ -7,13 +7,13 @@ namespace ATPTennisStat.SQLServerData.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ChangedCitiesTableConstraints : IMigrationMetadata
+    public sealed partial class CitiesTableConstraints : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangedCitiesTableConstraints));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CitiesTableConstraints));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706041534191_ChangedCitiesTableConstraints"; }
+            get { return "201706041709394_CitiesTableConstraints"; }
         }
         
         string IMigrationMetadata.Source

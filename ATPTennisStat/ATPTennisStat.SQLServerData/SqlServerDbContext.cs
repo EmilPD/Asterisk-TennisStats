@@ -37,6 +37,8 @@ namespace ATPTennisStat.SQLServerData
             modelBuilder.Configurations.Add(new TournamentCategoryConfiguration());
             modelBuilder.Configurations.Add(new SurfaceConfiguration());
             modelBuilder.Configurations.Add(new UmpireConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

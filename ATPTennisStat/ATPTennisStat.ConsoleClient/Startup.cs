@@ -1,9 +1,9 @@
-﻿using ATPTennisStat.Repositories;
+﻿using ATPTennisStat.Models;
+using ATPTennisStat.Repositories;
+using ATPTennisStat.SQLServerData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -11,7 +11,27 @@ namespace ATPTennisStat.ConsoleClient
     {
         static void Main()
         {
-           
+            var context = new SqlServerDbContext();
+            
+            //context.Cities.Add(new City
+            //{
+            //    Name = "Varna"
+            //    //Country = new Country { Name = "Bulgaria" },
+            //    //Players = new List<Player> { new Player { FirstName = "Ivan" } },
+            //    //Tournaments = new List<Tournament> { new Tournament
+            //    //    { Name = "Paris", PrizeMoney = 10 } }
+            //});
+
+            //context.SaveChanges();
+
+            var selectedCity = context.Cities
+                .Where(c => c.Name == "Varna")
+                .Select(c => new
+                {
+                    CityName = c.Name
+                })
+                .FirstOrDefault();
+            Console.WriteLine(selectedCity);
         }
     }
 }

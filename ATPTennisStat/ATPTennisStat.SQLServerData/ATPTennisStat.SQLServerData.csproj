@@ -54,9 +54,9 @@
     <Compile Include="Migrations\201706041435428_Initial.Designer.cs">
       <DependentUpon>201706041435428_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706041534191_ChangedCitiesTableConstraints.cs" />
-    <Compile Include="Migrations\201706041534191_ChangedCitiesTableConstraints.Designer.cs">
-      <DependentUpon>201706041534191_ChangedCitiesTableConstraints.cs</DependentUpon>
+    <Compile Include="Migrations\201706041709394_CitiesTableConstraints.cs" />
+    <Compile Include="Migrations\201706041709394_CitiesTableConstraints.Designer.cs">
+      <DependentUpon>201706041709394_CitiesTableConstraints.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201706041737493_Add Data Annotations To Tournaments.cs" />
     <Compile Include="Migrations\201706041737493_Add Data Annotations To Tournaments.Designer.cs">
@@ -92,8 +92,8 @@
     <EmbeddedResource Include="Migrations\201706041435428_Initial.resx">
       <DependentUpon>201706041435428_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706041534191_ChangedCitiesTableConstraints.resx">
-      <DependentUpon>201706041534191_ChangedCitiesTableConstraints.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706041709394_CitiesTableConstraints.resx">
+      <DependentUpon>201706041709394_CitiesTableConstraints.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706041737493_Add Data Annotations To Tournaments.resx">
       <DependentUpon>201706041737493_Add Data Annotations To Tournaments.cs</DependentUpon>
