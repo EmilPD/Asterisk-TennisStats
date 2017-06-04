@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201706041534191_ChangedCitiesTableConstraints.Designer.cs">
       <DependentUpon>201706041534191_ChangedCitiesTableConstraints.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706041737493_Add Data Annotations To Tournaments.cs" />
+    <Compile Include="Migrations\201706041737493_Add Data Annotations To Tournaments.Designer.cs">
+      <DependentUpon>201706041737493_Add Data Annotations To Tournaments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SqlServerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706041534191_ChangedCitiesTableConstraints.resx">
       <DependentUpon>201706041534191_ChangedCitiesTableConstraints.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041737493_Add Data Annotations To Tournaments.resx">
+      <DependentUpon>201706041737493_Add Data Annotations To Tournaments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
