@@ -62,10 +62,17 @@
     <Compile Include="Migrations\201706041737493_Add Data Annotations To Tournaments.Designer.cs">
       <DependentUpon>201706041737493_Add Data Annotations To Tournaments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706041844173_Add Constraints To Category Umpire Surface.cs" />
+    <Compile Include="Migrations\201706041844173_Add Constraints To Category Umpire Surface.Designer.cs">
+      <DependentUpon>201706041844173_Add Constraints To Category Umpire Surface.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SqlServerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerUnitOfWork.cs" />
+    <Compile Include="EntityConfigurations\TournamentCategoryConfiguration.cs" />
+    <Compile Include="EntityConfigurations\SurfaceConfiguration.cs" />
+    <Compile Include="EntityConfigurations\UmpireConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -90,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706041737493_Add Data Annotations To Tournaments.resx">
       <DependentUpon>201706041737493_Add Data Annotations To Tournaments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041844173_Add Constraints To Category Umpire Surface.resx">
+      <DependentUpon>201706041844173_Add Constraints To Category Umpire Surface.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
