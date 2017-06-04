@@ -1,9 +1,10 @@
-﻿using ATPTennisStat.Repositories.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Data.Entity;
+
+using ATPTennisStat.Repositories.Contracts;
 
 namespace ATPTennisStat.Repositories
 {
