@@ -21,8 +21,8 @@ namespace ATPTennisStat.SQLServerData.EntityConfigurations
                             IsClustered = false
                         }));
 
-            //HasRequired(c => c.Country)
-            //    .WithMany(a => a.Cities);
+            HasRequired(c => c.Country)
+                .WithMany(a => a.Cities);
         }
     }
 }
