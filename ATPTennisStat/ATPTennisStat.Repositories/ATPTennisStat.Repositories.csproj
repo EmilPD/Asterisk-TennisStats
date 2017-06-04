@@ -57,10 +57,7 @@
     <Compile Include="Repository.cs" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
-=======
     <None Include="App.config" />
->>>>>>> Stashed changes
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
