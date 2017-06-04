@@ -34,6 +34,8 @@ namespace ATPTennisStat.SQLServerData
             //    .HasMany(c => c.Players);
 
             modelBuilder.Configurations.Add(new CityConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
