@@ -49,9 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityConfigurations\CityConfiguration.cs" />
     <Compile Include="Migrations\201706041435428_Initial.cs" />
     <Compile Include="Migrations\201706041435428_Initial.Designer.cs">
       <DependentUpon>201706041435428_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706041534191_ChangedCitiesTableConstraints.cs" />
+    <Compile Include="Migrations\201706041534191_ChangedCitiesTableConstraints.Designer.cs">
+      <DependentUpon>201706041534191_ChangedCitiesTableConstraints.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SqlServerDbContext.cs" />
@@ -75,6 +80,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706041435428_Initial.resx">
       <DependentUpon>201706041435428_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041534191_ChangedCitiesTableConstraints.resx">
+      <DependentUpon>201706041534191_ChangedCitiesTableConstraints.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

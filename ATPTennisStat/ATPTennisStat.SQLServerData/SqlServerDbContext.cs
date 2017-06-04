@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using ATPTennisStat.Models;
+using ATPTennisStat.SQLServerData.EntityConfigurations;
 
 namespace ATPTennisStat.SQLServerData
 {
@@ -29,7 +30,10 @@ namespace ATPTennisStat.SQLServerData
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<City>()
+            //    .HasMany(c => c.Players);
 
+            modelBuilder.Configurations.Add(new CityConfiguration());
         }
     }
 }
