@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityConfigurations\CoachConfiguration.cs" />
     <Compile Include="EntityConfigurations\CityConfiguration.cs" />
     <Compile Include="Migrations\201706041435428_Initial.cs" />
     <Compile Include="Migrations\201706041435428_Initial.Designer.cs">
@@ -65,6 +66,14 @@
     <Compile Include="Migrations\201706041844173_Add Constraints To Category Umpire Surface.cs" />
     <Compile Include="Migrations\201706041844173_Add Constraints To Category Umpire Surface.Designer.cs">
       <DependentUpon>201706041844173_Add Constraints To Category Umpire Surface.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706041948190_Missing Migration.cs" />
+    <Compile Include="Migrations\201706041948190_Missing Migration.Designer.cs">
+      <DependentUpon>201706041948190_Missing Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706041955359_Added Constraints For Coach.cs" />
+    <Compile Include="Migrations\201706041955359_Added Constraints For Coach.Designer.cs">
+      <DependentUpon>201706041955359_Added Constraints For Coach.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SqlServerDbContext.cs" />
@@ -100,6 +109,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706041844173_Add Constraints To Category Umpire Surface.resx">
       <DependentUpon>201706041844173_Add Constraints To Category Umpire Surface.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041948190_Missing Migration.resx">
+      <DependentUpon>201706041948190_Missing Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041955359_Added Constraints For Coach.resx">
+      <DependentUpon>201706041955359_Added Constraints For Coach.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
