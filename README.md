@@ -54,6 +54,7 @@
     - EndDate (dateTime)
     - SurfaceId ( int, surfaces can be reused in maches )
     - PrizeMoney (money)
+    - Category (TournamentCategory)
     - CityId (one City can have many Tournaments!)
 - [Matches](http://www.tennis-data.co.uk/alldata.php)
     - Id
@@ -68,13 +69,23 @@
 - [Surfaces](http://sportsbyapt.com/types-tennis-courts/)
     - Id
     - Name (string, clay, grass, hard, ...)
+- [TournamentCategories](https://en.wikipedia.org/wiki/Association_of_Tennis_Professionals) (250, 500, Grand Slam)
+    - Id
+    - Category
+- [Coaches](http://www.atpworldtour.com/en/players/coaches)
+    - Id
+    - FirstName
+    - LastName
+    - BirthDate
+- [Umpires](https://en.wikipedia.org/wiki/List_of_tennis_umpires)
+    - Id
+    - FirstName
+    - LastName
+    - YearActiveFrom
 
 ### Optional Data (tables)
 Can Introduse other tables if needed:
-- [Coaches](http://www.atpworldtour.com/en/players/coaches)
-- [Umpires](https://en.wikipedia.org/wiki/List_of_tennis_umpires)
 - [Rounds](https://en.wikipedia.org/wiki/Single-elimination_tournament) (1/16, 1/4)
-- [TournamentSeries](https://en.wikipedia.org/wiki/Association_of_Tennis_Professionals) (250, 500, Grand Slam)
 
 ### Data to be Extracted
 Possible type of data that can be extracted
