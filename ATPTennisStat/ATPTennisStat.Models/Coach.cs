@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ATPTennisStat.Models
 {
@@ -9,7 +10,7 @@ namespace ATPTennisStat.Models
         {
             Players = new HashSet<Player>();
         }
-
+        
         public int Id { get; set; }
 
         public string FirstName { get; set; }
