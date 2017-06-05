@@ -32,8 +32,6 @@ namespace ATPTennisStat.Models
 
         public virtual City City { get; set; }
 
-        public virtual Coach Coach { get; set; }
-
         public virtual ICollection<Match> WonMatches
         {
             get { return this.wonMatches; }

@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="PointDistribution.cs" />
     <Compile Include="City.cs" />
-    <Compile Include="Coach.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Enums\RoundStage.cs" />
     <Compile Include="Match.cs" />
@@ -53,7 +52,6 @@
     <Compile Include="Surface.cs" />
     <Compile Include="Tournament.cs" />
     <Compile Include="TournamentCategory.cs" />
-    <Compile Include="Umpire.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -25,8 +25,6 @@ namespace ATPTennisStat.Models
         [Column(TypeName = "smalldatetime")]
         public DateTime? DatePlayed { get; set; }
         
-        public virtual Umpire Umpire { get; set; }
-        
         public virtual Round Round { get; set; }
 
     }
