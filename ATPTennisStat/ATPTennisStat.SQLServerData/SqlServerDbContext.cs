@@ -30,6 +30,8 @@ namespace ATPTennisStat.SQLServerData
 
         public virtual IDbSet<Match> Matches { get; set; }
 
+        public virtual IDbSet<Round> Rounds { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<City>()
