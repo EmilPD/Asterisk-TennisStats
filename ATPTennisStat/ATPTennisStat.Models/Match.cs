@@ -23,17 +23,17 @@ namespace ATPTennisStat.Models
         public string Result { get; set; }
 
         [Required]
-        public int TournamentId { get; set; }
+        public int? TournamentId { get; set; }
         public virtual Tournament Tournament { get; set; }
 
         [Column(TypeName = "smalldatetime")]
-        public DateTime DatePlayed { get; set; }
+        public DateTime? DatePlayed { get; set; }
 
-        public int UmpireId { get; set; }
+        public int? UmpireId { get; set; }
         public virtual Umpire Umpire { get; set; }
 
         [Required]
-        public int RoundId { get; set; }
+        public int? RoundId { get; set; }
         public virtual Round Round { get; set; }
 
     }
