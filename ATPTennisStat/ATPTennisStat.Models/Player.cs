@@ -5,6 +5,8 @@ namespace ATPTennisStat.Models
 {
     public class Player
     {
+        //private ICollection<Match> matches;
+
         public Player()
         {
             //Matches = new HashSet<Match>();
@@ -28,6 +30,10 @@ namespace ATPTennisStat.Models
 
         public virtual Coach Coach { get; set; }
 
-        //public virtual ICollection<Match> Matches { get; set; }
+        //public virtual ICollection<Match> Matches 
+        //{ 
+        //    get { return this.matches; }
+        //    set { this.matches = value; }
+        //}
     }
 }
