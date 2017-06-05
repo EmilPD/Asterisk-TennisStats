@@ -19,10 +19,7 @@ namespace ATPTennisStat.Models
         public virtual TournamentCategory TournamentCategory { get; set; }
 
         public virtual Round Round { get; set; }
-
-        [Required]
+        
         public int Points { get; set; }
-
-
     }
 }
