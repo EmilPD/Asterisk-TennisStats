@@ -3,6 +3,9 @@ using System.Linq;
 using ATPTennisStat.SQLServerData;
 using ATPTennisStat.Models;
 using ATPTennisStat.Repositories;
+using System.Data.Entity;
+using ATPTennisStat.SQLServerData.Migrations;
+
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -10,10 +13,20 @@ namespace ATPTennisStat.ConsoleClient
     {
         static void Main()
         {
-
             Database.SetInitializer(
             new MigrateDatabaseToLatestVersion<SqlServerDbContext, Configuration>());
+            ///<summary>
+            ///Control Flow -> choose either of the following two methods
+            ///</summary>
+            DbContextStart();
 
+            //RepoStart();
+
+
+        }
+
+        static void DbContextStart()
+        {
             var context = new SqlServerDbContext();
             //context.Cities.Add(new City
             //{
@@ -24,7 +37,9 @@ namespace ATPTennisStat.ConsoleClient
             //    //    { Name = "Paris", PrizeMoney = 10 } }
             //});
 
-            //context.SaveChanges();
+
+
+            context.SaveChanges();
 
             var selectedCity = context.Cities
                 .Where(c => c.Name == "Varna")
@@ -35,11 +50,17 @@ namespace ATPTennisStat.ConsoleClient
                 .FirstOrDefault();
             Console.WriteLine(selectedCity);
 
-            //var citiesCollection = unitOfWork.Cities.GetAll();
-            //foreach (var city in citiesCollection)
-            //{
-            //    Console.WriteLine(city.Name);
-            //}
+        }
+
+        static void RepoStart()
+        {
+            var unitOfWork = new SqlServerUnitOfWork(new SqlServerDbContext());
+            var citiesCollection = unitOfWork.Cities.GetAll();
+            foreach (var city in citiesCollection)
+            {
+                Console.WriteLine(city.Name);
+            }
+
         }
     }
 }
