@@ -21,8 +21,6 @@ namespace ATPTennisStat.ConsoleClient
             DbContextStart();
 
             //RepoStart();
-
-
         }
 
         static void DbContextStart()
