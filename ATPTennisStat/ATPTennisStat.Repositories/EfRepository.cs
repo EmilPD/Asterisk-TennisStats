@@ -8,38 +8,41 @@ using ATPTennisStat.Repositories.Contracts;
 
 namespace ATPTennisStat.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected readonly DbContext context;
 
-        public Repository(DbContext context)
+        protected readonly DbSet<TEntity> dbSet;
+
+        public EfRepository(DbContext context)
         {
             this.context = context;
+            this.dbSet = context.Set<TEntity>();
         }
 
         public TEntity Get(int id)
         {
-            return context.Set<TEntity>().Find(id);
+            return this.dbSet.Find(id);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return context.Set<TEntity>().ToList();
+            return this.dbSet.ToList();
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return context.Set<TEntity>().Where(predicate);
+            return this.dbSet.Where(predicate);
         }
         
         public void Add(TEntity entity)
         {
-            context.Set<TEntity>().Add(entity);
+            this.dbSet.Add(entity);
         }
         
         public void Remove(TEntity entity)
         {
-            context.Set<TEntity>().Remove(entity);
+            this.dbSet.Remove(entity);
         }
     }
 }
