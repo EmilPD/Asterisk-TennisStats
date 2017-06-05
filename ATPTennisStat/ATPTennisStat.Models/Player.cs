@@ -5,11 +5,15 @@ namespace ATPTennisStat.Models
 {
     public class Player
     {
-        //private ICollection<Match> matches;
+        private ICollection<Match> wonMatches;
+        private ICollection<Match> lostMatches;
+
 
         public Player()
         {
-            //this.Matches = new HashSet<Match>();
+            this.wonMatches = new HashSet<Match>();
+            this.lostMatches = new HashSet<Match>();
+
         }
 
         public int Id { get; set; }
@@ -30,10 +34,10 @@ namespace ATPTennisStat.Models
 
         public virtual Coach Coach { get; set; }
 
-        //public virtual ICollection<Match> Matches 
-        //{ 
-        //    get { return this.matches; }
-        //    set { this.matches = value; }
-        //}
+
+        public virtual ICollection<Match> WonMatches { get; set; }
+        public virtual ICollection<Match> LostMatches { get; set; }
+
+
     }
 }

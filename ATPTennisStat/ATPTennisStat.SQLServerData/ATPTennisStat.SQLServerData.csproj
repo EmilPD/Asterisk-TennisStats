@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="EntityConfigurations\CoachConfiguration.cs" />
     <Compile Include="EntityConfigurations\CityConfiguration.cs" />
+    <Compile Include="EntityConfigurations\MatchConfiguration.cs" />
     <Compile Include="EntityConfigurations\PlayerConfiguration.cs" />
     <Compile Include="Migrations\201706042024482_Initial.cs" />
     <Compile Include="Migrations\201706042024482_Initial.Designer.cs">
