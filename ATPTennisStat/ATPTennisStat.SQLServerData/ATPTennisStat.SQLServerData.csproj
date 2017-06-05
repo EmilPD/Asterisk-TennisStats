@@ -52,14 +52,6 @@
     <Compile Include="EntityConfigurations\CityConfiguration.cs" />
     <Compile Include="EntityConfigurations\MatchConfiguration.cs" />
     <Compile Include="EntityConfigurations\PlayerConfiguration.cs" />
-    <Compile Include="Migrations\201706042024482_Initial.cs" />
-    <Compile Include="Migrations\201706042024482_Initial.Designer.cs">
-      <DependentUpon>201706042024482_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706051822311_AllModels.cs" />
-    <Compile Include="Migrations\201706051822311_AllModels.Designer.cs">
-      <DependentUpon>201706051822311_AllModels.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SqlServerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,14 +72,6 @@
       <Project>{B4FC6642-8C45-49EC-B3F3-FFA883FADF4F}</Project>
       <Name>ATPTennisStat.Repositories</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706042024482_Initial.resx">
-      <DependentUpon>201706042024482_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706051822311_AllModels.resx">
-      <DependentUpon>201706051822311_AllModels.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
