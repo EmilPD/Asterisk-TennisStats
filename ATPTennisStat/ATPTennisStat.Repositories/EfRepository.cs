@@ -16,6 +16,11 @@ namespace ATPTennisStat.Repositories
 
         public EfRepository(DbContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentException("An instance of DbContext is required.", "context");
+            }
+
             this.context = context;
             this.dbSet = context.Set<TEntity>();
         }
