@@ -28,5 +28,8 @@ namespace ATPTennisStat.Models
             get { return this.matches; }
             set { this.matches = value; }
         }
+
+        public virtual ICollection<PointDistribution> PointDistributions { get; set; }
+
     }
 }
