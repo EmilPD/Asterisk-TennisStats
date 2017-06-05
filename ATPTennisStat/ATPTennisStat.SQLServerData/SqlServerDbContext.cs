@@ -11,7 +11,7 @@ namespace ATPTennisStat.SQLServerData
         {
             //this.Configuration.LazyLoadingEnabled = false;
         }
-
+        
         public virtual IDbSet<City> Cities { get; set; }
 
         public virtual IDbSet<Country> Countries { get; set; }
@@ -28,6 +28,8 @@ namespace ATPTennisStat.SQLServerData
 
         public virtual IDbSet<Umpire> Umpires { get; set; }
 
+        public virtual IDbSet<Match> Matches { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<City>()
@@ -39,6 +41,7 @@ namespace ATPTennisStat.SQLServerData
             modelBuilder.Configurations.Add(new TournamentCategoryConfiguration());
             modelBuilder.Configurations.Add(new SurfaceConfiguration());
             modelBuilder.Configurations.Add(new UmpireConfiguration());
+            modelBuilder.Configurations.Add(new MatchConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

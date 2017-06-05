@@ -10,7 +10,9 @@ namespace ATPTennisStat.ConsoleClient
     {
         static void Main()
         {
-            //var unitOfWork = new SqlServerUnitOfWork(new SqlServerDbContext());
+
+            Database.SetInitializer(
+            new MigrateDatabaseToLatestVersion<SqlServerDbContext, Configuration>());
 
             var context = new SqlServerDbContext();
             //context.Cities.Add(new City
