@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ATPTennisStat.Models
 {
@@ -21,15 +21,17 @@ namespace ATPTennisStat.Models
         public int LoserId { get; set; }
         public virtual Player Loser { get; set; }
 
-        //[MaxLength(40)]
-        //public string Result { get; set; }
+        [MaxLength(40)]
+        public string Result { get; set; }
 
-        //public int TournamentId { get; set; }
-        //public virtual Tournament Tournament { get; set; }
+        public int TournamentId { get; set; }
+        public virtual Tournament Tournament { get; set; }
 
-        ////smalldatetime
-        //public DateTime DatePlayed { get; set; }
+        [Column(TypeName = "smalldatetime")]
+        public DateTime DatePlayed { get; set; }
 
-        //public int UmpiredId { get; set; }
+        public int UmpireId { get; set; }
+        public virtual Umpire Umpire { get; set; }
+
     }
 }

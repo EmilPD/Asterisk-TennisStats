@@ -10,7 +10,7 @@ namespace ATPTennisStat.SQLServerData.Migrations
         public Configuration()
         {
             this.AutomaticMigrationsEnabled = true;
-            this.AutomaticMigrationDataLossAllowed = false;
+            this.AutomaticMigrationDataLossAllowed = true;
             //this.ContextKey = "ATPTennisStat.SQLServerData.SqlServerDbContext";
 
         }
