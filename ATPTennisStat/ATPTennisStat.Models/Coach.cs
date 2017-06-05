@@ -10,7 +10,7 @@ namespace ATPTennisStat.Models
 
         public Coach()
         {
-            this.Players = new HashSet<Player>();
+            this.players = new HashSet<Player>();
         }
         
         public int Id { get; set; }

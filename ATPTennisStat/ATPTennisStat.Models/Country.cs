@@ -9,7 +9,7 @@ namespace ATPTennisStat.Models
 
         public Country()
         {
-            this.Cities = new HashSet<City>();
+            this.cities = new HashSet<City>();
         }
 
         [Key]

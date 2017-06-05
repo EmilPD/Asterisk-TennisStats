@@ -34,10 +34,16 @@ namespace ATPTennisStat.Models
 
         public virtual Coach Coach { get; set; }
 
+        public virtual ICollection<Match> WonMatches
+        {
+            get { return this.wonMatches; }
+            set { this.wonMatches = value; }
+        }
 
-        public virtual ICollection<Match> WonMatches { get; set; }
-        public virtual ICollection<Match> LostMatches { get; set; }
-
-
+        public virtual ICollection<Match> LostMatches
+        {
+            get { return this.lostMatches; }
+            set { this.lostMatches = value; }
+        }
     }
 }

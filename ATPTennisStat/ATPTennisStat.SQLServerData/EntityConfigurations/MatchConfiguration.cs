@@ -14,12 +14,10 @@ namespace ATPTennisStat.SQLServerData.EntityConfigurations
         {
             this.HasRequired(m => m.Winner)
                     .WithMany(p => p.WonMatches)
-                    .HasForeignKey(m => m.WinnerId)
                     .WillCascadeOnDelete(false);
 
             this.HasRequired(m => m.Loser)
                    .WithMany(p => p.LostMatches)
-                   .HasForeignKey(m => m.LoserId)
                    .WillCascadeOnDelete(false);
         }
     }

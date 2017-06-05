@@ -10,10 +10,10 @@ namespace ATPTennisStat.Models
 
         public City()
         {
-            this.Players = new HashSet<Player>();
-            this.Tournaments = new HashSet<Tournament>();
+            this.players = new HashSet<Player>();
+            this.tournaments = new HashSet<Tournament>();
         }
-
+        
         public int Id { get; set; }
 
         public string Name { get; set; }
