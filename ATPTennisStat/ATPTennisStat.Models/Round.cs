@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ATPTennisStat.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,8 +12,7 @@ namespace ATPTennisStat.Models
     {
         public int Id { get; set; }
 
-        [StringLength(40)]
         [Required]
-        public string Name { get; set; }
+        public RoundStage Stage { get; set; }
     }
 }
