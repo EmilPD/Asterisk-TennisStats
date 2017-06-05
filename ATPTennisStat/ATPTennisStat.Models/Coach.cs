@@ -6,9 +6,11 @@ namespace ATPTennisStat.Models
 {
     public class Coach
     {
+        private ICollection<Player> players;
+
         public Coach()
         {
-            Players = new HashSet<Player>();
+            this.Players = new HashSet<Player>();
         }
         
         public int Id { get; set; }
@@ -19,6 +21,10 @@ namespace ATPTennisStat.Models
 
         public DateTime BirthDate { get; set; }
 
-        public virtual ICollection<Player> Players { get; set; }
+        public virtual ICollection<Player> Players
+        {
+            get { return this.players; }
+            set { this.players = value; }
+        }
     }
 }
