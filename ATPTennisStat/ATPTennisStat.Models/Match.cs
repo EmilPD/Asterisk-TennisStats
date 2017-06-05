@@ -13,8 +13,6 @@ namespace ATPTennisStat.Models
         [Key]
         public int Id { get; set; }
 
-
-
         public int WinnerId { get; set; }
         public virtual Player Winner { get; set; }
 
@@ -24,6 +22,7 @@ namespace ATPTennisStat.Models
         [MaxLength(40)]
         public string Result { get; set; }
 
+        [Required]
         public int TournamentId { get; set; }
         public virtual Tournament Tournament { get; set; }
 
@@ -32,6 +31,10 @@ namespace ATPTennisStat.Models
 
         public int UmpireId { get; set; }
         public virtual Umpire Umpire { get; set; }
+
+        [Required]
+        public int RoundId { get; set; }
+        public virtual Round Round { get; set; }
 
     }
 }
