@@ -2,6 +2,8 @@
 using System.Linq;
 using ATPTennisStat.SQLServerData;
 using ATPTennisStat.Models;
+using System.Data.Entity;
+using ATPTennisStat.SQLServerData.Migrations;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -9,6 +11,10 @@ namespace ATPTennisStat.ConsoleClient
     {
         static void Main()
         {
+
+            System.Data.Entity.Database.SetInitializer(
+            new MigrateDatabaseToLatestVersion<SqlServerDbContext, Configuration>());
+
             var context = new SqlServerDbContext();
 
             context.Cities.Add(new City

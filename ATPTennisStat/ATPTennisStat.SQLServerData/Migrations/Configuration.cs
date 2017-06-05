@@ -5,14 +5,16 @@ namespace ATPTennisStat.SQLServerData.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ATPTennisStat.SQLServerData.SqlServerDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<SqlServerDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            this.AutomaticMigrationDataLossAllowed = false;
+
         }
 
-        protected override void Seed(ATPTennisStat.SQLServerData.SqlServerDbContext context)
+        protected override void Seed(SqlServerDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
