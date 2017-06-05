@@ -4,10 +4,14 @@ namespace ATPTennisStat.Models
 {
     public class City
     {
+        private ICollection<Player> players;
+
+        private ICollection<Tournament> tournaments;
+
         public City()
         {
-            Players = new HashSet<Player>();
-            Tournaments = new HashSet<Tournament>();
+            this.Players = new HashSet<Player>();
+            this.Tournaments = new HashSet<Tournament>();
         }
 
         public int Id { get; set; }
@@ -16,8 +20,16 @@ namespace ATPTennisStat.Models
 
         public virtual Country Country { get; set; }
 
-        public virtual ICollection<Player> Players { get; set; }
+        public virtual ICollection<Player> Players
+        {
+            get { return this.players; }
+            set { this.players = value; }
+        }
 
-        public virtual ICollection<Tournament> Tournaments { get; set; }
+        public virtual ICollection<Tournament> Tournaments
+        {
+            get { return this.tournaments; }
+            set { this.tournaments = value; }
+        }
     }
 }
