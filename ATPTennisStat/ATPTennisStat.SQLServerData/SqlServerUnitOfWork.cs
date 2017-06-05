@@ -1,4 +1,5 @@
-﻿using ATPTennisStat.Repositories.Contracts;
+﻿using ATPTennisStat.Models;
+using ATPTennisStat.Repositories.Contracts;
 using ATPTennisStat.SQLServerData;
 
 namespace ATPTennisStat.Repositories
@@ -10,7 +11,10 @@ namespace ATPTennisStat.Repositories
         public SqlServerUnitOfWork(SqlServerDbContext context)
         {
             this.context = context;
+            this.Cities = new EfRepository<City>(context);
         }
+
+        public IRepository<City> Cities { get; private set; }
 
         public int Finished()
         {

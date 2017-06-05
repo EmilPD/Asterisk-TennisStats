@@ -2,8 +2,7 @@
 using System.Linq;
 using ATPTennisStat.SQLServerData;
 using ATPTennisStat.Models;
-using System.Data.Entity;
-using ATPTennisStat.SQLServerData.Migrations;
+using ATPTennisStat.Repositories;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -16,7 +15,6 @@ namespace ATPTennisStat.ConsoleClient
             new MigrateDatabaseToLatestVersion<SqlServerDbContext, Configuration>());
 
             var context = new SqlServerDbContext();
-
             //context.Cities.Add(new City
             //{
             //    Name = "Varna",
@@ -36,6 +34,12 @@ namespace ATPTennisStat.ConsoleClient
                 })
                 .FirstOrDefault();
             Console.WriteLine(selectedCity);
+
+            //var citiesCollection = unitOfWork.Cities.GetAll();
+            //foreach (var city in citiesCollection)
+            //{
+            //    Console.WriteLine(city.Name);
+            //}
         }
     }
 }
