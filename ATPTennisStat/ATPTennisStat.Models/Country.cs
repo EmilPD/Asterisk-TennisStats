@@ -5,9 +5,11 @@ namespace ATPTennisStat.Models
 {
     public class Country
     {
+        private ICollection<City> cities;
+
         public Country()
         {
-            Cities = new HashSet<City>();
+            this.Cities = new HashSet<City>();
         }
 
         [Key]
@@ -17,6 +19,10 @@ namespace ATPTennisStat.Models
         [StringLength(50)]
         public string Name { get; set; }
 
-        public virtual ICollection<City> Cities { get; set; }
+        public virtual ICollection<City> Cities
+        {
+            get { return this.cities; }
+            set { this.cities = value; }
+        }
     }
 }
