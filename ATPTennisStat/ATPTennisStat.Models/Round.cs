@@ -11,12 +11,15 @@ namespace ATPTennisStat.Models
     public class Round
     {
         private ICollection<Match> matches;
+        private ICollection<PointDistribution> pointDistributions;
+
 
         public Round()
         {
             this.matches = new HashSet<Match>();
+            this.pointDistributions = new HashSet<PointDistribution>();
         }
-        
+
         [Key]
         public int Id { get; set; }
 
@@ -29,7 +32,11 @@ namespace ATPTennisStat.Models
             set { this.matches = value; }
         }
 
-        public virtual ICollection<PointDistribution> PointDistributions { get; set; }
+        public virtual ICollection<PointDistribution> PointDistributions
+        {
+            get { return this.pointDistributions; }
+            set { this.pointDistributions = value; }
+        }
 
     }
 }
