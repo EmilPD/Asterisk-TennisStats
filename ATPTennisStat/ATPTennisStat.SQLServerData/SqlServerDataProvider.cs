@@ -1,6 +1,6 @@
-﻿using System;
-using ATPTennisStat.Models;
+﻿using ATPTennisStat.Models;
 using ATPTennisStat.Repositories.Contracts;
+using System;
 
 namespace ATPTennisStat.SQLServerData
 {
