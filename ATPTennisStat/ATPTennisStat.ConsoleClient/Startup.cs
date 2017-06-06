@@ -5,6 +5,8 @@ using ATPTennisStat.Models;
 using ATPTennisStat.Repositories;
 using System.Data.Entity;
 using ATPTennisStat.SQLServerData.Migrations;
+using System.IO;
+using ClosedXML.Excel;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -17,9 +19,29 @@ namespace ATPTennisStat.ConsoleClient
             ///<summary>
             ///Control Flow -> choose either of the following two methods
             ///</summary>
-            DbContextStart();
+            //DbContextStart();
 
             //RepoStart();
+            ExcelImport();
+
+
+        }
+
+
+        static void ExcelImport()
+        {
+            string dir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            
+            string path = dir + "\\Data\\Excel\\TennisStatsDatabase.xlsx";
+            Console.WriteLine(path);
+            var workbook = new XLWorkbook(path);
+            var ws = workbook.Worksheet(1);
+            Console.WriteLine(ws.Name);
+            var currentRegion = ws.RangeUsed().AsTable();
+            var names = currentRegion.DataRange.Rows()
+                .Select(nameRow => nameRow.Field("Name").GetString())
+                .ToList();
+            names.ForEach(Console.WriteLine);
         }
 
         static void DbContextStart()
