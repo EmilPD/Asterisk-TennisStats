@@ -25,8 +25,8 @@ namespace ATPTennisStat.ConsoleClient
 
             //RepoStart();
             //ExcelImport();
-            //NinjectStart();
-            GeneratePdfReport();
+            NinjectStart();
+            //GeneratePdfReport();
 
         }
 
@@ -51,7 +51,7 @@ namespace ATPTennisStat.ConsoleClient
             var kernel = new StandardKernel(new ATPTennisStatModules());
 
             var dp = kernel.Get<SqlServerDataProvider>();
-            var cities = dp.cities.GetAll();
+            var cities = dp.cities.Find(c => c.Country.Name == "Bulgaria");
 
             //dp.cities.Add(new City
             //{
@@ -64,7 +64,6 @@ namespace ATPTennisStat.ConsoleClient
             foreach (var city in cities)
             {
                 Console.WriteLine(city.Name);
-                Console.WriteLine(city.Country.Name);
             }
         }
 
