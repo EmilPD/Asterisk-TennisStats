@@ -35,7 +35,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +72,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ATPTennisStatSqlServerDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ATPTennisStatSqlServerDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -86,6 +100,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ATPTennisStatSqlServerDataSet.xsc">
+      <DependentUpon>ATPTennisStatSqlServerDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ATPTennisStatSqlServerDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ATPTennisStatSqlServerDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ATPTennisStatSqlServerDataSet.xss">
+      <DependentUpon>ATPTennisStatSqlServerDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,6 +120,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ATPTennisStat.Models\ATPTennisStat.Models.csproj">
+      <Project>{12de3fd9-6ebc-408d-af51-1a7f7c712108}</Project>
+      <Name>ATPTennisStat.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.ReportGenerators\ATPTennisStat.ReportGenerators.csproj">
+      <Project>{e890edeb-d444-4c5d-8f66-49cc423bfed5}</Project>
+      <Name>ATPTennisStat.ReportGenerators</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.Repositories\ATPTennisStat.Repositories.csproj">
+      <Project>{b4fc6642-8c45-49ec-b3f3-ffa883fadf4f}</Project>
+      <Name>ATPTennisStat.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.SQLServerData\ATPTennisStat.SQLServerData.csproj">
+      <Project>{81fbd9b4-f1c8-4316-8a6b-d932362b6540}</Project>
+      <Name>ATPTennisStat.SQLServerData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

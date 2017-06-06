@@ -23,8 +23,8 @@ namespace ATPTennisStat.ConsoleClient
             ///</summary>
             //DbContextStart();
             //ExcelImport();
-            NinjectStart();
-            //GeneratePdfReport();
+            //NinjectStart();
+            GeneratePdfReport();
 
         }
 

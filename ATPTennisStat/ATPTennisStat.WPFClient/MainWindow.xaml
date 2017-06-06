@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ATPTennisStat.WPFClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="450" Width="725" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:ATPTennisStatSqlServerDataSet x:Key="aTPTennisStatSqlServerDataSet"/>
+        <CollectionViewSource x:Key="countriesViewSource" Source="{Binding Countries, Source={StaticResource aTPTennisStatSqlServerDataSet}}"/>
+        <CollectionViewSource x:Key="citiesViewSource" Source="{Binding Cities, Source={StaticResource aTPTennisStatSqlServerDataSet}}"/>
+    </Window.Resources>
+    <StackPanel >
+        <TabControl x:Name="tabControl" MinHeight="380">
+            <TabItem Header="Cities">
+                <Grid Background="#FFE5E5E5" DataContext="{StaticResource citiesViewSource}">
+                    <DataGrid x:Name="citiesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10" RowDetailsVisibilityMode="VisibleWhenSelected">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="nameColumn1" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="country_IdColumn" Binding="{Binding Country_Id}" Header="Country Id" Width="SizeToHeader"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Countries">
+                <Grid Background="#FFE5E5E5" DataContext="{StaticResource countriesViewSource}">
+                    <DataGrid x:Name="countriesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10" RowDetailsVisibilityMode="VisibleWhenSelected">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Grid Height="22" Margin="567,0,0,0" RenderTransformOrigin="0.504,0.382">
+            <Button x:Name="save" Content="Save Changes" Width="150" HorizontalAlignment="Right" Click="button_Save" Margin="0,4,0,-15"/>
+        </Grid>
+        <Grid Height="22" Margin="284,0,283,0" RenderTransformOrigin="1.365,-0.363">
+            <Button x:Name="loadData" Content="Load data" Width="150"  Click="button_Load" Margin="130,-18,-130,7"/>
+            <Button x:Name="generateReport" Content="Generate PDF Report" Width="150"  Click="button_Generate" Margin="-22,-18,22,7"/>
+        </Grid>
+    </StackPanel>
 </Window>
