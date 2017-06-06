@@ -22,8 +22,6 @@ namespace ATPTennisStat.ConsoleClient
             ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
-
-            //RepoStart();
             //ExcelImport();
             //NinjectStart();
             GeneratePdfReport();
@@ -108,17 +106,6 @@ namespace ATPTennisStat.ConsoleClient
                 })
                 .FirstOrDefault();
             Console.WriteLine(selectedCity);
-
-        }
-
-        static void RepoStart()
-        {
-            var unitOfWork = new SqlServerUnitOfWork(new SqlServerDbContext());
-            var citiesCollection = unitOfWork.Cities.GetAll();
-            foreach (var city in citiesCollection)
-            {
-                Console.WriteLine(city.Name);
-            }
 
         }
     }

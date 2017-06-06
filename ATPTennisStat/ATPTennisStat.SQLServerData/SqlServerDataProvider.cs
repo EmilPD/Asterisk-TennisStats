@@ -5,6 +5,7 @@ namespace ATPTennisStat.SQLServerData
 {
     public class SqlServerDataProvider
     {
+        //Properties?
         public IRepository<City> cities;
         public IRepository<Country> countries;
         public IUnitOfWork unitOfWork;

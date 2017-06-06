@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.ConsoleClient", "ATPTennisStat.ConsoleClient\ATPTennisStat.ConsoleClient.csproj", "{E8A89F36-16CB-487E-8D99-38D981429D80}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.SQLServerData", "ATPTennisStat.SQLServerData\ATPTennisStat.SQLServerData.csproj", "{81FBD9B4-F1C8-4316-8A6B-D932362B6540}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.ReportGenerators", "ATPTennisStat.ReportGenerators\ATPTennisStat.ReportGenerators.csproj", "{E890EDEB-D444-4C5D-8F66-49CC423BFED5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.Common", "ATPTennisStat.Common\ATPTennisStat.Common.csproj", "{47E8C2DD-C907-4E69-A02B-344F98B981A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{E890EDEB-D444-4C5D-8F66-49CC423BFED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E890EDEB-D444-4C5D-8F66-49CC423BFED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E890EDEB-D444-4C5D-8F66-49CC423BFED5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47E8C2DD-C907-4E69-A02B-344F98B981A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47E8C2DD-C907-4E69-A02B-344F98B981A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47E8C2DD-C907-4E69-A02B-344F98B981A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47E8C2DD-C907-4E69-A02B-344F98B981A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
