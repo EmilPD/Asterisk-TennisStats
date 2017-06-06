@@ -7,6 +7,7 @@ using System.Data.Entity;
 using ATPTennisStat.SQLServerData.Migrations;
 using System.IO;
 using ClosedXML.Excel;
+using Ninject;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -17,21 +18,42 @@ namespace ATPTennisStat.ConsoleClient
             Database.SetInitializer(
             new MigrateDatabaseToLatestVersion<SqlServerDbContext, Configuration>());
             ///<summary>
-            ///Control Flow -> choose either of the following two methods
+            ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
 
             //RepoStart();
-            ExcelImport();
-
+            //ExcelImport();
+            NinjectStart();
 
         }
 
+        private static void NinjectStart()
+        {
+            var kernel = new StandardKernel(new ATPTennisStatModules());
+
+            var dp = kernel.Get<SqlServerDataProvider>();
+            var cities = dp.cities.GetAll();
+
+            //dp.cities.Add(new City
+            //{
+            //    Name = "Burgas",
+            //    Country = new Country { Name = "Bulgaria" }
+            //});
+
+            dp.unitOfWork.Finished();
+
+            foreach (var city in cities)
+            {
+                Console.WriteLine(city.Name);
+                Console.WriteLine(city.Country.Name);
+            }
+        }
 
         static void ExcelImport()
         {
             string dir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
-            
+
             string path = dir + "\\Data\\Excel\\TennisStatsDatabase.xlsx";
             Console.WriteLine(path);
             var workbook = new XLWorkbook(path);
