@@ -8,16 +8,19 @@ SELECT
 	pow.Points AS [Points Winner],
 	pol.Points AS [Points Loser],
 	t.Name AS [Tournament],
+	t.StartDate AS [StartDate],
+	t.EndDate AS [EndDate],
+	t.PrizeMoney AS [PrizeMoney],
+	cat.Category,
+	cat.PlayersNumber,
 	tr.Name AS [Round],
     c.Name AS [City],
 	co.Name AS [Country],
-	t.StartDate AS [StartDate],
-	t.EndDate AS [EndDate],
 	ts.Type AS [Surface],
-	ts.Speed AS [Speed],
-	t.PrizeMoney AS [PrizeMoney]
+	ts.Speed AS [Speed]
 FROM Matches m
 JOIN Tournaments t ON t.Id = m.TournamentId
+JOIN TournamentCategories cat ON cat.Id = t.CategoryId
 JOIN Rounds tr ON tr.Id = m.RoundId
 JOIN Surfaces ts ON ts.Id = t.SurfaceId
 JOIN PointDistributionKeys pow ON pow.CategoryId = t.CategoryId AND pow.RoundId = (m.RoundId + 1)
