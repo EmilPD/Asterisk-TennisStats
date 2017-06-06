@@ -8,6 +8,7 @@ using ATPTennisStat.SQLServerData.Migrations;
 using System.IO;
 using ClosedXML.Excel;
 using Ninject;
+using ATPTennisStat.ReportGenerators;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -24,8 +25,25 @@ namespace ATPTennisStat.ConsoleClient
 
             //RepoStart();
             //ExcelImport();
-            NinjectStart();
+            //NinjectStart();
+            GeneratePdfReport();
 
+        }
+
+        private static void GeneratePdfReport()
+        {
+            var context = new SqlServerDbContext();
+            var unitOfWork = new EfUnitOfWork(context);
+            var citiesRepository = new EfRepository<City>(context);
+            var countriesRepository = new EfRepository<Country>(context);
+
+            var provider = new SqlServerDataProvider(
+                unitOfWork, 
+                citiesRepository, 
+                countriesRepository);
+
+            var generator = new PdfReportGenerator(provider);
+            generator.GenerateReport();
         }
 
         private static void NinjectStart()
@@ -41,7 +59,7 @@ namespace ATPTennisStat.ConsoleClient
             //    Country = new Country { Name = "Bulgaria" }
             //});
 
-            dp.unitOfWork.Finished();
+            //dp.unitOfWork.Finished();
 
             foreach (var city in cities)
             {

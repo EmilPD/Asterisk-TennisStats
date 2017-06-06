@@ -77,6 +77,10 @@
       <Project>{12de3fd9-6ebc-408d-af51-1a7f7c712108}</Project>
       <Name>ATPTennisStat.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.ReportGenerators\ATPTennisStat.ReportGenerators.csproj">
+      <Project>{E890EDEB-D444-4C5D-8F66-49CC423BFED5}</Project>
+      <Name>ATPTennisStat.ReportGenerators</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ATPTennisStat.Repositories\ATPTennisStat.Repositories.csproj">
       <Project>{b4fc6642-8c45-49ec-b3f3-ffa883fadf4f}</Project>
       <Name>ATPTennisStat.Repositories</Name>
