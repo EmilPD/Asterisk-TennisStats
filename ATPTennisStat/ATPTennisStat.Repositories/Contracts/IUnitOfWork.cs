@@ -4,6 +4,6 @@ namespace ATPTennisStat.Repositories.Contracts
 {
     public interface IUnitOfWork : IDisposable
     {
-        int Finished();
+        void Finished();
     }
 }

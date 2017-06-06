@@ -53,6 +53,7 @@
     <Compile Include="EntityConfigurations\MatchConfiguration.cs" />
     <Compile Include="EntityConfigurations\PlayerConfiguration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="SqlServerDataProvider.cs" />
     <Compile Include="SqlServerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerUnitOfWork.cs" />

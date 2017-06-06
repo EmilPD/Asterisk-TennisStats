@@ -16,9 +16,9 @@ namespace ATPTennisStat.Repositories
 
         public IRepository<City> Cities { get; private set; }
 
-        public int Finished()
+        public void Finished()
         {
-            return context.SaveChanges();
+            context.SaveChanges();
         }
 
         public void Dispose()
