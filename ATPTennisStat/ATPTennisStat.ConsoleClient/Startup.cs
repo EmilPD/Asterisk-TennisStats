@@ -22,9 +22,18 @@ namespace ATPTennisStat.ConsoleClient
             ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
-            ExcelImporter.Read();
+            ExcelImporterWrite();
             //NinjectStart();
             //GeneratePdfReport();
+
+        }
+
+        private static void ExcelImporterWrite()
+        {
+            var kernel = new StandardKernel(new ATPTennisStatModules());
+
+            var excelImporter = kernel.Get<ExcelImporter>();
+            excelImporter.Write();
 
         }
 
@@ -44,14 +53,18 @@ namespace ATPTennisStat.ConsoleClient
             //var cities = dp.Cities.Find(c => c.Country.Name == "Bulgaria");
 
             var players = dp.Players.GetAll();
+            //dp.Players.Add()
 
-            //dp.cities.Add(new City
-            //{
-            //    Name = "Burgas",
-            //    Country = new Country { Name = "Bulgaria" }
-            //});
+            
 
-            //dp.unitOfWork.Finished();
+
+            dp.Cities.Add(new City
+            {
+                Name = "Burgas",
+                Country = new Country { Name = "Bulgaria" }
+            });
+
+            dp.UnitOfWork.Finished();
 
             //foreach (var city in cities)
             //{

@@ -5,12 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using ClosedXML.Excel;
 using System.IO;
+using ATPTennisStat.Importers.Contracts;
+using ATPTennisStat.SQLServerData;
 
 namespace ATPTennisStat.Importers
 {
-    public class ExcelImporter
+    public class ExcelImporter : IImporter
     {
-        public static void Read()
+        private SqlServerDataProvider dataProvider;
+
+        public ExcelImporter(SqlServerDataProvider dataProvider)
+        {
+            this.dataProvider = dataProvider;
+        }
+
+        public void Read()
         {
             string dir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
 
@@ -25,5 +34,13 @@ namespace ATPTennisStat.Importers
                 .ToList();
             names.ForEach(Console.WriteLine);
         }
+
+        public void Write()
+        {
+            Console.WriteLine("REFACTORED");
+
+        }
+
+
     }
 }

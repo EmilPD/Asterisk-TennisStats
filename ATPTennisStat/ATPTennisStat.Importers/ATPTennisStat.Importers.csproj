@@ -48,12 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IImporter.cs" />
     <Compile Include="ExcelImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLImporter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ATPTennisStat.SQLServerData\ATPTennisStat.SQLServerData.csproj">
+      <Project>{81FBD9B4-F1C8-4316-8A6B-D932362B6540}</Project>
+      <Name>ATPTennisStat.SQLServerData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
