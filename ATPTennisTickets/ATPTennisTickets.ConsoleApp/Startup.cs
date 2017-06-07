@@ -42,7 +42,7 @@ namespace ATPTennisTickets.ConsoleApp
             */
 
             // USE Example from Here http://www.npgsql.org/doc/index.html
-            var connString = "Host=localhost;Port=5432;Username=postgres;Password=1234;Database=atpTicketsDb";
+            var connString = "Host=localhost;Port=5435;Username=postgres;Password=asterisk;Database=atpTicketsDb";
 
             using (var conn = new NpgsqlConnection(connString))
             {
