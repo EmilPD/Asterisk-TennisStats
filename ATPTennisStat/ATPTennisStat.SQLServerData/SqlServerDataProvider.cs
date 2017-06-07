@@ -43,7 +43,11 @@ namespace ATPTennisStat.SQLServerData
 
         public IUnitOfWork UnitOfWork
         {
-            get { return this.unitOfWork; }
+            get
+            {
+                return this.unitOfWork;
+            }
+
             set
             {
                 if (value == null)
@@ -57,7 +61,11 @@ namespace ATPTennisStat.SQLServerData
 
         public IRepository<City> Cities
         {
-            get { return this.cities; }
+            get
+            {
+                return this.cities;
+            }
+
             set
             {
                 if (value == null)
@@ -71,7 +79,11 @@ namespace ATPTennisStat.SQLServerData
 
         public IRepository<Country> Countries
         {
-            get { return this.countries; }
+            get
+            {
+                return this.countries;
+            }
+
             set
             {
                 if (value == null)
@@ -85,7 +97,11 @@ namespace ATPTennisStat.SQLServerData
 
         public IRepository<Match> Matches
         {
-            get { return this.matches; }
+            get
+            {
+                return this.matches;
+            }
+
             set
             {
                 if (value == null)
@@ -99,7 +115,11 @@ namespace ATPTennisStat.SQLServerData
 
         public IRepository<Player> Players
         {
-            get { return this.players; }
+            get
+            {
+                return this.players;
+            }
+
             set
             {
                 if (value == null)
@@ -113,7 +133,11 @@ namespace ATPTennisStat.SQLServerData
 
         public IRepository<PointDistribution> PointDistributions
         {
-            get { return this.pointDistributions; }
+            get
+            {
+                return this.pointDistributions;
+            }
+
             set
             {
                 if (value == null)
@@ -127,7 +151,11 @@ namespace ATPTennisStat.SQLServerData
 
         public IRepository<Round> Rounds
         {
-            get { return this.rounds; }
+            get
+            {
+                return this.rounds;
+            }
+
             set
             {
                 if (value == null)
@@ -141,7 +169,11 @@ namespace ATPTennisStat.SQLServerData
 
         public IRepository<Surface> Surfaces
         {
-            get { return this.surfaces; }
+            get
+            {
+                return this.surfaces;
+            }
+
             set
             {
                 if (value == null)
@@ -155,7 +187,11 @@ namespace ATPTennisStat.SQLServerData
 
         public IRepository<Tournament> Tournaments
         {
-            get { return this.tournaments; }
+            get
+            {
+                return this.tournaments;
+            }
+
             set
             {
                 if (value == null)
@@ -169,7 +205,11 @@ namespace ATPTennisStat.SQLServerData
 
         public IRepository<TournamentCategory> TournamentCategories
         {
-            get { return this.tournamentCategories; }
+            get
+            {
+                return this.tournamentCategories;
+            }
+
             set
             {
                 if (value == null)
