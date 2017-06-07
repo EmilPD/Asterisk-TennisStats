@@ -108,18 +108,18 @@ namespace ATPTennisStat.WPFClient
 
         private void button_Generate(object sender, RoutedEventArgs e)
         {
-            var context = new SqlServerDbContext();
-            var unitOfWork = new EfUnitOfWork(context);
-            var citiesRepository = new EfRepository<City>(context);
-            var countriesRepository = new EfRepository<Country>(context);
+        //    var context = new SqlServerDbContext();
+        //    var unitOfWork = new EfUnitOfWork(context);
+        //    var citiesRepository = new EfRepository<City>(context);
+        //    var countriesRepository = new EfRepository<Country>(context);
 
-            var provider = new SqlServerDataProvider(
-                unitOfWork,
-                citiesRepository,
-                countriesRepository);
+        //    var provider = new SqlServerDataProvider(
+        //        unitOfWork,
+        //        citiesRepository,
+        //        countriesRepository);
 
-            var generator = new PdfReportGenerator(provider);
-            generator.GenerateReport();
+        //    var generator = new PdfReportGenerator(provider);
+        //    generator.GenerateReport();
         }
     }
 }

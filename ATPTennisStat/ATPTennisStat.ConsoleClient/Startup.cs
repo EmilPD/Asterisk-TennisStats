@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Linq;
-using ATPTennisStat.SQLServerData;
-using ATPTennisStat.Models;
-using ATPTennisStat.Repositories;
-using System.Data.Entity;
-using ATPTennisStat.SQLServerData.Migrations;
 using System.IO;
+using System.Linq;
+using System.Data.Entity;
 using ClosedXML.Excel;
 using Ninject;
 using ATPTennisStat.ReportGenerators;
+using ATPTennisStat.SQLServerData;
+using ATPTennisStat.Models;
+using ATPTennisStat.Repositories;
+using ATPTennisStat.SQLServerData.Migrations;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -23,25 +23,17 @@ namespace ATPTennisStat.ConsoleClient
             ///</summary>
             //DbContextStart();
             //ExcelImport();
-            //NinjectStart();
-            GeneratePdfReport();
+            NinjectStart();
+            //GeneratePdfReport();
 
         }
 
         private static void GeneratePdfReport()
         {
-            var context = new SqlServerDbContext();
-            var unitOfWork = new EfUnitOfWork(context);
-            var citiesRepository = new EfRepository<City>(context);
-            var countriesRepository = new EfRepository<Country>(context);
+            var kernel = new StandardKernel(new ATPTennisStatModules());
 
-            var provider = new SqlServerDataProvider(
-                unitOfWork, 
-                citiesRepository, 
-                countriesRepository);
-
-            var generator = new PdfReportGenerator(provider);
-            generator.GenerateReport();
+            var report = kernel.Get<PdfReportGenerator>();
+            report.GenerateReport();
         }
 
         private static void NinjectStart()
@@ -49,7 +41,9 @@ namespace ATPTennisStat.ConsoleClient
             var kernel = new StandardKernel(new ATPTennisStatModules());
 
             var dp = kernel.Get<SqlServerDataProvider>();
-            var cities = dp.cities.Find(c => c.Country.Name == "Bulgaria");
+            //var cities = dp.Cities.Find(c => c.Country.Name == "Bulgaria");
+
+            var players = dp.Players.GetAll();
 
             //dp.cities.Add(new City
             //{
@@ -59,9 +53,20 @@ namespace ATPTennisStat.ConsoleClient
 
             //dp.unitOfWork.Finished();
 
-            foreach (var city in cities)
+            //foreach (var city in cities)
+            //{
+            //    Console.WriteLine(city.Name);
+            //}
+
+            foreach (var p in players)
             {
-                Console.WriteLine(city.Name);
+                Console.WriteLine("First name: {0}", p.FirstName);
+                Console.WriteLine("LastName: {0}", p.LastName);
+                Console.WriteLine("Ranking: {0}", p.Ranking);
+                Console.WriteLine("City of birth: {0}", p.City.Name);
+                Console.WriteLine("Country of birth: {0}", p.City.Country.Name);
+                Console.WriteLine("-------------");
+                Console.WriteLine();
             }
         }
 
