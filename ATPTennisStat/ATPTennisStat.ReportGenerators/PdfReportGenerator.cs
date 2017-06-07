@@ -48,7 +48,7 @@ namespace ATPTennisStat.ReportGenerators
             heading.Alignment = Element.ALIGN_CENTER;
             doc.Add(heading);
 
-            var cities = sqlProvider.cities.GetAll();
+            var cities = sqlProvider.Cities.GetAll();
 
             PdfPTable table = CreateTable(TableColumnsNumber);
             
