@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ATPTennisStat.Models
 {
@@ -17,6 +18,7 @@ namespace ATPTennisStat.Models
 
         [Required]
         [StringLength(50)]
+        [Index("IX_Country_Name", IsUnique = true)]
         public string Name { get; set; }
 
         public virtual ICollection<City> Cities
