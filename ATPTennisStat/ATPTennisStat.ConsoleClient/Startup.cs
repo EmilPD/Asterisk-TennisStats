@@ -2,8 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Data.Entity;
-using ClosedXML.Excel;
 using Ninject;
+using ATPTennisStat.Importers;
 using ATPTennisStat.ReportGenerators;
 using ATPTennisStat.SQLServerData;
 using ATPTennisStat.Models;
@@ -22,9 +22,9 @@ namespace ATPTennisStat.ConsoleClient
             ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
-            //ExcelImport();
+            ExcelImporter.Read();
             //NinjectStart();
-            GeneratePdfReport();
+            //GeneratePdfReport();
 
         }
 
@@ -68,22 +68,6 @@ namespace ATPTennisStat.ConsoleClient
                 Console.WriteLine("-------------");
                 Console.WriteLine();
             }
-        }
-
-        static void ExcelImport()
-        {
-            string dir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
-
-            string path = dir + "\\Data\\Excel\\TennisStatsDatabase.xlsx";
-            Console.WriteLine(path);
-            var workbook = new XLWorkbook(path);
-            var ws = workbook.Worksheet(1);
-            Console.WriteLine(ws.Name);
-            var currentRegion = ws.RangeUsed().AsTable();
-            var names = currentRegion.DataRange.Rows()
-                .Select(nameRow => nameRow.Field("Name").GetString())
-                .ToList();
-            names.ForEach(Console.WriteLine);
         }
 
         static void DbContextStart()
