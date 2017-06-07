@@ -10,7 +10,7 @@ namespace ATPTennisTickets.Data
 {
     public class PostgresDbContext : DbContext
     {
-        public PostgresDbContext() : base("PostgresDotNet")
+        public PostgresDbContext() : base("ATPTennisTickets")
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
@@ -24,7 +24,6 @@ namespace ATPTennisTickets.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer<PostgresDbContext>(null);
 
             modelBuilder.HasDefaultSchema("public");
             // modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

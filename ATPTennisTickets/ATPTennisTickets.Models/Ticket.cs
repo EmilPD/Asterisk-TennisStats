@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ATPTennisTickets.Models
 {
-    //[Table("Tickets", Schema = "public")]
+    [Table("Tickets", Schema = "public")]
     public class Ticket
     {
         public int Id { get; set; }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ATPTennisTickets.Models
 {
-    //[Table("Tournaments", Schema="public")]
+    [Table("Tournaments", Schema = "public")]
     public class Tournament
     {
         private ICollection<Ticket> tickets;
