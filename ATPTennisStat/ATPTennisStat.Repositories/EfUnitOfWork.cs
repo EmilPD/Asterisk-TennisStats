@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using ATPTennisStat.Repositories.Contracts;
+using System.Data.Entity.Infrastructure;
 
 namespace ATPTennisStat.Repositories
 {
@@ -19,6 +20,11 @@ namespace ATPTennisStat.Repositories
 
         public void Dispose()
         {
+        }
+
+        public DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class
+        {
+            return context.Entry<TEntity>(entity);
         }
     }
 }

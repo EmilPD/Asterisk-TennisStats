@@ -2,6 +2,7 @@
 using ATPTennisStat.SQLServerData;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,16 +41,20 @@ namespace ATPTennisStat.Factories
                 throw new ArgumentException("Country name - null or empty");
             }
 
-            var country = this.dataProvider.Countries.GetAll()
-                                    .FirstOrDefault(c => c.Name.ToLower() == countryNameLowerCase);
+            var list = this.dataProvider.Countries.GetAll();
 
-            
+            var country = list.FirstOrDefault(c => c.Name.ToLower() == countryNameLowerCase);
+
+
+            //dbCtx.Entry(stud).State = System.Data.Entity.EntityState.Modified;
+
             if (country == null)
             {
                 country = new Country
                 {
                     Name = countryName
                 };
+                this.dataProvider.Countries.Add(country);
             }
             
             return new City
