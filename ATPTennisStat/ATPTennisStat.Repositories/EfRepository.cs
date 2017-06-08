@@ -50,8 +50,16 @@ namespace ATPTennisStat.Repositories
         {
             this.dbSet.Add(entity);
 
-            var a = this.context.Entry<TEntity>(entity);
-            var state = a.State;
+            var dbSetLocalToList = this.dbSet.Local.ToList();
+
+            var entry = this.context.Entry<TEntity>(entity);
+            var state = entry.State;
+            //state = System.Data.Entity.EntityState.Modified;
+
+            var dbSetToList = this.dbSet.AsEnumerable().ToList();
+            var dbSet = this.dbSet;
+
+
         }
         
         public void Remove(TEntity entity)
