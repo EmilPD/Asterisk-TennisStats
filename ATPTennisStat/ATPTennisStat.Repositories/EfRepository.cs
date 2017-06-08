@@ -30,8 +30,9 @@ namespace ATPTennisStat.Repositories
             return this.dbSet.Find(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<TEntity> GetAll(out DbSet dbSet)
         {
+            dbSet = this.dbSet;
             return this.dbSet.ToList();
         }
 
