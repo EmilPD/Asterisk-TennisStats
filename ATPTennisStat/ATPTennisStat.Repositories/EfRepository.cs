@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Data.Entity;
 
 using ATPTennisStat.Repositories.Contracts;
+using System.Collections.ObjectModel;
 
 namespace ATPTennisStat.Repositories
 {
@@ -32,13 +33,10 @@ namespace ATPTennisStat.Repositories
 
         public IEnumerable<TEntity> GetAll()
         {
-            return this.dbSet.ToList();
-        }
+            var materializingDbSet = this.dbSet.ToList();
+            //working with in memory objects
+            return this.dbSet.Local;
 
-        public IEnumerable<TEntity> GetAll(out DbSet dbSet)
-        {
-            dbSet = this.dbSet;
-            return this.dbSet.ToList();
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
@@ -50,14 +48,16 @@ namespace ATPTennisStat.Repositories
         {
             this.dbSet.Add(entity);
 
-            var dbSetLocalToList = this.dbSet.Local.ToList();
+            //DEBUG
 
-            var entry = this.context.Entry<TEntity>(entity);
-            var state = entry.State;
-            //state = System.Data.Entity.EntityState.Modified;
+            //var dbSetLocalToList = this.dbSet.Local.ToList();
 
-            var dbSetToList = this.dbSet.AsEnumerable().ToList();
-            var dbSet = this.dbSet;
+            //var entry = this.context.Entry<TEntity>(entity);
+            //var state = entry.State;
+            ////state = System.Data.Entity.EntityState.Modified;
+
+            //var dbSetToList = this.dbSet.AsEnumerable().ToList();
+            //var dbSet = this.dbSet;
 
 
         }

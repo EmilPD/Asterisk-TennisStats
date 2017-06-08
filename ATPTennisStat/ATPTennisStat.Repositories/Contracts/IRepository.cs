@@ -9,8 +9,6 @@ namespace ATPTennisStat.Repositories.Contracts
     {
         TEntity Get(int id);
 
-        IEnumerable<TEntity> GetAll(out DbSet dbSet);
-
         IEnumerable<TEntity> GetAll();
 
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
