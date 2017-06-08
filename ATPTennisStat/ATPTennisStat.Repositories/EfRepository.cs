@@ -43,6 +43,9 @@ namespace ATPTennisStat.Repositories
         public void Add(TEntity entity)
         {
             this.dbSet.Add(entity);
+
+            var a = this.context.Entry<TEntity>(entity);
+            var state = a.State;
         }
         
         public void Remove(TEntity entity)

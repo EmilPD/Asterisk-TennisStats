@@ -43,13 +43,16 @@ namespace ATPTennisStat.Factories
             var country = this.dataProvider.Countries.GetAll()
                                     .FirstOrDefault(c => c.Name.ToLower() == countryNameLowerCase);
 
-            
+
+            //dbCtx.Entry(stud).State = System.Data.Entity.EntityState.Modified;
+
             if (country == null)
             {
                 country = new Country
                 {
                     Name = countryName
                 };
+                this.dataProvider.Countries.Add(country);
             }
             
             return new City

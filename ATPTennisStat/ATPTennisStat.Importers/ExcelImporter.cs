@@ -45,17 +45,17 @@ namespace ATPTennisStat.Importers
 
             //ISsue when adding two different cities in batch
             //Trackign changes - attached status?
-            var city = modelsFactory.CreateCity("London", "UK");
+            var city = this.modelsFactory.CreateCity("Paris", "France");
             this.dataProvider.Cities.Add(city);
 
             //this.dataProvider.UnitOfWork.Finished();
 
-            var city1 = modelsFactory.CreateCity("Dublin", "UK");
+            var city1 = modelsFactory.CreateCity("Nant", "France");
 
 
             this.dataProvider.Cities.Add(city1);
 
-            this.dataProvider.UnitOfWork.Finished();
+            //this.dataProvider.UnitOfWork.Finished();
 
         }
 
