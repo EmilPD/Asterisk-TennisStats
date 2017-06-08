@@ -13,6 +13,7 @@ using ATPTennisStat.Common;
 using ATPTennisStat.Models.PostgreSqlModels;
 using ATPTennisStat.Models.Enums;
 using ATPTennisStat.PostgreSqlData;
+using ATPTennisStat.Common.Enums;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -36,7 +37,7 @@ namespace ATPTennisStat.ConsoleClient
         private static void PostgreDataStart()
         {
             // TODO: Resolve duplicate DBContexts in Kernel???
-            var kernel = new StandardKernel(new ATPTennisStatModules());
+            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.Postgre));
             var dp = kernel.Get<PostgresDataProvider>();
 
             // test
@@ -92,23 +93,23 @@ namespace ATPTennisStat.ConsoleClient
 
         private static void ExcelImporterWrite()
         {
-            var kernel = new StandardKernel(new ATPTennisStatModules());
+            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
 
-            var excelImporter = kernel.Get<ExcelImporter>();
-            excelImporter.Write();
+            //var excelImporter = kernel.Get<ExcelImporter>();
+            //excelImporter.Write();
 
         }
 
         private static void GeneratePdfReport()
         {
-            var kernel = new StandardKernel(new ATPTennisStatModules());
+            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
             var report = kernel.Get<PdfReportGenerator>();
             report.GenerateReport();
         }
 
         private static void NinjectStart()
         {
-            var kernel = new StandardKernel(new ATPTennisStatModules());
+            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
             var dp = kernel.Get<SqlServerDataProvider>();
             //var cities = dp.Cities.Find(c => c.Country.Name == "Bulgaria");
 
