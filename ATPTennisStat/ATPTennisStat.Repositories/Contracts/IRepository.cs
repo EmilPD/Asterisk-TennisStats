@@ -11,6 +11,8 @@ namespace ATPTennisStat.Repositories.Contracts
 
         IEnumerable<TEntity> GetAll(out DbSet dbSet);
 
+        IEnumerable<TEntity> GetAll();
+
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 
         void Add(TEntity entity);

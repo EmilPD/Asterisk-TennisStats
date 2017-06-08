@@ -23,6 +23,8 @@ namespace ATPTennisStat.Factories
             var countryNameLowerCase = countryName.ToLower();
             var cityNameLowerCase = name.ToLower();
 
+            DbSet dbSet = null;
+
             if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("City name - null or empty");
@@ -41,8 +43,7 @@ namespace ATPTennisStat.Factories
                 throw new ArgumentException("Country name - null or empty");
             }
 
-            DbSet dbSet = null;
-            var list = this.dataProvider.Countries.GetAll(dbSet);
+            var list = this.dataProvider.Countries.GetAll(out dbSet);
 
             var country = list.FirstOrDefault(c => c.Name.ToLower() == countryNameLowerCase);
 
