@@ -45,6 +45,12 @@ namespace ATPTennisStat.Importers
 
             var city = modelsFactory.CreateCity("Burgas", "Bulgaria");
 
+            //this.dataProvider.Cities.Add(new City
+            //{
+            //    Name = "Burgas",
+            //    Country = new Country { Name = "Bulgaria" }
+            //});
+
             this.dataProvider.Cities.Add(city);
             this.dataProvider.UnitOfWork.Finished();
 

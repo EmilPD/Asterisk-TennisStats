@@ -28,7 +28,7 @@ namespace ATPTennisStat.Factories
             }
 
             bool cityExists = this.dataProvider.Cities.GetAll()
-                                .Any();
+                                .Any(c => c.Name.ToLower() == cityNameLowerCase);
 
             if (cityExists)
             {
