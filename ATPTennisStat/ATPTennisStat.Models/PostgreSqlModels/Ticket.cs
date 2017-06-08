@@ -17,7 +17,7 @@ namespace ATPTennisStat.Models.PostgreSqlModels
 
         public int? Number { get; set; }
 
-        public virtual int TennisEventId { get; set; }
+        public int TennisEventId { get; set; }
 
         public virtual TennisEvent TennisEvent { get; set; }
     }
