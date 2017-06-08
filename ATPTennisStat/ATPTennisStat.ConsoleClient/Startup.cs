@@ -54,10 +54,7 @@ namespace ATPTennisStat.ConsoleClient
 
             var players = dp.Players.GetAll();
             //dp.Players.Add()
-
             
-
-
             dp.Cities.Add(new City
             {
                 Name = "Burgas",

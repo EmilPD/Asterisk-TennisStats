@@ -7,16 +7,21 @@ using ClosedXML.Excel;
 using System.IO;
 using ATPTennisStat.Importers.Contracts;
 using ATPTennisStat.SQLServerData;
+using ATPTennisStat.Models;
+using ATPTennisStat.Factories;
 
 namespace ATPTennisStat.Importers
 {
     public class ExcelImporter : IImporter
     {
         private SqlServerDataProvider dataProvider;
+        private ModelsFactory modelsFactory;
 
-        public ExcelImporter(SqlServerDataProvider dataProvider)
+        public ExcelImporter(SqlServerDataProvider dataProvider, ModelsFactory modelsFactory)
         {
             this.dataProvider = dataProvider;
+            this.modelsFactory = modelsFactory;
+
         }
 
         public void Read()
@@ -37,7 +42,11 @@ namespace ATPTennisStat.Importers
 
         public void Write()
         {
-            Console.WriteLine("REFACTORED");
+
+            var city = modelsFactory.CreateCity("Burgas", "Bulgaria");
+
+            this.dataProvider.Cities.Add(city);
+            this.dataProvider.UnitOfWork.Finished();
 
         }
 
