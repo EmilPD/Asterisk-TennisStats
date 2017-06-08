@@ -43,15 +43,18 @@ namespace ATPTennisStat.Importers
         public void Write()
         {
 
-            var city = modelsFactory.CreateCity("Burgas", "Bulgaria");
-
-            //this.dataProvider.Cities.Add(new City
-            //{
-            //    Name = "Burgas",
-            //    Country = new Country { Name = "Bulgaria" }
-            //});
-
+            //ISsue when adding two different cities in batch
+            //Trackign changes - attached status?
+            var city = modelsFactory.CreateCity("London", "UK");
             this.dataProvider.Cities.Add(city);
+
+            //this.dataProvider.UnitOfWork.Finished();
+
+            var city1 = modelsFactory.CreateCity("Dublin", "UK");
+
+
+            this.dataProvider.Cities.Add(city1);
+
             this.dataProvider.UnitOfWork.Finished();
 
         }
