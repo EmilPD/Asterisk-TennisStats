@@ -28,7 +28,7 @@ namespace ATPTennisStat.ConsoleClient
             ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
-            ExcelImporterWrite();
+            ExcelImporter();
             //NinjectStart();
             //GeneratePdfReport();
             //PostgreDataStart();
@@ -91,12 +91,13 @@ namespace ATPTennisStat.ConsoleClient
             }
         }
 
-        private static void ExcelImporterWrite()
+        private static void ExcelImporter()
         {
             var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
 
             var excelImporter = kernel.Get<ExcelImporter>();
-            excelImporter.Write();
+            excelImporter.Read();
+            //excelImporter.Write();
 
         }
 
