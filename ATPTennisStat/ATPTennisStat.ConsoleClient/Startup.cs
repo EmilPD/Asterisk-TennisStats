@@ -2,10 +2,13 @@
 using System.IO;
 using System.Linq;
 using System.Data.Entity;
-using ClosedXML.Excel;
 using Ninject;
+using ATPTennisStat.Importers;
 using ATPTennisStat.ReportGenerators;
 using ATPTennisStat.SQLServerData;
+using ATPTennisStat.Models;
+using ATPTennisStat.Repositories;
+using ATPTennisStat.SQLServerData.Migrations;
 using ATPTennisStat.Common;
 using ATPTennisStat.Models.PostgreSqlModels;
 using ATPTennisStat.Models.Enums;
@@ -24,7 +27,7 @@ namespace ATPTennisStat.ConsoleClient
             ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
-            //ExcelImport();
+            //ExcelImporterWrite();
             //NinjectStart();
             //GeneratePdfReport();
             PostgreDataStart();
@@ -87,6 +90,15 @@ namespace ATPTennisStat.ConsoleClient
             }
         }
 
+        private static void ExcelImporterWrite()
+        {
+            var kernel = new StandardKernel(new ATPTennisStatModules());
+
+            var excelImporter = kernel.Get<ExcelImporter>();
+            excelImporter.Write();
+
+        }
+
         private static void GeneratePdfReport()
         {
             var kernel = new StandardKernel(new ATPTennisStatModules());
@@ -101,14 +113,15 @@ namespace ATPTennisStat.ConsoleClient
             //var cities = dp.Cities.Find(c => c.Country.Name == "Bulgaria");
 
             var players = dp.Players.GetAll();
+            //dp.Players.Add()
+            
+            dp.Cities.Add(new City
+            {
+                Name = "Burgas",
+                Country = new Country { Name = "Bulgaria" }
+            });
 
-            //dp.cities.Add(new City
-            //{
-            //    Name = "Burgas",
-            //    Country = new Country { Name = "Bulgaria" }
-            //});
-
-            //dp.unitOfWork.Finished();
+            dp.UnitOfWork.Finished();
 
             //foreach (var city in cities)
             //{
@@ -125,22 +138,6 @@ namespace ATPTennisStat.ConsoleClient
                 Console.WriteLine("-------------");
                 Console.WriteLine();
             }
-        }
-
-        static void ExcelImport()
-        {
-            string dir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
-
-            string path = dir + "\\Data\\Excel\\TennisStatsDatabase.xlsx";
-            Console.WriteLine(path);
-            var workbook = new XLWorkbook(path);
-            var ws = workbook.Worksheet(1);
-            Console.WriteLine(ws.Name);
-            var currentRegion = ws.RangeUsed().AsTable();
-            var names = currentRegion.DataRange.Rows()
-                .Select(nameRow => nameRow.Field("Name").GetString())
-                .ToList();
-            names.ForEach(Console.WriteLine);
         }
 
         static void DbContextStart()
