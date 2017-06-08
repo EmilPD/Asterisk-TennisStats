@@ -6,9 +6,10 @@ using ClosedXML.Excel;
 using Ninject;
 using ATPTennisStat.ReportGenerators;
 using ATPTennisStat.SQLServerData;
-using ATPTennisStat.Models;
-using ATPTennisStat.Repositories;
-using ATPTennisStat.SQLServerData.Migrations;
+using ATPTennisStat.Common;
+using ATPTennisStat.Models.PostgreSqlModels;
+using ATPTennisStat.Models.Enums;
+using ATPTennisStat.PostgreSqlData;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -16,22 +17,79 @@ namespace ATPTennisStat.ConsoleClient
     {
         static void Main()
         {
-            Database.SetInitializer(
-            new MigrateDatabaseToLatestVersion<SqlServerDbContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerDbContext, SQLServerData.Migrations.Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PostgresDbContext, PostgreSqlData.Migrations.Configuration>());
+
             ///<summary>
             ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
             //ExcelImport();
             //NinjectStart();
-            GeneratePdfReport();
+            //GeneratePdfReport();
+            PostgreDataStart();
+        }
 
+        private static void PostgreDataStart()
+        {
+            // TODO: Resolve duplicate DBContexts in Kernel???
+            var kernel = new StandardKernel(new ATPTennisStatModules());
+            var dp = kernel.Get<PostgresDataProvider>();
+
+            // test
+            // Seed Data
+            using (var uow = dp.UnitOfWork())
+            {
+                string[] names = new string[] { "Wimbledon - Final", "US Open - Q1", "Sofia Open - Semi-Final", "AO - R32", "Selski Turnir" };
+                foreach (var name in names)
+                {
+                    var tevent = new TennisEvent()
+                    {
+                        Name = name
+                    };
+
+                    dp.TennisEvents.Add(tevent);
+                }
+
+                for (int i = 1; i <= 10; i++)
+                {
+                    var ticket = new Ticket()
+                    {
+                        Sector = Sector.Front,
+                        Price = 5.40m + i/2,
+                        Number = 200 - i,
+                        TennisEventId = i % 5 + 1
+                    };
+                    dp.Tickets.Add(ticket);
+                }
+
+                uow.Finished();
+            }
+
+            // Read Data
+            var tevents = dp.TennisEvents.GetAll().ToList();
+
+            foreach (var evt in tevents)
+            {
+                Console.WriteLine($"*** {evt.Name} ***");
+
+                var tList = dp
+                    .Tickets
+                    .Find(t => t.TennisEvent.Id == evt.Id)
+                    .Select(t => "Id: " + t.Id + ", Price: " + t.Price + ", Sector: " + (Sector)t.Sector + " - Remaining: " + t.Number)
+                    .ToList();
+
+                var tickets = String.Join("\n    ", tList);
+                if (tickets.Length > 0)
+                {
+                    Console.WriteLine("    " + tickets);
+                }
+            }
         }
 
         private static void GeneratePdfReport()
         {
             var kernel = new StandardKernel(new ATPTennisStatModules());
-
             var report = kernel.Get<PdfReportGenerator>();
             report.GenerateReport();
         }
@@ -39,7 +97,6 @@ namespace ATPTennisStat.ConsoleClient
         private static void NinjectStart()
         {
             var kernel = new StandardKernel(new ATPTennisStatModules());
-
             var dp = kernel.Get<SqlServerDataProvider>();
             //var cities = dp.Cities.Find(c => c.Country.Name == "Bulgaria");
 

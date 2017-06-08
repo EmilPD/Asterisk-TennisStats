@@ -41,7 +41,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="PostgresDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ATPTennisStat.Models\ATPTennisStat.Models.csproj">
+      <Project>{12DE3FD9-6EBC-408D-AF51-1A7F7C712108}</Project>
+      <Name>ATPTennisStat.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.Repositories\ATPTennisStat.Repositories.csproj">
+      <Project>{B4FC6642-8C45-49EC-B3F3-FFA883FADF4F}</Project>
+      <Name>ATPTennisStat.Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
