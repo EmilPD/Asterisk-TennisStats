@@ -9,11 +9,15 @@ using ATPTennisStat.Importers.Contracts;
 using ATPTennisStat.SQLServerData;
 using ATPTennisStat.Models;
 using ATPTennisStat.Factories;
+using System.Data;
 
 namespace ATPTennisStat.Importers
 {
     public class ExcelImporter : IImporter
     {
+        private string solutionDirectory;
+        private string filePath;
+
         private SqlServerDataProvider dataProvider;
         private ModelsFactory modelsFactory;
 
@@ -22,39 +26,61 @@ namespace ATPTennisStat.Importers
             this.dataProvider = dataProvider;
             this.modelsFactory = modelsFactory;
 
+            this.solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            this.filePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
+
         }
 
+        /// <summary>
+        /// Expects a file with data in the first worksheet
+        /// </summary>
         public void Read()
         {
-            string dir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            var workbook = new XLWorkbook(this.filePath);
+            var ws = workbook.Worksheets.First();
 
-            string path = dir + "\\Data\\Excel\\TennisStatsDatabase.xlsx";
-            Console.WriteLine(path);
-            var workbook = new XLWorkbook(path);
-            var ws = workbook.Worksheet(1);
-            Console.WriteLine(ws.Name);
-            var currentRegion = ws.RangeUsed().AsTable();
-            var names = currentRegion.DataRange.Rows()
-                .Select(nameRow => nameRow.Field("Name").GetString())
+            var dataRange = ws.RangeUsed().AsTable().DataRange;
+
+
+            var names = dataRange.Rows()
+                .Select(nameRow => new {
+                    FirstName = nameRow.Field("FirstName").GetValue<string>(),
+                    LastName = nameRow.Field("LastName").GetValue<string>(),
+                    Ranking = nameRow.Field("Ranking").GetValue<string>(),
+                    BirthDate = nameRow.Field("BirthDate").GetValue<string>(),
+                    Height = nameRow.Field("Height").GetValue<string>(),
+                    Weight = nameRow.Field("Weight").GetValue<string>(),
+                    City = nameRow.Field("City").GetValue<string>(),
+                    Country = nameRow.Field("Country").GetValue<string>()
+
+                })
                 .ToList();
+
             names.ForEach(Console.WriteLine);
+        }
+
+        public void ImportPlayer()
+        {
+
         }
 
         public void Write()
         {
 
 
-            var city = this.modelsFactory.CreateCity("Paris", "France");
-            this.dataProvider.Cities.Add(city);
+
+
+            //var city = this.modelsFactory.CreateCity("Paris", "France");
+            //this.dataProvider.Cities.Add(city);
+
+            ////this.dataProvider.UnitOfWork.Finished();
+
+            //var city1 = modelsFactory.CreateCity("Nant", "France");
+
+
+            //this.dataProvider.Cities.Add(city1);
 
             //this.dataProvider.UnitOfWork.Finished();
-
-            var city1 = modelsFactory.CreateCity("Nant", "France");
-
-
-            this.dataProvider.Cities.Add(city1);
-
-            this.dataProvider.UnitOfWork.Finished();
 
         }
 
