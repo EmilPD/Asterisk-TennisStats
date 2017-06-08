@@ -33,8 +33,8 @@ namespace ATPTennisStat.Repositories
 
         public IEnumerable<TEntity> GetAll()
         {
-            var materializingDbSet = this.dbSet.ToList();
-            //working with in memory objects
+            this.dbSet.Load();
+
             return this.dbSet.Local;
 
         }
