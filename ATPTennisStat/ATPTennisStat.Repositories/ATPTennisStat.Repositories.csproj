@@ -64,6 +64,10 @@
       <Project>{12DE3FD9-6EBC-408D-AF51-1A7F7C712108}</Project>
       <Name>ATPTennisStat.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.PostgreSqlData\ATPTennisStat.PostgreSqlData.csproj">
+      <Project>{F06EFDFC-76C0-49E3-9519-347427486BDA}</Project>
+      <Name>ATPTennisStat.PostgreSqlData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
