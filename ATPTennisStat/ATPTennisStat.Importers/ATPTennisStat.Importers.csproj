@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ATPTennisStat.Factories\ATPTennisStat.Factories.csproj">
-      <Project>{35DC9DDD-EA35-446D-AE71-829681EC8B15}</Project>
+      <Project>{35dc9ddd-ea35-446d-ae71-829681ec8b15}</Project>
       <Name>ATPTennisStat.Factories</Name>
     </ProjectReference>
     <ProjectReference Include="..\ATPTennisStat.Models\ATPTennisStat.Models.csproj">
