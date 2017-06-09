@@ -32,11 +32,11 @@ namespace ATPTennisStat.ConsoleClient
             ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
-            //ExcelImporter();
+            ExcelImporter();
             //NinjectStart();
             //GeneratePdfReport();
             //ConsoleEngineStart();
-            SqliteStart();
+            //SqliteStart();
         }
 
         private static void SqliteStart()
@@ -101,7 +101,7 @@ namespace ATPTennisStat.ConsoleClient
             var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
 
             var excelImporter = kernel.Get<ExcelImporter>();
-            excelImporter.Read();
+            excelImporter.ImportPlayers();
             //excelImporter.Write();
 
         }

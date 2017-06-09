@@ -15,8 +15,9 @@ namespace ATPTennisStat.Importers
 {
     public class ExcelImporter : IImporter
     {
-        private string solutionDirectory;
-        private string filePath;
+        private readonly string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+        private string playersFilePath;
+        private string matchesFilePath;
 
         private SqlServerDataProvider dataProvider;
         private ModelsFactory modelsFactory;
@@ -26,24 +27,31 @@ namespace ATPTennisStat.Importers
             this.dataProvider = dataProvider;
             this.modelsFactory = modelsFactory;
 
-            this.solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
-            this.filePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
 
+            this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
+            this.matchesFilePath = this.solutionDirectory + "\\Data\\Excel\\Matches-Full-Data.xlsx";
         }
 
         /// <summary>
         /// Expects a file with data in the first worksheet
         /// </summary>
-        public void Read()
+        public IXLTableRange GenerateTableRangeFromFile(string filePath)
         {
-            var workbook = new XLWorkbook(this.filePath);
+            var workbook = new XLWorkbook(this.playersFilePath);
             var ws = workbook.Worksheets.First();
 
             var dataRange = ws.RangeUsed().AsTable().DataRange;
 
+            return dataRange;
+        }
+
+        public void ImportPlayers()
+        {
+            var dataRange = GenerateTableRangeFromFile(this.playersFilePath);
 
             var players = dataRange.Rows()
-                .Select(nameRow => new {
+                .Select(nameRow => new
+                {
                     FirstName = nameRow.Field("FirstName").GetString(),
                     LastName = nameRow.Field("LastName").GetString(),
                     Ranking = nameRow.Field("Ranking").GetString(),
@@ -77,17 +85,12 @@ namespace ATPTennisStat.Importers
                 catch (ArgumentException ex)
                 {
 
-                    Console.WriteLine("Excel import problem: "+ex.Message);
+                    Console.WriteLine("Excel import problem: " + ex.Message);
                 }
- 
+
             }
 
             this.dataProvider.UnitOfWork.Finished();
-        }
-
-        public void ImportPlayer()
-        {
-
         }
 
         public void Write()
