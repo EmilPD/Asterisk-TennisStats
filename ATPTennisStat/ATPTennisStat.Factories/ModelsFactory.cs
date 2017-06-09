@@ -1,4 +1,6 @@
-﻿using ATPTennisStat.Models;
+﻿using ATPTennisStat.Common;
+using ATPTennisStat.Factories.Contracts;
+using ATPTennisStat.Models;
 using ATPTennisStat.SQLServerData;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ATPTennisStat.Factories
 {
-    public class ModelsFactory
+    public class ModelsFactory : IModelsFactory
     {
         private SqlServerDataProvider dataProvider;
 

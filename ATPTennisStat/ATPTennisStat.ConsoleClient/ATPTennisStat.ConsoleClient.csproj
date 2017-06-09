@@ -96,7 +96,6 @@
     <Compile Include="Core\Commands\TicketCommands\ShowTicketsCommand.cs" />
     <Compile Include="Core\Commands\TicketCommands\BuyTicketsCommand.cs" />
     <Compile Include="Core\Contracts\ILogger.cs" />
-    <Compile Include="Core\Contracts\IModelsFactory.cs" />
     <Compile Include="Core\Engine.cs" />
     <Compile Include="Core\Commands\Contracts\ICommand.cs" />
     <Compile Include="Core\Commands\Contracts\ICommandFactory.cs" />
@@ -105,7 +104,6 @@
     <Compile Include="Core\Contracts\IReader.cs" />
     <Compile Include="Core\Contracts\IWriter.cs" />
     <Compile Include="Core\Factories\CommandFactory.cs" />
-    <Compile Include="Core\Factories\ModelsFactory.cs" />
     <Compile Include="Core\Providers\CommandParser.cs" />
     <Compile Include="Core\Providers\ConsoleReader.cs" />
     <Compile Include="Core\Providers\ConsoleWriter.cs" />
@@ -118,6 +116,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ATPTennisStat.Factories\ATPTennisStat.Factories.csproj">
+      <Project>{35DC9DDD-EA35-446D-AE71-829681EC8B15}</Project>
+      <Name>ATPTennisStat.Factories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ATPTennisStat.Importers\ATPTennisStat.Importers.csproj">
       <Project>{99052262-0c1c-4a7c-a581-cefe3d429fb2}</Project>
       <Name>ATPTennisStat.Importers</Name>

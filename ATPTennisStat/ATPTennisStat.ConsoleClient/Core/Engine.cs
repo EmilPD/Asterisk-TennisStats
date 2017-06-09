@@ -79,6 +79,8 @@ namespace ATPTennisStat.ConsoleClient.Core
 
         public void Start()
         {
+            ShowWelcomeScreen();
+
             var builder = new StringBuilder();
 
             while(true)
@@ -95,7 +97,7 @@ namespace ATPTennisStat.ConsoleClient.Core
                 try
                 {
                     var executionResult = this.parser.ParseCommand(commandLine);
-                    this.writer.Write(executionResult);
+                    this.writer.WriteLine(executionResult);
                 }
                 catch (ArgumentException ex)
                 {
@@ -107,6 +109,11 @@ namespace ATPTennisStat.ConsoleClient.Core
                     this.logger.Log(ex.Message);
                 }
             }
+        }
+
+        private void ShowWelcomeScreen()
+        {
+            this.writer.WriteLine("");
         }
     }
 }
