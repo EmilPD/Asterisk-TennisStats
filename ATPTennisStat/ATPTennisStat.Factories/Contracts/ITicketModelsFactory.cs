@@ -2,7 +2,7 @@
 
 namespace ATPTennisStat.Factories.Contracts
 {
-    interface ITicketModelsFactory
+    public interface ITicketModelsFactory
     {
         Ticket CreateTicket(string sector, string price, string number, string eventId);
 

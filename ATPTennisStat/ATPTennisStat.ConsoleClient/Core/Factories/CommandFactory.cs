@@ -16,13 +16,13 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
 {
     class CommandFactory : ICommandFactory
     {
-        private readonly IModelsFactory factory;
+        private readonly ITicketModelsFactory factory;
         private readonly PostgresDataProvider PgDp;
         private readonly SqlServerDataProvider SqlDp;
 
-        public CommandFactory(IModelsFactory factory, PostgresDataProvider PgDp, SqlServerDataProvider SqlDp)
+        public CommandFactory(ITicketModelsFactory factory, PostgresDataProvider PgDp, SqlServerDataProvider SqlDp)
         {
-            this.factory = factory ?? new ModelsFactory(SqlDp, PgDp);
+            this.factory = factory ?? new TicketModelsFactory(PgDp);
             this.PgDp = PgDp;
             this.SqlDp = SqlDp;
         }

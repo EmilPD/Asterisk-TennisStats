@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IModelsFactory.cs" />
+    <Compile Include="Contracts\ITicketModelsFactory.cs" />
     <Compile Include="ModelsFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicketModelsFactory.cs" />
