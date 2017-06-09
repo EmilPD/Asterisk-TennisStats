@@ -20,6 +20,20 @@ namespace ATPTennisStat.Factories
             this.dataProvider = dataProvider;
         }
 
+        public Tournament CreateTournament(string name,
+                                           string startDate,
+                                           string endDate,
+                                           string prizeMoney,
+                                           string categoryName,
+                                           string playersCount,
+                                           string cityName,
+                                           string countryName,
+                                           string surfaceType,
+                                           string surfaceSpeed)
+        {
+            return null;
+        }
+
         public Match CreateMatch(string datePlayed,
                                  string winner,
                                  string loser,

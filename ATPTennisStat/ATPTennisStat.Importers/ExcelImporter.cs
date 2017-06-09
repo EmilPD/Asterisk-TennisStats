@@ -18,6 +18,7 @@ namespace ATPTennisStat.Importers
         private readonly string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
         private string playersFilePath;
         private string matchesFilePath;
+        private string tournamentsFilePath;
 
         private SqlServerDataProvider dataProvider;
         private ModelsFactory modelsFactory;
@@ -30,6 +31,8 @@ namespace ATPTennisStat.Importers
 
             this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
             this.matchesFilePath = this.solutionDirectory + "\\Data\\Excel\\Matches-Full-Data.xlsx";
+            this.tournamentsFilePath = this.solutionDirectory + "\\Data\\Excel\\Tournaments-Full-Data.xlsx";
+
         }
 
         /// <summary>
@@ -54,6 +57,41 @@ namespace ATPTennisStat.Importers
                 return null;
             }
             
+
+        }
+
+        public void ImportTournaments()
+        {
+            var dataRange = GenerateTableRangeFromFile(this.tournamentsFilePath);
+
+            if (dataRange == null)
+            {
+                //another exception handling possible
+                return;
+            }
+
+            //TODO Exception Handling
+            var tournaments = dataRange.Rows()
+                            .Select(row => new
+                            {
+                                Name = row.Field("Name").GetString().Trim(),
+                                StartDate = row.Field("StartDate").GetString().Trim(),
+                                EndDate = row.Field("EndDate").GetString().Trim(),
+                                PrizeMoney = row.Field("PrizeMoney").GetString().Trim(),
+                                Category = row.Field("Category").GetString().Trim(),
+                                PlayersCount = row.Field("PlayersCount").GetString().Trim(),
+                                City = row.Field("City").GetString().Trim(),
+                                Country = row.Field("Country").GetString().Trim(),
+                                Surface = row.Field("Surface").GetString().Trim(),
+                                Speed = row.Field("Speed").GetString().Trim()
+                            });
+
+
+
+
+            //this.dataProvider.UnitOfWork.Finished();
+
+            var a = 3;
 
         }
 
