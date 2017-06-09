@@ -42,21 +42,36 @@ namespace ATPTennisStat.Importers
             var dataRange = ws.RangeUsed().AsTable().DataRange;
 
 
-            var names = dataRange.Rows()
+            var players = dataRange.Rows()
                 .Select(nameRow => new {
-                    FirstName = nameRow.Field("FirstName").GetValue<string>(),
-                    LastName = nameRow.Field("LastName").GetValue<string>(),
-                    Ranking = nameRow.Field("Ranking").GetValue<string>(),
-                    BirthDate = nameRow.Field("BirthDate").GetValue<string>(),
-                    Height = nameRow.Field("Height").GetValue<string>(),
-                    Weight = nameRow.Field("Weight").GetValue<string>(),
-                    City = nameRow.Field("City").GetValue<string>(),
-                    Country = nameRow.Field("Country").GetValue<string>()
+                    FirstName = nameRow.Field("FirstName").GetString(),
+                    LastName = nameRow.Field("LastName").GetString(),
+                    Ranking = nameRow.Field("Ranking").GetString(),
+                    BirthDate = nameRow.Field("BirthDate").GetString(),
+                    Height = nameRow.Field("Height").GetString(),
+                    Weight = nameRow.Field("Weight").GetString(),
+                    City = nameRow.Field("City").GetString(),
+                    Country = nameRow.Field("Country").GetString()
 
                 })
                 .ToList();
 
-            names.ForEach(Console.WriteLine);
+
+            foreach (var p in players)
+            {
+                var newPlayer = modelsFactory.CreatePlayer(
+                    p.FirstName,
+                    p.LastName,
+                    p.Ranking,
+                    p.BirthDate,
+                    p.Height,
+                    p.Weight,
+                    p.City,
+                    p.Country);
+                this.dataProvider.Players.Add(newPlayer);
+            }
+
+            this.dataProvider.UnitOfWork.Finished();
         }
 
         public void ImportPlayer()
