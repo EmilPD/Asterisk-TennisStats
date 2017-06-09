@@ -83,14 +83,40 @@ namespace ATPTennisStat.Importers
                                 City = row.Field("City").GetString().Trim(),
                                 Country = row.Field("Country").GetString().Trim(),
                                 Surface = row.Field("Surface").GetString().Trim(),
-                                Speed = row.Field("Speed").GetString().Trim()
-                            });
+                                SurfaceSpeed = row.Field("Speed").GetString().Trim()
+                            })
+                            .ToList();
 
 
 
+            foreach (var t in tournaments)
+            {
+                try
+                {
+                    var newTournament = modelsFactory.CreateTournament(
+                     t.Name,
+                     t.StartDate,
+                     t.EndDate,
+                     t.PrizeMoney,
+                     t.Category,
+                     t.PlayersCount,
+                     t.City,
+                     t.Country,
+                     t.Surface,
+                     t.SurfaceSpeed);
+
+                    //this.dataProvider.Tournaments.Add(newTournament);
+
+                }
+                catch (ArgumentException ex)
+                {
+
+                    Console.WriteLine("Excel import problem: " + ex.Message);
+                }
+
+            }
 
             //this.dataProvider.UnitOfWork.Finished();
-
             var a = 3;
 
         }
@@ -150,6 +176,12 @@ namespace ATPTennisStat.Importers
         public void ImportPlayers()
         {
             var dataRange = GenerateTableRangeFromFile(this.playersFilePath);
+
+            if (dataRange == null)
+            {
+                //another exception handling possible
+                return;
+            }
 
             var players = dataRange.Rows()
                 .Select(row => new

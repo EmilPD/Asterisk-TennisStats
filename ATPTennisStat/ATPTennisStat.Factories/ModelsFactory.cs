@@ -20,26 +20,13 @@ namespace ATPTennisStat.Factories
             this.dataProvider = dataProvider;
         }
 
-        public Tournament CreateTournament(string name,
-                                           string startDate,
-                                           string endDate,
-                                           string prizeMoney,
-                                           string categoryName,
-                                           string playersCount,
-                                           string cityName,
-                                           string countryName,
-                                           string surfaceType,
-                                           string surfaceSpeed)
-        {
-            return null;
-        }
 
         public Match CreateMatch(string datePlayed,
-                                 string winner,
-                                 string loser,
-                                 string result,
-                                 string tournamentName,
-                                 string round)
+                         string winner,
+                         string loser,
+                         string result,
+                         string tournamentName,
+                         string round)
         {
 
             //TODO: MATCH EXISTS CONDITION 
@@ -55,7 +42,7 @@ namespace ATPTennisStat.Factories
             }
 
             var winnerToLower = winner.ToLower();
-            
+
             var loserToLower = loser.ToLower();
 
             //bool playerExists = this.dataProvider.Players.GetAll()
@@ -66,18 +53,33 @@ namespace ATPTennisStat.Factories
             //    throw new ArgumentException("Player already in the database");
 
 
-                //RESULT NULLABLE
-                //DatePlayed NULLABLE
+            //RESULT NULLABLE
+            //DatePlayed NULLABLE
 
-                //LoserID NON-NULLABLE
-                //WinnerID NON-NULLABLE
+            //LoserID NON-NULLABLE
+            //WinnerID NON-NULLABLE
 
-                //RoundID NULLABLE
-                //TournamentID NULLABLE
+            //RoundID NULLABLE
+            //TournamentID NULLABLE
 
 
 
-                return new Match();
+            return new Match();
+        }
+
+
+        public Tournament CreateTournament(string name,
+                                           string startDate,
+                                           string endDate,
+                                           string prizeMoney,
+                                           string categoryName,
+                                           string playersCount,
+                                           string cityName,
+                                           string countryName,
+                                           string surfaceType,
+                                           string surfaceSpeed)
+        {
+            return null;
         }
 
 
