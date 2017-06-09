@@ -15,6 +15,7 @@ using ATPTennisStat.Models.Enums;
 using ATPTennisStat.PostgreSqlData;
 using ATPTennisStat.Common.Enums;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
+using ATPTennisStat.ReportGenerators.Enums;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -31,8 +32,8 @@ namespace ATPTennisStat.ConsoleClient
             //DbContextStart();
             //ExcelImporter();
             //NinjectStart();
-            //GeneratePdfReport();
-            ConsoleEngineStart();
+            GeneratePdfReport();
+            //ConsoleEngineStart();
         }
 
         private static void ConsoleEngineStart()
@@ -87,7 +88,8 @@ namespace ATPTennisStat.ConsoleClient
         private static void GeneratePdfReport()
         {
             var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
-            var report = kernel.Get<PdfReportGenerator>();
+            var reportType = new Ninject.Parameters.ConstructorArgument("reportType", PdfReportType.Ranking);
+            var report = kernel.Get<PdfReportGenerator>(reportType);
             report.GenerateReport();
         }
 
