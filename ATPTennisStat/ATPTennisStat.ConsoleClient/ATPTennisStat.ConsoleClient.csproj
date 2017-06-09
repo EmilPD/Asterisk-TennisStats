@@ -142,6 +142,10 @@
       <Project>{b4fc6642-8c45-49ec-b3f3-ffa883fadf4f}</Project>
       <Name>ATPTennisStat.Repositories</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.SQLiteData\ATPTennisStat.SQLiteData.csproj">
+      <Project>{b44ca568-61f8-4a31-a247-25e7dfed9a99}</Project>
+      <Name>ATPTennisStat.SQLiteData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ATPTennisStat.SQLServerData\ATPTennisStat.SQLServerData.csproj">
       <Project>{81fbd9b4-f1c8-4316-8a6b-d932362b6540}</Project>
       <Name>ATPTennisStat.SQLServerData</Name>
