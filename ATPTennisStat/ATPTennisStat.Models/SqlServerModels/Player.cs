@@ -26,7 +26,7 @@ namespace ATPTennisStat.Models
 
         public float Weight { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public int Ranking { get; set; }
 

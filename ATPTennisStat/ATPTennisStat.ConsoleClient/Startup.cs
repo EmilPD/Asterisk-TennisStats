@@ -14,6 +14,7 @@ using ATPTennisStat.Models.PostgreSqlModels;
 using ATPTennisStat.Models.Enums;
 using ATPTennisStat.PostgreSqlData;
 using ATPTennisStat.Common.Enums;
+using ATPTennisStat.ConsoleClient.Core.Contracts;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -28,20 +29,21 @@ namespace ATPTennisStat.ConsoleClient
             ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
-            //ExcelImporterWrite();
+            //ExcelImporter();
             //NinjectStart();
             //GeneratePdfReport();
-            PostgreDataStart();
+            ConsoleEngineStart();
         }
 
-        private static void PostgreDataStart()
+        private static void ConsoleEngineStart()
         {
-            // TODO: Resolve duplicate DBContexts in Kernel???
             var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.Postgre));
-            var dp = kernel.Get<PostgresDataProvider>();
+            var engine = kernel.Get<IEngine>();
+            engine.Start();
 
+            #region Seed Data saved for later!
             // test
-            // Seed Data
+            /* Seed Data 
             using (var uow = dp.UnitOfWork())
             {
                 string[] names = new string[] { "Wimbledon - Final", "US Open - Q1", "Sofia Open - Semi-Final", "AO - R32", "Selski Turnir" };
@@ -68,34 +70,16 @@ namespace ATPTennisStat.ConsoleClient
                 }
 
                 uow.Finished();
-            }
-
-            // Read Data
-            var tevents = dp.TennisEvents.GetAll().ToList();
-
-            foreach (var evt in tevents)
-            {
-                Console.WriteLine($"*** {evt.Name} ***");
-
-                var tList = dp
-                    .Tickets
-                    .Find(t => t.TennisEvent.Id == evt.Id)
-                    .Select(t => "Id: " + t.Id + ", Price: " + t.Price + ", Sector: " + (Sector)t.Sector + " - Remaining: " + t.Number)
-                    .ToList();
-
-                var tickets = String.Join("\n    ", tList);
-                if (tickets.Length > 0)
-                {
-                    Console.WriteLine("    " + tickets);
-                }
-            }
+            } */
+            #endregion
         }
 
-        private static void ExcelImporterWrite()
+        private static void ExcelImporter()
         {
             var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
 
-            //var excelImporter = kernel.Get<ExcelImporter>();
+            var excelImporter = kernel.Get<ExcelImporter>();
+            excelImporter.Read();
             //excelImporter.Write();
 
         }
