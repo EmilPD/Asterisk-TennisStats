@@ -15,7 +15,7 @@ namespace ATPTennisStat.SQLServerData.EntityConfigurations
                 .HasColumnAnnotation(
                     IndexAnnotation.AnnotationName,
                     new IndexAnnotation(
-                        new IndexAttribute("IX_FirstName", 1)
+                        new IndexAttribute("IX_Name", 1)
                         {
                             IsUnique = true,
                             IsClustered = false
@@ -27,7 +27,7 @@ namespace ATPTennisStat.SQLServerData.EntityConfigurations
                 .HasColumnAnnotation(
                     IndexAnnotation.AnnotationName,
                     new IndexAnnotation(
-                        new IndexAttribute("IX_LastName", 1)
+                        new IndexAttribute("IX_Name", 2)
                         {
                             IsUnique = true,
                             IsClustered = false
