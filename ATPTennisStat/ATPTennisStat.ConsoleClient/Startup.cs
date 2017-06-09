@@ -43,12 +43,18 @@ namespace ATPTennisStat.ConsoleClient
         {
             var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLite));
             var dp = kernel.Get<SqliteDataProvider>();
-            
-            var log = new Log();
-            log.Message = "Content2";
-
-            dp.Logs.Add(log);
+            var logs = dp.Logs;
+            logs.Add(new Log { Message = "proba123", TimeStamp = DateTime.Now });
             dp.UnitOfWork.Finished();
+
+            var logsList = dp.Logs.GetAll();
+            foreach (var log in logsList)
+            {
+                Console.WriteLine("ID {0}", log.Id.ToString());
+                Console.WriteLine("Message {0}", log.Message.ToString());
+                Console.WriteLine("Time {0}", log.TimeStamp.ToString());
+                Console.WriteLine("---------------");
+            }
         }
 
         private static void ConsoleEngineStart()
