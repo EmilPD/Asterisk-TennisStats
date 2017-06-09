@@ -37,17 +37,37 @@ namespace ATPTennisStat.Importers
         /// </summary>
         public IXLTableRange GenerateTableRangeFromFile(string filePath)
         {
-            var workbook = new XLWorkbook(filePath);
-            var ws = workbook.Worksheets.First();
+            try
+            {
+                var workbook = new XLWorkbook(filePath);
+                var ws = workbook.Worksheets.First();
 
-            var dataRange = ws.RangeUsed().AsTable().DataRange;
+                var dataRange = ws.RangeUsed().AsTable().DataRange;
 
-            return dataRange;
+                return dataRange;
+            }
+            catch (Exception ex)
+            {
+
+                //throw new ArgumentException("File opened by another program");
+                Console.WriteLine("File opened by another program");
+                return null;
+            }
+            
+
         }
 
         public void ImportMatches()
         {
+
             var dataRange = GenerateTableRangeFromFile(this.matchesFilePath);
+
+            if (dataRange == null)
+            {
+                //another exception handling possible
+                return;
+            }
+
             var matches = dataRange.Rows()
                        .Select(row => new
                        {
@@ -55,18 +75,8 @@ namespace ATPTennisStat.Importers
                            Winner = row.Field("Winner").GetString().Trim(),
                            Loser = row.Field("Loser").GetString().Trim(),
                            Result = row.Field("Result").GetString().Trim(),
-                           WinnerPoints = row.Field("Winner Points").GetString().Trim(),
-                           LoserPoints = row.Field("Loser Points").GetString().Trim(),
                            TournamentName = row.Field("Tournament").GetString().Trim(),
-                           StartDate = row.Field("StartDate").GetString().Trim(),
-                           EndDate = row.Field("EndDate").GetString().Trim(),
-                           PrizeMoney = row.Field("PrizeMoney").GetString().Trim(),
-                           TournamentCategory = row.Field("Category").GetString().Trim(),
-                           PlayersCount = row.Field("PlayersCount").GetString().Trim(),
-                           Round = row.Field("Round").GetString().Trim(),
-                           City = row.Field("City").GetString().Trim(),
-                           Surface = row.Field("Surface").GetString().Trim(),
-                           Speed = row.Field("Speed").GetString().Trim()
+                           Round = row.Field("Round").GetString().Trim()
                        })
                         .ToList();
 
@@ -79,18 +89,8 @@ namespace ATPTennisStat.Importers
                          m.Winner,
                          m.Loser,
                          m.Result,
-                         m.WinnerPoints,
-                         m.LoserPoints,
                          m.TournamentName,
-                         m.StartDate,
-                         m.EndDate,
-                         m.PrizeMoney,
-                         m.TournamentCategory,
-                         m.PlayersCount,
-                         m.Round,
-                         m.City,
-                         m.Surface,
-                         m.Speed
+                         m.Round
                      );
 
                     this.dataProvider.Matches.Add(newMatch);

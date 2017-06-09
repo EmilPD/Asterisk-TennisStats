@@ -24,32 +24,46 @@ namespace ATPTennisStat.Factories
                                  string winner,
                                  string loser,
                                  string result,
-                                 string winnerPoints,
-                                 string loserPoints,
                                  string tournamentName,
-                                 string startDate,
-                                 string endDate,
-                                 string prizeMoney,
-                                 string tournamentCategoryName,
-                                 string playersCount,
-                                 string round,
-                                 string city,
-                                 string surface,
-                                 string speed)
+                                 string round)
         {
+
+            //TODO: MATCH EXISTS CONDITION 
+
+            if (String.IsNullOrEmpty(winner))
+            {
+                throw new ArgumentException("Winner - null or empty");
+            }
+
+            if (String.IsNullOrEmpty(loser))
+            {
+                throw new ArgumentException("Last name - null or empty");
+            }
+
+            var winnerToLower = winner.ToLower();
             
-            //RESULT NULLABLE
-            //DatePlayed NULLABLE
+            var loserToLower = loser.ToLower();
 
-            //LoserID NON-NULLABLE
-            //WinnerID NON-NULLABLE
+            //bool playerExists = this.dataProvider.Players.GetAll()
+            //                    .Any(p => p.FirstName.ToLower() == firstNameToLower &&
+            //                                p.LastName.ToLower() == lastNameToLower);
+            //if (playerExists)
+            //{
+            //    throw new ArgumentException("Player already in the database");
 
-            //RoundID NULLABLE
-            //TournamentID NULLABLE
+
+                //RESULT NULLABLE
+                //DatePlayed NULLABLE
+
+                //LoserID NON-NULLABLE
+                //WinnerID NON-NULLABLE
+
+                //RoundID NULLABLE
+                //TournamentID NULLABLE
 
 
 
-            return new Match();
+                return new Match();
         }
 
 
