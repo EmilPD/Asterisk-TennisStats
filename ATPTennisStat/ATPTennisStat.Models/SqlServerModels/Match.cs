@@ -23,7 +23,8 @@ namespace ATPTennisStat.Models
         public virtual Tournament Tournament { get; set; }
 
         [Column(TypeName = "smalldatetime")]
-        public DateTime? DatePlayed { get; set; }
+        [Required]
+        public DateTime DatePlayed { get; set; }
         
         public virtual Round Round { get; set; }
 
