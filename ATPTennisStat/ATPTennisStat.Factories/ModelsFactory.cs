@@ -20,7 +20,40 @@ namespace ATPTennisStat.Factories
             this.dataProvider = dataProvider;
         }
 
-        public Player CreatePlayer(string firstName, 
+        public Match CreateMatch(string datePlayed,
+                                 string winner,
+                                 string loser,
+                                 string result,
+                                 string winnerPoints,
+                                 string loserPoints,
+                                 string tournamentName,
+                                 string startDate,
+                                 string endDate,
+                                 string prizeMoney,
+                                 string tournamentCategoryName,
+                                 string playersCount,
+                                 string round,
+                                 string city,
+                                 string surface,
+                                 string speed)
+        {
+            
+            //RESULT NULLABLE
+            //DatePlayed NULLABLE
+
+            //LoserID NON-NULLABLE
+            //WinnerID NON-NULLABLE
+
+            //RoundID NULLABLE
+            //TournamentID NULLABLE
+
+
+
+            return new Match();
+        }
+
+
+        public Player CreatePlayer(string firstName,
                                    string lastName,
                                    string ranking,
                                    string birthDate,
@@ -47,7 +80,8 @@ namespace ATPTennisStat.Factories
             bool playerExists = this.dataProvider.Players.GetAll()
                                 .Any(p => p.FirstName.ToLower() == firstNameToLower &&
                                             p.LastName.ToLower() == lastNameToLower);
-            if (playerExists) {
+            if (playerExists)
+            {
                 throw new ArgumentException("Player already in the database");
             }
 
@@ -66,7 +100,7 @@ namespace ATPTennisStat.Factories
 
 
             DateTime? birthDateParsed = null;
-            if(birthDate != null)
+            if (birthDate != null)
             {
                 try
                 {
@@ -124,7 +158,7 @@ namespace ATPTennisStat.Factories
 
             if (city == null)
             {
-                city = CreateCity(cityName,countryName);
+                city = CreateCity(cityName, countryName);
 
                 this.dataProvider.Cities.Add(city);
             }
@@ -202,20 +236,20 @@ namespace ATPTennisStat.Factories
             if (country == null)
             {
                 country = CreateCountry(countryName);
-                    
+
                 //    new Country
                 //{
                 //    Name = countryName
                 //};
                 this.dataProvider.Countries.Add(country);
             }
-            
+
             return new City
             {
                 Name = name,
                 Country = country
             };
-           
+
         }
     }
 }

@@ -51,24 +51,61 @@ namespace ATPTennisStat.Importers
             var matches = dataRange.Rows()
                        .Select(row => new
                        {
-                           DataPlayed = row.Field("DatePlayed").GetString(),
-                           Winner = row.Field("Winner").GetString(),
-                           Loser = row.Field("Loser").GetString(),
-                           Result = row.Field("Result").GetString(),
-                           WinnerPoints = row.Field("Winner Points").GetString(),
-                           LoserPoints = row.Field("Loser Points").GetString(),
-                           TournamentName = row.Field("Tournament").GetString(),
-                           StartDate = row.Field("StartDate").GetString(),
-                           EndDate = row.Field("EndDate").GetString(),
-                           PrizeMoney = row.Field("PrizeMoney").GetString(),
-                           TournamentCategory = row.Field("Category").GetString(),
-                           PlayersCount = row.Field("PlayersCount").GetString(),
-                           Round = row.Field("Round").GetString(),
-                           City = row.Field("City").GetString(),
-                           Surface = row.Field("Surface").GetString(),
-                           Speed = row.Field("Speed").GetString()
+                           DatePlayed = row.Field("DatePlayed").GetString().Trim(),
+                           Winner = row.Field("Winner").GetString().Trim(),
+                           Loser = row.Field("Loser").GetString().Trim(),
+                           Result = row.Field("Result").GetString().Trim(),
+                           WinnerPoints = row.Field("Winner Points").GetString().Trim(),
+                           LoserPoints = row.Field("Loser Points").GetString().Trim(),
+                           TournamentName = row.Field("Tournament").GetString().Trim(),
+                           StartDate = row.Field("StartDate").GetString().Trim(),
+                           EndDate = row.Field("EndDate").GetString().Trim(),
+                           PrizeMoney = row.Field("PrizeMoney").GetString().Trim(),
+                           TournamentCategory = row.Field("Category").GetString().Trim(),
+                           PlayersCount = row.Field("PlayersCount").GetString().Trim(),
+                           Round = row.Field("Round").GetString().Trim(),
+                           City = row.Field("City").GetString().Trim(),
+                           Surface = row.Field("Surface").GetString().Trim(),
+                           Speed = row.Field("Speed").GetString().Trim()
                        })
                         .ToList();
+
+            foreach (var m in matches)
+            {
+                try
+                {
+                    var newMatch = modelsFactory.CreateMatch(
+                         m.DatePlayed,
+                         m.Winner,
+                         m.Loser,
+                         m.Result,
+                         m.WinnerPoints,
+                         m.LoserPoints,
+                         m.TournamentName,
+                         m.StartDate,
+                         m.EndDate,
+                         m.PrizeMoney,
+                         m.TournamentCategory,
+                         m.PlayersCount,
+                         m.Round,
+                         m.City,
+                         m.Surface,
+                         m.Speed
+                     );
+
+                    this.dataProvider.Matches.Add(newMatch);
+
+                }
+                catch (ArgumentException ex)
+                {
+
+                    Console.WriteLine("Excel import problem: " + ex.Message);
+                }
+
+            }
+
+            //this.dataProvider.UnitOfWork.Finished();
+
             var a = 3;
         }
 
@@ -79,14 +116,14 @@ namespace ATPTennisStat.Importers
             var players = dataRange.Rows()
                 .Select(row => new
                 {
-                    FirstName = row.Field("FirstName").GetString(),
-                    LastName = row.Field("LastName").GetString(),
-                    Ranking = row.Field("Ranking").GetString(),
-                    BirthDate = row.Field("BirthDate").GetString(),
-                    Height = row.Field("Height").GetString(),
-                    Weight = row.Field("Weight").GetString(),
-                    City = row.Field("City").GetString(),
-                    Country = row.Field("Country").GetString()
+                    FirstName = row.Field("FirstName").GetString().Trim(),
+                    LastName = row.Field("LastName").GetString().Trim(),
+                    Ranking = row.Field("Ranking").GetString().Trim(),
+                    BirthDate = row.Field("BirthDate").GetString().Trim(),
+                    Height = row.Field("Height").GetString().Trim(),
+                    Weight = row.Field("Weight").GetString().Trim(),
+                    City = row.Field("City").GetString().Trim(),
+                    Country = row.Field("Country").GetString().Trim()
 
                 })
                 .ToList();
