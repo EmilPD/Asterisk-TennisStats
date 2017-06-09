@@ -1,28 +1,38 @@
 ﻿using System;
-using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.Models.Enums;
 using ATPTennisStat.Models.PostgreSqlModels;
 using Bytes2you.Validation;
+using ATPTennisStat.Factories.Contracts;
 
-namespace ATPTennisStat.ConsoleClient.Core.Factories
+namespace ATPTennisStat.Factories
 {
-    public class ModelsFactory : IModelsFactory
+    public partial class ModelsFactory : IModelsFactory
     {
-        public Ticket CreateTicket(int sector, double price, int number, int eventId)
+        public Ticket CreateTicket(string sectorStr, string priceStr, string numberStr, string eventIdStr)
         {
+            Sector sector;
+            Decimal price = -1m;
+            int number = -1;
+            int eventId = -1;
+
+            sector = (Sector) Enum.Parse(typeof(Sector), eventIdStr);
+            Decimal.TryParse(priceStr, out price);
+            int.TryParse(numberStr, out number);
+            int.TryParse(eventIdStr, out eventId);
+
             if (!Enum.IsDefined(typeof(Sector), sector))
             {
                 throw new ArgumentException("Sector is not valid!");    
             }
 
-            Guard.WhenArgument(price, "Ticket price").IsNaN().Throw();
-            Guard.WhenArgument(number, "Number of avaulable tickets").IsLessThan(0).Throw();
+            Guard.WhenArgument(price, "Ticket price").IsLessThan(0).Throw();
+            Guard.WhenArgument(number, "Number of available tickets").IsLessThan(0).Throw();
             Guard.WhenArgument(eventId, "Event Id").IsLessThan(0).Throw();
 
             var ticket = new Ticket()
             {
                 Sector = (Sector) sector,
-                Price = (decimal)price,
+                Price = price,
                 Number = number,
                 TennisEventId = eventId
             };

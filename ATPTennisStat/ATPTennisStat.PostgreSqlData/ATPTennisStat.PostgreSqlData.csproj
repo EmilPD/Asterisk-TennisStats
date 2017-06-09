@@ -74,15 +74,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201706080116219_init.resx">
+      <DependentUpon>201706080116219_init.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ATPTennisStat.Models\ATPTennisStat.Models.csproj">
       <Project>{12DE3FD9-6EBC-408D-AF51-1A7F7C712108}</Project>
       <Name>ATPTennisStat.Models</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706080116219_init.resx">
-      <DependentUpon>201706080116219_init.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

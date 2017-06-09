@@ -9,6 +9,8 @@ using ATPTennisStat.Common;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands;
 using ATPTennisStat.SQLServerData;
+using ATPTennisStat.Factories.Contracts;
+using ATPTennisStat.Factories;
 
 namespace ATPTennisStat.ConsoleClient.Core.Factories
 {
@@ -20,7 +22,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
 
         public CommandFactory(IModelsFactory factory, PostgresDataProvider PgDp, SqlServerDataProvider SqlDp)
         {
-            this.factory = factory ?? new ModelsFactory();
+            this.factory = factory ?? new ModelsFactory(SqlDp, PgDp);
             this.PgDp = PgDp;
             this.SqlDp = SqlDp;
         }
