@@ -39,6 +39,18 @@ namespace ATPTennisStat.Factories
                 throw new ArgumentException("Last name - null or empty");
             }
 
+            var firstNameToLower = firstName.ToLower();
+            var lastNameToLower = lastName.ToLower();
+
+            bool playerExists = this.dataProvider.Players.GetAll()
+                                .Any(p => p.FirstName.ToLower() == firstNameToLower &&
+                                            p.LastName.ToLower() == lastNameToLower);
+            if (playerExists) {
+                throw new ArgumentException("Player already in the database");
+            }
+
+
+
             int rankingParsed;
             try
             {

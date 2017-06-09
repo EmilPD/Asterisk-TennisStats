@@ -59,16 +59,27 @@ namespace ATPTennisStat.Importers
 
             foreach (var p in players)
             {
-                var newPlayer = modelsFactory.CreatePlayer(
-                    p.FirstName,
-                    p.LastName,
-                    p.Ranking,
-                    p.BirthDate,
-                    p.Height,
-                    p.Weight,
-                    p.City,
-                    p.Country);
-                this.dataProvider.Players.Add(newPlayer);
+                try
+                {
+                    var newPlayer = modelsFactory.CreatePlayer(
+                     p.FirstName,
+                     p.LastName,
+                     p.Ranking,
+                     p.BirthDate,
+                     p.Height,
+                     p.Weight,
+                     p.City,
+                     p.Country);
+
+                    this.dataProvider.Players.Add(newPlayer);
+
+                }
+                catch (ArgumentException ex)
+                {
+
+                    Console.WriteLine("Excel import problem: "+ex.Message);
+                }
+ 
             }
 
             this.dataProvider.UnitOfWork.Finished();
