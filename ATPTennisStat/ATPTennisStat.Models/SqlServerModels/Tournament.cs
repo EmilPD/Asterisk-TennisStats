@@ -24,8 +24,10 @@ namespace ATPTennisStat.Models
 
         public virtual Surface Type { get; set; }
 
+        [Required]
         public virtual TournamentCategory Category { get; set; }
 
+        [Required]
         public virtual City City { get; set; } // One City - many Tournaments
     }
 }
