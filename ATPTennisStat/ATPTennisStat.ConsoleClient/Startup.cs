@@ -16,6 +16,8 @@ using ATPTennisStat.PostgreSqlData;
 using ATPTennisStat.Common.Enums;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.ReportGenerators.Enums;
+using ATPTennisStat.SQLiteData;
+using ATPTennisStat.Models.SqliteModels;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -32,8 +34,21 @@ namespace ATPTennisStat.ConsoleClient
             //DbContextStart();
             //ExcelImporter();
             //NinjectStart();
-            GeneratePdfReport();
+            //GeneratePdfReport();
             //ConsoleEngineStart();
+            SqliteStart();
+        }
+
+        private static void SqliteStart()
+        {
+            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLite));
+            var dp = kernel.Get<SqliteDataProvider>();
+            
+            var log = new Log();
+            log.Message = "Content2";
+
+            dp.Logs.Add(log);
+            dp.UnitOfWork.Finished();
         }
 
         private static void ConsoleEngineStart()

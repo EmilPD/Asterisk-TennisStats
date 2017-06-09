@@ -7,15 +7,15 @@ namespace ATPTennisStat.SQLiteData
     public class SqliteDataProvider
     {
         private IRepository<Log> logs;
-        private Func<IUnitOfWork> unitOfWork;
+        private IUnitOfWork unitOfWork;
 
-        public SqliteDataProvider(Func<IUnitOfWork> uow, IRepository<Log> logs)
+        public SqliteDataProvider(IUnitOfWork uow, IRepository<Log> logs)
         {
             this.logs = logs;
-            this.unitOfWork = uow;
+            this.UnitOfWork = uow;
         }
 
-        public IRepository<Log> Tickets
+        public IRepository<Log> Logs
         {
             get
             {
@@ -33,11 +33,11 @@ namespace ATPTennisStat.SQLiteData
             }
         }
         
-        public Func<IUnitOfWork> UnitOfWork
+        public IUnitOfWork UnitOfWork
         {
             get
             {
-                return unitOfWork;
+                return this.unitOfWork;
             }
 
             set
@@ -47,7 +47,7 @@ namespace ATPTennisStat.SQLiteData
                     throw new ArgumentNullException("Unit of work");
                 }
 
-                unitOfWork = value;
+                this.unitOfWork = value;
             }
         }
     }
