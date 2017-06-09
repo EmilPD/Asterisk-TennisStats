@@ -11,15 +11,13 @@ using System.Threading.Tasks;
 
 namespace ATPTennisStat.Factories
 {
-    public partial class ModelsFactory : IModelsFactory
+    public class ModelsFactory : IModelsFactory
     {
         private SqlServerDataProvider dataProvider;
-        private PostgresDataProvider postgreDataProvider;
 
-        public ModelsFactory(SqlServerDataProvider dataProvider, PostgresDataProvider postgreDataProvider)
+        public ModelsFactory(SqlServerDataProvider dataProvider)
         {
             this.dataProvider = dataProvider;
-            this.postgreDataProvider = postgreDataProvider;
         }
 
         public Player CreatePlayer(string firstName, 

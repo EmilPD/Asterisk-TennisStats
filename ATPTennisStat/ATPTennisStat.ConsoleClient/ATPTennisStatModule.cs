@@ -65,7 +65,6 @@ namespace ATPTennisStat.ConsoleClient
             Bind<ILogger>().To<SqLiteLogger>().InSingletonScope();
 
             Bind<ICommandFactory>().To<CommandFactory>().InSingletonScope();
-            //Bind<IModelsFactory>().To<ModelsFactory>().InSingletonScope();
         }
     }
 }

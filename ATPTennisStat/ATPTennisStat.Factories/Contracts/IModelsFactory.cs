@@ -21,9 +21,5 @@ namespace ATPTennisStat.Factories.Contracts
         // tournament
 
         // match
-
-        Ticket CreateTicket(string sector, string price, string number, string eventId);
-
-        TennisEvent CreateTennisEvent(string name);
     }
 }

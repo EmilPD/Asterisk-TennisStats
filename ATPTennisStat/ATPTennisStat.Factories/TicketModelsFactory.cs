@@ -3,11 +3,19 @@ using ATPTennisStat.Models.Enums;
 using ATPTennisStat.Models.PostgreSqlModels;
 using Bytes2you.Validation;
 using ATPTennisStat.Factories.Contracts;
+using ATPTennisStat.Common;
 
 namespace ATPTennisStat.Factories
 {
-    public partial class ModelsFactory : IModelsFactory
+    public class TicketModelsFactory : ITicketModelsFactory
     {
+        private PostgresDataProvider postgreDataProvider;
+
+        public TicketModelsFactory(PostgresDataProvider postgreDataProvider)
+        {
+            this.postgreDataProvider = postgreDataProvider;
+        }
+
         public Ticket CreateTicket(string sectorStr, string priceStr, string numberStr, string eventIdStr)
         {
             Sector sector;
@@ -31,11 +39,12 @@ namespace ATPTennisStat.Factories
 
             var ticket = new Ticket()
             {
-                Sector = (Sector) sector,
+                Sector = sector,
                 Price = price,
                 Number = number,
                 TennisEventId = eventId
             };
+
             return ticket;
         }
 
