@@ -101,8 +101,8 @@ namespace ATPTennisStat.ConsoleClient
             var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
 
             var excelImporter = kernel.Get<ExcelImporter>();
-            excelImporter.ImportPlayers();
-            //excelImporter.Write();
+            //excelImporter.ImportPlayers();
+            excelImporter.ImportMatches();
 
         }
 

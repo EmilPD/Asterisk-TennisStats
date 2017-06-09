@@ -37,7 +37,7 @@ namespace ATPTennisStat.Importers
         /// </summary>
         public IXLTableRange GenerateTableRangeFromFile(string filePath)
         {
-            var workbook = new XLWorkbook(this.playersFilePath);
+            var workbook = new XLWorkbook(filePath);
             var ws = workbook.Worksheets.First();
 
             var dataRange = ws.RangeUsed().AsTable().DataRange;
@@ -45,21 +45,48 @@ namespace ATPTennisStat.Importers
             return dataRange;
         }
 
+        public void ImportMatches()
+        {
+            var dataRange = GenerateTableRangeFromFile(this.matchesFilePath);
+            var matches = dataRange.Rows()
+                       .Select(row => new
+                       {
+                           DataPlayed = row.Field("DatePlayed").GetString(),
+                           Winner = row.Field("Winner").GetString(),
+                           Loser = row.Field("Loser").GetString(),
+                           Result = row.Field("Result").GetString(),
+                           WinnerPoints = row.Field("Winner Points").GetString(),
+                           LoserPoints = row.Field("Loser Points").GetString(),
+                           TournamentName = row.Field("Tournament").GetString(),
+                           StartDate = row.Field("StartDate").GetString(),
+                           EndDate = row.Field("EndDate").GetString(),
+                           PrizeMoney = row.Field("PrizeMoney").GetString(),
+                           TournamentCategory = row.Field("Category").GetString(),
+                           PlayersCount = row.Field("PlayersCount").GetString(),
+                           Round = row.Field("Round").GetString(),
+                           City = row.Field("City").GetString(),
+                           Surface = row.Field("Surface").GetString(),
+                           Speed = row.Field("Speed").GetString()
+                       })
+                        .ToList();
+            var a = 3;
+        }
+
         public void ImportPlayers()
         {
             var dataRange = GenerateTableRangeFromFile(this.playersFilePath);
 
             var players = dataRange.Rows()
-                .Select(nameRow => new
+                .Select(row => new
                 {
-                    FirstName = nameRow.Field("FirstName").GetString(),
-                    LastName = nameRow.Field("LastName").GetString(),
-                    Ranking = nameRow.Field("Ranking").GetString(),
-                    BirthDate = nameRow.Field("BirthDate").GetString(),
-                    Height = nameRow.Field("Height").GetString(),
-                    Weight = nameRow.Field("Weight").GetString(),
-                    City = nameRow.Field("City").GetString(),
-                    Country = nameRow.Field("Country").GetString()
+                    FirstName = row.Field("FirstName").GetString(),
+                    LastName = row.Field("LastName").GetString(),
+                    Ranking = row.Field("Ranking").GetString(),
+                    BirthDate = row.Field("BirthDate").GetString(),
+                    Height = row.Field("Height").GetString(),
+                    Weight = row.Field("Weight").GetString(),
+                    City = row.Field("City").GetString(),
+                    Country = row.Field("Country").GetString()
 
                 })
                 .ToList();
