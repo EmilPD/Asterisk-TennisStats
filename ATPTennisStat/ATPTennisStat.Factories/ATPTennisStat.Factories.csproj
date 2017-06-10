@@ -68,6 +68,10 @@
       <Project>{12DE3FD9-6EBC-408D-AF51-1A7F7C712108}</Project>
       <Name>ATPTennisStat.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.PostgreSqlData\ATPTennisStat.PostgreSqlData.csproj">
+      <Project>{F06EFDFC-76C0-49E3-9519-347427486BDA}</Project>
+      <Name>ATPTennisStat.PostgreSqlData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ATPTennisStat.Repositories\ATPTennisStat.Repositories.csproj">
       <Project>{B4FC6642-8C45-49EC-B3F3-FFA883FADF4F}</Project>
       <Name>ATPTennisStat.Repositories</Name>

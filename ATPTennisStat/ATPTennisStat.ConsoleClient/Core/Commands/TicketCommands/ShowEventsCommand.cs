@@ -1,8 +1,8 @@
-﻿using ATPTennisStat.Common;
-using ATPTennisStat.ConsoleClient.Core.Contracts;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ATPTennisStat.ConsoleClient.Core.Contracts;
+using ATPTennisStat.PostgreSqlData;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
 {

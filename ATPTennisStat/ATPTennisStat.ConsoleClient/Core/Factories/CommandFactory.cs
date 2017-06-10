@@ -14,6 +14,7 @@ using ATPTennisStat.Factories;
 using ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands;
+using ATPTennisStat.PostgreSqlData;
 
 namespace ATPTennisStat.ConsoleClient.Core.Factories
 {

@@ -1,9 +1,9 @@
 ﻿using System;
 using ATPTennisStat.Models.Enums;
 using ATPTennisStat.Models.PostgreSqlModels;
-using Bytes2you.Validation;
 using ATPTennisStat.Factories.Contracts;
-using ATPTennisStat.Common;
+using ATPTennisStat.PostgreSqlData;
+using Bytes2you.Validation;
 
 namespace ATPTennisStat.Factories
 {
