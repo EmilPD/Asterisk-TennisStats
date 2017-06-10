@@ -105,7 +105,7 @@ namespace ATPTennisStat.Importers
                      t.Surface,
                      t.SurfaceSpeed);
 
-                    //this.dataProvider.Tournaments.Add(newTournament);
+                    this.dataProvider.Tournaments.Add(newTournament);
 
                 }
                 catch (ArgumentException ex)

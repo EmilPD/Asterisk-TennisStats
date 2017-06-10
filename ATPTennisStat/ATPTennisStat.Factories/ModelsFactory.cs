@@ -119,7 +119,7 @@ namespace ATPTennisStat.Factories
             //END DATE
             if (endDate == null)
             {
-                throw new ArgumentException("Tournament startdate is required");
+                throw new ArgumentException("Tournament enddate is required");
             }
 
             DateTime endDateParsed;
@@ -131,10 +131,16 @@ namespace ATPTennisStat.Factories
             catch (Exception)
             {
 
-                throw new ArgumentException("Startdate cannot be parsed");
+                throw new ArgumentException("Enddate cannot be parsed");
             }
 
             //prizeMoney
+
+            if (prizeMoney == null)
+            {
+                throw new ArgumentException("Prize money is required");
+            }
+
             decimal prizeMoneyParsed;
 
             try
@@ -147,13 +153,82 @@ namespace ATPTennisStat.Factories
                 throw new ArgumentException("Prize money cannot be parsed");
             }
 
+            //look for existing category -> + PlayersCount
+            //categoryName
+            if (String.IsNullOrEmpty(categoryName))
+            {
+                throw new ArgumentException("Category name is required");
+            }
+
+            if (String.IsNullOrEmpty(playersCount))
+            {
+                throw new ArgumentException("Players number is required");
+            }
+
+            var categoryNameToLower = categoryName.ToLower();
+
+            byte playersCountParsed;
+
+            try
+            {
+                playersCountParsed = byte.Parse(playersCount);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Prize money cannot be parsed");
+            }
+
+
+            var list = this.dataProvider.TournamentCategories.GetAll();
+
+            var tournamentCategory = list.FirstOrDefault(c => c.Category.ToLower() == categoryNameToLower &&
+                                            c.PlayersCount == playersCountParsed);
+
+            var block = 3;
+
+
+            if (tournamentCategory == null)
+            {
+                tournamentCategory = CreateTournamentCategory(categoryName, playersCountParsed);
+
+                this.dataProvider.TournamentCategories.Add(tournamentCategory);
+            }
+
+
             return new Tournament
             {
                 Name = name,
                 StartDate = startDateParsed,
-                EndDate = endDateParsed
+                EndDate = endDateParsed,
+                PrizeMoney = prizeMoneyParsed,
+                Category = tournamentCategory
                 
                 
+            };
+        }
+
+        public TournamentCategory CreateTournamentCategory(string categoryName, byte playersCount)
+        {
+            if (String.IsNullOrEmpty(categoryName))
+            {
+                throw new ArgumentException("Category name - null or empty");
+            }
+
+            var nameToLower = categoryName.ToLower();
+
+            bool tournamentCategoryExists = this.dataProvider.TournamentCategories.GetAll()
+                                .Any(tc => tc.Category.ToLower() == nameToLower &&
+                                        tc.PlayersCount == playersCount);
+
+            if (tournamentCategoryExists)
+            {
+                throw new ArgumentException("Category already in the database");
+            }
+
+            return new TournamentCategory
+            {
+                Category = categoryName,
+                PlayersCount = playersCount
             };
         }
 
