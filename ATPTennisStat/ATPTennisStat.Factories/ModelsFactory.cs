@@ -64,7 +64,7 @@ namespace ATPTennisStat.Factories
             var loserLastNameToLower = loserLastName.ToLower();
 
 
-            if (datePlayed == null)
+            if (String.IsNullOrEmpty(datePlayed))
             {
                 throw new ArgumentException("Match date is required");
             }
@@ -102,13 +102,35 @@ namespace ATPTennisStat.Factories
                             .FirstOrDefault(p => p.FirstName.ToLower() == winnerFirstNameToLower &&
                                                  p.LastName.ToLower() == winnerLastNameToLower);
 
+            if (String.IsNullOrEmpty(round))
+            {
+                throw new ArgumentException("Round - null or empty");
+            }
+
+            if (String.IsNullOrEmpty(tournamentName))
+            {
+                throw new ArgumentException("Tournament - null or empty");
+            }
 
 
             if (winner == null)
             {
-                //winner = CreatePlayer(winnerf)
+                winner = CreatePlayer(winnerFirstName, winnerLastName);
 
-                //this.dataProvider.TournamentCategories.Add(tournamentCategory);
+                this.dataProvider.Players.Add(winner);
+            }
+
+            var loser = this.dataProvider.Players.GetAll()
+                .FirstOrDefault(p => p.FirstName.ToLower() == loserFirstNameToLower &&
+                                     p.LastName.ToLower() == loserLastNameToLower);
+
+
+
+            if (loser == null)
+            {
+                loser = CreatePlayer(loserFirstName, loserLastName);
+
+                this.dataProvider.Players.Add(winner);
             }
 
             //RoundID
@@ -119,6 +141,8 @@ namespace ATPTennisStat.Factories
             return new Match
             {
                 DatePlayed = datePlayedParsed,
+                Winner = winner,
+                Loser = loser,
                 Result = result
             };
         }
@@ -259,7 +283,7 @@ namespace ATPTennisStat.Factories
             }
 
             //START DATE
-            if (startDate == null)
+            if (String.IsNullOrEmpty(startDate))
             {
                 throw new ArgumentException("Tournament startdate is required");
             }
@@ -278,7 +302,7 @@ namespace ATPTennisStat.Factories
             }
 
             //END DATE
-            if (endDate == null)
+            if (String.IsNullOrEmpty(endDate))
             {
                 throw new ArgumentException("Tournament enddate is required");
             }
@@ -297,7 +321,7 @@ namespace ATPTennisStat.Factories
 
             //prizeMoney
 
-            if (prizeMoney == null)
+            if (String.IsNullOrEmpty(prizeMoney))
             {
                 throw new ArgumentException("Prize money is required");
             }
