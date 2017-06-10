@@ -20,6 +20,7 @@ namespace ATPTennisStat.ReportGenerators
         private const int ColumnAlignment = 1;
         private const int MatchesTableColumnsNumber = 5;
         private const int RankingTableColumnsNumber = 6;
+        private const string NotProvidedInfo = "Not Provided";
 
         private BaseColor MainHeadingTitleBackgroundColor = new BaseColor(205, 205, 205);
         private BaseColor HeadingTitleBackgroundColor = new BaseColor(241, 241, 241);
@@ -160,6 +161,7 @@ namespace ATPTennisStat.ReportGenerators
             else if (reportType == PdfReportType.Ranking)
             {
                 var ranking = sqlProvider.Players.GetAll()
+                    .Where(p => p.Ranking != null)
                     .OrderBy(p => p.Ranking);
 
                 AddHeadingTitle(table, reportName, FontSize, RankingTableColumnsNumber);
@@ -167,7 +169,7 @@ namespace ATPTennisStat.ReportGenerators
 
                 foreach (var player in ranking)
                 {
-                    var playerRanking = CreateColumn(player.Ranking.ToString(), ColumnAlignment, FontSize);
+                    var playerRanking = CreateColumn(player.Ranking.ToString() ?? NotProvidedInfo, ColumnAlignment, FontSize);
                     playerRanking.PaddingBottom = PaddingBottom;
                     table.AddCell(playerRanking);
 
@@ -175,19 +177,41 @@ namespace ATPTennisStat.ReportGenerators
                     playerName.PaddingBottom = PaddingBottom;
                     table.AddCell(playerName);
 
-                    var playerHeight = CreateColumn(player.Height.ToString(), ColumnAlignment, FontSize);
+                    var playerHeight = CreateColumn(player.Height.ToString() ?? NotProvidedInfo, ColumnAlignment, FontSize);
                     playerHeight.PaddingBottom = PaddingBottom;
                     table.AddCell(playerHeight);
 
-                    var playerWeight = CreateColumn(player.Weight.ToString(), ColumnAlignment, FontSize);
+                    var playerWeight = CreateColumn(player.Weight.ToString() ?? NotProvidedInfo, ColumnAlignment, FontSize);
                     playerHeight.PaddingBottom = PaddingBottom;
                     table.AddCell(playerHeight);
 
-                    var playerCity = CreateColumn(player.City.Name, ColumnAlignment, FontSize);
+                    var playerCityName = "";
+
+                    if (player.City != null)
+                    {
+                        playerCityName = player.City.Name;
+                    }
+                    else
+                    {
+                        playerCityName = NotProvidedInfo;
+                    }
+
+                    var playerCity = CreateColumn(playerCityName, ColumnAlignment, FontSize);
                     playerCity.PaddingBottom = PaddingBottom;
                     table.AddCell(playerCity);
 
-                    var playerCountry = CreateColumn(player.City.Country.Name, ColumnAlignment, FontSize);
+                    var playerCountryName = "";
+
+                    if (player.City != null)
+                    {
+                        playerCountryName = player.City.Country.Name;
+                    }
+                    else
+                    {
+                        playerCountryName = NotProvidedInfo;
+                    }
+
+                    var playerCountry = CreateColumn(playerCountryName, ColumnAlignment, FontSize);
                     playerCountry.PaddingBottom = PaddingBottom;
                     table.AddCell(playerCountry);
                 }
