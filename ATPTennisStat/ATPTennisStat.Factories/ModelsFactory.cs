@@ -23,41 +23,45 @@ namespace ATPTennisStat.Factories
 
 
         public Match CreateMatch(string datePlayed,
-                         string winner,
-                         string loser,
+                         string winnerName,
+                         string loserName,
                          string result,
                          string tournamentName,
                          string round)
         {
 
 
-            if (String.IsNullOrEmpty(winner))
+            if (String.IsNullOrEmpty(winnerName))
             {
                 throw new ArgumentException("Winner - null or empty");
             }
 
-            if (String.IsNullOrEmpty(loser))
+            if (String.IsNullOrEmpty(loserName))
             {
                 throw new ArgumentException("Loser - null or empty");
             }
-            string[] winnerNames = winner.Split(' ');
+            string[] winnerNames = winnerName.Split(' ');
 
-            if (winnerNames.Length !=2)
+            if (winnerNames.Length != 2)
             {
                 throw new ArgumentException("Winner name not formatted correctly - Firstname Lastname");
             }
-            string[] loserNames = loser.Split(' ');
+            string[] loserNames = loserName.Split(' ');
 
             if (loserNames.Length != 2)
             {
                 throw new ArgumentException("Loser name not formatted correctly - Firstname Lastname");
             }
 
-            var winnerFirstNameToLower = winnerNames[0].ToLower();
-            var winnerLastNameToLower = winnerNames[1].ToLower();
+            var winnerFirstName = winnerNames[0];
+            var winnerFirstNameToLower = winnerFirstName.ToLower();
+            var winnerLastName = winnerNames[1];
+            var winnerLastNameToLower = winnerLastName.ToLower();
 
-            var loserFirstNameToLower = loserNames[0].ToLower();
-            var loserLastNameToLower = loserNames[1].ToLower();
+            var loserFirstName = loserNames[0];
+            var loserFirstNameToLower = loserFirstName.ToLower();
+            var loserLastName = loserNames[1];
+            var loserLastNameToLower = loserLastName.ToLower();
 
 
             if (datePlayed == null)
@@ -82,7 +86,7 @@ namespace ATPTennisStat.Factories
                                           m.Winner.LastName.ToLower() == winnerLastNameToLower &&
                                           m.Loser.FirstName.ToLower() == loserFirstNameToLower &&
                                           m.Loser.LastName.ToLower() == loserLastNameToLower &&
-                                          m.DatePlayed == datePlayedParsed);
+                                          m.DatePlayed == datePlayedParsed); // working?
             if (matchExists)
             {
                 throw new ArgumentException("Match already in the database");
@@ -92,6 +96,19 @@ namespace ATPTennisStat.Factories
             if (String.IsNullOrEmpty(result))
             {
                 throw new ArgumentException("Result - null or empty");
+            }
+
+            var winner = this.dataProvider.Players.GetAll()
+                            .FirstOrDefault(p => p.FirstName.ToLower() == winnerFirstNameToLower &&
+                                                 p.LastName.ToLower() == winnerLastNameToLower);
+
+
+
+            if (winner == null)
+            {
+                //winner = CreatePlayer(winnerf)
+
+                //this.dataProvider.TournamentCategories.Add(tournamentCategory);
             }
 
             //RoundID
@@ -137,7 +154,7 @@ namespace ATPTennisStat.Factories
 
                 throw new ArgumentException("Round stage cannot be parsed - Available ones are Q1, Q2...");
             }
-   
+
             if (String.IsNullOrEmpty(playersNumber))
             {
                 throw new ArgumentException("Players number is empty");
@@ -207,7 +224,7 @@ namespace ATPTennisStat.Factories
                 TournamentCategory = tournamentCategory,
                 Round = round,
                 Points = pointsParsed
-                
+
             };
         }
 
@@ -400,8 +417,8 @@ namespace ATPTennisStat.Factories
                 PrizeMoney = prizeMoneyParsed,
                 Category = tournamentCategory,
                 City = city,
-                Type = surface   
-                
+                Type = surface
+
             };
         }
 
@@ -466,12 +483,12 @@ namespace ATPTennisStat.Factories
 
         public Player CreatePlayer(string firstName,
                                    string lastName,
-                                   string ranking,
-                                   string birthDate,
-                                   string height,
-                                   string weight,
-                                   string cityName,
-                                   string countryName)
+                                   string ranking = null,
+                                   string birthDate = null,
+                                   string height = null,
+                                   string weight = null,
+                                   string cityName = null,
+                                   string countryName = null)
         {
 
 
@@ -497,21 +514,23 @@ namespace ATPTennisStat.Factories
             }
 
 
+            int? rankingParsed = null;
 
-            int rankingParsed;
-            try
+            if (String.IsNullOrEmpty(ranking) == false)
             {
-                rankingParsed = int.Parse(ranking);
-            }
-            catch (Exception)
-            {
+                try
+                {
+                    rankingParsed = int.Parse(ranking);
+                }
+                catch (Exception)
+                {
 
-                throw new ArgumentException("Ranking cannot be parsed");
+                    throw new ArgumentException("Ranking cannot be parsed");
+                }
             }
-
 
             DateTime? birthDateParsed = null;
-            if (birthDate != null)
+            if (String.IsNullOrEmpty(birthDate) == false)
             {
                 try
                 {
@@ -526,54 +545,59 @@ namespace ATPTennisStat.Factories
 
 
 
-            float heightParsed;
-            try
+            float? heightParsed = null;
+            if (String.IsNullOrEmpty(height) == false)
             {
-                heightParsed = float.Parse(height);
-            }
-            catch (Exception)
-            {
+                try
+                {
+                    heightParsed = float.Parse(height);
+                }
+                catch (Exception)
+                {
 
-                throw new ArgumentException("Height cannot be parsed");
-            }
-
-            float weightParsed;
-            try
-            {
-                weightParsed = float.Parse(weight);
-            }
-            catch (Exception)
-            {
-
-                throw new ArgumentException("Weight cannot be parsed");
+                    throw new ArgumentException("Height cannot be parsed");
+                }
             }
 
-            if (String.IsNullOrEmpty(cityName))
+
+            float? weightParsed = null;
+            if (String.IsNullOrEmpty(weight) == false)
             {
-                throw new ArgumentException("City name - null or empty");
+                try
+                {
+                    weightParsed = float.Parse(weight);
+                }
+                catch (Exception)
+                {
+
+                    throw new ArgumentException("Weight cannot be parsed");
+                }
             }
 
-            if (String.IsNullOrEmpty(countryName))
+            City city = null;
+
+            if (String.IsNullOrEmpty(cityName) == false)
             {
-                throw new ArgumentException("Country name - null or empty");
+                if (String.IsNullOrEmpty(countryName))
+                {
+                    throw new ArgumentException("Country name - null or empty");
+                }
+
+                var cityNameToLowerCase = cityName.ToLower();
+
+                var countryNameLowerCase = countryName.ToLower();
+
+                var list = this.dataProvider.Cities.GetAll();
+
+                city = list.FirstOrDefault(c => c.Name.ToLower() == cityNameToLowerCase);
+
+                if (city == null)
+                {
+                    city = CreateCity(cityName, countryName);
+
+                    this.dataProvider.Cities.Add(city);
+                }
             }
-
-            var cityNameToLowerCase = cityName.ToLower();
-
-            var countryNameLowerCase = countryName.ToLower();
-
-
-            var list = this.dataProvider.Cities.GetAll();
-
-            var city = list.FirstOrDefault(c => c.Name.ToLower() == cityNameToLowerCase);
-
-            if (city == null)
-            {
-                city = CreateCity(cityName, countryName);
-
-                this.dataProvider.Cities.Add(city);
-            }
-
 
             return new Player
             {
