@@ -170,12 +170,12 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
 
         public ICommand AddTournament()
         {
-            return new AddTournamentCommand(sqlDp, writer);
+            return new AddTournamentCommand(sqlDp, writer, modelsFactory);
         }
 
         public ICommand AddMatch()
         {
-            return new AddMatchCommand(sqlDp, writer);
+            return new AddMatchCommand(sqlDp, writer, modelsFactory);
         }
 
         // Data Show Commands

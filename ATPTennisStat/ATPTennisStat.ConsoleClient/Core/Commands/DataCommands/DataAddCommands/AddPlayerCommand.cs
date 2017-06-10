@@ -83,14 +83,14 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
             else
             {
                 return $@"Not enough parameters!
-Use this template [addct (F) (L) (H) (W) (B) (R) (C)] and try again!
-F - first name
-L - last name
-H - height (optional)
-W - weight (optional)
-B - birthday (yyyy/mm/dd optional)
-R - rank (optional)
-C - city (optional)
+Use this template [addp 1 2 3 4 5 6 7] and try again!
+1 - first name
+2 - last name
+3 - height (optional)
+4 - weight (optional)
+5 - birthday (yyyy/mm/dd optional)
+6 - rank (optional)
+7 - city (optional)
 
 [menu] [show] [add]";
             }

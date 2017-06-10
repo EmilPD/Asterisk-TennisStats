@@ -56,8 +56,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
             return @"
  [addco (name)] Add new country
  [addct (name) (country)] Add new city
- [addct (F) (L) (H) (W) (B) (R) (C)] Add new player
- [addt (name) (city)] Add new tournament
+ [addct (2 - 7 arguments)] Add new player
+ [addt (4 - 10 arguments)] Add new tournament
  [addm (w) (L) (r) (d)] Add new match
  [menu] [show]";
         }
