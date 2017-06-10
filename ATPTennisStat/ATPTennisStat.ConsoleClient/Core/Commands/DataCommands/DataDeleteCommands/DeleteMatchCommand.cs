@@ -34,11 +34,12 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataDeleteComma
                     var match = dp.Matches.Get(id);
                     if (match != null)
                     {
-                        this.writer.Write("Are you sure? Y/N");
+                        this.writer.WriteLine("Are you sure? Y/N");
                         var answer = this.reader.ReadLine();
                         if (answer.ToLower() == "y")
                         {
                             dp.Matches.Remove(match);
+                            dp.UnitOfWork.Finished();
                             return $"Match with Id - {id} was removed successfully!";
                         }
                         else
