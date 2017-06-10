@@ -35,8 +35,8 @@ namespace ATPTennisStat.ConsoleClient
             //DbContextStart();
             //ExcelImporter();
             //NinjectStart();
-            GeneratePdfReport();
-            //ConsoleEngineStart();
+            //GeneratePdfReport();
+            ConsoleEngineStart();
             //SqliteStart();
             //JsonImportStart();
         }
@@ -94,7 +94,7 @@ namespace ATPTennisStat.ConsoleClient
 
         private static void ConsoleEngineStart()
         {
-            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.Postgre));
+            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
             var engine = kernel.Get<IEngine>();
             engine.Start();
 

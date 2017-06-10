@@ -107,13 +107,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ATPTennisStatModule.cs" />
-    <Compile Include="Core\Commands\MenuCommands\AddTennisDataMenuCommand.cs" />
+    <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddPlayerCommand.cs" />
+    <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddMatchCommand.cs" />
+    <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddCountryCommand.cs" />
+    <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddTournamentCommand.cs" />
+    <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddCityCommand.cs" />
+    <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddTennisDataMenuCommand.cs" />
+    <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowMatchesCommand.cs" />
+    <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowPlayersCommand.cs" />
+    <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowTournamentsCommand.cs" />
     <Compile Include="Core\Commands\MenuCommands\MainMenuCommand.cs" />
     <Compile Include="Core\Commands\MenuCommands\ReportersMenuCommand.cs" />
-    <Compile Include="Core\Commands\MenuCommands\ShowTennisDataMenuCommand.cs" />
+    <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowTennisDataMenuCommand.cs" />
     <Compile Include="Core\Commands\MenuCommands\TeamInfoCommand.cs" />
-    <Compile Include="Core\Commands\MenuCommands\TennisDataMenuCommand.cs" />
+    <Compile Include="Core\Commands\DataCommands\TennisDataMenuCommand.cs" />
     <Compile Include="Core\Commands\MenuCommands\TicketMenuCommand.cs" />
+    <Compile Include="Core\Commands\ReporterCommands\CreateRankingPdf.cs" />
+    <Compile Include="Core\Commands\ReporterCommands\CreateMatchesPdf.cs" />
     <Compile Include="Core\Commands\TicketCommands\ShowEventsCommand.cs" />
     <Compile Include="Core\Commands\TicketCommands\ShowTicketsCommand.cs" />
     <Compile Include="Core\Commands\TicketCommands\BuyTicketsCommand.cs" />
@@ -176,10 +186,7 @@
       <Name>ATPTennisStat.SQLServerData</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Commands\ReporterCommands\" />
-    <Folder Include="Core\Commands\StatisticsCommands\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.1\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.1\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
