@@ -23,12 +23,14 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         private readonly PostgresDataProvider pgDp;
         private readonly SqlServerDataProvider sqlDp;
         private IWriter writer;
+        private IModelsFactory modelsFactory;
 
-        public CommandFactory(IWriter writer, PostgresDataProvider pgDp, SqlServerDataProvider sqlDp)
+        public CommandFactory(IWriter writer, PostgresDataProvider pgDp, SqlServerDataProvider sqlDp, IModelsFactory modelsFactory)
         {
             this.pgDp = pgDp;
             this.sqlDp = sqlDp;
             this.writer = writer;
+            this.modelsFactory = modelsFactory;
         }
 
         public ICommand CreateCommandFromString(string commandName)
@@ -163,7 +165,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
 
         public ICommand AddPlayer()
         {
-            return new AddPlayerCommand(sqlDp, writer);
+            return new AddPlayerCommand(sqlDp, writer, modelsFactory);
         }
 
         public ICommand AddTournament()

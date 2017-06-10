@@ -1,9 +1,8 @@
 ﻿using ATPTennisStat.ConsoleClient.Core.Contracts;
-using ATPTennisStat.Models;
+using ATPTennisStat.Factories.Contracts;
 using ATPTennisStat.SQLServerData;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands
 {
@@ -11,81 +10,90 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
     {
         private SqlServerDataProvider dp;
         private IWriter writer;
+        private IModelsFactory factory;
 
-        public AddPlayerCommand(SqlServerDataProvider sqlDP, IWriter writer)
+        public AddPlayerCommand(SqlServerDataProvider sqlDP, IWriter writer, IModelsFactory factory)
         {
             this.dp = sqlDP;
             this.writer = writer;
+            this.factory = factory;
         }
 
         public string Execute(IList<string> parameters)
         {
             writer.Clear();
 
+
             string firstName = string.Empty;
             string lastName = string.Empty;
-            int weight = 0;
-            int height = 0;
-            DateTime birthDate = new DateTime();
-            int rank = 0;
+            string weight = string.Empty;
+            string height = string.Empty;
+            string birthDate = string.Empty;
+            string rank = string.Empty;
             string city = string.Empty;
-            /*
-            if (parameters.Count > 2)
+            string country = string.Empty;
+
+            if (parameters.Count > 1)
             {
                 firstName = parameters[0];
                 lastName = parameters[1];
-                int.TryParse(parameters[2], out weight);
-                int.TryParse(parameters[3], out height);
-                DateTime.TryParse(parameters[4], out birthDate);
-                int.TryParse(parameters[5], out rank);
-                city = parameters[6];
 
-                Country country = dp.Countries
-                    .Find(c => c.Name == countryName)
-                    .FirstOrDefault();
-
-                if (country != null)
+                if (parameters.Count > 2)
                 {
-                    var search = dp.Cities
-                        .Find(c => c.Name == name && c.Country.Name == countryName)
-                        .FirstOrDefault();
+                    weight = parameters[2];
+                }
 
-                    if (search != null)
-                    {
-                        return $@"City {name}, {countryName} already exists in database. 
-Add new country with command [addct (name) (country)]!
+                if (parameters.Count > 3)
+                {
+                    height = parameters[3];
+                }
 
-[menu] [show] [add]";
-                    }
+                if (parameters.Count > 4)
+                {
+                    birthDate = parameters[4];
+                }
 
-                    dp.Cities.Add(new City()
-                    {
-                        Name = name,
-                        Country = country
-                    });
+                if (parameters.Count > 5)
+                {
+                    rank = parameters[5];
+                }
 
+                if (parameters.Count > 6)
+                {
+                    city = parameters[6];
+                }
+
+                if (parameters.Count > 7)
+                {
+                    country = parameters[7];
+                }
+
+                var player = factory.CreatePlayer(firstName, lastName, rank, birthDate, height, weight, city, country);
+                if (player != null)
+                {
+                    dp.Players.Add(player);
                     dp.UnitOfWork.Finished();
-
-                    return $@"City {name} was successfully added!
-
-[menu] [show] [add]";
+                    return $"PLayer {firstName} {lastName} created successfully!";
                 }
                 else
                 {
-                    return $@"No country {countryName} exists in database. 
-Add new country with command [addct (name) (country)]!
-
-[menu] [show] [add]";
+                    throw new ArgumentNullException("Player cannot be null!");
                 }
             }
             else
             {
                 return $@"Not enough parameters!
-Use this template [addct (name) (country)] and try again!
+Use this template [addct (F) (L) (H) (W) (B) (R) (C)] and try again!
+F - first name
+L - last name
+H - height (optional)
+W - weight (optional)
+B - birthday (yyyy/mm/dd optional)
+R - rank (optional)
+C - city (optional)
 
 [menu] [show] [add]";
-            }*/
-            return "test";
+            }
         }
     }
 }
