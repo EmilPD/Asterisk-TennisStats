@@ -54,9 +54,9 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
         internal static string GenerateDataAddMenu()
         {
             return @"
- [addcountry (name)] Add new country
- [addcity (name) (country)] Add new city
- [addp (name) (db) (city)] Add new player
+ [addco (name)] Add new country
+ [addct (name) (country)] Add new city
+ [addp (names) (db) (city)] Add new player
  [addt (name) (city)] Add new tournament
  [addm (w) (L) (r) (d)] Add new match
  [menu] [show]";

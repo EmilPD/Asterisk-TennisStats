@@ -1,7 +1,9 @@
 ﻿using ATPTennisStat.ConsoleClient.Core.Contracts;
+using ATPTennisStat.Models;
 using ATPTennisStat.SQLServerData;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands
 {
@@ -18,7 +20,49 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
 
         public string Execute(IList<string> parameters)
         {
-            throw new NotImplementedException();
+            writer.Clear();
+
+            string name = string.Empty;
+            string countryName = string.Empty;
+
+            if (parameters.Count == 2)
+            {
+                name = parameters[0];
+                countryName = parameters[1];
+
+                Country country = dp.Countries
+                    .Find(c => c.Name == countryName)
+                    .FirstOrDefault();
+
+                if (country != null)
+                {
+                    dp.Cities.Add(new City()
+                    {
+                        Name = name,
+                        Country = country
+                    });
+
+                    dp.UnitOfWork.Finished();
+
+                    return $@"City {name} was successfully added!
+
+[menu] [show] [add]";
+                }
+                else
+                {
+                    return $@"No country {countryName} exists in database. 
+Add new country with command [addct (name) (country)]!
+
+[menu] [show] [add]";
+                }
+            }
+            else
+            {
+                return $@"Not enough parameters!
+Use this template [addct (name) (country)] and try again!
+
+[menu] [show] [add]";
+            }
         }
     }
 }

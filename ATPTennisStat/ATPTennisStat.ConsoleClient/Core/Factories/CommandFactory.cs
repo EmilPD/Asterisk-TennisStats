@@ -69,6 +69,17 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                     return this.ShowTournaments();
                 case "showm":
                     return this.ShowMatches();
+                // data add
+                case "addco":
+                    return this.AddCountry();
+                case "addct":
+                    return this.AddCity();
+                case "addp":
+                    return this.AddPlayer();
+                case "addt":
+                    return this.AddTournament();
+                case "addm":
+                    return this.AddMatch();
                 default:
                     throw new ArgumentException(nameof(ICommand));
             }
