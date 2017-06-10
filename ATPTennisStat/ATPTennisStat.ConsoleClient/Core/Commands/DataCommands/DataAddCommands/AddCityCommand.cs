@@ -36,6 +36,18 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
 
                 if (country != null)
                 {
+                    var search = dp.Cities
+                        .Find(c => c.Name == name && c.Country.Name == countryName)
+                        .FirstOrDefault();
+
+                    if (search != null)
+                    {
+                        return $@"City {name}, {countryName} already exists in database. 
+Add new country with command [addct (name) (country)]!
+
+[menu] [show] [add]";
+                    }
+
                     dp.Cities.Add(new City()
                     {
                         Name = name,
