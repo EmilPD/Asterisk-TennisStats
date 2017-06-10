@@ -15,6 +15,8 @@ using ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands;
 using ATPTennisStat.PostgreSqlData;
+using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataDeleteCommands;
+using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateCommands;
 
 namespace ATPTennisStat.ConsoleClient.Core.Factories
 {
@@ -22,13 +24,15 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
     {
         private readonly PostgresDataProvider pgDp;
         private readonly SqlServerDataProvider sqlDp;
+        IReader reader;
         private IWriter writer;
         private IModelsFactory modelsFactory;
 
-        public CommandFactory(IWriter writer, PostgresDataProvider pgDp, SqlServerDataProvider sqlDp, IModelsFactory modelsFactory)
+        public CommandFactory(IReader reader, IWriter writer, PostgresDataProvider pgDp, SqlServerDataProvider sqlDp, IModelsFactory modelsFactory)
         {
             this.pgDp = pgDp;
             this.sqlDp = sqlDp;
+            this.reader = reader;
             this.writer = writer;
             this.modelsFactory = modelsFactory;
         }
@@ -83,6 +87,12 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                     return this.AddTournament();
                 case "addm":
                     return this.AddMatch();
+                // data update
+                case "updatep":
+                    return this.UpdatePlayer();
+                // data delete
+                case "delm":
+                    return this.DeleteMatch();
                 default:
                     throw new ArgumentException(nameof(ICommand));
             }
@@ -192,6 +202,18 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         public ICommand ShowPlayers()
         {
             return new ShowPlayersCommand(sqlDp, writer);
+        }
+
+        // Data Update Commands
+        public ICommand UpdatePlayer()
+        {
+            return new UpdatePlayerCommand(sqlDp, writer);
+        }
+
+        // Data Delete Commands
+        public ICommand DeleteMatch()
+        {
+            return new DeleteMatchCommand(sqlDp, reader, writer);
         }
     }
 }

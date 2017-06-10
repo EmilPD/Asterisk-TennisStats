@@ -49,8 +49,10 @@ namespace ATPTennisStat.ConsoleClient.Core.Contracts
         ICommand AddMatch();
 
         // TODO: Update data commands
+        ICommand UpdatePlayer();
 
         // TODO: Delete data commands
+        ICommand DeleteMatch();
 
         // Read data commands
         ICommand ShowTournaments();
