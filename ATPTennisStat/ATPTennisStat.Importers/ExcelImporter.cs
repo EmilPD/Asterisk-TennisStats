@@ -57,7 +57,7 @@ namespace ATPTennisStat.Importers
                 Console.WriteLine("File opened by another program");
                 return null;
             }
-            
+
 
         }
 
@@ -88,7 +88,7 @@ namespace ATPTennisStat.Importers
             {
                 try
                 {
-                    var newPointDistribution= modelsFactory.CreatePointDistribution(
+                    var newPointDistribution = modelsFactory.CreatePointDistribution(
                      pd.Category,
                      pd.PlayersNumber,
                      pd.RoundName,
@@ -218,8 +218,20 @@ namespace ATPTennisStat.Importers
             }
 
             this.dataProvider.UnitOfWork.Finished();
-        }
 
+            //NEED TO REFACTOR IN METHOD
+            this.dataProvider.Players
+                   .GetAll()
+                   .Select(p => new
+                   {
+                       p.FirstName,
+                       p.LastName,
+                       p.TotalPoints
+                   })
+                   .OrderByDescending(p => p.TotalPoints)
+                   .ForEach(p => Console.WriteLine("{0} {1}: {2}", p.FirstName, p.LastName, p.TotalPoints));
+        }
+  
         public void ImportPlayers()
         {
             var dataRange = GenerateTableRangeFromFile(this.playersFilePath);
