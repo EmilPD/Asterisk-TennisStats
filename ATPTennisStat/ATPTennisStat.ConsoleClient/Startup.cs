@@ -27,6 +27,7 @@ namespace ATPTennisStat.ConsoleClient
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerDbContext, SQLServerData.Migrations.Configuration>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<PostgresDbContext, PostgreSqlData.Migrations.Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqliteDbContext, SQLiteData.Migrations.Configuration>(true));
 
             ///<summary>
             ///Control Flow -> choose either of the following methods
@@ -36,7 +37,41 @@ namespace ATPTennisStat.ConsoleClient
             //NinjectStart();
             //GeneratePdfReport();
             //ConsoleEngineStart();
-            SqliteStart();
+            //SqliteStart();
+            JsonImportStart();
+        }
+
+        private static void JsonImportStart()
+        {
+            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
+            var dp = kernel.Get<SqlServerDataProvider>();
+            var countriesInDb = dp.Countries.GetAll();
+
+            var baseDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            var jsonPath = "\\Data\\Json\\";
+            var jsonFileName = "countries.json";
+            var fullPath = baseDir + jsonPath + jsonFileName;
+
+            var jsonImporter = new JSONImporter(fullPath);
+            var listOfCountries = jsonImporter.Read();
+
+            var count = 1;
+            foreach (var country in listOfCountries)
+            {
+                if (count > 10)
+                {
+                    break;
+                }
+
+                if (!countriesInDb.Any(c => c.Name == country.Name))
+                {
+                    Console.WriteLine("Adding country - {0}", country.Name);
+                    dp.Countries.Add(new Country { Name = country.Name });
+                    count++;
+                }
+            }
+
+            dp.UnitOfWork.Finished();
         }
 
         private static void SqliteStart()
@@ -126,7 +161,7 @@ namespace ATPTennisStat.ConsoleClient
             dp.Cities.Add(new City
             {
                 Name = "Burgas",
-                Country = new Country { Name = "Bulgaria" }
+                Country = new Models.Country { Name = "Bulgaria" }
             });
 
             dp.UnitOfWork.Finished();
