@@ -18,8 +18,22 @@ namespace ATPTennisStat.Factories.Contracts
 
         City CreateCity(string name, string CountryName);
 
-        // tournament
+        Tournament CreateTournament(string name,
+                                           string startDate,
+                                           string endDate,
+                                           string prizeMoney,
+                                           string categoryName,
+                                           string playersCount,
+                                           string cityName,
+                                           string countryName,
+                                           string surfaceType,
+                                           string surfaceSpeed);
 
-        // match
+        Match CreateMatch(string datePlayed,
+                         string winnerName,
+                         string loserName,
+                         string result,
+                         string tournamentName,
+                         string roundName);
     }
 }
