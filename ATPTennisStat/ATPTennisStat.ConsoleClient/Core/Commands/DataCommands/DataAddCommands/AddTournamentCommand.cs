@@ -102,11 +102,11 @@ Use this template [addt 1 2 3 4 5 6 7 8 9] and try again!
 2 - surface (clay, hard, grass)
 3 - category
 4 - city
-5 - start (yyyy/mm/dd optional)
-6 - end (yyyy/mm/dd optional)
-7 - city (optional)
-8 - city (optional)
-9 - city (optional)
+5 - start (yyyy/mm/dd)
+6 - end (yyyy/mm/dd)
+7 - prize money (optional)
+8 - players (optional)
+9 - country (optional)
 
 [menu] [show] [add]";
             }
