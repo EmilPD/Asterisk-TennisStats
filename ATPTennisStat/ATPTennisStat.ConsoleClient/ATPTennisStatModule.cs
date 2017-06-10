@@ -19,21 +19,24 @@ namespace ATPTennisStat.ConsoleClient
     {
         public override void Load()
         {
+            this.Bind<SqlServerDbContext>().ToSelf().InSingletonScope().Named("SqlServer");
+            this.Bind<PostgresDbContext>().ToSelf().InSingletonScope().Named("Postgre");
+
             this.Bind<IUnitOfWork>().To<EfUnitOfWork>()
                 .WhenInjectedInto<SqlServerDataProvider>()
-                .WithConstructorArgument("context", Kernel.Get<SqlServerDbContext>());
+                .WithConstructorArgument("context", Kernel.Get<SqlServerDbContext>("SqlServer"));
 
             this.Bind(typeof(IRepository<>)).To(typeof(EfRepository<>))
                 .WhenInjectedInto<SqlServerDataProvider>()
-                .WithConstructorArgument("context", Kernel.Get<SqlServerDbContext>());
+                .WithConstructorArgument("context", Kernel.Get<SqlServerDbContext>("SqlServer"));
 
             this.Bind<IUnitOfWork>().To<EfUnitOfWork>()
                 .WhenInjectedInto<PostgresDataProvider>()
-                .WithConstructorArgument("context", Kernel.Get<PostgresDbContext>());
+                .WithConstructorArgument("context", Kernel.Get<PostgresDbContext>("Postgre"));
 
             this.Bind(typeof(IRepository<>)).To(typeof(EfRepository<>))
                 .WhenInjectedInto<PostgresDataProvider>()
-                .WithConstructorArgument("context", Kernel.Get<PostgresDbContext>());
+                .WithConstructorArgument("context", Kernel.Get<PostgresDbContext>("Postgre"));
 
             this.Kernel.Bind(x =>
             {

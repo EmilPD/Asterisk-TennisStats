@@ -36,42 +36,17 @@ namespace ATPTennisStat.ConsoleClient
             //ExcelImporter();
             //NinjectStart();
             //GeneratePdfReport();
-            ConsoleEngineStart();
+            //ConsoleEngineStart();
             //SqliteStart();
-            //JsonImportStart();
+            JsonImportStart();
         }
 
         private static void JsonImportStart()
         {
             var kernel = new StandardKernel(new ATPTennisStatModules());
-            var dp = kernel.Get<SqlServerDataProvider>();
-            var countriesInDb = dp.Countries.GetAll();
-
-            var baseDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
-            var jsonPath = "\\Data\\Json\\";
-            var jsonFileName = "countries.json";
-            var fullPath = baseDir + jsonPath + jsonFileName;
-
-            var jsonImporter = new JSONImporter(fullPath);
-            var listOfCountries = jsonImporter.Read();
-
-            var count = 1;
-            foreach (var country in listOfCountries)
-            {
-                if (count > 10)
-                {
-                    break;
-                }
-
-                if (!countriesInDb.Any(c => c.Name == country.Name))
-                {
-                    Console.WriteLine("Adding country - {0}", country.Name);
-                    dp.Countries.Add(new Country { Name = country.Name });
-                    count++;
-                }
-            }
-
-            dp.UnitOfWork.Finished();
+            var jsonImporter = kernel.Get<JSONImporter>();
+            jsonImporter.ReadFromFile();
+            jsonImporter.WriteToDb();
         }
 
         private static void SqliteStart()
