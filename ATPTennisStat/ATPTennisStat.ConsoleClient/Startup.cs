@@ -33,10 +33,10 @@ namespace ATPTennisStat.ConsoleClient
             ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
-            //ExcelImporter();
+            ExcelImporter();
             //NinjectStart();
             //GeneratePdfReport();
-            ConsoleEngineStart();
+            //ConsoleEngineStart();
             //SqliteStart();
             //JsonImportStart();
         }
