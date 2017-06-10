@@ -8,7 +8,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
 {
     public static class Messages
     {
-        public static string GenerateWelcomeMessage()
+        internal static string GenerateWelcomeMessage()
         {
             return @" < WELCOME TO ASTERISK - TENNIS STATS >
 ----------------------------------------
@@ -17,31 +17,58 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
 ----------------------------------------";
         }
 
-        public static string GenerateMainMenu()
+        internal static string GenerateMainMenu()
         {
             return @"
- [p] Tennis Players Menu
- [s] Tennis Statistics Menu
- [t] Ticket Store Menu
- [i] Team Asterisk Info";
+ [r] Tennis reporters
+ [s] Tennis statistics menu
+ [t] Ticket store menu
+ [i] Team Asterisk info
+ [exit]";
         }
 
-        public static string GenerateTicketMenu()
+        internal static string GenerateReportersMenu()
         {
             return @"
- [allt] Show All Tickets
- [alle] Show All Events
- [buyt (id)] Buy a ticket with (id)
+ [pdfm] Create PDF report for matches
+ [pdfr] Create PDF report for ranking";
+        }
+
+        internal static string GenerateTicketMenu()
+        {
+            return @"
+ [allt] Show all tickets
+ [alle] Show all events
+ [buyt (id)] buy a ticket with (id)
  [menu] Back to main menu";
         }
 
-        public static string GenerateDataAddMenu()
+        internal static string GenerateDataMenu()
         {
             return @"
- [addp] Add New Player
- [addt] Add New Tournament
- [addm] Add New Match
+ [show] Show tennis data menu
+ [add] Add tennis data menu
  [menu] Back to main menu";
+        }
+
+        internal static string GenerateDataAddMenu()
+        {
+            return @"
+ [addcountry (name)] Add new country
+ [addcity (name) (country)] Add new city
+ [addp (name) (db) (city)] Add new player
+ [addt (name) (city)] Add new tournament
+ [addm (w) (L) (r) (d)] Add new match
+ [menu] [show]";
+        }
+
+        internal static string GenerateDataShowMenu()
+        {
+            return @"
+ [showp (id)] Show all players of filter by id
+ [showt (id)] Show all tournaments of filter by id
+ [showm (id)] Show all mathes of filter by id
+ [menu] [add]";
         }
     }
 }

@@ -90,7 +90,7 @@ namespace ATPTennisStat.ConsoleClient.Core
 
                 if (commandLine.ToLower() == "exit")
                 {
-                    this.writer.Write(builder.ToString());
+                    //this.writer.Write(builder.ToString());
                     this.writer.WriteLine("Program terminated.");
                     break;
                 }

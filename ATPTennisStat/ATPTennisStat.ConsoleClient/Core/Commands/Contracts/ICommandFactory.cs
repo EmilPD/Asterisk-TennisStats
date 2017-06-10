@@ -10,7 +10,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Contracts
 
         ICommand MainMenuCommand();
 
+        ICommand ReportersMenuCommand();
+
         ICommand TicketMenuCommand();
+
+        ICommand TeamInfoCommand();
 
         // Ticket data commands
         ICommand ShowEventsCommand();
@@ -18,6 +22,20 @@ namespace ATPTennisStat.ConsoleClient.Core.Contracts
         ICommand ShowTicketsCommand();
 
         ICommand BuyTicketsCommand();
+
+        // Reporter commands
+
+        ICommand CreateMatchesPdf();
+
+        ICommand CreateRankingPdf();
+
+        // Data menu commanda
+
+        ICommand TennisDataMenuCommand();
+
+        ICommand ShowTennisDataMenuCommand();
+
+        ICommand AddTennisDataMenuCommand();
 
         // Create data commands 
         ICommand AddCountry();

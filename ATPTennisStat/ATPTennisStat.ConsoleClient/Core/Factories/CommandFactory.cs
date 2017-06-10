@@ -12,19 +12,21 @@ using ATPTennisStat.SQLServerData;
 using ATPTennisStat.Factories.Contracts;
 using ATPTennisStat.Factories;
 using ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands;
+using ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands;
+using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands;
 
 namespace ATPTennisStat.ConsoleClient.Core.Factories
 {
     class CommandFactory : ICommandFactory
     {
-        private readonly PostgresDataProvider PgDp;
-        private readonly SqlServerDataProvider SqlDp;
+        private readonly PostgresDataProvider pgDp;
+        private readonly SqlServerDataProvider sqlDp;
         private IWriter writer;
 
-        public CommandFactory(IWriter writer, PostgresDataProvider PgDp, SqlServerDataProvider SqlDp)
+        public CommandFactory(IWriter writer, PostgresDataProvider pgDp, SqlServerDataProvider sqlDp)
         {
-            this.PgDp = PgDp;
-            this.SqlDp = SqlDp;
+            this.pgDp = pgDp;
+            this.sqlDp = sqlDp;
             this.writer = writer;
         }
 
@@ -32,74 +34,55 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         {
             switch (commandName.ToLower())
             {
+                // main menu
                 case "menu":
                     return this.MainMenuCommand();
+                case "r":
+                    return this.ReportersMenuCommand();
+                case "s":
+                    return this.TennisDataMenuCommand();
                 case "t":
                     return this.TicketMenuCommand();
+                case "i":
+                    return this.TeamInfoCommand();
+                // tickets commands
                 case "alle":
                     return this.ShowEventsCommand();
                 case "allt":
                     return this.ShowTicketsCommand();
                 case "buyt":
                     return this.BuyTicketsCommand();
+                // reporter commands
+                case "pdfm":
+                    return this.CreateMatchesPdf();
+                case "pdfr":
+                    return this.CreateRankingPdf();
+                // data menu
+                case "show":
+                    return this.ShowTennisDataMenuCommand();
+                case "add":
+                    return this.AddTennisDataMenuCommand();
+                // data show
+                case "showp":
+                    return this.ShowPlayers();
+                case "showt":
+                    return this.ShowTournaments();
+                case "showm":
+                    return this.ShowMatches();
                 default:
                     throw new ArgumentException(nameof(ICommand));
             }
         }
 
-        public ICommand ShowTicketsCommand()
-        {
-            return new ShowTicketsCommand(PgDp, writer);
-        }
-
-        public ICommand BuyTicketsCommand()
-        {
-            return new BuyTicketsCommand(PgDp, writer);
-        }
-
-        public ICommand AddCountry()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICommand AddCity()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICommand AddPlayer()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICommand AddTournament()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICommand AddMatch()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICommand ShowTournaments()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICommand ShowMatches()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICommand ShowPlayers()
-        {
-            throw new NotImplementedException();
-        }
-
+        // Menu commands
         public ICommand MainMenuCommand()
         {
             return new MainMenuCommand(writer);
+        }
+
+        public ICommand ReportersMenuCommand()
+        {
+            return new ReportersMenuCommand(writer);
         }
 
         public ICommand TicketMenuCommand()
@@ -107,9 +90,94 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
             return new TicketMenuCommand(writer);
         }
 
+        public ICommand TeamInfoCommand()
+        {
+            return new TeamInfoCommand(writer);
+        }
+
+        // Reporters commands
+        public ICommand CreateMatchesPdf()
+        {
+            return new CreateMatchesPdf(sqlDp, writer);
+        }
+
+        public ICommand CreateRankingPdf()
+        {
+            return new CreateRankingPdf(sqlDp, writer);
+        }
+
+        // Ticket store commands
+        public ICommand ShowTicketsCommand()
+        {
+            return new ShowTicketsCommand(pgDp, writer);
+        }
+
         public ICommand ShowEventsCommand()
         {
-            return new ShowEventsCommand(PgDp, writer);
+            return new ShowEventsCommand(pgDp, writer);
+        }
+
+        public ICommand BuyTicketsCommand()
+        {
+            return new BuyTicketsCommand(pgDp, writer);
+        }
+
+        // Tennis Data menu commands
+        public ICommand TennisDataMenuCommand()
+        {
+            return new TennisDataMenuCommand(writer);
+        }
+
+        public ICommand ShowTennisDataMenuCommand()
+        {
+            return new ShowTennisDataMenuCommand(writer);
+        }
+
+        public ICommand AddTennisDataMenuCommand()
+        {
+            return new AddTennisDataMenuCommand(writer);
+        }
+
+        // Data Add Commands
+        public ICommand AddCountry()
+        {
+            return new AddCountryCommand(sqlDp, writer);
+        }
+
+        public ICommand AddCity()
+        {
+            return new AddCityCommand(sqlDp, writer);
+        }
+
+        public ICommand AddPlayer()
+        {
+            return new AddPlayerCommand(sqlDp, writer);
+        }
+
+        public ICommand AddTournament()
+        {
+            return new AddTournamentCommand(sqlDp, writer);
+        }
+
+        public ICommand AddMatch()
+        {
+            return new AddMatchCommand(sqlDp, writer);
+        }
+
+        // Data Show Commands
+        public ICommand ShowTournaments()
+        {
+            return new ShowTournamentsCommand(sqlDp, writer);
+        }
+
+        public ICommand ShowMatches()
+        {
+            return new ShowMatchesCommand(sqlDp, writer);
+        }
+
+        public ICommand ShowPlayers()
+        {
+            return new ShowPlayersCommand(sqlDp, writer);
         }
     }
 }
