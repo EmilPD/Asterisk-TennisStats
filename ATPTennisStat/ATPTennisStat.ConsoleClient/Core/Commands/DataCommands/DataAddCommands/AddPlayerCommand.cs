@@ -23,7 +23,6 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
         {
             writer.Clear();
 
-
             string firstName = string.Empty;
             string lastName = string.Empty;
             string weight = string.Empty;
