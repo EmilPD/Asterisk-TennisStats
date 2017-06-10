@@ -39,12 +39,30 @@ namespace ATPTennisStat.Factories
 
             if (String.IsNullOrEmpty(loser))
             {
-                throw new ArgumentException("Last name - null or empty");
+                throw new ArgumentException("Loser - null or empty");
             }
 
             var winnerToLower = winner.ToLower();
 
             var loserToLower = loser.ToLower();
+
+            if (datePlayed == null)
+            {
+                throw new ArgumentException("Match date is required");
+            }
+
+
+            DateTime datePlayedParsed;
+
+            try
+            {
+                datePlayedParsed = DateTime.Parse(datePlayed);
+            }
+            catch (Exception)
+            {
+
+                throw new ArgumentException("Startdate cannot be parsed");
+            }
 
             //bool playerExists = this.dataProvider.Players.GetAll()
             //                    .Any(p => p.FirstName.ToLower() == firstNameToLower &&
@@ -55,17 +73,16 @@ namespace ATPTennisStat.Factories
 
 
             //RESULT NULLABLE
-            //DatePlayed NULLABLE
-
-            //LoserID NON-NULLABLE
-            //WinnerID NON-NULLABLE
 
             //RoundID NULLABLE
             //TournamentID NULLABLE
 
 
 
-            return new Match();
+            return new Match
+            {
+                DatePlayed = datePlayedParsed
+            };
         }
 
 
