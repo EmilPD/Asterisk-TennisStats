@@ -50,7 +50,7 @@ namespace ATPTennisStat.Importers
 
                 return dataRange;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 //throw new ArgumentException("File opened by another program");
