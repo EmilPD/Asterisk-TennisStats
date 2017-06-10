@@ -33,7 +33,7 @@ namespace ATPTennisStat.ConsoleClient
             ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
-            //ExcelImporter();
+            ExcelImporter();
             //NinjectStart();
             //GeneratePdfReport();
             //ConsoleEngineStart();
@@ -136,8 +136,11 @@ namespace ATPTennisStat.ConsoleClient
             var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
 
             var excelImporter = kernel.Get<ExcelImporter>();
-            excelImporter.Read();
-            //excelImporter.Write();
+            excelImporter.ImportPlayers();
+            excelImporter.ImportTournaments();
+            excelImporter.ImportPointDistributions();
+            excelImporter.ImportMatches();
+
 
         }
 

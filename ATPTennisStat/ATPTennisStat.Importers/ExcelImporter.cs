@@ -15,8 +15,11 @@ namespace ATPTennisStat.Importers
 {
     public class ExcelImporter : IImporter
     {
-        private string solutionDirectory;
-        private string filePath;
+        private readonly string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+        private string playersFilePath;
+        private string matchesFilePath;
+        private string tournamentsFilePath;
+        private string pointDistributionsFilePath;
 
         private SqlServerDataProvider dataProvider;
         private ModelsFactory modelsFactory;
@@ -26,32 +29,218 @@ namespace ATPTennisStat.Importers
             this.dataProvider = dataProvider;
             this.modelsFactory = modelsFactory;
 
-            this.solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
-            this.filePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
 
+            this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
+            this.matchesFilePath = this.solutionDirectory + "\\Data\\Excel\\Matches-Full-Data.xlsx";
+            this.tournamentsFilePath = this.solutionDirectory + "\\Data\\Excel\\Tournaments-Full-Data.xlsx";
+            this.pointDistributionsFilePath = this.solutionDirectory + "\\Data\\Excel\\TournamentCategoryPoints.xlsx";
         }
 
         /// <summary>
         /// Expects a file with data in the first worksheet
         /// </summary>
-        public void Read()
+        private IXLTableRange GenerateTableRangeFromFile(string filePath)
         {
-            var workbook = new XLWorkbook(this.filePath);
-            var ws = workbook.Worksheets.First();
+            try
+            {
+                var workbook = new XLWorkbook(filePath);
+                var ws = workbook.Worksheets.First();
 
-            var dataRange = ws.RangeUsed().AsTable().DataRange;
+                var dataRange = ws.RangeUsed().AsTable().DataRange;
 
+                return dataRange;
+            }
+            catch (Exception)
+            {
+
+                //throw new ArgumentException("File opened by another program");
+                Console.WriteLine("File opened by another program");
+                return null;
+            }
+            
+
+        }
+
+        public void ImportPointDistributions()
+        {
+            var dataRange = GenerateTableRangeFromFile(this.pointDistributionsFilePath);
+
+            if (dataRange == null)
+            {
+                //another exception handling possible
+                return;
+            }
+
+            //TODO Exception Handling
+            var pointDistributions = dataRange.Rows()
+                            .Select(row => new
+                            {
+                                Category = row.Field("Category").GetString().Trim(),
+                                PlayersNumber = row.Field("PlayersNumber").GetString().Trim(),
+                                RoundName = row.Field("Round Name").GetString().Trim(),
+                                Points = row.Field("Points").GetString().Trim()
+                            })
+                            .ToList();
+
+
+
+            foreach (var pd in pointDistributions)
+            {
+                try
+                {
+                    var newPointDistribution= modelsFactory.CreatePointDistribution(
+                     pd.Category,
+                     pd.PlayersNumber,
+                     pd.RoundName,
+                     pd.Points);
+
+                    this.dataProvider.PointDistributions.Add(newPointDistribution);
+
+                }
+                catch (ArgumentException ex)
+                {
+
+                    Console.WriteLine("Excel import problem: " + ex.Message);
+                }
+
+            }
+
+            this.dataProvider.UnitOfWork.Finished();
+
+        }
+
+        public void ImportTournaments()
+        {
+            var dataRange = GenerateTableRangeFromFile(this.tournamentsFilePath);
+
+            if (dataRange == null)
+            {
+                //another exception handling possible
+                return;
+            }
+
+            //TODO Exception Handling
+            var tournaments = dataRange.Rows()
+                            .Select(row => new
+                            {
+                                Name = row.Field("Name").GetString().Trim(),
+                                StartDate = row.Field("StartDate").GetString().Trim(),
+                                EndDate = row.Field("EndDate").GetString().Trim(),
+                                PrizeMoney = row.Field("PrizeMoney").GetString().Trim(),
+                                Category = row.Field("Category").GetString().Trim(),
+                                PlayersCount = row.Field("PlayersCount").GetString().Trim(),
+                                City = row.Field("City").GetString().Trim(),
+                                Country = row.Field("Country").GetString().Trim(),
+                                Surface = row.Field("Surface").GetString().Trim(),
+                                SurfaceSpeed = row.Field("Speed").GetString().Trim()
+                            })
+                            .ToList();
+
+
+
+            foreach (var t in tournaments)
+            {
+                try
+                {
+                    var newTournament = modelsFactory.CreateTournament(
+                     t.Name,
+                     t.StartDate,
+                     t.EndDate,
+                     t.PrizeMoney,
+                     t.Category,
+                     t.PlayersCount,
+                     t.City,
+                     t.Country,
+                     t.Surface,
+                     t.SurfaceSpeed);
+
+                    this.dataProvider.Tournaments.Add(newTournament);
+
+                }
+                catch (ArgumentException ex)
+                {
+
+                    Console.WriteLine("Excel import problem: " + ex.Message);
+                }
+
+            }
+
+            this.dataProvider.UnitOfWork.Finished();
+
+
+        }
+
+        public void ImportMatches()
+        {
+
+            var dataRange = GenerateTableRangeFromFile(this.matchesFilePath);
+
+            if (dataRange == null)
+            {
+                //another exception handling possible
+                return;
+            }
+
+            var matches = dataRange.Rows()
+                       .Select(row => new
+                       {
+                           DatePlayed = row.Field("DatePlayed").GetString().Trim(),
+                           Winner = row.Field("Winner").GetString().Trim(),
+                           Loser = row.Field("Loser").GetString().Trim(),
+                           Result = row.Field("Result").GetString().Trim(),
+                           TournamentName = row.Field("Tournament").GetString().Trim(),
+                           Round = row.Field("Round").GetString().Trim()
+                       })
+                        .ToList();
+
+            foreach (var m in matches)
+            {
+                try
+                {
+                    var newMatch = modelsFactory.CreateMatch(
+                         m.DatePlayed,
+                         m.Winner,
+                         m.Loser,
+                         m.Result,
+                         m.TournamentName,
+                         m.Round
+                     );
+
+                    this.dataProvider.Matches.Add(newMatch);
+
+                }
+                catch (ArgumentException ex)
+                {
+
+                    Console.WriteLine("Excel import problem: " + ex.Message);
+                }
+
+            }
+
+            this.dataProvider.UnitOfWork.Finished();
+        }
+
+        public void ImportPlayers()
+        {
+            var dataRange = GenerateTableRangeFromFile(this.playersFilePath);
+
+            if (dataRange == null)
+            {
+                //another exception handling possible
+                return;
+            }
 
             var players = dataRange.Rows()
-                .Select(nameRow => new {
-                    FirstName = nameRow.Field("FirstName").GetString(),
-                    LastName = nameRow.Field("LastName").GetString(),
-                    Ranking = nameRow.Field("Ranking").GetString(),
-                    BirthDate = nameRow.Field("BirthDate").GetString(),
-                    Height = nameRow.Field("Height").GetString(),
-                    Weight = nameRow.Field("Weight").GetString(),
-                    City = nameRow.Field("City").GetString(),
-                    Country = nameRow.Field("Country").GetString()
+                .Select(row => new
+                {
+                    FirstName = row.Field("FirstName").GetString().Trim(),
+                    LastName = row.Field("LastName").GetString().Trim(),
+                    Ranking = row.Field("Ranking").GetString().Trim(),
+                    BirthDate = row.Field("BirthDate").GetString().Trim(),
+                    Height = row.Field("Height").GetString().Trim(),
+                    Weight = row.Field("Weight").GetString().Trim(),
+                    City = row.Field("City").GetString().Trim(),
+                    Country = row.Field("Country").GetString().Trim()
 
                 })
                 .ToList();
@@ -77,39 +266,13 @@ namespace ATPTennisStat.Importers
                 catch (ArgumentException ex)
                 {
 
-                    Console.WriteLine("Excel import problem: "+ex.Message);
+                    Console.WriteLine("Excel import problem: " + ex.Message);
                 }
- 
+
             }
 
             this.dataProvider.UnitOfWork.Finished();
         }
-
-        public void ImportPlayer()
-        {
-
-        }
-
-        public void Write()
-        {
-
-
-
-
-            //var city = this.modelsFactory.CreateCity("Paris", "France");
-            //this.dataProvider.Cities.Add(city);
-
-            ////this.dataProvider.UnitOfWork.Finished();
-
-            //var city1 = modelsFactory.CreateCity("Nant", "France");
-
-
-            //this.dataProvider.Cities.Add(city1);
-
-            //this.dataProvider.UnitOfWork.Finished();
-
-        }
-
 
     }
 }

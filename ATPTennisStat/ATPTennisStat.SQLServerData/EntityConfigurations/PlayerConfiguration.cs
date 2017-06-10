@@ -36,6 +36,15 @@ namespace ATPTennisStat.SQLServerData.EntityConfigurations
             Property(p => p.BirthDate)
                 .HasColumnType("smalldatetime")
                 .IsOptional();
+
+            Property(p => p.Height)
+                .IsOptional();
+
+            Property(p => p.Weight)
+                .IsOptional();
+
+            Property(p => p.Ranking)
+                .IsOptional();
         }
     }
 }

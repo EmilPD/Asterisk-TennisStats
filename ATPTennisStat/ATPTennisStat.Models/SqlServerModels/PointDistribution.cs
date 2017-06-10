@@ -15,7 +15,7 @@ namespace ATPTennisStat.Models
 
         [Key, Column(Order = 1)]
         public int RoundId { get; set; }
-
+   
         public virtual TournamentCategory TournamentCategory { get; set; }
 
         public virtual Round Round { get; set; }
