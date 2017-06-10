@@ -19,6 +19,7 @@ namespace ATPTennisStat.Importers
         private string playersFilePath;
         private string matchesFilePath;
         private string tournamentsFilePath;
+        private string pointDistributionsFilePath;
 
         private SqlServerDataProvider dataProvider;
         private ModelsFactory modelsFactory;
@@ -32,13 +33,13 @@ namespace ATPTennisStat.Importers
             this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
             this.matchesFilePath = this.solutionDirectory + "\\Data\\Excel\\Matches-Full-Data.xlsx";
             this.tournamentsFilePath = this.solutionDirectory + "\\Data\\Excel\\Tournaments-Full-Data.xlsx";
-
+            this.pointDistributionsFilePath = this.solutionDirectory + "\\Data\\Excel\\TournamentCategoryPoints.xlsx";
         }
 
         /// <summary>
         /// Expects a file with data in the first worksheet
         /// </summary>
-        public IXLTableRange GenerateTableRangeFromFile(string filePath)
+        private IXLTableRange GenerateTableRangeFromFile(string filePath)
         {
             try
             {
@@ -57,6 +58,54 @@ namespace ATPTennisStat.Importers
                 return null;
             }
             
+
+        }
+
+        public void ImportPointDistributions()
+        {
+            var dataRange = GenerateTableRangeFromFile(this.pointDistributionsFilePath);
+
+            if (dataRange == null)
+            {
+                //another exception handling possible
+                return;
+            }
+
+            //TODO Exception Handling
+            var pointDistributions = dataRange.Rows()
+                            .Select(row => new
+                            {
+                                Category = row.Field("Category").GetString().Trim(),
+                                PlayersNumber = row.Field("PlayersNumber").GetString().Trim(),
+                                RoundName = row.Field("Round Name").GetString().Trim(),
+                                Points = row.Field("Points").GetString().Trim()
+                            })
+                            .ToList();
+
+
+
+            foreach (var pd in pointDistributions)
+            {
+                try
+                {
+                    var newPointDistribution= modelsFactory.CreatePointDistribution(
+                     pd.Category,
+                     pd.PlayersNumber,
+                     pd.RoundName,
+                     pd.Points);
+
+                    this.dataProvider.PointDistributions.Add(newPointDistribution);
+
+                }
+                catch (ArgumentException ex)
+                {
+
+                    Console.WriteLine("Excel import problem: " + ex.Message);
+                }
+
+            }
+
+            this.dataProvider.UnitOfWork.Finished();
 
         }
 
@@ -117,7 +166,7 @@ namespace ATPTennisStat.Importers
             }
 
             this.dataProvider.UnitOfWork.Finished();
-            //var a = 3;
+
 
         }
 
@@ -226,27 +275,6 @@ namespace ATPTennisStat.Importers
 
             this.dataProvider.UnitOfWork.Finished();
         }
-
-        public void Write()
-        {
-
-
-
-
-            //var city = this.modelsFactory.CreateCity("Paris", "France");
-            //this.dataProvider.Cities.Add(city);
-
-            ////this.dataProvider.UnitOfWork.Finished();
-
-            //var city1 = modelsFactory.CreateCity("Nant", "France");
-
-
-            //this.dataProvider.Cities.Add(city1);
-
-            //this.dataProvider.UnitOfWork.Finished();
-
-        }
-
 
     }
 }

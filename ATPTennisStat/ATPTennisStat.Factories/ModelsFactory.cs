@@ -1,6 +1,7 @@
 ﻿using ATPTennisStat.Common;
 using ATPTennisStat.Factories.Contracts;
 using ATPTennisStat.Models;
+using ATPTennisStat.Models.Enums;
 using ATPTennisStat.SQLServerData;
 using System;
 using System.Collections.Generic;
@@ -65,6 +66,111 @@ namespace ATPTennisStat.Factories
 
 
             return new Match();
+        }
+
+
+        public PointDistribution CreatePointDistribution(string categoryName,
+                                                         string playersNumber,
+                                                         string roundName,
+                                                         string points)
+        {
+
+
+            if (String.IsNullOrEmpty(categoryName))
+            {
+                throw new ArgumentException("Category name is empty");
+            }
+
+            var categoryNameToLower = categoryName.ToLower();
+
+            if (String.IsNullOrEmpty(roundName))
+            {
+                throw new ArgumentException("Round name is empty");
+            }
+
+            RoundStage roundNameParsed;
+
+            try
+            {
+                roundNameParsed = (RoundStage)Enum.Parse(typeof(RoundStage), roundName, true);
+            }
+            catch (Exception)
+            {
+
+                throw new ArgumentException("Round stage cannot be parsed - Available ones are Q1, Q2...");
+            }
+   
+            if (String.IsNullOrEmpty(playersNumber))
+            {
+                throw new ArgumentException("Players number is empty");
+            }
+            byte playersNumberParsed;
+
+            try
+            {
+                playersNumberParsed = byte.Parse(playersNumber);
+            }
+            catch (Exception)
+            {
+
+                throw new ArgumentException("Players number cannot be parsed");
+            }
+
+
+            bool pointDistributionExists = this.dataProvider.PointDistributions.GetAll()
+                    .Any(pd => pd.TournamentCategory.Category == categoryNameToLower &&
+                                pd.TournamentCategory.PlayersCount == playersNumberParsed &&
+                                pd.Round.Stage == roundNameParsed);
+            if (pointDistributionExists)
+            {
+                throw new ArgumentException("Point distribution already exists in the database");
+            }
+
+            int pointsParsed;
+
+            try
+            {
+                pointsParsed = int.Parse(points);
+            }
+            catch (Exception)
+            {
+
+                throw new ArgumentException("Points cannot be parsed");
+            }
+
+            var tournamentCategory = dataProvider.TournamentCategories.GetAll()
+                                        .FirstOrDefault(c => c.Category.ToLower() == categoryNameToLower &&
+                                            c.PlayersCount == playersNumberParsed);
+
+
+
+            if (tournamentCategory == null)
+            {
+                tournamentCategory = CreateTournamentCategory(categoryName, playersNumberParsed);
+
+                this.dataProvider.TournamentCategories.Add(tournamentCategory);
+            }
+
+            var round = dataProvider.Rounds.GetAll()
+                                        .FirstOrDefault(r => r.Stage == roundNameParsed);
+
+            if (round == null)
+            {
+                round = new Round
+                {
+                    Stage = roundNameParsed
+                };
+
+                this.dataProvider.Rounds.Add(round);
+            }
+
+            return new PointDistribution
+            {
+                TournamentCategory = tournamentCategory,
+                Round = round,
+                Points = pointsParsed
+                
+            };
         }
 
 
