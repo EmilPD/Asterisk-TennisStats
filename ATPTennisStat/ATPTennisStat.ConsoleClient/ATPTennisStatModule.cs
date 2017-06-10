@@ -15,7 +15,7 @@ using ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.ConsoleClient.Core.Factories;
 using ATPTennisStat.ConsoleClient.Core.Providers;
-using ATPTennisStat.Common;
+using ATPTennisStat.SQLiteData;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -37,9 +37,9 @@ namespace ATPTennisStat.ConsoleClient
             {
                 this.Bind<DbContext>().To<SqlServerDbContext>().InSingletonScope();
             }
-            else
+            else if (this.contextType == DbContextType.SQLite)
             {
-                //this.Bind<DbContext>().To<SqliteDbContext>().InSingletonScope();
+                this.Bind<DbContext>().To<SqliteDbContext>().InSingletonScope();
             }
 
             this.Bind(typeof(IRepository<>)).To(typeof(EfRepository<>));

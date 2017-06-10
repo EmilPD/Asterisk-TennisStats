@@ -22,13 +22,13 @@ namespace ATPTennisStat.Models
 
         public string LastName { get; set; }
 
-        public float Height { get; set; }
+        public float? Height { get; set; }
 
-        public float Weight { get; set; }
+        public float? Weight { get; set; }
 
         public DateTime? BirthDate { get; set; }
 
-        public int Ranking { get; set; }
+        public int? Ranking { get; set; }
 
         public virtual City City { get; set; }
 

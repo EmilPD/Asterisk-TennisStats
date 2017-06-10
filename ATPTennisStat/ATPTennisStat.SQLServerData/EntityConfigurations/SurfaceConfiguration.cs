@@ -14,6 +14,7 @@ namespace ATPTennisStat.SQLServerData
                 .HasMaxLength(40);
 
             this.Property(s => s.Speed)
+                .IsRequired()
                 .HasMaxLength(40);
         }
     }

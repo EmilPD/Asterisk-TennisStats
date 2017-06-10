@@ -15,6 +15,9 @@ using ATPTennisStat.Models.Enums;
 using ATPTennisStat.PostgreSqlData;
 using ATPTennisStat.Common.Enums;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
+using ATPTennisStat.ReportGenerators.Enums;
+using ATPTennisStat.SQLiteData;
+using ATPTennisStat.Models.SqliteModels;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -24,15 +27,69 @@ namespace ATPTennisStat.ConsoleClient
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerDbContext, SQLServerData.Migrations.Configuration>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<PostgresDbContext, PostgreSqlData.Migrations.Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqliteDbContext, SQLiteData.Migrations.Configuration>(true));
 
             ///<summary>
             ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
-            //ExcelImporter();
+            ExcelImporter();
             //NinjectStart();
             //GeneratePdfReport();
-            ConsoleEngineStart();
+            //ConsoleEngineStart();
+            //SqliteStart();
+            JsonImportStart();
+        }
+
+        private static void JsonImportStart()
+        {
+            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
+            var dp = kernel.Get<SqlServerDataProvider>();
+            var countriesInDb = dp.Countries.GetAll();
+
+            var baseDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            var jsonPath = "\\Data\\Json\\";
+            var jsonFileName = "countries.json";
+            var fullPath = baseDir + jsonPath + jsonFileName;
+
+            var jsonImporter = new JSONImporter(fullPath);
+            var listOfCountries = jsonImporter.Read();
+
+            var count = 1;
+            foreach (var country in listOfCountries)
+            {
+                if (count > 10)
+                {
+                    break;
+                }
+
+                if (!countriesInDb.Any(c => c.Name == country.Name))
+                {
+                    Console.WriteLine("Adding country - {0}", country.Name);
+                    dp.Countries.Add(new Country { Name = country.Name });
+                    count++;
+                }
+            }
+
+            dp.UnitOfWork.Finished();
+        }
+
+        private static void SqliteStart()
+        {
+            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLite));
+            var dp = kernel.Get<SqliteDataProvider>();
+            var logs = dp.Logs;
+            logs.Add(new Log { Message = "proba123", TimeStamp = DateTime.Now });
+            dp.UnitOfWork.Finished();
+
+            var logsList = dp.Logs.GetAll();
+            foreach (var log in logsList)
+            {
+                Console.WriteLine("ID {0}", log.Id.ToString());
+                Console.WriteLine("Message {0}", log.Message.ToString());
+                Console.WriteLine("Time {0}", log.TimeStamp.ToString());
+                Console.WriteLine("---------------");
+            }
         }
 
         private static void ConsoleEngineStart()
@@ -79,15 +136,19 @@ namespace ATPTennisStat.ConsoleClient
             var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
 
             var excelImporter = kernel.Get<ExcelImporter>();
-            excelImporter.Read();
-            //excelImporter.Write();
+            excelImporter.ImportPlayers();
+            excelImporter.ImportTournaments();
+            excelImporter.ImportPointDistributions();
+            excelImporter.ImportMatches();
+
 
         }
 
         private static void GeneratePdfReport()
         {
             var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
-            var report = kernel.Get<PdfReportGenerator>();
+            var reportType = new Ninject.Parameters.ConstructorArgument("reportType", PdfReportType.Ranking);
+            var report = kernel.Get<PdfReportGenerator>(reportType);
             report.GenerateReport();
         }
 
@@ -103,7 +164,7 @@ namespace ATPTennisStat.ConsoleClient
             dp.Cities.Add(new City
             {
                 Name = "Burgas",
-                Country = new Country { Name = "Bulgaria" }
+                Country = new Models.Country { Name = "Bulgaria" }
             });
 
             dp.UnitOfWork.Finished();

@@ -1,4 +1,4 @@
-USE TennisStats
+USE ATPTennisStatSqlServer
 
 ------------------- SELECT MATCHES DATA ----------------------
 SELECT 
@@ -11,7 +11,7 @@ SELECT
 	pol.Points AS [Points Loser],
 	t.Name AS [Tournament],
 	tc.Category AS [Category],
-	tr.Name AS [Round],
+	tr.Stage AS [Round],
     c.Name AS [City],
 	co.Name AS [Country],
 	t.StartDate AS [StartDate],
@@ -20,16 +20,16 @@ SELECT
 	ts.Speed AS [Speed],
 	t.PrizeMoney AS [PrizeMoney]
 FROM Matches m
-JOIN Tournaments t ON t.Id = m.TournamentId
-JOIN TournamentCategories tc ON t.CategoryId = tc.Id
-JOIN Rounds tr ON tr.Id = m.RoundId
-JOIN Surfaces ts ON ts.Id = t.SurfaceId
-JOIN PointDistributions pow ON pow.CategoryId = t.CategoryId AND pow.RoundId = (m.RoundId)
-JOIN PointDistributions pol ON pol.CategoryId = t.CategoryId AND pol.RoundId = (m.RoundId-1)
-JOIN Cities c ON c.Id = t.CityId
-JOIN Players p ON m.WinnerId = p.Id
-JOIN Players pp ON m.LoserId = pp.Id
-JOIN Countries co ON c.CountryId = co.Id
+JOIN Tournaments t ON t.Id = m.Tournament_Id
+JOIN TournamentCategories tc ON t.Category_Id = tc.Id
+JOIN Rounds tr ON tr.Id = m.Round_Id
+JOIN Surfaces ts ON ts.Id = t.Type_Id
+JOIN PointDistributions pow ON pow.TournamentCategoryId = t.Category_Id AND pow.RoundId = (m.Round_Id)
+JOIN PointDistributions pol ON pol.TournamentCategoryId = t.Category_Id AND pol.RoundId = (m.Round_Id-1)
+JOIN Cities c ON c.Id = t.City_Id
+JOIN Players p ON m.Winner_Id = p.Id
+JOIN Players pp ON m.Loser_Id = pp.Id
+JOIN Countries co ON c.Country_Id = co.Id
 
 ----------------------- SELECT PLAYERS DATA -----------------------
 
@@ -44,9 +44,5 @@ SELECT
 	ci.Name AS [City],
 	co.Name AS [Country]
 FROM Players p
-JOIN Cities ci ON ci.Id = p.CityId
-JOIN Countries co ON co.Id = ci.CountryId
-
-
---SELECT *
---FROM PointDistributions
+LEFT JOIN Cities ci ON ci.Id = p.City_Id
+LEFT JOIN Countries co ON co.Id = ci.Country_Id

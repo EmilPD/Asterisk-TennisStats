@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\PdfReportType.cs" />
     <Compile Include="PdfReportGenerator.cs" />
     <Compile Include="Contracts\IReportGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

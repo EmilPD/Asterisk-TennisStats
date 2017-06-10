@@ -14,6 +14,7 @@ namespace ATPTennisStat.SQLServerData.EntityConfigurations
                 .HasMaxLength(40);
 
             this.Property(t => t.PlayersCount)
+                .IsRequired()
                 .HasColumnType("tinyint");
         }
     }

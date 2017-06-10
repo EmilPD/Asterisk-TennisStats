@@ -77,6 +77,7 @@
       <DependentUpon>201706090535466_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="SqliteDataProvider.cs" />
     <Compile Include="SqliteDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -88,6 +89,10 @@
     <ProjectReference Include="..\ATPTennisStat.Models\ATPTennisStat.Models.csproj">
       <Project>{12de3fd9-6ebc-408d-af51-1a7f7c712108}</Project>
       <Name>ATPTennisStat.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.Repositories\ATPTennisStat.Repositories.csproj">
+      <Project>{b4fc6642-8c45-49ec-b3f3-ffa883fadf4f}</Project>
+      <Name>ATPTennisStat.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
