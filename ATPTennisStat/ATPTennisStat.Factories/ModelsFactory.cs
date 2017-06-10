@@ -27,7 +27,7 @@ namespace ATPTennisStat.Factories
                          string loserName,
                          string result,
                          string tournamentName,
-                         string round)
+                         string roundName)
         {
 
 
@@ -102,7 +102,7 @@ namespace ATPTennisStat.Factories
                             .FirstOrDefault(p => p.FirstName.ToLower() == winnerFirstNameToLower &&
                                                  p.LastName.ToLower() == winnerLastNameToLower);
 
-            if (String.IsNullOrEmpty(round))
+            if (String.IsNullOrEmpty(roundName))
             {
                 throw new ArgumentException("Round - null or empty");
             }
@@ -130,12 +130,44 @@ namespace ATPTennisStat.Factories
             {
                 loser = CreatePlayer(loserFirstName, loserLastName);
 
-                this.dataProvider.Players.Add(winner);
+                this.dataProvider.Players.Add(loser);
             }
 
             //RoundID
-            //TournamentID
+            RoundStage roundParsed;
 
+            try
+            {
+                roundParsed = (RoundStage)Enum.Parse(typeof(RoundStage), roundName, true);
+            }
+            catch (Exception)
+            {
+
+                throw new ArgumentException("Round stage cannot be parsed - Available ones are Q1, Q2...");
+            }
+
+            var round = dataProvider.Rounds.GetAll()
+                            .FirstOrDefault(r => r.Stage == roundParsed);
+
+            if (round == null)
+            {
+                round = new Round
+                {
+                    Stage = roundParsed
+                };
+
+                this.dataProvider.Rounds.Add(round);
+            }
+            //TournamentID
+            var tournamentNameToLower = tournamentName.ToLower();
+
+            var tournament = dataProvider.Tournaments.GetAll()
+                             .FirstOrDefault(t => t.Name.ToLower() == tournamentNameToLower);
+
+            if(tournament == null)
+            {
+                throw new ArgumentException("Tournament cannot be found - please import tournaments");
+            }
 
 
             return new Match
@@ -143,7 +175,9 @@ namespace ATPTennisStat.Factories
                 DatePlayed = datePlayedParsed,
                 Winner = winner,
                 Loser = loser,
-                Result = result
+                Result = result,
+                Round = round,
+                Tournament = tournament
             };
         }
 

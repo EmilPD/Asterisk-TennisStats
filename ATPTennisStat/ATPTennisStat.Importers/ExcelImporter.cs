@@ -217,9 +217,7 @@ namespace ATPTennisStat.Importers
 
             }
 
-            //this.dataProvider.UnitOfWork.Finished();
-
-            var a = 3;
+            this.dataProvider.UnitOfWork.Finished();
         }
 
         public void ImportPlayers()
