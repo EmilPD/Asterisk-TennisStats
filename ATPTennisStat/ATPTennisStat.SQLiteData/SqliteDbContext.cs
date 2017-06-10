@@ -9,7 +9,6 @@ namespace ATPTennisStat.SQLiteData
     {
         public SqliteDbContext() : base("ATPTennisStatSQLite")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqliteDbContext, Configuration>(true));
         }
 
         public virtual IDbSet<Log> Logs { get; set; }
