@@ -1,8 +1,8 @@
-﻿using ATPTennisStat.Models.PostgreSqlModels;
+﻿using System;
+using ATPTennisStat.Models.PostgreSqlModels;
 using ATPTennisStat.Repositories.Contracts;
-using System;
 
-namespace ATPTennisStat.Common
+namespace ATPTennisStat.PostgreSqlData
 {
     public class PostgresDataProvider
     {

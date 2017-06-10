@@ -43,7 +43,7 @@ namespace ATPTennisStat.ConsoleClient
 
         private static void JsonImportStart()
         {
-            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
+            var kernel = new StandardKernel(new ATPTennisStatModules());
             var dp = kernel.Get<SqlServerDataProvider>();
             var countriesInDb = dp.Countries.GetAll();
 
@@ -76,7 +76,7 @@ namespace ATPTennisStat.ConsoleClient
 
         private static void SqliteStart()
         {
-            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLite));
+            var kernel = new StandardKernel(new ATPTennisStatModules());
             var dp = kernel.Get<SqliteDataProvider>();
             var logs = dp.Logs;
             logs.Add(new Log { Message = "proba123", TimeStamp = DateTime.Now });
@@ -94,7 +94,7 @@ namespace ATPTennisStat.ConsoleClient
 
         private static void ConsoleEngineStart()
         {
-            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
+            var kernel = new StandardKernel(new ATPTennisStatModules());
             var engine = kernel.Get<IEngine>();
             engine.Start();
 
@@ -133,7 +133,7 @@ namespace ATPTennisStat.ConsoleClient
 
         private static void ExcelImporter()
         {
-            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
+            var kernel = new StandardKernel(new ATPTennisStatModules());
 
             var excelImporter = kernel.Get<ExcelImporter>();
             excelImporter.ImportPlayers();
@@ -146,7 +146,7 @@ namespace ATPTennisStat.ConsoleClient
 
         private static void GeneratePdfReport()
         {
-            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
+            var kernel = new StandardKernel(new ATPTennisStatModules());
             var reportType = new Ninject.Parameters.ConstructorArgument("reportType", PdfReportType.Ranking);
             var report = kernel.Get<PdfReportGenerator>(reportType);
             report.GenerateReport();
@@ -154,7 +154,7 @@ namespace ATPTennisStat.ConsoleClient
 
         private static void NinjectStart()
         {
-            var kernel = new StandardKernel(new ATPTennisStatModules(DbContextType.SQLServer));
+            var kernel = new StandardKernel(new ATPTennisStatModules());
             var dp = kernel.Get<SqlServerDataProvider>();
             //var cities = dp.Cities.Find(c => c.Country.Name == "Bulgaria");
 

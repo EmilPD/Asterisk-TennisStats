@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="PostgresDataProvider.cs" />
     <Compile Include="PostgresDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,6 +74,10 @@
     <ProjectReference Include="..\ATPTennisStat.Models\ATPTennisStat.Models.csproj">
       <Project>{12DE3FD9-6EBC-408D-AF51-1A7F7C712108}</Project>
       <Name>ATPTennisStat.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.Repositories\ATPTennisStat.Repositories.csproj">
+      <Project>{b4fc6642-8c45-49ec-b3f3-ffa883fadf4f}</Project>
+      <Name>ATPTennisStat.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

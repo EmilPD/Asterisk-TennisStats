@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Enums\DbContextType.cs" />
-    <Compile Include="PostgresDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

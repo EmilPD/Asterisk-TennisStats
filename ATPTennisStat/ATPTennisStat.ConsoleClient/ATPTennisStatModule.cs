@@ -1,50 +1,39 @@
-﻿using Ninject;
+﻿using System.IO;
+using System.Reflection;
+using Ninject;
 using Ninject.Extensions.Conventions;
 using Ninject.Modules;
-using System;
-using ATPTennisStat.SQLServerData;
-using System.Data.Entity;
-using System.IO;
-using System.Reflection;
-using ATPTennisStat.Repositories.Contracts;
-using ATPTennisStat.Repositories;
-using ATPTennisStat.PostgreSqlData;
-using ATPTennisStat.Common.Enums;
 using ATPTennisStat.ConsoleClient.Core;
 using ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.ConsoleClient.Core.Factories;
 using ATPTennisStat.ConsoleClient.Core.Providers;
-using ATPTennisStat.SQLiteData;
+using ATPTennisStat.SQLServerData;
+using ATPTennisStat.PostgreSqlData;
+using ATPTennisStat.Repositories.Contracts;
+using ATPTennisStat.Repositories;
 
 namespace ATPTennisStat.ConsoleClient
 {
     public class ATPTennisStatModules : NinjectModule
     {
-        private readonly DbContextType contextType;
-
-        public ATPTennisStatModules(DbContextType contextType)
-        {
-            this.contextType = contextType;
-        }
         public override void Load()
         {
-            if (this.contextType == DbContextType.Postgre)
-            {
-                this.Bind<DbContext>().To<PostgresDbContext>().InSingletonScope();
-            }
-            else if (this.contextType == DbContextType.SQLServer)
-            {
-                this.Bind<DbContext>().To<SqlServerDbContext>().InSingletonScope();
-            }
-            else if (this.contextType == DbContextType.SQLite)
-            {
-                this.Bind<DbContext>().To<SqliteDbContext>().InSingletonScope();
-            }
+            this.Bind<IUnitOfWork>().To<EfUnitOfWork>()
+                .WhenInjectedInto<SqlServerDataProvider>()
+                .WithConstructorArgument("context", Kernel.Get<SqlServerDbContext>());
 
-            this.Bind(typeof(IRepository<>)).To(typeof(EfRepository<>));
-            this.Bind<Func<IUnitOfWork>>().ToMethod(ctx => () => ctx.Kernel.Get<EfUnitOfWork>());
-            this.Bind<IUnitOfWork>().To<EfUnitOfWork>();
+            this.Bind(typeof(IRepository<>)).To(typeof(EfRepository<>))
+                .WhenInjectedInto<SqlServerDataProvider>()
+                .WithConstructorArgument("context", Kernel.Get<SqlServerDbContext>());
+
+            this.Bind<IUnitOfWork>().To<EfUnitOfWork>()
+                .WhenInjectedInto<PostgresDataProvider>()
+                .WithConstructorArgument("context", Kernel.Get<PostgresDbContext>());
+
+            this.Bind(typeof(IRepository<>)).To(typeof(EfRepository<>))
+                .WhenInjectedInto<PostgresDataProvider>()
+                .WithConstructorArgument("context", Kernel.Get<PostgresDbContext>());
 
             this.Kernel.Bind(x =>
             {
@@ -58,7 +47,7 @@ namespace ATPTennisStat.ConsoleClient
 
             var buytickets = Bind<BuyTicketsCommand>().ToSelf().InSingletonScope();
             var showtickets = Bind<ShowTicketsCommand>().ToSelf().InSingletonScope();
-            buytickets.WithConstructorArgument(this.Kernel.Get<DbContext>());
+            buytickets.WithConstructorArgument(this.Kernel.Get<PostgresDbContext>());
 
             Bind<IReader>().To<ConsoleReader>().InSingletonScope();
             Bind<IWriter>().To<ConsoleWriter>().InSingletonScope();

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ATPTennisStat.Common;
+using System.Text;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.Models.Enums;
-using System.Text;
+using ATPTennisStat.PostgreSqlData;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
 {
