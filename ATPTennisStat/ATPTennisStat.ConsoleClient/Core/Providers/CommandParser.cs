@@ -26,7 +26,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Providers
 
             set
             {
-                Guard.WhenArgument(value, "CommandProcessor CommandsFactory").IsNull().Throw();
+                Guard.WhenArgument(value, "CommandParser CommandsFactory").IsNull().Throw();
                 this.factory = value;
             }
         }

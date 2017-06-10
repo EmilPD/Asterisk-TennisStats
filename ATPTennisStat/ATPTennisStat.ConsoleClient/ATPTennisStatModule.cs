@@ -15,6 +15,7 @@ using ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.ConsoleClient.Core.Factories;
 using ATPTennisStat.ConsoleClient.Core.Providers;
+using ATPTennisStat.Common;
 
 namespace ATPTennisStat.ConsoleClient
 {

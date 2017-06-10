@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
-using ATPTennisStat.ConsoleClient.Core.Providers;
 using Bytes2you.Validation;
+using ATPTennisStat.ConsoleClient.Core.Utilities;
 
 namespace ATPTennisStat.ConsoleClient.Core
 {
@@ -13,12 +13,12 @@ namespace ATPTennisStat.ConsoleClient.Core
         private ILogger logger;
         private IParser parser;
 
-        public Engine(IReader reader, IWriter writer, ILogger logger, IParser processor)
+        public Engine(IReader reader, IWriter writer, ILogger logger, IParser parser)
         {
             this.Reader = reader;
             this.Writer = writer;
             this.Logger = logger;
-            this.Parser = processor;
+            this.Parser = parser;
         }
 
         public IReader Reader
@@ -72,14 +72,15 @@ namespace ATPTennisStat.ConsoleClient.Core
 
             set
             {
-                Guard.WhenArgument(value, "Engine Processor provider").IsNull().Throw();
+                Guard.WhenArgument(value, "Engine command parser provider").IsNull().Throw();
                 this.parser = value;
             }
         }
 
         public void Start()
         {
-            ShowWelcomeScreen();
+            this.writer.WriteLine(Messages.GenerateWelcomeMessage());
+            this.writer.WriteLine(Messages.GenerateMainMenu());
 
             var builder = new StringBuilder();
 
@@ -109,11 +110,6 @@ namespace ATPTennisStat.ConsoleClient.Core
                     this.logger.Log(ex.Message);
                 }
             }
-        }
-
-        private void ShowWelcomeScreen()
-        {
-            this.writer.WriteLine("");
         }
     }
 }
