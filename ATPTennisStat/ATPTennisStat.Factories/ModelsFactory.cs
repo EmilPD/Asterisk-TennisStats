@@ -184,7 +184,6 @@ namespace ATPTennisStat.Factories
             var tournamentCategory = list.FirstOrDefault(c => c.Category.ToLower() == categoryNameToLower &&
                                             c.PlayersCount == playersCountParsed);
 
-            var block = 3;
 
 
             if (tournamentCategory == null)
@@ -194,6 +193,60 @@ namespace ATPTennisStat.Factories
                 this.dataProvider.TournamentCategories.Add(tournamentCategory);
             }
 
+            //create new city
+            if (String.IsNullOrEmpty(cityName))
+            {
+                throw new ArgumentException("City name is required");
+            }
+
+            if (String.IsNullOrEmpty(countryName))
+            {
+                throw new ArgumentException("Country name is required");
+            }
+
+            var cityNameToLower = cityName.ToLower();
+
+            var countryNameToLower = countryName.ToLower();
+
+            var city = this.dataProvider.Cities.GetAll()
+                        .FirstOrDefault(c => c.Name.ToLower() == cityNameToLower);
+
+            if (city == null)
+            {
+                city = CreateCity(cityName, countryName);
+
+                this.dataProvider.Cities.Add(city);
+            }
+
+            //surface type + surface speed
+
+            if (String.IsNullOrEmpty(surfaceType))
+            {
+                throw new ArgumentException("Surface type is required");
+            }
+
+            if (String.IsNullOrEmpty(surfaceSpeed))
+            {
+                throw new ArgumentException("Surface speed is required");
+            }
+
+            var surfaceTypeToLower = surfaceType.ToLower();
+
+            var surfaceSpeedToLower = surfaceSpeed.ToLower();
+
+            var surfacesList = this.dataProvider.Surfaces.GetAll();
+
+            var surface = surfacesList
+                                .FirstOrDefault(s => s.Type.ToLower() == surfaceTypeToLower &&
+                                            s.Speed.ToLower() == surfaceSpeedToLower);
+
+            if (surface == null)
+            {
+                surface = CreateSurface(surfaceType, surfaceSpeed);
+
+                this.dataProvider.Surfaces.Add(surface);
+            }
+
 
             return new Tournament
             {
@@ -201,9 +254,43 @@ namespace ATPTennisStat.Factories
                 StartDate = startDateParsed,
                 EndDate = endDateParsed,
                 PrizeMoney = prizeMoneyParsed,
-                Category = tournamentCategory
+                Category = tournamentCategory,
+                City = city,
+                Type = surface   
                 
-                
+            };
+        }
+
+        public Surface CreateSurface(string surfaceType, string surfaceSpeed)
+        {
+
+            if (String.IsNullOrEmpty(surfaceType))
+            {
+                throw new ArgumentException("Surface type - null or empty");
+            }
+
+            if (String.IsNullOrEmpty(surfaceType))
+            {
+                throw new ArgumentException("Surface speed - null or empty");
+            }
+
+            var surfaceTypeToLower = surfaceType.ToLower();
+            var surfaceSpeedToLower = surfaceSpeed.ToLower();
+
+            bool surfaceExists = this.dataProvider.Surfaces.GetAll()
+                                .Any(s => s.Type.ToLower() == surfaceTypeToLower &&
+                                            s.Speed.ToLower() == surfaceSpeedToLower);
+
+            if (surfaceExists)
+            {
+                throw new ArgumentException("Surface already in the database");
+            }
+
+
+            return new Surface
+            {
+                Type = surfaceType,
+                Speed = surfaceSpeed
             };
         }
 
@@ -410,17 +497,10 @@ namespace ATPTennisStat.Factories
 
             var country = list.FirstOrDefault(c => c.Name.ToLower() == countryNameLowerCase);
 
-
-            //dbCtx.Entry(stud).State = System.Data.Entity.EntityState.Modified;
-
             if (country == null)
             {
                 country = CreateCountry(countryName);
 
-                //    new Country
-                //{
-                //    Name = countryName
-                //};
                 this.dataProvider.Countries.Add(country);
             }
 
