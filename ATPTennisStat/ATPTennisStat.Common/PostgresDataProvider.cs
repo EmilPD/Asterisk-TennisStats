@@ -8,9 +8,9 @@ namespace ATPTennisStat.Common
     {
         private IRepository<Ticket> tickets;
         private IRepository<TennisEvent> tennisEvents;
-        private Func<IUnitOfWork> unitOfWork;
+        private IUnitOfWork unitOfWork;
 
-        public PostgresDataProvider(Func<IUnitOfWork> uow, IRepository<Ticket> tickets, IRepository<TennisEvent> tennisEvents)
+        public PostgresDataProvider(IUnitOfWork uow, IRepository<Ticket> tickets, IRepository<TennisEvent> tennisEvents)
         {
             this.tickets = tickets;
             this.tennisEvents = tennisEvents;
@@ -45,7 +45,7 @@ namespace ATPTennisStat.Common
             }
         }
 
-        public Func<IUnitOfWork> UnitOfWork
+        public IUnitOfWork UnitOfWork
         {
             get { return unitOfWork; }
             set

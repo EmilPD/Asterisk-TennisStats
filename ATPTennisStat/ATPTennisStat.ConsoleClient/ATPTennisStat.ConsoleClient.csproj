@@ -107,6 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ATPTennisStatModule.cs" />
+    <Compile Include="Core\Commands\MenuCommands\MainMenuCommand.cs" />
+    <Compile Include="Core\Commands\MenuCommands\TicketMenuCommand.cs" />
+    <Compile Include="Core\Commands\TicketCommands\ShowEventsCommand.cs" />
     <Compile Include="Core\Commands\TicketCommands\ShowTicketsCommand.cs" />
     <Compile Include="Core\Commands\TicketCommands\BuyTicketsCommand.cs" />
     <Compile Include="Core\Contracts\ILogger.cs" />
@@ -122,6 +125,7 @@
     <Compile Include="Core\Providers\ConsoleReader.cs" />
     <Compile Include="Core\Providers\ConsoleWriter.cs" />
     <Compile Include="Core\Providers\SqLiteLogger.cs" />
+    <Compile Include="Core\Utilities\Messages.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -167,10 +171,7 @@
       <Name>ATPTennisStat.SQLServerData</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Commands\Abstract\" />
-    <Folder Include="Core\Commands\MainCommands\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.1\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.1\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

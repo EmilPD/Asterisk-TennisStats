@@ -11,43 +11,105 @@ using ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands;
 using ATPTennisStat.SQLServerData;
 using ATPTennisStat.Factories.Contracts;
 using ATPTennisStat.Factories;
+using ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands;
 
 namespace ATPTennisStat.ConsoleClient.Core.Factories
 {
     class CommandFactory : ICommandFactory
     {
-        private readonly ITicketModelsFactory factory;
         private readonly PostgresDataProvider PgDp;
         private readonly SqlServerDataProvider SqlDp;
+        private IWriter writer;
 
-        public CommandFactory(ITicketModelsFactory factory, PostgresDataProvider PgDp, SqlServerDataProvider SqlDp)
+        public CommandFactory(IWriter writer, PostgresDataProvider PgDp, SqlServerDataProvider SqlDp)
         {
-            this.factory = factory ?? new TicketModelsFactory(PgDp);
             this.PgDp = PgDp;
             this.SqlDp = SqlDp;
+            this.writer = writer;
         }
 
         public ICommand CreateCommandFromString(string commandName)
         {
             switch (commandName.ToLower())
             {
-                case "tickets":
-                    return this.ShowTicketsCommand(PgDp);
-                case "buy":
-                    return this.BuyTicketsCommand(PgDp);
+                case "menu":
+                    return this.MainMenuCommand();
+                case "t":
+                    return this.TicketMenuCommand();
+                case "alle":
+                    return this.ShowEventsCommand();
+                case "allt":
+                    return this.ShowTicketsCommand();
+                case "buyt":
+                    return this.BuyTicketsCommand();
                 default:
                     throw new ArgumentException(nameof(ICommand));
             }
         }
 
-        public ICommand ShowTicketsCommand(PostgresDataProvider PgDp)
+        public ICommand ShowTicketsCommand()
         {
-            return new ShowTicketsCommand(PgDp);
+            return new ShowTicketsCommand(PgDp, writer);
         }
 
-        public ICommand BuyTicketsCommand(PostgresDataProvider PgDp)
+        public ICommand BuyTicketsCommand()
         {
-            return new BuyTicketsCommand(PgDp);
+            return new BuyTicketsCommand(PgDp, writer);
+        }
+
+        public ICommand AddCountry()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICommand AddCity()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICommand AddPlayer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICommand AddTournament()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICommand AddMatch()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICommand ShowTournaments()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICommand ShowMatches()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICommand ShowPlayers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICommand MainMenuCommand()
+        {
+            return new MainMenuCommand(writer);
+        }
+
+        public ICommand TicketMenuCommand()
+        {
+            return new TicketMenuCommand(writer);
+        }
+
+        public ICommand ShowEventsCommand()
+        {
+            return new ShowEventsCommand(PgDp, writer);
         }
     }
 }

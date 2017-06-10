@@ -12,22 +12,23 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
     {
         private const string NoTicketsMessage = "Sorry, no tickets for this event!";
         protected readonly PostgresDataProvider dp;
+        private IWriter writer;
 
-        public ShowTicketsCommand(PostgresDataProvider dp)
+        public ShowTicketsCommand(PostgresDataProvider dp, IWriter writer)
         {
             this.dp = dp;
+            this.writer = writer;
         }
 
         public string Execute(IList<string> parameters)
         {
+            this.writer.Clear();
             var result = new StringBuilder();
             var tevents = dp.TennisEvents.GetAll();
 
             foreach (var evt in tevents)
             {
-                result.AppendLine(new String('-', evt.Name.Length + 8));
-                result.AppendLine($"|   {evt.Name}   |");
-                result.AppendLine(new String('-', evt.Name.Length + 8));
+                result.AppendLine($"* {evt.Name}");
 
                 var tList = dp
                     .Tickets
@@ -45,8 +46,9 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
                 {
                     result.AppendLine("    " + NoTicketsMessage);
                 }
-                result.AppendLine("");
+                result.AppendLine("");   
             }
+            result.AppendLine("[menu] [alle] [allt] [buyt (id)]");
             return result.ToString();
         }
     }

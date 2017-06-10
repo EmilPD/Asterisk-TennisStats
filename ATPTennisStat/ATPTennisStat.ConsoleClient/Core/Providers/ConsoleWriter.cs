@@ -14,5 +14,10 @@ namespace ATPTennisStat.ConsoleClient.Core.Providers
         {
             Console.WriteLine(value);
         }
+
+        public void Clear()
+        {
+            Console.Clear();
+        }
     }
 }
