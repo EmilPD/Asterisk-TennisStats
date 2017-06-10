@@ -12,9 +12,9 @@ namespace ATPTennisStat.Models
     {
         [Key]
         public int Id { get; set; }
-        
+
         public virtual Player Winner { get; set; }
-        
+
         public virtual Player Loser { get; set; }
 
         [MaxLength(40)]

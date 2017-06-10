@@ -79,7 +79,82 @@ namespace ATPTennisStat.Factories
                                            string surfaceType,
                                            string surfaceSpeed)
         {
-            return null;
+
+            //Name is Unique
+
+            if (String.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("Tournament name is empty");
+            }
+
+
+            var nameToLower = name.ToLower();
+
+            bool tournamentExists = this.dataProvider.Tournaments.GetAll()
+                                .Any(t => t.Name.ToLower() == nameToLower);
+            if (tournamentExists)
+            {
+                throw new ArgumentException("Tournament with the same name already in the database");
+            }
+
+            //START DATE
+            if (startDate == null)
+            {
+                throw new ArgumentException("Tournament startdate is required");
+            }
+
+
+            DateTime startDateParsed;
+
+            try
+            {
+                startDateParsed = DateTime.Parse(startDate);
+            }
+            catch (Exception)
+            {
+
+                throw new ArgumentException("Startdate cannot be parsed");
+            }
+
+            //END DATE
+            if (endDate == null)
+            {
+                throw new ArgumentException("Tournament startdate is required");
+            }
+
+            DateTime endDateParsed;
+
+            try
+            {
+                endDateParsed = DateTime.Parse(endDate);
+            }
+            catch (Exception)
+            {
+
+                throw new ArgumentException("Startdate cannot be parsed");
+            }
+
+            //prizeMoney
+            decimal prizeMoneyParsed;
+
+            try
+            {
+                prizeMoneyParsed = decimal.Parse(prizeMoney);
+            }
+            catch (Exception)
+            {
+
+                throw new ArgumentException("Prize money cannot be parsed");
+            }
+
+            return new Tournament
+            {
+                Name = name,
+                StartDate = startDateParsed,
+                EndDate = endDateParsed
+                
+                
+            };
         }
 
 
