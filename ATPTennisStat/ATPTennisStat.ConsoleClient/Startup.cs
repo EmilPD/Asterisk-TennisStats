@@ -103,8 +103,8 @@ namespace ATPTennisStat.ConsoleClient
             var excelImporter = kernel.Get<ExcelImporter>();
             //excelImporter.ImportPlayers();
             //excelImporter.ImportTournaments();
-            excelImporter.ImportPointDistributions();
-            //excelImporter.ImportMatches();
+            //excelImporter.ImportPointDistributions();
+            excelImporter.ImportMatches();
 
 
         }

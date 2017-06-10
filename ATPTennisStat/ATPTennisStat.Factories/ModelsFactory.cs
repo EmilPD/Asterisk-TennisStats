@@ -30,7 +30,6 @@ namespace ATPTennisStat.Factories
                          string round)
         {
 
-            //TODO: MATCH EXISTS CONDITION 
 
             if (String.IsNullOrEmpty(winner))
             {
@@ -41,16 +40,30 @@ namespace ATPTennisStat.Factories
             {
                 throw new ArgumentException("Loser - null or empty");
             }
+            string[] winnerNames = winner.Split(' ');
 
-            var winnerToLower = winner.ToLower();
+            if (winnerNames.Length !=2)
+            {
+                throw new ArgumentException("Winner name not formatted correctly - Firstname Lastname");
+            }
+            string[] loserNames = loser.Split(' ');
 
-            var loserToLower = loser.ToLower();
+            if (loserNames.Length != 2)
+            {
+                throw new ArgumentException("Loser name not formatted correctly - Firstname Lastname");
+            }
+
+            var winnerFirstNameToLower = winnerNames[0].ToLower();
+            var winnerLastNameToLower = winnerNames[1].ToLower();
+
+            var loserFirstNameToLower = loserNames[0].ToLower();
+            var loserLastNameToLower = loserNames[1].ToLower();
+
 
             if (datePlayed == null)
             {
                 throw new ArgumentException("Match date is required");
             }
-
 
             DateTime datePlayedParsed;
 
@@ -64,24 +77,32 @@ namespace ATPTennisStat.Factories
                 throw new ArgumentException("Startdate cannot be parsed");
             }
 
-            //bool playerExists = this.dataProvider.Players.GetAll()
-            //                    .Any(p => p.FirstName.ToLower() == firstNameToLower &&
-            //                                p.LastName.ToLower() == lastNameToLower);
-            //if (playerExists)
-            //{
-            //    throw new ArgumentException("Player already in the database");
+            bool matchExists = this.dataProvider.Matches.GetAll()
+                                .Any(m => m.Winner.FirstName.ToLower() == winnerFirstNameToLower &&
+                                          m.Winner.LastName.ToLower() == winnerLastNameToLower &&
+                                          m.Loser.FirstName.ToLower() == loserFirstNameToLower &&
+                                          m.Loser.LastName.ToLower() == loserLastNameToLower &&
+                                          m.DatePlayed == datePlayedParsed);
+            if (matchExists)
+            {
+                throw new ArgumentException("Match already in the database");
+            }
 
 
-            //RESULT NULLABLE
+            if (String.IsNullOrEmpty(result))
+            {
+                throw new ArgumentException("Result - null or empty");
+            }
 
-            //RoundID NULLABLE
-            //TournamentID NULLABLE
+            //RoundID
+            //TournamentID
 
 
 
             return new Match
             {
-                DatePlayed = datePlayedParsed
+                DatePlayed = datePlayedParsed,
+                Result = result
             };
         }
 
