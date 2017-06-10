@@ -118,7 +118,7 @@ namespace ATPTennisStat.Factories
 
 
             bool pointDistributionExists = this.dataProvider.PointDistributions.GetAll()
-                    .Any(pd => pd.TournamentCategory.Category == categoryNameToLower &&
+                    .Any(pd => pd.TournamentCategory.Category.ToLower() == categoryNameToLower &&
                                 pd.TournamentCategory.PlayersCount == playersNumberParsed &&
                                 pd.Round.Stage == roundNameParsed);
             if (pointDistributionExists)
