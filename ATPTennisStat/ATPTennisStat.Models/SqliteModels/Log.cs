@@ -7,7 +7,7 @@ namespace ATPTennisStat.Models.SqliteModels
     {
         public int Id { get; set; }
 
-        [StringLength(250)]
+        [StringLength(5000)]
         public string Message { get; set; }
 
         public DateTime? TimeStamp { get; set; }
