@@ -12,6 +12,10 @@ using ATPTennisStat.SQLServerData;
 using ATPTennisStat.PostgreSqlData;
 using ATPTennisStat.Repositories.Contracts;
 using ATPTennisStat.Repositories;
+using ATPTennisStat.SQLiteData;
+using ATPTennisStat.ReportGenerators.Contracts;
+using ATPTennisStat.ReportGenerators;
+using ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -21,6 +25,7 @@ namespace ATPTennisStat.ConsoleClient
         {
             this.Bind<SqlServerDbContext>().ToSelf().InSingletonScope().Named("SqlServer");
             this.Bind<PostgresDbContext>().ToSelf().InSingletonScope().Named("Postgre");
+            this.Bind<SqliteDbContext>().ToSelf().InSingletonScope().Named("Sqlite");
 
             this.Bind<IUnitOfWork>().To<EfUnitOfWork>()
                 .WhenInjectedInto<SqlServerDataProvider>()
@@ -38,6 +43,14 @@ namespace ATPTennisStat.ConsoleClient
                 .WhenInjectedInto<PostgresDataProvider>()
                 .WithConstructorArgument("context", Kernel.Get<PostgresDbContext>("Postgre"));
 
+            this.Bind<IUnitOfWork>().To<EfUnitOfWork>()
+                .WhenInjectedInto<SqliteDataProvider>()
+                .WithConstructorArgument("context", Kernel.Get<SqliteDbContext>("Sqlite"));
+
+            this.Bind(typeof(IRepository<>)).To(typeof(EfRepository<>))
+                .WhenInjectedInto<SqliteDataProvider>()
+                .WithConstructorArgument("context", Kernel.Get<SqliteDbContext>("Sqlite"));
+            
             this.Kernel.Bind(x =>
             {
                 x.FromAssembliesInPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
