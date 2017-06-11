@@ -1,6 +1,7 @@
 ﻿using System;
 using ATPTennisStat.Common;
 using ATPTennisStat.SQLServerData;
+using ATPTennisStat.ReportGenerators.Contracts;
 
 namespace ATPTennisStat.ConsoleClient.Core.Contracts
 {

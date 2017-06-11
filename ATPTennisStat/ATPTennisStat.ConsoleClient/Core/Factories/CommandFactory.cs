@@ -15,20 +15,28 @@ using ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands;
 using ATPTennisStat.PostgreSqlData;
+using ATPTennisStat.ReportGenerators;
+using ATPTennisStat.ReportGenerators.Contracts;
 
 namespace ATPTennisStat.ConsoleClient.Core.Factories
 {
     class CommandFactory : ICommandFactory
     {
+        private const string InvalidCommand = "Invalid command!";
+
         private readonly PostgresDataProvider pgDp;
         private readonly SqlServerDataProvider sqlDp;
         private IWriter writer;
+        private ILogger logger;
+        private PdfReportGenerator reporter;
 
-        public CommandFactory(IWriter writer, PostgresDataProvider pgDp, SqlServerDataProvider sqlDp)
+        public CommandFactory(PdfReportGenerator reporter, PostgresDataProvider pgDp, SqlServerDataProvider sqlDp, ILogger logger, IWriter writer)
         {
             this.pgDp = pgDp;
             this.sqlDp = sqlDp;
             this.writer = writer;
+            this.logger = logger;
+            this.reporter = reporter;
         }
 
         public ICommand CreateCommandFromString(string commandName)
@@ -82,7 +90,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                 case "addm":
                     return this.AddMatch();
                 default:
-                    throw new ArgumentException(nameof(ICommand));
+                    //throw new ArgumentException(nameof(ICommand)); The bellow way is more informative!
+                    throw new ArgumentException(InvalidCommand);
             }
         }
 
@@ -110,12 +119,12 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         // Reporters commands
         public ICommand CreateMatchesPdf()
         {
-            return new CreateMatchesPdf(sqlDp, writer);
+            return new CreateMatchesPdf(this.reporter, this.logger, this.writer);
         }
 
         public ICommand CreateRankingPdf()
         {
-            return new CreateRankingPdf(sqlDp, writer);
+            return new CreateRankingPdf(this.reporter, this.logger, this.writer);
         }
 
         // Ticket store commands
