@@ -28,10 +28,10 @@ namespace ATPTennisStat.ReportGenerators
         private string baseReportFileName = "Report-";
         private string reportPath = "\\Reports\\Pdf\\";
 
-        private readonly SqlServerDataProvider provider;
+        private readonly ISqlServerDataProvider provider;
         private PdfReportType reportType;
 
-        public PdfReportGenerator(SqlServerDataProvider provider)
+        public PdfReportGenerator(ISqlServerDataProvider provider)
         {
             if (provider == null)
             {
@@ -101,7 +101,7 @@ namespace ATPTennisStat.ReportGenerators
             this.ExportToPdf(this.provider, reportPath, baseReportFileName, reportType);
         }
 
-        private void ExportToPdf(SqlServerDataProvider sqlProvider, string pathToSave, string reportFileName, PdfReportType reportType)
+        private void ExportToPdf(ISqlServerDataProvider sqlProvider, string pathToSave, string reportFileName, PdfReportType reportType)
         {
             if (!string.IsNullOrEmpty(reportFileName))
             {
