@@ -29,11 +29,20 @@ namespace ATPTennisStat.Factories.Contracts
                                            string surfaceType,
                                            string surfaceSpeed);
 
+        Surface CreateSurface(string surfaceType, string surfaceSpeed);
+
+        TournamentCategory CreateTournamentCategory(string categoryName, byte playersCount);
+
         Match CreateMatch(string datePlayed,
                          string winnerName,
                          string loserName,
                          string result,
                          string tournamentName,
                          string roundName);
+
+        PointDistribution CreatePointDistribution(string categoryName,
+                                                  string playersNumber,
+                                                  string roundName,
+                                                  string points);
     }
 }
