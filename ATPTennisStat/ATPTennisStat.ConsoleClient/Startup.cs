@@ -31,7 +31,7 @@ namespace ATPTennisStat.ConsoleClient
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerDbContext, SQLServerData.Migrations.Configuration>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<PostgresDbContext, PostgreSqlData.Migrations.Configuration>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqliteDbContext, SQLiteData.Migrations.Configuration>(true));
-            
+
             ///<summary>
             ///Control Flow -> choose either of the following methods
             ///</summary>
@@ -39,10 +39,10 @@ namespace ATPTennisStat.ConsoleClient
             //ExcelImporter();
             //NinjectStart();
             //GeneratePdfReport();
-            //ConsoleEngineStart();
+            ConsoleEngineStart();
             //SqliteStart();
             //JsonImportStart();
-            loadSqliteDb();
+            //loadSqliteDb();
         }
 
         private static void loadSqliteDb()

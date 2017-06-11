@@ -10,6 +10,7 @@ using ATPTennisStat.SQLServerData;
 using ATPTennisStat.Models;
 using ATPTennisStat.Factories;
 using System.Data;
+using ATPTennisStat.Factories.Contracts;
 
 namespace ATPTennisStat.Importers
 {
@@ -21,10 +22,10 @@ namespace ATPTennisStat.Importers
         private string tournamentsFilePath;
         private string pointDistributionsFilePath;
 
-        private SqlServerDataProvider dataProvider;
-        private ModelsFactory modelsFactory;
+        private ISqlServerDataProvider dataProvider;
+        private IModelsFactory modelsFactory;
 
-        public ExcelImporter(SqlServerDataProvider dataProvider, ModelsFactory modelsFactory)
+        public ExcelImporter(ISqlServerDataProvider dataProvider, IModelsFactory modelsFactory)
         {
             this.dataProvider = dataProvider;
             this.modelsFactory = modelsFactory;

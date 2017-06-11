@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityConfigurations\LogConfigurations.cs" />
+    <Compile Include="ISqliteDataProvider.cs" />
     <Compile Include="Migrations\201706102206316_Initial.cs" />
     <Compile Include="Migrations\201706102206316_Initial.Designer.cs">
       <DependentUpon>201706102206316_Initial.cs</DependentUpon>

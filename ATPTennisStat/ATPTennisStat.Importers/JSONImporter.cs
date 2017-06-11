@@ -15,9 +15,9 @@ namespace ATPTennisStat.Importers
         private readonly string baseDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
         private string fullPath;
 
-        private SqlServerDataProvider dataProvider;
+        private ISqlServerDataProvider dataProvider;
 
-        public JSONImporter(SqlServerDataProvider dataProvider)
+        public JSONImporter(ISqlServerDataProvider dataProvider)
         {
             if (dataProvider == null)
             {

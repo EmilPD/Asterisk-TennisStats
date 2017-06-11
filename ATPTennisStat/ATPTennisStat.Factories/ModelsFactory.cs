@@ -14,9 +14,9 @@ namespace ATPTennisStat.Factories
 {
     public class ModelsFactory : IModelsFactory
     {
-        private SqlServerDataProvider dataProvider;
+        private ISqlServerDataProvider dataProvider;
 
-        public ModelsFactory(SqlServerDataProvider dataProvider)
+        public ModelsFactory(ISqlServerDataProvider dataProvider)
         {
             this.dataProvider = dataProvider;
         }
