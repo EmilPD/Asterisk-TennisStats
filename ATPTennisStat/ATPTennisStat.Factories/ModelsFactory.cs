@@ -42,25 +42,25 @@ namespace ATPTennisStat.Factories
             }
             string[] winnerNames = winnerName.Split(' ');
 
-            if (winnerNames.Length != 2)
+            if (winnerNames.Length < 2)
             {
                 throw new ArgumentException("Winner name not formatted correctly - Firstname Lastname");
             }
             string[] loserNames = loserName.Split(' ');
 
-            if (loserNames.Length != 2)
+            if (loserNames.Length < 2)
             {
                 throw new ArgumentException("Loser name not formatted correctly - Firstname Lastname");
             }
 
             var winnerFirstName = winnerNames[0];
             var winnerFirstNameToLower = winnerFirstName.ToLower();
-            var winnerLastName = winnerNames[1];
+            var winnerLastName = string.Join(" ", winnerNames.Skip(1));
             var winnerLastNameToLower = winnerLastName.ToLower();
 
             var loserFirstName = loserNames[0];
             var loserFirstNameToLower = loserFirstName.ToLower();
-            var loserLastName = loserNames[1];
+            var loserLastName = string.Join(" ", loserNames.Skip(1));
             var loserLastNameToLower = loserLastName.ToLower();
 
 
@@ -166,9 +166,10 @@ namespace ATPTennisStat.Factories
 
             if(tournament == null)
             {
-                throw new ArgumentException("Tournament cannot be found - please import tournaments");
+                throw new ArgumentException("Tournament cannot be found - please import tournaments" + tournamentName);
             }
 
+            //Console.WriteLine("MatchImported " + tournamentName);
 
             return new Match
             {

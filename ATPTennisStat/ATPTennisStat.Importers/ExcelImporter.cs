@@ -32,11 +32,12 @@ namespace ATPTennisStat.Importers
 
 
             //this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
+            this.pointDistributionsFilePath = this.solutionDirectory + "\\Data\\Excel\\TournamentCategoryPoints.xlsx";
+
             this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Big Data\\players-2016.xlsx";
 
-            this.matchesFilePath = this.solutionDirectory + "\\Data\\Excel\\Matches-Full-Data.xlsx";
-            this.tournamentsFilePath = this.solutionDirectory + "\\Data\\Excel\\Tournaments-Full-Data.xlsx";
-            this.pointDistributionsFilePath = this.solutionDirectory + "\\Data\\Excel\\TournamentCategoryPoints.xlsx";
+            this.matchesFilePath = this.solutionDirectory + "\\Data\\Excel\\Big Data\\matches-2016.xlsx";
+            this.tournamentsFilePath = this.solutionDirectory + "\\Data\\Excel\\Big Data\\tournaments-2016.xlsx";
         }
 
         /// <summary>
@@ -196,6 +197,7 @@ namespace ATPTennisStat.Importers
                        })
                         .ToList();
 
+            var i = 0;
             foreach (var m in matches)
             {
                 try
@@ -209,7 +211,11 @@ namespace ATPTennisStat.Importers
                          m.Round
                      );
 
+
+
                     this.dataProvider.Matches.Add(newMatch);
+                    i++;
+                    Console.WriteLine(i);
 
                 }
                 catch (ArgumentException ex)
@@ -221,18 +227,6 @@ namespace ATPTennisStat.Importers
             }
 
             this.dataProvider.UnitOfWork.Finished();
-
-            //NEED TO REFACTOR IN METHOD
-            this.dataProvider.Players
-                   .GetAll()
-                   .Select(p => new
-                   {
-                       p.FirstName,
-                       p.LastName,
-                       p.TotalPoints
-                   })
-                   .OrderByDescending(p => p.TotalPoints)
-                   .ForEach(p => Console.WriteLine("{0} {1}: {2}", p.FirstName, p.LastName, p.TotalPoints));
         }
   
         public void ImportPlayers()
