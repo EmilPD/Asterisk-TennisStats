@@ -7,10 +7,10 @@ namespace ATPTennisStat.ConsoleClient.Core.Providers
 {
     public class SqLiteLogger : ILogger
     {
-        private readonly SqliteDataProvider provider;
+        private readonly ISqliteDataProvider provider;
         private readonly IWriter writer;
 
-        public SqLiteLogger(SqliteDataProvider provider, IWriter writer)
+        public SqLiteLogger(ISqliteDataProvider provider, IWriter writer)
         {
             if (provider == null)
             {

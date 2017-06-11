@@ -4,7 +4,7 @@ using ATPTennisStat.Repositories.Contracts;
 
 namespace ATPTennisStat.SQLiteData
 {
-    public class SqliteDataProvider
+    public class SqliteDataProvider : ISqliteDataProvider
     {
         private IRepository<Log> logs;
         private IUnitOfWork unitOfWork;
