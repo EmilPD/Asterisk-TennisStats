@@ -25,7 +25,7 @@ namespace ATPTennisStat.Importers
         private ISqlServerDataProvider dataProvider;
         private IModelsFactory modelsFactory;
 
-        public ExcelImporter(SqlServerDataProvider dataProvider, ModelsFactory modelsFactory)
+        public ExcelImporter(ISqlServerDataProvider dataProvider, IModelsFactory modelsFactory)
         {
             this.dataProvider = dataProvider;
             this.modelsFactory = modelsFactory;

@@ -56,7 +56,6 @@
     <Compile Include="ExcelImporter.cs" />
     <Compile Include="JSONImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XMLImporter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
