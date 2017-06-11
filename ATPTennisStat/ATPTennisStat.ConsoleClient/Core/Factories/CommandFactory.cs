@@ -10,6 +10,7 @@ using ATPTennisStat.PostgreSqlData;
 using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataDeleteCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateCommands;
 using ATPTennisStat.ReportGenerators.Contracts;
+using ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands;
 
 namespace ATPTennisStat.ConsoleClient.Core.Factories
 {
@@ -92,6 +93,9 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                 // data delete
                 case "delm":
                     return this.DeleteMatch();
+                // import
+                case "importsd":
+                    return this.ImportSampleData();
                 default:
                     //throw new ArgumentException(nameof(ICommand)); The bellow way is more informative!
                     throw new ArgumentException("InvalidCommand");
@@ -214,6 +218,12 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         public ICommand DeleteMatch()
         {
             return new DeleteMatchCommand(sqlDp, reader, writer);
+        }
+
+        // Import Commands
+        public ICommand ImportSampleData()
+        {
+            return new ImportSampleDataCommand(sqlDp, reader, writer);
         }
     }
 }
