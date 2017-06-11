@@ -31,8 +31,13 @@ namespace ATPTennisStat.ReportGenerators
         private readonly SqlServerDataProvider provider;
         private PdfReportType reportType;
 
-        public PdfReportGenerator(SqlServerDataProvider provider, PdfReportType reportType)
+        public PdfReportGenerator(SqlServerDataProvider provider)
         {
+            if (provider == null)
+            {
+                throw new ArgumentNullException("SqlServerDataProvider");
+            }
+            
             this.provider = provider;
             this.ReportType = reportType;
         }
@@ -86,15 +91,17 @@ namespace ATPTennisStat.ReportGenerators
             }
         }
 
-        public void GenerateReport()
+        public void GenerateReport(PdfReportType reportType)
         {
+            this.reportType = reportType;
+
             string dir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
             string reportPath = dir + this.ReportPath;
 
             this.ExportToPdf(this.provider, reportPath, baseReportFileName, reportType);
         }
 
-        public void ExportToPdf(SqlServerDataProvider sqlProvider, string pathToSave, string reportFileName, PdfReportType reportType)
+        private void ExportToPdf(SqlServerDataProvider sqlProvider, string pathToSave, string reportFileName, PdfReportType reportType)
         {
             if (!string.IsNullOrEmpty(reportFileName))
             {
