@@ -37,7 +37,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands
 
             this.reporter.GenerateReport(PdfReportType.Ranking);
             this.logger.Log(Success);
-            return Success;
+            return String.Empty;
         }
     }
 }
