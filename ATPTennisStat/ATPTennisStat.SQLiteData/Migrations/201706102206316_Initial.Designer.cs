@@ -13,7 +13,7 @@ namespace ATPTennisStat.SQLiteData.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201706090535466_Initial"; }
+            get { return "201706102206316_Initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -12,7 +12,7 @@ namespace ATPTennisStat.SQLiteData.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Message = c.String(nullable: false, maxLength: 50),
+                        Message = c.String(nullable: false, maxLength: 5000),
                         TimeStamp = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id);
