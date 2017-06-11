@@ -13,15 +13,19 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
     {
         private ISqlServerDataProvider dp;
         private IExcelImporter excelImporter;
-        private IReader reader;
         private IWriter writer;
+        private ILogger logger;
 
-        public ImportSampleDataCommand(ISqlServerDataProvider sqlDP, IExcelImporter excelImporter, IReader reader, IWriter writer)
+        public ImportSampleDataCommand(ISqlServerDataProvider sqlDP, 
+                                       IExcelImporter excelImporter, 
+                                       IWriter writer,
+                                       ILogger logger)
         {
             this.dp = sqlDP;
             this.excelImporter = excelImporter;
-            this.reader = reader;
             this.writer = writer;
+            this.logger = logger;
+
         }
 
         public string Execute(IList<string> parameters)

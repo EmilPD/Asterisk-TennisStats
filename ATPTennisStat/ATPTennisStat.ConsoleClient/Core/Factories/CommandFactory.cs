@@ -233,7 +233,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         // Import Commands
         public ICommand ImportSampleData()
         {
-            return new ImportSampleDataCommand(sqlDp, excelImporter, reader, writer);
+            return new ImportSampleDataCommand(sqlDp, excelImporter, writer, logger);
         }
     }
 }
