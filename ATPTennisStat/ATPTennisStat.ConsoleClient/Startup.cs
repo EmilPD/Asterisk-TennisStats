@@ -18,6 +18,9 @@ using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.ReportGenerators.Enums;
 using ATPTennisStat.SQLiteData;
 using ATPTennisStat.Models.SqliteModels;
+using ATPTennisStat.ConsoleClient.Core.Providers;
+using ATPTennisStat.ReportGenerators.Contracts;
+using System.Collections.Generic;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -28,7 +31,7 @@ namespace ATPTennisStat.ConsoleClient
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerDbContext, SQLServerData.Migrations.Configuration>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<PostgresDbContext, PostgreSqlData.Migrations.Configuration>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqliteDbContext, SQLiteData.Migrations.Configuration>(true));
-
+            
             ///<summary>
             ///Control Flow -> choose either of the following methods
             ///</summary>
@@ -38,7 +41,23 @@ namespace ATPTennisStat.ConsoleClient
             //GeneratePdfReport();
             //ConsoleEngineStart();
             //SqliteStart();
-            JsonImportStart();
+            //JsonImportStart();
+            loadSqliteDb();
+        }
+
+        private static void loadSqliteDb()
+        {
+            var kernel = new StandardKernel(new ATPTennisStatModules());
+            var dp = kernel.Get<SqliteDataProvider>();
+            var listOfLogs = dp.Logs.GetAll();
+
+            foreach (var log in listOfLogs)
+            {
+                Console.Write("Log-{0} -- ", log.Id);
+                Console.Write("{0} -- ", log.Message);
+                Console.Write("{0}", log.TimeStamp);
+                Console.WriteLine();
+            }
         }
 
         private static void JsonImportStart()
@@ -52,19 +71,8 @@ namespace ATPTennisStat.ConsoleClient
         private static void SqliteStart()
         {
             var kernel = new StandardKernel(new ATPTennisStatModules());
-            var dp = kernel.Get<SqliteDataProvider>();
-            var logs = dp.Logs;
-            logs.Add(new Log { Message = "proba123", TimeStamp = DateTime.Now });
-            dp.UnitOfWork.Finished();
-
-            var logsList = dp.Logs.GetAll();
-            foreach (var log in logsList)
-            {
-                Console.WriteLine("ID {0}", log.Id.ToString());
-                Console.WriteLine("Message {0}", log.Message.ToString());
-                Console.WriteLine("Time {0}", log.TimeStamp.ToString());
-                Console.WriteLine("---------------");
-            }
+            var logger = kernel.Get<SqLiteLogger>();
+            logger.Log("probbbba");
         }
 
         private static void ConsoleEngineStart()
@@ -122,9 +130,15 @@ namespace ATPTennisStat.ConsoleClient
         private static void GeneratePdfReport()
         {
             var kernel = new StandardKernel(new ATPTennisStatModules());
-            var reportType = new Ninject.Parameters.ConstructorArgument("reportType", PdfReportType.Ranking);
-            var report = kernel.Get<PdfReportGenerator>(reportType);
-            report.GenerateReport();
+            //var reportType = new Ninject.Parameters.ConstructorArgument("reportType", PdfReportType.Matches);
+            //var report = kernel.Get<PdfReportGenerator>();
+            //report.GenerateReport(PdfReportType.Matches);
+
+            var factory = kernel.Get<ICommandFactory>();
+            var list = new List<string>();
+            list.Add("sfsdf");
+            factory.CreateRankingPdf().Execute(list);
+
         }
 
         private static void NinjectStart()
