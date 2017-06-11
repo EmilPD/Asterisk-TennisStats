@@ -14,7 +14,7 @@ using ATPTennisStat.Factories.Contracts;
 
 namespace ATPTennisStat.Importers
 {
-    public class ExcelImporter : IImporter
+    public class ExcelImporter : IImporter, IExcelImporter
     {
         private readonly string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
         private string playersFilePath;
@@ -282,6 +282,5 @@ namespace ATPTennisStat.Importers
 
             this.dataProvider.UnitOfWork.Finished();
         }
-
     }
 }

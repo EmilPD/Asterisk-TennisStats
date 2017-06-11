@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IExcelImporter.cs" />
     <Compile Include="Contracts\IImporter.cs" />
     <Compile Include="ExcelImporter.cs" />
     <Compile Include="JSONImporter.cs" />

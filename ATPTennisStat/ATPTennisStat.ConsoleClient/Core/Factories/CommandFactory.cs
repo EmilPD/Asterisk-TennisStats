@@ -11,6 +11,7 @@ using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataDeleteCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateCommands;
 using ATPTennisStat.ReportGenerators.Contracts;
 using ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands;
+using ATPTennisStat.Importers.Contracts;
 
 namespace ATPTennisStat.ConsoleClient.Core.Factories
 {
@@ -25,6 +26,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         private ILogger logger;
         private IReportGenerator reporter;
         private IModelsFactory modelsFactory;
+        private IExcelImporter excelImporter;
 
         public CommandFactory(IReportGenerator reporter, 
                               ILogger logger, 
@@ -32,7 +34,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                               IWriter writer, 
                               IPostgresDataProvider pgDp, 
                               ISqlServerDataProvider sqlDp, 
-                              IModelsFactory modelsFactory)
+                              IModelsFactory modelsFactory,
+                              IExcelImporter excelImporter)
         {
             this.pgDp = pgDp;
             this.sqlDp = sqlDp;
@@ -41,6 +44,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
             this.logger = logger;
             this.reporter = reporter;
             this.modelsFactory = modelsFactory;
+            this.excelImporter = excelImporter;
         }
 
         public ICommand CreateCommandFromString(string commandName)
@@ -229,7 +233,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         // Import Commands
         public ICommand ImportSampleData()
         {
-            return new ImportSampleDataCommand(sqlDp, reader, writer);
+            return new ImportSampleDataCommand(sqlDp, excelImporter, reader, writer);
         }
     }
 }
