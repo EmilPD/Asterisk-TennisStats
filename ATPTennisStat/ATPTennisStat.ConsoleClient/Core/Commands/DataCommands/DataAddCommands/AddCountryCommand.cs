@@ -26,7 +26,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
 
             if (parameters.Count == 1)
             {
-                countryName = parameters[1];
+                countryName = parameters[0];
 
                 Country country = dp.Countries
                     .Find(c => c.Name == countryName)

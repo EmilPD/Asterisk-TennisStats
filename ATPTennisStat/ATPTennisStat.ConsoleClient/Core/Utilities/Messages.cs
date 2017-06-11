@@ -56,9 +56,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
             return @"
  [addco (name)] Add new country
  [addct (name) (country)] Add new city
- [addp (names) (db) (city)] Add new player
- [addt (name) (city)] Add new tournament
- [addm (w) (L) (r) (d)] Add new match
+ [addp (2 - 7 arguments)] Add new player
+ [updatep (id)] Update Player with id
+ [addt (4 - 10 arguments)] Add new tournament
+ [addm (6 arguments)] Add new match
+ [delm (id)] Delete Match with id
  [menu] [show]";
         }
 

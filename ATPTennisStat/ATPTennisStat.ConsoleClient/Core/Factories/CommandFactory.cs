@@ -15,6 +15,8 @@ using ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands;
 using ATPTennisStat.PostgreSqlData;
+using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataDeleteCommands;
+using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateCommands;
 using ATPTennisStat.ReportGenerators;
 using ATPTennisStat.ReportGenerators.Contracts;
 
@@ -26,17 +28,21 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
 
         private readonly PostgresDataProvider pgDp;
         private readonly SqlServerDataProvider sqlDp;
+        IReader reader;
         private IWriter writer;
         private ILogger logger;
         private PdfReportGenerator reporter;
+        private IModelsFactory modelsFactory;
 
-        public CommandFactory(PdfReportGenerator reporter, PostgresDataProvider pgDp, SqlServerDataProvider sqlDp, ILogger logger, IWriter writer)
+        public CommandFactory(PdfReportGenerator reporter, IReader reader, IWriter writer, PostgresDataProvider pgDp, SqlServerDataProvider sqlDp, IModelsFactory modelsFactory)
         {
             this.pgDp = pgDp;
             this.sqlDp = sqlDp;
+            this.reader = reader;
             this.writer = writer;
             this.logger = logger;
             this.reporter = reporter;
+            this.modelsFactory = modelsFactory;
         }
 
         public ICommand CreateCommandFromString(string commandName)
@@ -89,6 +95,12 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                     return this.AddTournament();
                 case "addm":
                     return this.AddMatch();
+                // data update
+                case "updatep":
+                    return this.UpdatePlayer();
+                // data delete
+                case "delm":
+                    return this.DeleteMatch();
                 default:
                     //throw new ArgumentException(nameof(ICommand)); The bellow way is more informative!
                     throw new ArgumentException(InvalidCommand);
@@ -172,17 +184,17 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
 
         public ICommand AddPlayer()
         {
-            return new AddPlayerCommand(sqlDp, writer);
+            return new AddPlayerCommand(sqlDp, writer, modelsFactory);
         }
 
         public ICommand AddTournament()
         {
-            return new AddTournamentCommand(sqlDp, writer);
+            return new AddTournamentCommand(sqlDp, writer, modelsFactory);
         }
 
         public ICommand AddMatch()
         {
-            return new AddMatchCommand(sqlDp, writer);
+            return new AddMatchCommand(sqlDp, writer, modelsFactory);
         }
 
         // Data Show Commands
@@ -199,6 +211,18 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         public ICommand ShowPlayers()
         {
             return new ShowPlayersCommand(sqlDp, writer);
+        }
+
+        // Data Update Commands
+        public ICommand UpdatePlayer()
+        {
+            return new UpdatePlayerCommand(sqlDp, writer);
+        }
+
+        // Data Delete Commands
+        public ICommand DeleteMatch()
+        {
+            return new DeleteMatchCommand(sqlDp, reader, writer);
         }
     }
 }

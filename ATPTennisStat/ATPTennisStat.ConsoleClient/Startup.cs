@@ -123,8 +123,6 @@ namespace ATPTennisStat.ConsoleClient
             excelImporter.ImportTournaments();
             excelImporter.ImportPointDistributions();
             excelImporter.ImportMatches();
-
-
         }
 
         private static void GeneratePdfReport()
