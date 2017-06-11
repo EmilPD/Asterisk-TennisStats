@@ -46,19 +46,39 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
                             result.AppendLine(new string('-', fullName.Length + 4));
                             result.AppendLine($"    Id: {playerId}");
 
-                            DateTime birthDay = DateTime.Now;
-                            DateTime.TryParse(player.BirthDate.ToString(), out birthDay);
-                            int playerAge = Convert.ToInt32(Math.Floor((DateTime.Now.Subtract(birthDay).TotalDays/360)));
-
-                            if(playerAge > 1)
+                            //nullable fields check
+                            if(player.BirthDate != null)
                             {
-                                result.AppendLine($"    Age: {playerAge}");
+                                DateTime birthDay = DateTime.Now;
+                                DateTime.TryParse(player.BirthDate.ToString(), out birthDay);
+                                int playerAge = Convert.ToInt32(Math.Floor((DateTime.Now.Subtract(birthDay).TotalDays / 360)));
+
+                                if (playerAge > 1)
+                                {
+                                    result.AppendLine($"    Age: {playerAge}");
+                                }
                             }
 
-                            result.AppendLine($"    Weight: {player.Weight} kg");
-                            result.AppendLine($"    Height: {player.Height} cm");
-                            result.AppendLine($"    Ranking: {player.Ranking}");
-                            result.AppendLine($"    City: {player.City.Name}, {player.City.Country.Name}");
+                            if (player.Weight != null)
+                            {
+                                result.AppendLine($"    Weight: {player.Weight} kg");
+                            }
+
+                            if(player.Height != null)
+                            {
+                                result.AppendLine($"    Height: {player.Height} cm");
+
+                            }
+
+                            if (player.Ranking != null)
+                            {
+                                result.AppendLine($"    Ranking: {player.Ranking}");
+                            }
+
+                            if (player.City != null)
+                            {
+                                result.AppendLine($"    City: {player.City.Name}, {player.City.Country.Name}");
+                            }
 
                             var matchesWon = dp.Matches
                                 .Find(m => m.Winner.Id == playerId)
