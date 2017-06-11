@@ -1,23 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ATPTennisStat.Common;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands;
 using ATPTennisStat.SQLServerData;
 using ATPTennisStat.Factories.Contracts;
-using ATPTennisStat.Factories;
 using ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands;
 using ATPTennisStat.PostgreSqlData;
 using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataDeleteCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateCommands;
-using ATPTennisStat.ReportGenerators;
 using ATPTennisStat.ReportGenerators.Contracts;
 
 namespace ATPTennisStat.ConsoleClient.Core.Factories
@@ -34,7 +25,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         private IReportGenerator reporter;
         private IModelsFactory modelsFactory;
 
-        public CommandFactory(IReportGenerator reporter, IReader reader, IWriter writer, IPostgresDataProvider pgDp, ISqlServerDataProvider sqlDp, IModelsFactory modelsFactory)
+        public CommandFactory(IReportGenerator reporter, ILogger logger, IReader reader, IWriter writer, IPostgresDataProvider pgDp, ISqlServerDataProvider sqlDp, IModelsFactory modelsFactory)
         {
             this.pgDp = pgDp;
             this.sqlDp = sqlDp;
@@ -131,12 +122,12 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         // Reporters commands
         public ICommand CreateMatchesPdf()
         {
-            return new CreateMatchesPdf(this.reporter, this.logger, this.writer);
+            return new CreateMatchesPdf(this.reporter, this.logger);
         }
 
         public ICommand CreateRankingPdf()
         {
-            return new CreateRankingPdf(this.reporter, this.logger, this.writer);
+            return new CreateRankingPdf(this.reporter, this.logger);
         }
 
         // Ticket store commands

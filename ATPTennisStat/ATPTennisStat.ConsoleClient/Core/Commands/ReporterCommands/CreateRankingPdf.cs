@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
-using ATPTennisStat.ReportGenerators;
 using ATPTennisStat.ReportGenerators.Enums;
 using ATPTennisStat.ReportGenerators.Contracts;
 
@@ -11,19 +10,13 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands
     {
         private const string Success = "Successfully created ranking report";
         private IReportGenerator reporter;
-        private IWriter writer;
         private ILogger logger;
 
-        public CreateRankingPdf(IReportGenerator reporter, ILogger logger, IWriter writer)
+        public CreateRankingPdf(IReportGenerator reporter, ILogger logger)
         {
             if (reporter == null)
             {
                 throw new ArgumentNullException("PdfReportGenerator");
-            }
-
-            if (writer == null)
-            {
-                throw new ArgumentNullException("writer");
             }
 
             if (logger == null)
@@ -32,7 +25,6 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands
             }
 
             this.reporter = reporter;
-            this.writer = writer;
             this.logger = logger;
         }
 

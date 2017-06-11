@@ -38,11 +38,11 @@ namespace ATPTennisStat.ConsoleClient
             //DbContextStart();
             //ExcelImporter();
             //NinjectStart();
-            //GeneratePdfReport();
+            GeneratePdfReport();
             //ConsoleEngineStart();
             //SqliteStart();
             //JsonImportStart();
-            loadSqliteDb();
+            //loadSqliteDb();
         }
 
         private static void loadSqliteDb()
