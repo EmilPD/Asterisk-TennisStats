@@ -31,7 +31,9 @@ namespace ATPTennisStat.Importers
             this.modelsFactory = modelsFactory;
 
 
-            this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
+            //this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
+            this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Big Data\\players-2016.xlsx";
+
             this.matchesFilePath = this.solutionDirectory + "\\Data\\Excel\\Matches-Full-Data.xlsx";
             this.tournamentsFilePath = this.solutionDirectory + "\\Data\\Excel\\Tournaments-Full-Data.xlsx";
             this.pointDistributionsFilePath = this.solutionDirectory + "\\Data\\Excel\\TournamentCategoryPoints.xlsx";
@@ -51,11 +53,11 @@ namespace ATPTennisStat.Importers
 
                 return dataRange;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 //throw new ArgumentException("File opened by another program");
-                Console.WriteLine("File opened by another program");
+                Console.WriteLine(ex.Message);
                 return null;
             }
 

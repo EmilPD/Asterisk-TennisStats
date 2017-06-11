@@ -8,7 +8,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Providers
     public class SqLiteLogger : ILogger
     {
         private readonly ISqliteDataProvider provider;
-        private readonly IWriter writer;
+        private readonly IWriter writer; //can be removed
 
         public SqLiteLogger(ISqliteDataProvider provider, IWriter writer)
         {
@@ -28,7 +28,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Providers
 
         public void Log(string message)
         {
-            this.writer.WriteLine($"{message}!");
+            this.writer.WriteLine($"{message}!"); //can be removed
             this.provider.Logs.Add(new Log { Message = message, TimeStamp = DateTime.Now });
             this.provider.UnitOfWork.Finished();
         }
