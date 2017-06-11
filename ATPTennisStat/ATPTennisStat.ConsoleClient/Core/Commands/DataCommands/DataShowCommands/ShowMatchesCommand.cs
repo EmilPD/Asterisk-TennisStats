@@ -11,10 +11,10 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
 {
     class ShowMatchesCommand : ICommand
     {
-        private SqlServerDataProvider dp;
+        private ISqlServerDataProvider dp;
         private IWriter writer;
 
-        public ShowMatchesCommand(SqlServerDataProvider sqlDP, IWriter writer)
+        public ShowMatchesCommand(ISqlServerDataProvider sqlDP, IWriter writer)
         {
             this.dp = sqlDP;
             this.writer = writer;

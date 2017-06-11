@@ -4,7 +4,7 @@ using ATPTennisStat.Repositories.Contracts;
 
 namespace ATPTennisStat.SQLServerData
 {
-    public class SqlServerDataProvider
+    public class SqlServerDataProvider : ISqlServerDataProvider
     {
         private IRepository<City> cities;
         private IRepository<Country> countries;

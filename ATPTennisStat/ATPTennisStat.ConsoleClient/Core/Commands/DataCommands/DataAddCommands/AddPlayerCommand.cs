@@ -8,11 +8,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
 {
     class AddPlayerCommand : ICommand
     {
-        private SqlServerDataProvider dp;
+        private ISqlServerDataProvider dp;
         private IWriter writer;
         private IModelsFactory factory;
 
-        public AddPlayerCommand(SqlServerDataProvider sqlDP, IWriter writer, IModelsFactory factory)
+        public AddPlayerCommand(ISqlServerDataProvider sqlDP, IWriter writer, IModelsFactory factory)
         {
             this.dp = sqlDP;
             this.writer = writer;

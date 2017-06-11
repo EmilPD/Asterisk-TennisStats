@@ -10,11 +10,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataDeleteComma
 {
     class DeleteMatchCommand : ICommand
     {
-        private SqlServerDataProvider dp;
+        private ISqlServerDataProvider dp;
         private IReader reader;
         private IWriter writer;
 
-        public DeleteMatchCommand(SqlServerDataProvider sqlDP, IReader reader, IWriter writer)
+        public DeleteMatchCommand(ISqlServerDataProvider sqlDP, IReader reader, IWriter writer)
         {
             this.dp = sqlDP;
             this.reader = reader;

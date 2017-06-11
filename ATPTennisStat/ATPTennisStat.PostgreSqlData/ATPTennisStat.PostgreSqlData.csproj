@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPostgresDataProvider.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PostgresDataProvider.cs" />
     <Compile Include="PostgresDbContext.cs" />

@@ -26,15 +26,15 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
     {
         private const string InvalidCommand = "Invalid command!";
 
-        private readonly PostgresDataProvider pgDp;
-        private readonly SqlServerDataProvider sqlDp;
-        IReader reader;
+        private readonly IPostgresDataProvider pgDp;
+        private readonly ISqlServerDataProvider sqlDp;
+        private IReader reader;
         private IWriter writer;
         private ILogger logger;
-        private PdfReportGenerator reporter;
+        private IReportGenerator reporter;
         private IModelsFactory modelsFactory;
 
-        public CommandFactory(PdfReportGenerator reporter, IReader reader, IWriter writer, PostgresDataProvider pgDp, SqlServerDataProvider sqlDp, IModelsFactory modelsFactory)
+        public CommandFactory(IReportGenerator reporter, IReader reader, IWriter writer, IPostgresDataProvider pgDp, ISqlServerDataProvider sqlDp, IModelsFactory modelsFactory)
         {
             this.pgDp = pgDp;
             this.sqlDp = sqlDp;
@@ -103,7 +103,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                     return this.DeleteMatch();
                 default:
                     //throw new ArgumentException(nameof(ICommand)); The bellow way is more informative!
-                    throw new ArgumentException(InvalidCommand);
+                    throw new ArgumentException("InvalidCommand");
             }
         }
 

@@ -9,10 +9,10 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
 {
     class AddCountryCommand : ICommand
     {
-        private SqlServerDataProvider dp;
+        private ISqlServerDataProvider dp;
         private IWriter writer;
 
-        public AddCountryCommand(SqlServerDataProvider sqlDP, IWriter writer)
+        public AddCountryCommand(ISqlServerDataProvider sqlDP, IWriter writer)
         {
             this.dp = sqlDP;
             this.writer = writer;

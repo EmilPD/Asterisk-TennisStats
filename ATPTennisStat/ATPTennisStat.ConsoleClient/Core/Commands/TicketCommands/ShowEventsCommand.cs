@@ -8,10 +8,10 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
 {
     class ShowEventsCommand : ICommand
     {
-        protected readonly PostgresDataProvider dp;
+        protected readonly IPostgresDataProvider dp;
         private IWriter writer;
 
-        public ShowEventsCommand(PostgresDataProvider dp, IWriter writer)
+        public ShowEventsCommand(IPostgresDataProvider dp, IWriter writer)
         {
             this.dp = dp;
             this.writer = writer;

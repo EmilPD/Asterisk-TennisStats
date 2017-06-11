@@ -9,10 +9,10 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
 {
     public class BuyTicketsCommand : ICommand
     {
-        protected readonly PostgresDataProvider dp;
+        protected readonly IPostgresDataProvider dp;
         private IWriter writer;
 
-        public BuyTicketsCommand(PostgresDataProvider dp, IWriter writer)
+        public BuyTicketsCommand(IPostgresDataProvider dp, IWriter writer)
         {
             this.dp = dp;
             this.writer = writer;

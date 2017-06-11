@@ -4,7 +4,7 @@ using ATPTennisStat.Repositories.Contracts;
 
 namespace ATPTennisStat.PostgreSqlData
 {
-    public class PostgresDataProvider
+    public class PostgresDataProvider : IPostgresDataProvider
     {
         private IRepository<Ticket> tickets;
         private IRepository<TennisEvent> tennisEvents;

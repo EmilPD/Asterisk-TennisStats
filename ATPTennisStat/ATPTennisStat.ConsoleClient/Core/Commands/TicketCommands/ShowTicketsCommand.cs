@@ -11,10 +11,10 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
     public class ShowTicketsCommand : ICommand
     {
         private const string NoTicketsMessage = "Sorry, no tickets for this event!";
-        protected readonly PostgresDataProvider dp;
+        protected readonly IPostgresDataProvider dp;
         private IWriter writer;
 
-        public ShowTicketsCommand(PostgresDataProvider dp, IWriter writer)
+        public ShowTicketsCommand(IPostgresDataProvider dp, IWriter writer)
         {
             this.dp = dp;
             this.writer = writer;

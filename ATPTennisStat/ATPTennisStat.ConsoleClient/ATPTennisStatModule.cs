@@ -69,6 +69,9 @@ namespace ATPTennisStat.ConsoleClient
             Bind<IWriter>().To<ConsoleWriter>().InSingletonScope();
             Bind<IParser>().To<CommandParser>().InSingletonScope();
             Bind<ILogger>().To<SqLiteLogger>().InSingletonScope();
+            //Bind<IPostgresDataProvider>().To<PostgresDataProvider>().InSingletonScope();
+            //Bind<ISqlServerDataProvider>().To<SqlServerDataProvider>().InSingletonScope();
+            Bind<IReportGenerator>().To<PdfReportGenerator>().InSingletonScope();
 
             Bind<ICommandFactory>().To<CommandFactory>().InSingletonScope();
         }

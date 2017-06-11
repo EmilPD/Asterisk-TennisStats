@@ -10,10 +10,10 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
 {
     class ShowTournamentsCommand : ICommand
     {
-        private SqlServerDataProvider dp;
+        private ISqlServerDataProvider dp;
         private IWriter writer;
 
-        public ShowTournamentsCommand(SqlServerDataProvider sqlDP, IWriter writer)
+        public ShowTournamentsCommand(ISqlServerDataProvider sqlDP, IWriter writer)
         {
             this.dp = sqlDP;
             this.writer = writer;

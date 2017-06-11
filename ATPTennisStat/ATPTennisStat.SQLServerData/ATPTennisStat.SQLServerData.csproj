@@ -52,6 +52,7 @@
     <Compile Include="EntityConfigurations\CityConfiguration.cs" />
     <Compile Include="EntityConfigurations\MatchConfiguration.cs" />
     <Compile Include="EntityConfigurations\PlayerConfiguration.cs" />
+    <Compile Include="ISqlServerDataProvider.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SqlServerDataProvider.cs" />
     <Compile Include="SqlServerDbContext.cs" />
