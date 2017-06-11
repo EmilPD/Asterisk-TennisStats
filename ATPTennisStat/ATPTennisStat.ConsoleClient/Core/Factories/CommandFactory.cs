@@ -26,7 +26,13 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         private IReportGenerator reporter;
         private IModelsFactory modelsFactory;
 
-        public CommandFactory(IReportGenerator reporter, ILogger logger, IReader reader, IWriter writer, IPostgresDataProvider pgDp, ISqlServerDataProvider sqlDp, IModelsFactory modelsFactory)
+        public CommandFactory(IReportGenerator reporter, 
+                              ILogger logger, 
+                              IReader reader, 
+                              IWriter writer, 
+                              IPostgresDataProvider pgDp, 
+                              ISqlServerDataProvider sqlDp, 
+                              IModelsFactory modelsFactory)
         {
             this.pgDp = pgDp;
             this.sqlDp = sqlDp;
