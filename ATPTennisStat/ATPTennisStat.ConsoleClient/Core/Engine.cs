@@ -103,6 +103,7 @@ namespace ATPTennisStat.ConsoleClient.Core
                 catch (ArgumentException ex)
                 {
                     builder.AppendLine(ex.Message);
+                    this.logger.Log(ex.Message);
                 }
                 catch (Exception ex)
                 {
