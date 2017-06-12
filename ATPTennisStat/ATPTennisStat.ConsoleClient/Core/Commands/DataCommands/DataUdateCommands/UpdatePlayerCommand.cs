@@ -50,7 +50,6 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateComman
                 string data = parameters[2];
 
                 switch (param)
-                //TODO: Exception Handling
                 {
                     case 1: { player.FirstName = data; break; }
                     case 2: { player.LastName = data; break; }
@@ -111,8 +110,15 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateComman
                         }
                     case 7:
                         {
-                            
-                            player.City.Name = data;
+                            var foundCity = this.dp.Cities.GetAll()
+                                            .FirstOrDefault(c => c.Name == data);
+                            if (foundCity == null)
+                            {
+                                throw new ArgumentException("The entered city is not found in the database." + 
+                                                        "\n\r"+
+                                                        "Please add it via the \"addct\" command.");
+                            }
+                            player.City = foundCity;
                             break;
                         }
                     default:
