@@ -59,6 +59,12 @@
     <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddPlayerCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddTennisDataMenuCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddTournamentCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\MenuCmmands\ImportMenuCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\MenuCmmands\MainMenuCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\MenuCmmands\ReporterMenuCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\MenuCmmands\TeamInfoCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\MenuCmmands\TicketMenuCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\TicketCommands\BuyTicketCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\ReportCommands\CreateMatchesPdf_Tests.cs" />
     <Compile Include="ConsoleClient\Mocks\CityMock.cs" />
     <Compile Include="ConsoleClient\Mocks\CountryMock.cs" />
@@ -100,6 +106,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

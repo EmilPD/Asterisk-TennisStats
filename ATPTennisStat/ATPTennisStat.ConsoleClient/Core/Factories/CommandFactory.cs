@@ -206,7 +206,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
 
         public ICommand AddCity()
         {
-            return new AddCityCommand(sqlDp, writer);
+            return new BuyTicketCommand(sqlDp, writer);
         }
 
         public ICommand AddPlayer()
@@ -260,7 +260,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         // Import Commands
         public ICommand ImportSampleData()
         {
-            return new ImportSampleDataCommand(sqlDp, modelsFactory, excelImporter, writer, logger);
+            return new ImportSampleDataCommand(sqlDp, modelsFactory, excelImporter, writer, logger,this);
         }
 
         public ICommand ImportPlayers()
