@@ -36,7 +36,6 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
         {
             var tournaments = excelImporter.ImportTournaments();
             writer.WriteLine(tournaments.Count);
-            writer.WriteLine("hehe");
 
             foreach (var t in tournaments)
             {
@@ -60,12 +59,12 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
                 catch (ArgumentException ex)
                 {
 
-                    Console.WriteLine("Excel import problem: " + ex.Message);
+                    writer.WriteLine("Excel import problem: " + ex.Message);
                 }
 
             }
 
-            //this.dataProvider.UnitOfWork.Finished();
+            this.dataProvider.UnitOfWork.Finished();
 
             return "";
         }

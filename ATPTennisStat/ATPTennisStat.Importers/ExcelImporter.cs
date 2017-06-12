@@ -59,61 +59,34 @@ namespace ATPTennisStat.Importers
             }
             catch (Exception ex)
             {
-
-                //throw new ArgumentException("File opened by another program");
-                Console.WriteLine(ex.Message);
-                return null;
+                throw new ArgumentException(ex.Message);
             }
 
 
         }
 
-        public void ImportPointDistributions()
+        public IList<IPointDistributionExcelImportModel> ImportPointDistributions()
         {
             var dataRange = GenerateTableRangeFromFile(this.pointDistributionsFilePath);
 
             if (dataRange == null)
             {
-                //another exception handling possible
-                return;
+                throw new ArgumentException("No data in the first sheet of the file");
             }
 
             //TODO Exception Handling
             var pointDistributions = dataRange.Rows()
-                            .Select(row => new
+                            .Select(row => new PointDistributionExcelImportModel
                             {
                                 Category = row.Field("Category").GetString().Trim(),
                                 PlayersNumber = row.Field("PlayersNumber").GetString().Trim(),
                                 RoundName = row.Field("Round Name").GetString().Trim(),
                                 Points = row.Field("Points").GetString().Trim()
                             })
-                            .ToList();
+                            .ToList<IPointDistributionExcelImportModel>();
 
 
-
-            foreach (var pd in pointDistributions)
-            {
-                try
-                {
-                    var newPointDistribution = modelsFactory.CreatePointDistribution(
-                     pd.Category,
-                     pd.PlayersNumber,
-                     pd.RoundName,
-                     pd.Points);
-
-                    this.dataProvider.PointDistributions.Add(newPointDistribution);
-
-                }
-                catch (ArgumentException ex)
-                {
-
-                    Console.WriteLine("Excel import problem: " + ex.Message);
-                }
-
-            }
-
-            this.dataProvider.UnitOfWork.Finished();
-
+            return pointDistributions;
         }
 
         public IList<ITournamentExcelImportModel> ImportTournaments()
@@ -155,6 +128,7 @@ namespace ATPTennisStat.Importers
                 throw new ArgumentException("No data in the first sheet of the file");
             }
 
+            //TODO Exception Handling
             var matches = dataRange.Rows()
                        .Select(row => new MatchExcelImportModel
                        {
@@ -178,6 +152,7 @@ namespace ATPTennisStat.Importers
                 throw new ArgumentException("No data in the first sheet of the file");
             }
 
+            //TODO Exception Handling
             var players = dataRange.Rows()
                 .Select(row => new PlayerExcelImportModel
                 {

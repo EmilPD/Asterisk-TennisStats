@@ -34,7 +34,30 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
         public string Execute(IList<string> parameters)
         {
+            var pointDistributions = excelImporter.ImportPointDistributions();
 
+            foreach (var pd in pointDistributions)
+            {
+                try
+                {
+                    var newPointDistribution = modelsFactory.CreatePointDistribution(
+                     pd.Category,
+                     pd.PlayersNumber,
+                     pd.RoundName,
+                     pd.Points);
+
+                    this.dataProvider.PointDistributions.Add(newPointDistribution);
+
+                }
+                catch (ArgumentException ex)
+                {
+
+                    writer.WriteLine("Excel import problem: " + ex.Message);
+                }
+
+            }
+
+            this.dataProvider.UnitOfWork.Finished();
             return "ImportPointDistributions";
         }
     }
