@@ -6,7 +6,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using ATPTennisStat.Tests.ConsoleClient.Mocks;
-using ATPTennisStat.Models;
+using ATPTennisStat.Models.SqlServerModels;
 using System.Linq.Expressions;
 
 namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCommands

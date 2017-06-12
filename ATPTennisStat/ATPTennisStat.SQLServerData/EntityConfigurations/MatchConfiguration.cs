@@ -1,4 +1,4 @@
-﻿using ATPTennisStat.Models;
+﻿using ATPTennisStat.Models.SqlServerModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;

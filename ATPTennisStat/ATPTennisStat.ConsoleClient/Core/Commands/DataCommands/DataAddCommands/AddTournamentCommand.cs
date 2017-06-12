@@ -1,6 +1,6 @@
 ﻿using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.Factories.Contracts;
-using ATPTennisStat.Models;
+using ATPTennisStat.Models.SqlServerModels;
 using ATPTennisStat.SQLServerData;
 using System;
 using System.Collections.Generic;

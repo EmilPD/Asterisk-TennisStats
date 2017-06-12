@@ -1,5 +1,5 @@
 ﻿using System;
-using ATPTennisStat.Models;
+using ATPTennisStat.Models.SqlServerModels;
 using ATPTennisStat.Repositories.Contracts;
 
 namespace ATPTennisStat.SQLServerData

@@ -7,7 +7,7 @@ using ClosedXML.Excel;
 using System.IO;
 using ATPTennisStat.Importers.Contracts;
 using ATPTennisStat.SQLServerData;
-using ATPTennisStat.Models;
+using ATPTennisStat.Models.SqlServerModels;
 using ATPTennisStat.Factories;
 using System.Data;
 using ATPTennisStat.Factories.Contracts;

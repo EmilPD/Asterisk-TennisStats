@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ATPTennisStat.Models
+namespace ATPTennisStat.Models.SqlServerModels
 {
     public class Tournament
     {

@@ -1,4 +1,4 @@
-﻿using ATPTennisStat.Models;
+﻿using ATPTennisStat.Models.SqlServerModels;
 using ATPTennisStat.Models.PostgreSqlModels;
 
 namespace ATPTennisStat.Factories.Contracts

@@ -1,12 +1,8 @@
-﻿using ATPTennisStat.Models.Enums;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ATPTennisStat.Models.Enums;
 
-namespace ATPTennisStat.Models
+namespace ATPTennisStat.Models.SqlServerModels
 {
     public class Round
     {

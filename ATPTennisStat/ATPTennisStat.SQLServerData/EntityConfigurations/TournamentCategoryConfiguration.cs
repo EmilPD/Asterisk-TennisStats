@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity.ModelConfiguration;
-using ATPTennisStat.Models;
+using ATPTennisStat.Models.SqlServerModels;
 
 namespace ATPTennisStat.SQLServerData.EntityConfigurations
 {
