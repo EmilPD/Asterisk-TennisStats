@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 {
-    class ImportSampleDataCommand : ICommand
+    public class ImportSampleDataCommand : ICommand
     {
         private ISqlServerDataProvider dp;
         private IExcelImporter excelImporter;
@@ -30,10 +30,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
         public string Execute(IList<string> parameters)
         {
-            excelImporter.ImportPlayers();
-            excelImporter.ImportTournaments();
-            excelImporter.ImportPointDistributions();
-            excelImporter.ImportMatches();
+            var players = excelImporter.ImportPlayers();
+            //writer.WriteLine("hehe");
+            //excelImporter.ImportTournaments();
+            //excelImporter.ImportPointDistributions();
+            //excelImporter.ImportMatches();
 
             return "";
         }

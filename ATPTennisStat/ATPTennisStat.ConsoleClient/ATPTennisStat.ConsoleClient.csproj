@@ -118,6 +118,7 @@
     <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowPlayersCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowTournamentsCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataUdateCommands\UpdatePlayerCommand.cs" />
+    <Compile Include="Core\Commands\ImportCommands\ImportPlayersCommand.cs" />
     <Compile Include="Core\Commands\ImportCommands\ImportSampleDataCommand.cs" />
     <Compile Include="Core\Commands\MenuCommands\MainMenuCommand.cs" />
     <Compile Include="Core\Commands\MenuCommands\ReportersMenuCommand.cs" />

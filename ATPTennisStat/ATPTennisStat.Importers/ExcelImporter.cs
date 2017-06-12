@@ -11,6 +11,8 @@ using ATPTennisStat.Models;
 using ATPTennisStat.Factories;
 using System.Data;
 using ATPTennisStat.Factories.Contracts;
+using System.Collections;
+using ATPTennisStat.Importers.ImportModels;
 
 namespace ATPTennisStat.Importers
 {
@@ -228,59 +230,31 @@ namespace ATPTennisStat.Importers
 
             this.dataProvider.UnitOfWork.Finished();
         }
-  
-        public void ImportPlayers()
+        
+        public IList<IPlayerExcelImportModel> ImportPlayers()
         {
             var dataRange = GenerateTableRangeFromFile(this.playersFilePath);
 
             if (dataRange == null)
             {
-                //another exception handling possible
-                return;
+                throw new ArgumentException("No data in the first sheet of the file");
             }
 
             var players = dataRange.Rows()
-                .Select(row => new
+                .Select(row => new PlayerExcelImportModel
                 {
                     FirstName = row.Field("FirstName").GetString().Trim(),
                     LastName = row.Field("LastName").GetString().Trim(),
                     Ranking = row.Field("Ranking").GetString().Trim(),
-                    BirthDate = row.Field("BirthDate").GetString().Trim(),
+                    Birthdate = row.Field("BirthDate").GetString().Trim(),
                     Height = row.Field("Height").GetString().Trim(),
                     Weight = row.Field("Weight").GetString().Trim(),
                     City = row.Field("City").GetString().Trim(),
                     Country = row.Field("Country").GetString().Trim()
 
                 })
-                .ToList();
-
-
-            foreach (var p in players)
-            {
-                try
-                {
-                    var newPlayer = modelsFactory.CreatePlayer(
-                     p.FirstName,
-                     p.LastName,
-                     p.Ranking,
-                     p.BirthDate,
-                     p.Height,
-                     p.Weight,
-                     p.City,
-                     p.Country);
-
-                    this.dataProvider.Players.Add(newPlayer);
-
-                }
-                catch (ArgumentException ex)
-                {
-
-                    Console.WriteLine("Excel import problem: " + ex.Message);
-                }
-
-            }
-
-            this.dataProvider.UnitOfWork.Finished();
+                .ToList<IPlayerExcelImportModel>();
+            return players;
         }
     }
 }

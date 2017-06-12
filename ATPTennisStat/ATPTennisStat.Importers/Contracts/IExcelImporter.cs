@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace ATPTennisStat.Importers.Contracts
     {
         void ImportPointDistributions();
 
-        void ImportPlayers();
+        IList<IPlayerExcelImportModel> ImportPlayers();
 
         void ImportTournaments();
 

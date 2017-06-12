@@ -28,12 +28,12 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         private IModelsFactory modelsFactory;
         private IExcelImporter excelImporter;
 
-        public CommandFactory(IReportGenerator reporter, 
-                              ILogger logger, 
-                              IReader reader, 
-                              IWriter writer, 
-                              IPostgresDataProvider pgDp, 
-                              ISqlServerDataProvider sqlDp, 
+        public CommandFactory(IReportGenerator reporter,
+                              ILogger logger,
+                              IReader reader,
+                              IWriter writer,
+                              IPostgresDataProvider pgDp,
+                              ISqlServerDataProvider sqlDp,
                               IModelsFactory modelsFactory,
                               IExcelImporter excelImporter)
         {
@@ -106,6 +106,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                 // import
                 case "importsd":
                     return this.ImportSampleData();
+                case "importp":
+                    return this.ImportPlayers();
                 default:
                     //throw new ArgumentException(nameof(ICommand)); The bellow way is more informative!
                     throw new ArgumentException("InvalidCommand");
@@ -234,6 +236,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         public ICommand ImportSampleData()
         {
             return new ImportSampleDataCommand(sqlDp, excelImporter, writer, logger);
+        }
+
+        public ICommand ImportPlayers()
+        {
+            return new ImportPlayersCommand(sqlDp, modelsFactory, excelImporter, writer, logger);
         }
     }
 }
