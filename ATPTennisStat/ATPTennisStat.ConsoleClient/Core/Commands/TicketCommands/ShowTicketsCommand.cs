@@ -16,6 +16,16 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
 
         public ShowTicketsCommand(IPostgresDataProvider dp, IWriter writer)
         {
+            if (dp == null)
+            {
+                throw new ArgumentNullException("Data provider cannot be null!");
+            }
+
+            if (writer == null)
+            {
+                throw new ArgumentNullException("Writer cannot be null!");
+            }
+
             this.dp = dp;
             this.writer = writer;
         }

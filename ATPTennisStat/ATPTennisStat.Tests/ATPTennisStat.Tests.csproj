@@ -67,9 +67,11 @@
     <Compile Include="ConsoleClient\Core\Commands\ReportCommands\CreateRankingPdf_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\TicketCommands\BuyTicketCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\ReportCommands\CreateMatchesPdf_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\TicketCommands\ShowEventsCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Mocks\CityMock.cs" />
     <Compile Include="ConsoleClient\Mocks\CountryMock.cs" />
     <Compile Include="ConsoleClient\Mocks\SurfaceMock.cs" />
+    <Compile Include="ConsoleClient\Mocks\TicketMock.cs" />
     <Compile Include="ConsoleClient\Mocks\TournamentCategoryMock.cs" />
     <Compile Include="ConsoleClient\Mocks\TournamentMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

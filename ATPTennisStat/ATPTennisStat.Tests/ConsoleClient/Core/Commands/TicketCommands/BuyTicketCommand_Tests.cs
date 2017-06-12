@@ -1,17 +1,12 @@
-﻿using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands;
-using ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands;
+﻿using ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.Models.PostgreSqlModels;
 using ATPTennisStat.PostgreSqlData;
-using ATPTennisStat.SQLServerData;
 using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.TicketCommands
 {
