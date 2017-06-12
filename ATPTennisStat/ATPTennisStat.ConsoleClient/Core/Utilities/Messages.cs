@@ -29,11 +29,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
         internal static string GenerateImportersMenu()
         {
             return @"
- [imatch] Import matches
- [iplayer] Import Players
- [ipoint] Tennis point distribution
- [itour] Import tournaments
- [isample] Import sample data
+ [importm] Import matches
+ [importp] Import Players
+ [importpd] Tennis point distribution
+ [importt] Import tournaments
+ [importsd] Import sample data
 
  [menu]";
         }
