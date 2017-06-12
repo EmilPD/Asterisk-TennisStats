@@ -120,6 +120,7 @@
     <Compile Include="Core\Commands\DataCommands\DataUdateCommands\UpdatePlayerCommand.cs" />
     <Compile Include="Core\Commands\ImportCommands\ImportPlayersCommand.cs" />
     <Compile Include="Core\Commands\ImportCommands\ImportSampleDataCommand.cs" />
+    <Compile Include="Core\Commands\ImportCommands\ImportTournamentsCommand.cs" />
     <Compile Include="Core\Commands\MenuCommands\MainMenuCommand.cs" />
     <Compile Include="Core\Commands\MenuCommands\ReportersMenuCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowTennisDataMenuCommand.cs" />

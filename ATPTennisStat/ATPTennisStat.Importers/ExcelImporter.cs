@@ -13,6 +13,7 @@ using System.Data;
 using ATPTennisStat.Factories.Contracts;
 using System.Collections;
 using ATPTennisStat.Importers.ImportModels;
+using ATPTennisStat.Importers.Contracts.Models;
 
 namespace ATPTennisStat.Importers
 {
@@ -115,19 +116,18 @@ namespace ATPTennisStat.Importers
 
         }
 
-        public void ImportTournaments()
+        public IList<ITournamentExcelImportModel> ImportTournaments()
         {
             var dataRange = GenerateTableRangeFromFile(this.tournamentsFilePath);
 
             if (dataRange == null)
             {
-                //another exception handling possible
-                return;
+                throw new ArgumentException("No data in the first sheet of the file");
             }
 
             //TODO Exception Handling
             var tournaments = dataRange.Rows()
-                            .Select(row => new
+                            .Select(row => new TournamentExcelImportModel
                             {
                                 Name = row.Field("Name").GetString().Trim(),
                                 StartDate = row.Field("StartDate").GetString().Trim(),
@@ -140,40 +140,9 @@ namespace ATPTennisStat.Importers
                                 Surface = row.Field("Surface").GetString().Trim(),
                                 SurfaceSpeed = row.Field("Speed").GetString().Trim()
                             })
-                            .ToList();
+                            .ToList<ITournamentExcelImportModel>();
 
-
-
-            foreach (var t in tournaments)
-            {
-                try
-                {
-                    var newTournament = modelsFactory.CreateTournament(
-                     t.Name,
-                     t.StartDate,
-                     t.EndDate,
-                     t.PrizeMoney,
-                     t.Category,
-                     t.PlayersCount,
-                     t.City,
-                     t.Country,
-                     t.Surface,
-                     t.SurfaceSpeed);
-
-                    this.dataProvider.Tournaments.Add(newTournament);
-
-                }
-                catch (ArgumentException ex)
-                {
-
-                    Console.WriteLine("Excel import problem: " + ex.Message);
-                }
-
-            }
-
-            this.dataProvider.UnitOfWork.Finished();
-
-
+            return tournaments;
         }
 
         public void ImportMatches()
