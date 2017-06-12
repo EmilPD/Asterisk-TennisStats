@@ -288,3 +288,6 @@ __pycache__/
 *.xsd.cs
 
 .sqlite
+/ATPTennisStat/ATPTennisStat.SQLiteData/ATPTennisStatSQLite.sqlite
+/ATPTennisStat/ATPTennisStat.ConsoleClient/ATPTennisStatSQLiteDatabase.sqlite
+/ATPTennisStat/ATPTennisStat.ConsoleClient/ATPTennisStatSQLite.sqlite
