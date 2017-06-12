@@ -21,9 +21,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
         {
             return @"
  [r] Tennis reporters
+ [i] Import data
  [s] Tennis statistics menu
  [t] Ticket store menu
- [i] Team Asterisk info
+ [a] Team Asterisk info
+
  [exit]";
         }
 
@@ -40,7 +42,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
  [allt] Show all tickets
  [alle] Show all events
  [buyt (id)] buy a ticket with (id)
- [menu] Back to main menu";
+
+ [menu]";
         }
 
         internal static string GenerateDataMenu()
@@ -48,7 +51,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
             return @"
  [show] Show tennis data menu
  [add] Add tennis data menu
- [menu] Back to main menu";
+
+ [menu]";
         }
 
         internal static string GenerateDataAddMenu()
@@ -61,6 +65,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
  [addt (4 - 10 arguments)] Add new tournament
  [addm (6 arguments)] Add new match
  [delm (id)] Delete Match with id
+
  [menu] [show]";
         }
 
@@ -70,6 +75,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
  [showp (id)] Show all players of filter by id
  [showt (id)] Show all tournaments of filter by id
  [showm (id)] Show all mathes of filter by id
+
  [menu] [add]";
         }
     }

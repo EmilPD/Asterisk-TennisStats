@@ -1,18 +1,14 @@
 ﻿using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.ConsoleClient.Core.Utilities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
 {
-    class ReportersMenuCommand : ICommand
+    class ImportMenuCommand : ICommand
     {
         private IWriter writer;
 
-        public ReportersMenuCommand(IWriter writer)
+        public ImportMenuCommand(IWriter writer)
         {
             this.writer = writer;
         }
@@ -22,7 +18,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
             this.writer.Clear();
             return
                 Messages.GenerateWelcomeMessage() +
-                Messages.GenerateReportersMenu() + 
+                Messages.GenerateImportersMenu() +
                 "\n\n [menu]";
         }
     }

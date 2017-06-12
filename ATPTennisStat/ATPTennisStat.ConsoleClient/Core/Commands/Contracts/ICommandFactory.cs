@@ -13,6 +13,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Contracts
 
         ICommand ReportersMenuCommand();
 
+        ICommand ImportMenuCommand();
+
         ICommand TicketMenuCommand();
 
         ICommand TeamInfoCommand();
