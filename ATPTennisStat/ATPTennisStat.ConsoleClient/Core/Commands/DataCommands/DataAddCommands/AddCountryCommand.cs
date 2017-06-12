@@ -7,13 +7,23 @@ using System.Linq;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands
 {
-    class AddCountryCommand : ICommand
+    public class AddCountryCommand : ICommand
     {
         private ISqlServerDataProvider dp;
         private IWriter writer;
 
         public AddCountryCommand(ISqlServerDataProvider sqlDP, IWriter writer)
         {
+            if (sqlDP == null)
+            {
+                throw new ArgumentNullException("Data provider cannot be null!");
+            }
+
+            if (writer == null)
+            {
+                throw new ArgumentNullException("Writer cannot be null!");
+            }
+
             this.dp = sqlDP;
             this.writer = writer;
         }
