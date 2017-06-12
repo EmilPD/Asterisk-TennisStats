@@ -1,4 +1,5 @@
-﻿using ATPTennisStat.ConsoleClient.Core.Contracts;
+﻿using ATPTennisStat.ConsoleClient.Core.Commands.Contracts;
+using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.Factories.Contracts;
 using ATPTennisStat.Importers.Contracts;
 using ATPTennisStat.SQLServerData;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 {
-    public class ImportMatchesCommand : ICommand
+    public class ImportMatchesCommand : ICommandNoParameters
     {
         private ISqlServerDataProvider dataProvider;
         private IModelsFactory modelsFactory;
@@ -33,6 +34,18 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
         }
 
         public string Execute(IList<string> parameters)
+        {
+            if (parameters.Count == 0)
+            {
+                return this.Execute();
+            }
+            else
+            {
+                return "This command takes no parameters";
+            }
+        }
+
+        public string Execute()
         {
             var matches = excelImporter.ImportMatches();
 
@@ -69,8 +82,9 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
             }
 
             this.dataProvider.UnitOfWork.Finished();
+            var loggerMessage = String.Format("Matches import: Records added: {0}, Duplicated records: {1}", counterAdded, counterDuplicates);
             writer.Write(Environment.NewLine);
-
+            logger.Log(loggerMessage);
             return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
         }
     }

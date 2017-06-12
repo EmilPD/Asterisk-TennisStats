@@ -2,6 +2,7 @@
 using ATPTennisStat.Common;
 using ATPTennisStat.SQLServerData;
 using ATPTennisStat.ReportGenerators.Contracts;
+using ATPTennisStat.ConsoleClient.Core.Commands.Contracts;
 
 namespace ATPTennisStat.ConsoleClient.Core.Contracts
 {
@@ -67,13 +68,13 @@ namespace ATPTennisStat.ConsoleClient.Core.Contracts
         //Import commands
         ICommand ImportSampleData();
 
-        ICommand ImportPlayers();
+        ICommandNoParameters ImportPlayers();
 
-        ICommand ImportTournaments();
+        ICommandNoParameters ImportTournaments();
 
-        ICommand ImportMatches();
+        ICommandNoParameters ImportMatches();
 
-        ICommand ImportPointDistributions();
+        ICommandNoParameters ImportPointDistributions();
 
     }
 }
