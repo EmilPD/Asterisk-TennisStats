@@ -38,12 +38,12 @@ namespace ATPTennisStat.Importers
 
 
             //this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
-            this.pointDistributionsFilePath = this.solutionDirectory + "\\Data\\Excel\\TournamentCategoryPoints.xlsx";
+            this.pointDistributionsFilePath = this.solutionDirectory + "\\Data\\Excel\\Sample Data\\TournamentCategoryPoints.xlsx";
 
-            this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Big Data\\players-2016.xlsx";
+            this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Sample Data\\players-2016.xlsx";
 
-            this.matchesFilePath = this.solutionDirectory + "\\Data\\Excel\\Big Data\\matches-2016.xlsx";
-            this.tournamentsFilePath = this.solutionDirectory + "\\Data\\Excel\\Big Data\\tournaments-2016.xlsx";
+            this.matchesFilePath = this.solutionDirectory + "\\Data\\Excel\\Sample Data\\matches-2016.xlsx";
+            this.tournamentsFilePath = this.solutionDirectory + "\\Data\\Excel\\Sample Data\\tournaments-2016.xlsx";
         }
 
         /// <summary>
@@ -166,9 +166,13 @@ namespace ATPTennisStat.Importers
             }
         }
 
-        public IList<IPlayerExcelImportModel> ImportPlayers()
+        public IList<IPlayerExcelImportModel> ImportPlayers(string filePath)
         {
-            var dataRange = GenerateTableRangeFromFile(this.playersFilePath);
+            if(filePath == null)
+            {
+                filePath = this.playersFilePath;
+            }
+            var dataRange = GenerateTableRangeFromFile(filePath);
 
             if (dataRange == null)
             {
