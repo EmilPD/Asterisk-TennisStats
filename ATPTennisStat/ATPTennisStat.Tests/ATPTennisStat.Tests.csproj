@@ -58,6 +58,9 @@
     <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddMatchCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Mocks\CityMock.cs" />
     <Compile Include="ConsoleClient\Mocks\CountryMock.cs" />
+    <Compile Include="ConsoleClient\Mocks\SurfaceMock.cs" />
+    <Compile Include="ConsoleClient\Mocks\TournamentCategoryMock.cs" />
+    <Compile Include="ConsoleClient\Mocks\TournamentMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

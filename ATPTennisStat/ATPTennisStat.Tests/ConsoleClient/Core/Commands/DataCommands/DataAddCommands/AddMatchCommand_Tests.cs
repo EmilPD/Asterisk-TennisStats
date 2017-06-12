@@ -88,15 +88,16 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
             var providerMock = new Mock<ISqlServerDataProvider>();
             var writerMock = new Mock<IWriter>();
             var factoryMock = new Mock<IModelsFactory>();
+            
             var testTournament = new Tournament()
             {
                 Name = "test",
                 StartDate = new DateTime(),
                 EndDate = new DateTime(),
                 PrizeMoney = 1234.5m,
-                Category = new TournamentCategory(),
+                Category = new TournamentCategoryMock(),
                 City = new CityMock(),
-                Type = new Surface()
+                Type = new SurfaceMock()
             };
 
             providerMock.Setup(p => p.Tournaments.Get(It.IsAny<int>())).Returns(testTournament);
@@ -120,15 +121,16 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
             var providerMock = new Mock<ISqlServerDataProvider>();
             var writerMock = new Mock<IWriter>();
             var factoryMock = new Mock<IModelsFactory>();
-            var testTournament = new Tournament()
+            
+            var testTournament = new TournamentMock()
             {
                 Name = "test",
                 StartDate = new DateTime(),
                 EndDate = new DateTime(),
                 PrizeMoney = 1234.5m,
-                Category = new TournamentCategory(),
+                Category = new TournamentCategoryMock(),
                 City = new CityMock(),
-                Type = new Surface()
+                Type = new SurfaceMock()
             };
 
             providerMock.Setup(p => p.Tournaments.Get(It.IsAny<int>())).Returns(testTournament);
