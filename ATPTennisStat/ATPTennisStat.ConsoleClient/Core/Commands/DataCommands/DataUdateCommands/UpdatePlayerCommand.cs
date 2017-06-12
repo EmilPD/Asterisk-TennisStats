@@ -29,7 +29,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateComman
                 int id = -1;
                 bool parsed = int.TryParse(parameters[0], out id);
 
-                if(!parsed)
+                if (!parsed)
                 {
                     throw new ArgumentException("Provided Id is not valid!");
                 }
@@ -49,18 +49,76 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateComman
 
                 string data = parameters[2];
 
-            switch (param)
+                switch (param)
+                //TODO: Exception Handling
                 {
-                    case 1: player.FirstName = data; break;
-                    case 2: player.LastName = data; break;
-                    case 3: player.Height = float.Parse(data); break;
-                    case 4: player.Weight = float.Parse(data); break;
-                    case 5: player.BirthDate = DateTime.Parse(data); break;
-                    case 6: player.Ranking = int.Parse(data); break;
-                    case 7: player.City.Name = data; break;
+                    case 1: { player.FirstName = data; break; }
+                    case 2: { player.LastName = data; break; }
+                    case 3:
+                        {
+                            try
+                            {
+                                player.Height = float.Parse(data);
+                            }
+                            catch (Exception)
+                            {
+                                throw new ArgumentException("Player's height must be a number");
+                            }
+                            break;
+                        }
+                    case 4:
+                        {
+                            try
+                            {
+                                player.Weight = float.Parse(data);
+                            }
+                            catch (Exception)
+                            {
+
+                                throw new ArgumentException("Player's weight must be a number");
+                            }
+                            break;
+                        }
+
+                    case 5:
+                        {
+                            try
+                            {
+                                player.BirthDate = DateTime.Parse(data);
+                            }
+                            catch (Exception)
+                            {
+
+                                throw new ArgumentException("Please enter a date in a valid format, e.g. dd/mm/yyyy");
+                            }
+
+                            break;
+                        }
+                    case 6:
+                        {
+                            try
+                            {
+                                player.Ranking = int.Parse(data);
+
+                            }
+                            catch (Exception)
+                            {
+
+                                throw new ArgumentException("Please enter an integer number");
+                            }
+
+                            break;
+                        }
+                    case 7:
+                        {
+                            
+                            player.City.Name = data;
+                            break;
+                        }
                     default:
                         throw new ArgumentOutOfRangeException("Parameter must be between 1 and 7!");
                 }
+                this.dp.UnitOfWork.Finished();
                 return $"Player {player.FirstName} {player.LastName} updated successfully!";
             }
             else
