@@ -95,6 +95,10 @@
       <Project>{E890EDEB-D444-4C5D-8F66-49CC423BFED5}</Project>
       <Name>ATPTennisStat.ReportGenerators</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.PostgreSqlData\ATPTennisStat.PostgreSqlData.csproj">
+      <Project>{F06EFDFC-76C0-49E3-9519-347427486BDA}</Project>
+      <Name>ATPTennisStat.PostgreSqlData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ATPTennisStat.Repositories\ATPTennisStat.Repositories.csproj">
       <Project>{B4FC6642-8C45-49EC-B3F3-FFA883FADF4F}</Project>
       <Name>ATPTennisStat.Repositories</Name>
