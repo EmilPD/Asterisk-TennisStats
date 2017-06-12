@@ -11,7 +11,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
     class ReportersMenuCommand_Tests
     {
         [Test]
-        public void ConstructorShould_ReturnInstanceOfAddCountryCommandClass_WhenThePassedValuesAreValid()
+        public void ConstructorShould_ReturnInstanceOfReportersMenuCommandClass_WhenThePassedValuesAreValid()
         {
             var writerMock = new Mock<IWriter>();
             var command = new ReportersMenuCommand(writerMock.Object);

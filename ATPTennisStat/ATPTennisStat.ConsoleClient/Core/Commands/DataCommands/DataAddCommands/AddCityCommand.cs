@@ -7,12 +7,12 @@ using ATPTennisStat.SQLServerData;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands
 {
-    public class AddCityCommand : ICommand
+    public class BuyTicketCommand : ICommand
     {
         private ISqlServerDataProvider dp;
         private IWriter writer;
 
-        public AddCityCommand(ISqlServerDataProvider sqlDP, IWriter writer)
+        public BuyTicketCommand(ISqlServerDataProvider sqlDP, IWriter writer)
         {
             if (sqlDP == null)
             {
