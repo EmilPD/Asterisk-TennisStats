@@ -36,6 +36,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
         {
             var pointDistributions = excelImporter.ImportPointDistributions();
 
+            writer.WriteLine("Total records in dataset: " + pointDistributions.Count);
+
+            var counterAdded = 0;
+            var counterDuplicates = 0;
+
             foreach (var pd in pointDistributions)
             {
                 try
@@ -47,18 +52,19 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
                      pd.Points);
 
                     this.dataProvider.PointDistributions.Add(newPointDistribution);
+                    counterAdded++;
 
                 }
                 catch (ArgumentException ex)
                 {
-
-                    writer.WriteLine("Excel import problem: " + ex.Message);
+                    //log(("Excel import problem: " + ex.Message)) PSEUDO CODE
+                    counterDuplicates++;
                 }
 
             }
 
             this.dataProvider.UnitOfWork.Finished();
-            return "ImportPointDistributions";
+            return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
         }
     }
 }

@@ -35,7 +35,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
         public string Execute(IList<string> parameters)
         {
             var matches = excelImporter.ImportMatches();
-            writer.WriteLine(matches.Count);
+
+            writer.WriteLine("Total records in dataset: " + matches.Count);
+
+            var counterAdded = 0;
+            var counterDuplicates = 0;
 
             foreach (var m in matches)
             {
@@ -53,19 +57,18 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
 
                     this.dataProvider.Matches.Add(newMatch);
-
+                    counterAdded++;
                 }
                 catch (ArgumentException ex)
                 {
-
-                    writer.WriteLine("Excel import problem: " + ex.Message);
+                    //log(("Excel import problem: " + ex.Message)) PSEUDO CODE
+                    counterDuplicates++;
                 }
 
             }
 
             this.dataProvider.UnitOfWork.Finished();
-
-            return "ImportMatches";
+            return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
         }
     }
 }

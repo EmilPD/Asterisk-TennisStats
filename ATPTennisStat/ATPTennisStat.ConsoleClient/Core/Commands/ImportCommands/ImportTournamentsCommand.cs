@@ -35,7 +35,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
         public string Execute(IList<string> parameters)
         {
             var tournaments = excelImporter.ImportTournaments();
-            writer.WriteLine(tournaments.Count);
+
+            writer.WriteLine("Total records in dataset: " + tournaments.Count);
+
+            var counterAdded = 0;
+            var counterDuplicates = 0;
 
             foreach (var t in tournaments)
             {
@@ -54,19 +58,20 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
                      t.SurfaceSpeed);
 
                     this.dataProvider.Tournaments.Add(newTournament);
-
+                    counterAdded++;
                 }
                 catch (ArgumentException ex)
                 {
 
-                    writer.WriteLine("Excel import problem: " + ex.Message);
+                    //log(("Excel import problem: " + ex.Message)) PSEUDO CODE
+                    counterDuplicates++;
                 }
 
             }
 
             this.dataProvider.UnitOfWork.Finished();
-
-            return "";
+       
+            return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
         }
     }
 }
