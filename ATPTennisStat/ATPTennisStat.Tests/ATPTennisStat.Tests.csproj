@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddCityCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddCountryCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddMatchCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Mocks\CityMock.cs" />
     <Compile Include="ConsoleClient\Mocks\CountryMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +68,10 @@
     <ProjectReference Include="..\ATPTennisStat.ConsoleClient\ATPTennisStat.ConsoleClient.csproj">
       <Project>{E8A89F36-16CB-487E-8D99-38D981429D80}</Project>
       <Name>ATPTennisStat.ConsoleClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.Factories\ATPTennisStat.Factories.csproj">
+      <Project>{35DC9DDD-EA35-446D-AE71-829681EC8B15}</Project>
+      <Name>ATPTennisStat.Factories</Name>
     </ProjectReference>
     <ProjectReference Include="..\ATPTennisStat.Models\ATPTennisStat.Models.csproj">
       <Project>{12de3fd9-6ebc-408d-af51-1a7f7c712108}</Project>

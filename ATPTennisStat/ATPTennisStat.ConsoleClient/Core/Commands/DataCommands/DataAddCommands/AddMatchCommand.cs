@@ -14,6 +14,21 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
 
         public AddMatchCommand(ISqlServerDataProvider sqlDP, IWriter writer, IModelsFactory factory)
         {
+            if (sqlDP == null)
+            {
+                throw new ArgumentNullException("Data provider cannot be null!");
+            }
+
+            if (writer == null)
+            {
+                throw new ArgumentNullException("Writer cannot be null!");
+            }
+
+            if (factory == null)
+            {
+                throw new ArgumentNullException("Writer cannot be null!");
+            }
+
             this.dp = sqlDP;
             this.writer = writer;
             this.factory = factory;
@@ -48,6 +63,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
 
                 tournamentId = int.Parse(parameters[6]);
                 string tournament = dp.Tournaments.Get(tournamentId).Name;
+
+                if (tournament == null)
+                {
+                    throw new ArgumentNullException($"No tournament with id {tournamentId} found!");
+                }
 
                 round = parameters[7];
 
