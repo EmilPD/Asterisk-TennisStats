@@ -41,6 +41,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
             var counterAdded = 0;
             var counterDuplicates = 0;
 
+            writer.Write("Importing...");
+
             foreach (var t in tournaments)
             {
                 try
@@ -70,7 +72,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
             }
 
             this.dataProvider.UnitOfWork.Finished();
-       
+            writer.Write(Environment.NewLine);
+
             return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
         }
     }
