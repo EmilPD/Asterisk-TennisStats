@@ -1,9 +1,9 @@
-﻿using ATPTennisStat.ConsoleClient.Core.Contracts;
-using ATPTennisStat.Models.SqlServerModels;
-using ATPTennisStat.SQLServerData;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ATPTennisStat.ConsoleClient.Core.Contracts;
+using ATPTennisStat.Models.SqlServerModels;
+using ATPTennisStat.SQLServerData;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands
 {
