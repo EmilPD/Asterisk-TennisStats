@@ -104,7 +104,7 @@ namespace ATPTennisStat.ConsoleClient.Core
                 {
                     builder.AppendLine(ex.Message);
                     this.logger.Log(ex.Message);
-                    this.writer.Write(ex.Message); //possibly  WriteLine
+                    this.writer.WriteLine(ex.Message); 
                     
                     //need to re-add menu footer
                 }
