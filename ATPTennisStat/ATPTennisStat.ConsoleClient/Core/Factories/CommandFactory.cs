@@ -108,6 +108,9 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                     return this.ImportSampleData();
                 case "importp":
                     return this.ImportPlayers();
+                case "importt":
+                    return this.ImportTournaments();
+
                 default:
                     //throw new ArgumentException(nameof(ICommand)); The bellow way is more informative!
                     throw new ArgumentException("InvalidCommand");
@@ -241,6 +244,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         public ICommand ImportPlayers()
         {
             return new ImportPlayersCommand(sqlDp, modelsFactory, excelImporter, writer, logger);
+        }
+
+        public ICommand ImportTournaments()
+        {
+            return new ImportTournamentsCommand(sqlDp, modelsFactory, excelImporter, writer, logger);
         }
     }
 }
