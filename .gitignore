@@ -287,6 +287,10 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
+.pdf
+/Reports/Pdf/Report-Matches.pdf
+/Reports/Pdf/Report-Ranking.pdf
+
 .sqlite
 /ATPTennisStat/ATPTennisStat.SQLiteData/ATPTennisStatSQLite.sqlite
 /ATPTennisStat/ATPTennisStat.ConsoleClient/ATPTennisStatSQLiteDatabase.sqlite
