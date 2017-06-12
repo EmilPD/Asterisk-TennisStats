@@ -11,7 +11,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
     class TeamInfoCommand_Tests
     {
         [Test]
-        public void ConstructorShould_ReturnInstanceOfAddCountryCommandClass_WhenThePassedValuesAreValid()
+        public void ConstructorShould_ReturnInstanceOfTeamInfoCommandClass_WhenThePassedValuesAreValid()
         {
             var writerMock = new Mock<IWriter>();
             var command = new TeamInfoCommand(writerMock.Object);

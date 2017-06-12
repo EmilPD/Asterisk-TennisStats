@@ -19,9 +19,9 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
         {
             var providerMock = new Mock<ISqlServerDataProvider>();
             var writerMock = new Mock<IWriter>();
-            var command = new AddCityCommand(providerMock.Object, writerMock.Object);
+            var command = new BuyTicketCommand(providerMock.Object, writerMock.Object);
             
-            Assert.IsInstanceOf<AddCityCommand>(command);
+            Assert.IsInstanceOf<BuyTicketCommand>(command);
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
         {
             var writerMock = new Mock<IWriter>();
 
-            Assert.Throws<ArgumentNullException>(() => new AddCityCommand(null, writerMock.Object));
+            Assert.Throws<ArgumentNullException>(() => new BuyTicketCommand(null, writerMock.Object));
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
         {
             var providerMock = new Mock<ISqlServerDataProvider>();
 
-            Assert.Throws<ArgumentNullException>(() => new AddCityCommand(providerMock.Object, null));
+            Assert.Throws<ArgumentNullException>(() => new BuyTicketCommand(providerMock.Object, null));
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
         {
             var providerMock = new Mock<ISqlServerDataProvider>();
             var writerMock = new Mock<IWriter>();
-            var command = new AddCityCommand(providerMock.Object, writerMock.Object);
+            var command = new BuyTicketCommand(providerMock.Object, writerMock.Object);
 
             command.Execute(new List<string>());
 
@@ -57,7 +57,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
         {
             var providerMock = new Mock<ISqlServerDataProvider>();
             var writerMock = new Mock<IWriter>();
-            var command = new AddCityCommand(providerMock.Object, writerMock.Object);
+            var command = new BuyTicketCommand(providerMock.Object, writerMock.Object);
 
             string result = command.Execute(new List<string>() { "Sofia" });
 
@@ -69,7 +69,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
         {
             var providerMock = new Mock<ISqlServerDataProvider>();
             var writerMock = new Mock<IWriter>();
-            var command = new AddCityCommand(providerMock.Object, writerMock.Object);
+            var command = new BuyTicketCommand(providerMock.Object, writerMock.Object);
 
             string result = command.Execute(new List<string>() { "Varna", "Bulgaria", "Europe", "Earth" });
 
@@ -83,7 +83,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
             providerMock.Setup(m => m.Countries.Equals(new List<CountryMock>() { null }));
 
             var writerMock = new Mock<IWriter>();
-            var command = new AddCityCommand(providerMock.Object, writerMock.Object);
+            var command = new BuyTicketCommand(providerMock.Object, writerMock.Object);
 
             string result = command.Execute(new List<string>() { "Varna", "Mordor" });
 
@@ -105,7 +105,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
             providerMock.Setup(p => p.Cities.Find(It.IsAny<Expression<Func<City, bool>>>())).Returns(new List<CityMock>() { city });
 
             var writerMock = new Mock<IWriter>();
-            var command = new AddCityCommand(providerMock.Object, writerMock.Object);
+            var command = new BuyTicketCommand(providerMock.Object, writerMock.Object);
 
             string result = command.Execute(new List<string>() { cityName, countryName });
 
@@ -130,7 +130,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
             providerMock.Setup(p => p.UnitOfWork.Finished()).Verifiable();
 
             var writerMock = new Mock<IWriter>();
-            var command = new AddCityCommand(providerMock.Object, writerMock.Object);
+            var command = new BuyTicketCommand(providerMock.Object, writerMock.Object);
 
             string result = command.Execute(new List<string>() { "Plovdiv", countryName });
 

@@ -206,7 +206,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
 
         public ICommand AddCity()
         {
-            return new AddCityCommand(sqlDp, writer);
+            return new BuyTicketCommand(sqlDp, writer);
         }
 
         public ICommand AddPlayer()
