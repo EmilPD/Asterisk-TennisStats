@@ -37,7 +37,6 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
         {
             var players = excelImporter.ImportPlayers();
             writer.WriteLine(players.Count);
-            writer.WriteLine("hehe");
 
             foreach (var p in players)
             {
