@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.ConsoleClient", "ATPTennisStat.ConsoleClient\ATPTennisStat.ConsoleClient.csproj", "{E8A89F36-16CB-487E-8D99-38D981429D80}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.Models", "ATPTennisStat.Models\ATPTennisStat.Models.csproj", "{12DE3FD9-6EBC-408D-AF51-1A7F7C712108}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.Repositories", "ATPTennisStat.Repositories\ATPTennisStat.Repositories.csproj", "{B4FC6642-8C45-49EC-B3F3-FFA883FADF4F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.WPFClient", "ATPTennisStat.WPFClient\ATPTennisStat.WPFClient.csproj", "{E2C9E82D-7F7B-48E1-935B-6AB976BF3752}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.SQLServerData", "ATPTennisStat.SQLServerData\ATPTennisStat.SQLServerData.csproj", "{81FBD9B4-F1C8-4316-8A6B-D932362B6540}"
 EndProject
@@ -45,10 +43,6 @@ Global
 		{B4FC6642-8C45-49EC-B3F3-FFA883FADF4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4FC6642-8C45-49EC-B3F3-FFA883FADF4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4FC6642-8C45-49EC-B3F3-FFA883FADF4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2C9E82D-7F7B-48E1-935B-6AB976BF3752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2C9E82D-7F7B-48E1-935B-6AB976BF3752}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2C9E82D-7F7B-48E1-935B-6AB976BF3752}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2C9E82D-7F7B-48E1-935B-6AB976BF3752}.Release|Any CPU.Build.0 = Release|Any CPU
 		{81FBD9B4-F1C8-4316-8A6B-D932362B6540}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{81FBD9B4-F1C8-4316-8A6B-D932362B6540}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81FBD9B4-F1C8-4316-8A6B-D932362B6540}.Release|Any CPU.ActiveCfg = Release|Any CPU
