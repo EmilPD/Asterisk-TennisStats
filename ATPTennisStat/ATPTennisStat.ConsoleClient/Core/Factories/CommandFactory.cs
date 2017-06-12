@@ -12,6 +12,7 @@ using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateCommands;
 using ATPTennisStat.ReportGenerators.Contracts;
 using ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands;
 using ATPTennisStat.Importers.Contracts;
+using ATPTennisStat.SQLiteData;
 
 namespace ATPTennisStat.ConsoleClient.Core.Factories
 {
@@ -21,6 +22,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
 
         private readonly IPostgresDataProvider pgDp;
         private readonly ISqlServerDataProvider sqlDp;
+        private readonly ISqliteDataProvider sqliteDp;
         private IReader reader;
         private IWriter writer;
         private ILogger logger;
@@ -34,11 +36,13 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                               IWriter writer,
                               IPostgresDataProvider pgDp,
                               ISqlServerDataProvider sqlDp,
+                              ISqliteDataProvider sqliteDp,
                               IModelsFactory modelsFactory,
                               IExcelImporter excelImporter)
         {
             this.pgDp = pgDp;
             this.sqlDp = sqlDp;
+            this.sqliteDp = sqliteDp;
             this.reader = reader;
             this.writer = writer;
             this.logger = logger;
@@ -60,6 +64,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                     return this.TennisDataMenuCommand();
                 case "t":
                     return this.TicketMenuCommand();
+                case "l":
+                    return this.ShowLogs();
                 case "i":
                     return this.TeamInfoCommand();
                 // tickets commands
@@ -220,6 +226,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         public ICommand ShowMatches()
         {
             return new ShowMatchesCommand(sqlDp, writer);
+        }
+
+        public ICommand ShowLogs()
+        {
+            return new ShowLogsCommand(sqliteDp, writer);
         }
 
         public ICommand ShowPlayers()
