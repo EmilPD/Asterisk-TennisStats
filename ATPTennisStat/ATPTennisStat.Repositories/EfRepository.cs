@@ -37,6 +37,7 @@ namespace ATPTennisStat.Repositories
             }
 
             return this.dbSet.Local;
+            //return this.dbSet.ToList();
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)

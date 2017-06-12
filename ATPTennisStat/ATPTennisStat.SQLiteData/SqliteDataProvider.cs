@@ -7,12 +7,35 @@ namespace ATPTennisStat.SQLiteData
     public class SqliteDataProvider : ISqliteDataProvider
     {
         private IRepository<Log> logs;
+        private IRepository<LogDetail> logDetails;
+
         private IUnitOfWork unitOfWork;
 
-        public SqliteDataProvider(IUnitOfWork uow, IRepository<Log> logs)
+        public SqliteDataProvider(IUnitOfWork uow, 
+                                  IRepository<Log> logs,
+                                  IRepository<LogDetail> logDetails)
         {
             this.logs = logs;
+            this.logDetails = logDetails;
             this.UnitOfWork = uow;
+        }
+
+        public IRepository<LogDetail> LogDetails
+        {
+            get
+            {
+                return this.logDetails;
+            }
+
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Logs");
+                }
+
+                this.logDetails = value;
+            }
         }
 
         public IRepository<Log> Logs

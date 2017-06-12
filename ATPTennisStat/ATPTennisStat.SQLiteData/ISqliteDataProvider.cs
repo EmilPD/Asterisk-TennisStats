@@ -7,6 +7,8 @@ namespace ATPTennisStat.SQLiteData
     {
         IRepository<Log> Logs { get; set; }
 
+        IRepository<LogDetail> LogDetails { get; set; }
+
         IUnitOfWork UnitOfWork { get; set; }
     }
 }

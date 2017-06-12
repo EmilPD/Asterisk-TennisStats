@@ -24,5 +24,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Providers
             this.provider.Logs.Add(new Log { Message = message, TimeStamp = DateTime.Now });
             this.provider.UnitOfWork.Finished();
         }
+
+        public void LogDetails(string message)
+        {
+            this.provider.LogDetails.Add(new LogDetail { Message = message, TimeStamp = DateTime.Now });
+            this.provider.UnitOfWork.Finished();
+        }
     }
 }

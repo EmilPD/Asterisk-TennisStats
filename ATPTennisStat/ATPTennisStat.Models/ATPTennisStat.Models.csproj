@@ -53,6 +53,7 @@
     <Compile Include="PostgreSqlModels\TennisEvent.cs" />
     <Compile Include="PostgreSqlModels\Ticket.cs" />
     <Compile Include="SqliteModels\Log.cs" />
+    <Compile Include="SqliteModels\LogDetail.cs" />
     <Compile Include="SqlServerModels\PointDistribution.cs" />
     <Compile Include="SqlServerModels\City.cs" />
     <Compile Include="SqlServerModels\Country.cs" />

@@ -121,7 +121,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
                 }
                 catch (ArgumentException ex)
                 {
-                    //log(("Excel import problem: " + ex.Message)) PSEUDO CODE
+                    logger.LogDetails("Excel import problem: " + ex.Message);
                     counterDuplicates++;
                 }
 
