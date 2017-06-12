@@ -8,12 +8,17 @@ using System.Threading.Tasks;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
 {
-    class TeamInfoCommand : ICommand
+    public class TeamInfoCommand : ICommand
     {
         private IWriter writer;
 
         public TeamInfoCommand(IWriter writer)
         {
+            if (writer == null)
+            {
+                throw new ArgumentNullException("Writer cannot be null!");
+            }
+
             this.writer = writer;
         }
 

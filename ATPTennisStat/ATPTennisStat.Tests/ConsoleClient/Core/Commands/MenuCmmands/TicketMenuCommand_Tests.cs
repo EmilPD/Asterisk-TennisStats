@@ -8,28 +8,28 @@ using ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands;
 namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCommands
 {
     [TestFixture]
-    class AddTennisDataMenuCommand_Tests
+    class TicketMenuCommand_Tests
     {
         [Test]
         public void ConstructorShould_ReturnInstanceOfAddCountryCommandClass_WhenThePassedValuesAreValid()
         {
             var writerMock = new Mock<IWriter>();
-            var command = new AddTennisDataMenuCommand(writerMock.Object);
+            var command = new TicketMenuCommand(writerMock.Object);
 
-            Assert.IsInstanceOf<AddTennisDataMenuCommand>(command);
+            Assert.IsInstanceOf<TicketMenuCommand>(command);
         }
 
         [Test]
         public void ConstructorShould_ThrowArgumentNullException_WhenThePassedWriterIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new AddTennisDataMenuCommand(null));
+            Assert.Throws<ArgumentNullException>(() => new TicketMenuCommand(null));
         }
 
         [Test]
         public void ExecuteShould_ClearTheScreenOneTIme()
         {
             var writerMock = new Mock<IWriter>();
-            var command = new AddTennisDataMenuCommand(writerMock.Object);
+            var command = new TicketMenuCommand(writerMock.Object);
 
             command.Execute(new List<string>());
 

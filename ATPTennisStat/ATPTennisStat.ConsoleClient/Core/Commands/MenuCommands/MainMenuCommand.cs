@@ -1,5 +1,6 @@
 ﻿using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.ConsoleClient.Core.Utilities;
+using System;
 using System.Collections.Generic;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
@@ -10,6 +11,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
 
         public MainMenuCommand(IWriter writer)
         {
+            if (writer == null)
+            {
+                throw new ArgumentNullException("Writer cannot be null!");
+            }
+
             this.writer = writer;
         }
 

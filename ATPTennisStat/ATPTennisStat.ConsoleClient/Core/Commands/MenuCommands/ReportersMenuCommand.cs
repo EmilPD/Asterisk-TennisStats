@@ -14,6 +14,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
 
         public ReportersMenuCommand(IWriter writer)
         {
+            if (writer == null)
+            {
+                throw new ArgumentNullException("Writer cannot be null!");
+            }
+
             this.writer = writer;
         }
 
