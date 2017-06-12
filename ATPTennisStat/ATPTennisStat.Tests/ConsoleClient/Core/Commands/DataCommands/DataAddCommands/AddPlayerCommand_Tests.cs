@@ -67,5 +67,49 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
 
             writerMock.Verify(x => x.Clear(), Times.Once);
         }
+
+        [Test]
+        public void ExecuteShould_ReturnNotEnoughParametersWhenNoParametersProvided()
+        {
+            var providerMock = new Mock<ISqlServerDataProvider>();
+            var writerMock = new Mock<IWriter>();
+            var factoryMock = new Mock<IModelsFactory>();
+
+            var command = new AddPlayerCommand(providerMock.Object, writerMock.Object, factoryMock.Object);
+
+            string result = command.Execute(new List<string>());
+
+            Assert.That(result.Contains("Not enough parameters!"));
+        }
+
+        [Test]
+        public void ExecuteShould_CallCreatePlayerWhen2OrMoreParametersProvidedProvided()
+        {
+            var providerMock = new Mock<ISqlServerDataProvider>();
+            var writerMock = new Mock<IWriter>();
+            var factoryMock = new Mock<IModelsFactory>();
+
+            var command = new AddPlayerCommand(providerMock.Object, writerMock.Object, factoryMock.Object);
+
+            try
+            {
+                command.Execute(new List<string>() { "Novak", "Jokovic" });
+            }
+            catch { }
+
+            factoryMock.Verify(x => x.CreatePlayer("Novak", "Jokovic", "", "", "", "", "", ""), Times.Once);
+        }
+
+        [Test]
+        public void ExecuteShould_ThrowArgumentNullExceptionIfPlayerCannotBeCreated()
+        {
+            var providerMock = new Mock<ISqlServerDataProvider>();
+            var writerMock = new Mock<IWriter>();
+            var factoryMock = new Mock<IModelsFactory>();
+
+            var command = new AddPlayerCommand(providerMock.Object, writerMock.Object, factoryMock.Object);
+
+            Assert.Throws<ArgumentNullException>(() => command.Execute(new List<string>() { "Novak", "Jokovic" }));
+        }
     }
 }
