@@ -54,10 +54,14 @@
   <ItemGroup>
     <Compile Include="Contracts\IExcelImporter.cs" />
     <Compile Include="Contracts\IImporter.cs" />
+    <Compile Include="Contracts\Models\IMatchExcelImportModel.cs" />
     <Compile Include="Contracts\Models\IPlayerExcelImportModel.cs" />
+    <Compile Include="Contracts\Models\IPointDistributionExcelImportModel.cs" />
     <Compile Include="Contracts\Models\ITournamentExcelImportModel.cs" />
     <Compile Include="ExcelImporter.cs" />
+    <Compile Include="ImportModels\MatchExcelImportModel.cs" />
     <Compile Include="ImportModels\PlayerExcelImportModel.cs" />
+    <Compile Include="ImportModels\PointDistributionExcelImportModel.cs" />
     <Compile Include="ImportModels\TournamentExcelImportModel.cs" />
     <Compile Include="JSONImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

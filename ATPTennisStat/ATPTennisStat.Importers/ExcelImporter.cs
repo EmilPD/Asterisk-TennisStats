@@ -145,19 +145,18 @@ namespace ATPTennisStat.Importers
             return tournaments;
         }
 
-        public void ImportMatches()
+        public IList<IMatchExcelImportModel> ImportMatches()
         {
 
             var dataRange = GenerateTableRangeFromFile(this.matchesFilePath);
 
             if (dataRange == null)
             {
-                //another exception handling possible
-                return;
+                throw new ArgumentException("No data in the first sheet of the file");
             }
 
             var matches = dataRange.Rows()
-                       .Select(row => new
+                       .Select(row => new MatchExcelImportModel
                        {
                            DatePlayed = row.Field("DatePlayed").GetString().Trim(),
                            Winner = row.Field("Winner").GetString().Trim(),
@@ -166,40 +165,10 @@ namespace ATPTennisStat.Importers
                            TournamentName = row.Field("Tournament").GetString().Trim(),
                            Round = row.Field("Round").GetString().Trim()
                        })
-                        .ToList();
-
-            var i = 0;
-            foreach (var m in matches)
-            {
-                try
-                {
-                    var newMatch = modelsFactory.CreateMatch(
-                         m.DatePlayed,
-                         m.Winner,
-                         m.Loser,
-                         m.Result,
-                         m.TournamentName,
-                         m.Round
-                     );
-
-
-
-                    this.dataProvider.Matches.Add(newMatch);
-                    i++;
-                    Console.WriteLine(i);
-
-                }
-                catch (ArgumentException ex)
-                {
-
-                    Console.WriteLine("Excel import problem: " + ex.Message);
-                }
-
-            }
-
-            this.dataProvider.UnitOfWork.Finished();
+                        .ToList<IMatchExcelImportModel>();
+            return matches;
         }
-        
+
         public IList<IPlayerExcelImportModel> ImportPlayers()
         {
             var dataRange = GenerateTableRangeFromFile(this.playersFilePath);

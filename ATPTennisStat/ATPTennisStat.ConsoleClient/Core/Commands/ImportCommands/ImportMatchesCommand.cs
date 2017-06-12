@@ -34,6 +34,36 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
         public string Execute(IList<string> parameters)
         {
+            var matches = excelImporter.ImportMatches();
+            writer.WriteLine(matches.Count);
+
+            foreach (var m in matches)
+            {
+                try
+                {
+                    var newMatch = modelsFactory.CreateMatch(
+                         m.DatePlayed,
+                         m.Winner,
+                         m.Loser,
+                         m.Result,
+                         m.TournamentName,
+                         m.Round
+                     );
+
+
+
+                    this.dataProvider.Matches.Add(newMatch);
+
+                }
+                catch (ArgumentException ex)
+                {
+
+                    writer.WriteLine("Excel import problem: " + ex.Message);
+                }
+
+            }
+
+            this.dataProvider.UnitOfWork.Finished();
 
             return "ImportMatches";
         }
