@@ -2,6 +2,7 @@
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.Models.SqliteModels;
 using ATPTennisStat.SQLiteData;
+using System.Collections.Generic;
 
 namespace ATPTennisStat.ConsoleClient.Core.Providers
 {
@@ -18,6 +19,28 @@ namespace ATPTennisStat.ConsoleClient.Core.Providers
     
             this.provider = provider;
         }
+        public Log CreateNewLog(string command)
+        {
+            var newLog =new Log
+            {
+                Message = command
+            };
+
+            this.provider.Logs.Add(newLog);
+            return newLog;
+        }
+
+        public LogDetail CreateNewLogDetail(string message, Log log)
+        {
+            var newlogDetail = new LogDetail
+            {
+                Message = message,
+                TimeStamp = DateTime.Now,
+                Log = log
+            };
+            this.provider.LogDetails.Add(newlogDetail);
+            return newlogDetail;
+        }
 
         public void Log(string message)
         {
@@ -25,9 +48,9 @@ namespace ATPTennisStat.ConsoleClient.Core.Providers
             this.provider.UnitOfWork.Finished();
         }
 
-        public void LogDetails(string message)
+        public void Log(Log log)
         {
-            this.provider.LogDetails.Add(new LogDetail { Message = message, TimeStamp = DateTime.Now });
+            //imame log i zakacheni Details
             this.provider.UnitOfWork.Finished();
         }
     }
