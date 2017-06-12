@@ -5,12 +5,17 @@ using System.Collections.Generic;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
 {
-    class AddTennisDataMenuCommand : ICommand
+    public class AddTennisDataMenuCommand : ICommand
     {
         private IWriter writer;
 
         public AddTennisDataMenuCommand(IWriter writer)
         {
+            if (writer == null)
+            {
+                throw new ArgumentNullException("Writer cannot be null!");
+            }
+
             this.writer = writer;
         }
 

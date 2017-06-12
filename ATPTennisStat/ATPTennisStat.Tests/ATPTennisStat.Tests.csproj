@@ -56,6 +56,9 @@
     <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddCityCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddCountryCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddMatchCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddPlayerCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddTennisDataMenuCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\DataCommands\DataAddCommands\AddTournamentCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Mocks\CityMock.cs" />
     <Compile Include="ConsoleClient\Mocks\CountryMock.cs" />
     <Compile Include="ConsoleClient\Mocks\SurfaceMock.cs" />

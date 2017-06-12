@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands
 {
-    class AddPlayerCommand : ICommand
+    public class AddPlayerCommand : ICommand
     {
         private ISqlServerDataProvider dp;
         private IWriter writer;
@@ -14,6 +14,21 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
 
         public AddPlayerCommand(ISqlServerDataProvider sqlDP, IWriter writer, IModelsFactory factory)
         {
+            if (sqlDP == null)
+            {
+                throw new ArgumentNullException("Data provider cannot be null!");
+            }
+
+            if (writer == null)
+            {
+                throw new ArgumentNullException("Writer cannot be null!");
+            }
+
+            if (factory == null)
+            {
+                throw new ArgumentNullException("Writer cannot be null!");
+            }
+
             this.dp = sqlDP;
             this.writer = writer;
             this.factory = factory;
