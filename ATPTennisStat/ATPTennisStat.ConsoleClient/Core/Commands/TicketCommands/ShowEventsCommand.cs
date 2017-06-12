@@ -3,16 +3,27 @@ using System.Linq;
 using System.Text;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.PostgreSqlData;
+using System;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
 {
-    class ShowEventsCommand : ICommand
+    public class ShowEventsCommand : ICommand
     {
         protected readonly IPostgresDataProvider dp;
         private IWriter writer;
 
         public ShowEventsCommand(IPostgresDataProvider dp, IWriter writer)
         {
+            if (dp == null)
+            {
+                throw new ArgumentNullException("Data provider cannot be null!");
+            }
+
+            if (writer == null)
+            {
+                throw new ArgumentNullException("Writer cannot be null!");
+            }
+
             this.dp = dp;
             this.writer = writer;
         }
