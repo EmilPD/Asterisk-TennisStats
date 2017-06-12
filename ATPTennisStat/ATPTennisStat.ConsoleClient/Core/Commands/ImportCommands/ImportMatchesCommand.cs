@@ -82,7 +82,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
             }
 
             this.dataProvider.UnitOfWork.Finished();
-            var loggerMessage = String.Format("Players import: Records added: {0}, Duplicated records: {1}", counterAdded, counterDuplicates);
+            var loggerMessage = String.Format("Matches import: Records added: {0}, Duplicated records: {1}", counterAdded, counterDuplicates);
             writer.Write(Environment.NewLine);
             logger.Log(loggerMessage);
             return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
