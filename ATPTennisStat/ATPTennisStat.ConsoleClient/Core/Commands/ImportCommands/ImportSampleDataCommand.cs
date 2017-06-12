@@ -38,16 +38,16 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
         public string Execute(IList<string> parameters)
         {
             
-            var importPlayersResult = commandsFactory.ImportPlayers().Execute(new List<string>());
+            var importPlayersResult = commandsFactory.ImportPlayers().Execute();
             writer.WriteLine(importPlayersResult);
 
-            var importPointDistributionsResult = commandsFactory.ImportPointDistributions().Execute(new List<string>());
+            var importPointDistributionsResult = commandsFactory.ImportPointDistributions().Execute();
             writer.WriteLine(importPointDistributionsResult);
 
-            var importTournamentsResult = commandsFactory.ImportTournaments().Execute(new List<string>());
+            var importTournamentsResult = commandsFactory.ImportTournaments().Execute();
             writer.WriteLine(importTournamentsResult);
 
-            var importMatchesResult = commandsFactory.ImportMatches().Execute(new List<string>());
+            var importMatchesResult = commandsFactory.ImportMatches().Execute();
             writer.WriteLine(importMatchesResult);
 
             return "Successfully (re-)added sample data";
