@@ -189,8 +189,8 @@ namespace ATPTennisStat.ReportGenerators
                     table.AddCell(playerHeight);
 
                     var playerWeight = CreateColumn(player.Weight.ToString() ?? NotProvidedInfo, ColumnAlignment, FontSize);
-                    playerHeight.PaddingBottom = PaddingBottom;
-                    table.AddCell(playerHeight);
+                    playerWeight.PaddingBottom = PaddingBottom;
+                    table.AddCell(playerWeight);
 
                     var playerCityName = "";
 
