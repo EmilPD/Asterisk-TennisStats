@@ -40,15 +40,18 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
             
             var importPlayersResult = commandsFactory.ImportPlayers().Execute();
             writer.WriteLine(importPlayersResult);
-
+            writer.WriteLine("------------------");
             var importPointDistributionsResult = commandsFactory.ImportPointDistributions().Execute();
             writer.WriteLine(importPointDistributionsResult);
+            writer.WriteLine("------------------");
 
             var importTournamentsResult = commandsFactory.ImportTournaments().Execute();
             writer.WriteLine(importTournamentsResult);
+            writer.WriteLine("------------------");
 
             var importMatchesResult = commandsFactory.ImportMatches().Execute();
             writer.WriteLine(importMatchesResult);
+            writer.WriteLine("------------------");
 
             return "Successfully (re-)added sample data";
         }
