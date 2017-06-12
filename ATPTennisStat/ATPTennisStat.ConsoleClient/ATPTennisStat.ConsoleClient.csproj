@@ -115,6 +115,7 @@
     <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddCityCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddTennisDataMenuCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataDeleteCommands\DeleteMatchCommand.cs" />
+    <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowDetailedLogsCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowLogsCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowMatchesCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowPlayersCommand.cs" />

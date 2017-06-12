@@ -29,6 +29,11 @@ namespace ATPTennisStat.Repositories
             return this.dbSet.Find(id);
         }
 
+        public IQueryable<TEntity> GetAllQuerable()
+        {
+            return this.dbSet;
+        }
+
         public IEnumerable<TEntity> GetAll()
         {
             if (this.dbSet.Local.Count == 0)

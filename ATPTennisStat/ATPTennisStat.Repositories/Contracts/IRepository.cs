@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace ATPTennisStat.Repositories.Contracts
@@ -10,6 +11,8 @@ namespace ATPTennisStat.Repositories.Contracts
 
         IEnumerable<TEntity> GetAll();
 
+        IQueryable<TEntity> GetAllQuerable();
+        
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 
         void Add(TEntity entity);

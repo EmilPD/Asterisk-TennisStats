@@ -65,6 +65,12 @@ namespace ATPTennisStat.ConsoleClient.Core.Contracts
 
         ICommand ShowPlayers();
 
+        // Log Commands
+
+        ICommand ShowLogs();
+
+        ICommand ShowDetailedLogs();
+
         //Import commands
         ICommand ImportSampleData();
 

@@ -69,6 +69,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                     return this.TicketMenuCommand();
                 case "l":
                     return this.ShowLogs();
+                case "ld":
+                    return this.ShowDetailedLogs();
                 case "a":
                     return this.TeamInfoCommand();
                 // tickets commands
@@ -239,6 +241,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         public ICommand ShowLogs()
         {
             return new ShowLogsCommand(sqliteDp, writer);
+        }
+
+        public ICommand ShowDetailedLogs()
+        {
+            return new ShowDetailedLogsCommand(sqliteDp, writer);
         }
 
         public ICommand ShowPlayers()
