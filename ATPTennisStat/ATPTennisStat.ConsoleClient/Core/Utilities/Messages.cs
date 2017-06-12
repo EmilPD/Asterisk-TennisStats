@@ -1,4 +1,6 @@
-﻿namespace ATPTennisStat.ConsoleClient.Core.Utilities
+﻿using System;
+
+namespace ATPTennisStat.ConsoleClient.Core.Utilities
 {
     public static class Messages
     {
@@ -19,15 +21,30 @@
  [s] Tennis statistics menu
  [t] Ticket store menu
  [l] Show all logs
- [i] Team Asterisk info
+ [a] Team Asterisk info
+
  [exit]";
+        }
+
+        internal static string GenerateImportersMenu()
+        {
+            return @"
+ [imatch] Import matches
+ [iplayer] Import Players
+ [ipoint] Tennis point distribution
+ [itour] Import tournaments
+ [isample] Import sample data
+
+ [menu]";
         }
 
         internal static string GenerateReportersMenu()
         {
             return @"
  [pdfm] Create PDF report for matches
- [pdfr] Create PDF report for ranking";
+ [pdfr] Create PDF report for ranking
+
+ [menu]";
         }
 
         internal static string GenerateTicketMenu()

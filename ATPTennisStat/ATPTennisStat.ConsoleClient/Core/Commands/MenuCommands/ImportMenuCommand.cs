@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
 {
-    class ImportMenuCommand : ICommand
+    public class ImportMenuCommand : ICommand
     {
         private IWriter writer;
 
@@ -18,8 +18,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
             this.writer.Clear();
             return
                 Messages.GenerateWelcomeMessage() +
-                Messages.GenerateImportersMenu() +
-                "\n\n [menu]";
+                Messages.GenerateImportersMenu();
         }
     }
 }

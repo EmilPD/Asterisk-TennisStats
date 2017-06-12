@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
 {
-    class ReportersMenuCommand : ICommand
+    public class ReportersMenuCommand : ICommand
     {
         private IWriter writer;
 
@@ -22,8 +22,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
             this.writer.Clear();
             return
                 Messages.GenerateWelcomeMessage() +
-                Messages.GenerateReportersMenu() + 
-                "\n\n [menu]";
+                Messages.GenerateReportersMenu();
         }
     }
 }

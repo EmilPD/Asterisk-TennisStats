@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
 {
-    class MainMenuCommand : ICommand
+    public class MainMenuCommand : ICommand
     {
         private IWriter writer;
 

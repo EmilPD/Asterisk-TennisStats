@@ -68,7 +68,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                     return this.TicketMenuCommand();
                 case "l":
                     return this.ShowLogs();
-                case "i":
+                case "a":
                     return this.TeamInfoCommand();
                 // tickets commands
                 case "alle":
@@ -140,9 +140,9 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
             return new ReportersMenuCommand(writer);
         }
 
-        private ICommand ImportMenuCommand()
+        public ICommand ImportMenuCommand()
         {
-            throw new NotImplementedException();
+            return new ImportMenuCommand(writer);
         }
 
         public ICommand TicketMenuCommand()
