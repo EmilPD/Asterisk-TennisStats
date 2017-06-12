@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ATPTennisStat.Models
+namespace ATPTennisStat.Models.SqlServerModels
 {
     public class City
     {

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
-namespace ATPTennisStat.Models
+namespace ATPTennisStat.Models.SqlServerModels
 {
     public class Player
     {
@@ -17,7 +14,6 @@ namespace ATPTennisStat.Models
         {
             this.wonMatches = new HashSet<Match>();
             this.lostMatches = new HashSet<Match>();
-
         }
 
         public int Id { get; set; }

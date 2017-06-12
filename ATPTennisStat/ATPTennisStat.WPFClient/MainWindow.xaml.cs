@@ -1,4 +1,4 @@
-﻿using ATPTennisStat.Models;
+﻿using ATPTennisStat.Models.SqlServerModels;
 using ATPTennisStat.ReportGenerators;
 using ATPTennisStat.Repositories;
 using ATPTennisStat.Repositories.Contracts;

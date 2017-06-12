@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
-using Bytes2you.Validation;
 using ATPTennisStat.ConsoleClient.Core.Utilities;
+using Bytes2you.Validation;
 
 namespace ATPTennisStat.ConsoleClient.Core
 {

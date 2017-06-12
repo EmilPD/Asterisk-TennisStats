@@ -6,7 +6,7 @@ using Ninject;
 using ATPTennisStat.Importers;
 using ATPTennisStat.ReportGenerators;
 using ATPTennisStat.SQLServerData;
-using ATPTennisStat.Models;
+using ATPTennisStat.Models.SqlServerModels;
 using ATPTennisStat.Repositories;
 using ATPTennisStat.SQLServerData.Migrations;
 using ATPTennisStat.Common;
@@ -141,7 +141,7 @@ namespace ATPTennisStat.ConsoleClient
             dp.Cities.Add(new City
             {
                 Name = "Burgas",
-                Country = new Models.Country { Name = "Bulgaria" }
+                Country = new Models.SqlServerModels.Country { Name = "Bulgaria" }
             });
 
             dp.UnitOfWork.Finished();
