@@ -8,7 +8,5 @@ namespace ATPTennisStat.Repositories.Contracts
         void Finished();
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
-
     }
-
 }

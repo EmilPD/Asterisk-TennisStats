@@ -1,4 +1,4 @@
-﻿using ATPTennisStat.Models;
+﻿using ATPTennisStat.Models.SqlServerModels;
 
 namespace ATPTennisStat.Tests.ConsoleClient.Mocks
 {

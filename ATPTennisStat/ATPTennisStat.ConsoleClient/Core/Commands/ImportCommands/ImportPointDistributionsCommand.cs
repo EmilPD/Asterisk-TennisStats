@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 {
-    public class ImportPlayersCommand : ICommand
+    public class ImportPointDistributionsCommand : ICommand
     {
         private ISqlServerDataProvider dataProvider;
         private IModelsFactory modelsFactory;
@@ -18,11 +18,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
         private IWriter writer;
         private ILogger logger;
 
-        public ImportPlayersCommand(ISqlServerDataProvider dataProvider,
-                                    IModelsFactory modelsFactory,
-                                    IExcelImporter excelImporter,
-                                    IWriter writer,
-                                    ILogger logger)
+        public ImportPointDistributionsCommand(ISqlServerDataProvider dataProvider,
+                            IModelsFactory modelsFactory,
+                            IExcelImporter excelImporter,
+                            IWriter writer,
+                            ILogger logger)
         {
             this.dataProvider = dataProvider;
             this.modelsFactory = modelsFactory;
@@ -32,12 +32,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
         }
 
-
         public string Execute(IList<string> parameters)
         {
-            var players = excelImporter.ImportPlayers();
+            var pointDistributions = excelImporter.ImportPointDistributions();
 
-            writer.WriteLine("Total records in dataset: " + players.Count);
+            writer.WriteLine("Total records in dataset: " + pointDistributions.Count);
 
             var counterAdded = 0;
             var counterDuplicates = 0;
@@ -45,22 +44,19 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
             writer.Write("Importing...");
 
 
-            foreach (var p in players)
+            foreach (var pd in pointDistributions)
             {
                 try
                 {
-                    var newPlayer = modelsFactory.CreatePlayer(
-                     p.FirstName,
-                     p.LastName,
-                     p.Ranking,
-                     p.Birthdate,
-                     p.Height,
-                     p.Weight,
-                     p.City,
-                     p.Country);
+                    var newPointDistribution = modelsFactory.CreatePointDistribution(
+                     pd.Category,
+                     pd.PlayersNumber,
+                     pd.RoundName,
+                     pd.Points);
 
-                    this.dataProvider.Players.Add(newPlayer);
+                    this.dataProvider.PointDistributions.Add(newPointDistribution);
                     counterAdded++;
+
                 }
                 catch (ArgumentException ex)
                 {

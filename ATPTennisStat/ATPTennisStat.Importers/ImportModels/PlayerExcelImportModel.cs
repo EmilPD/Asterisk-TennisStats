@@ -1,4 +1,5 @@
 ﻿using ATPTennisStat.Importers.Contracts;
+using ATPTennisStat.Importers.Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using ATPTennisStat.Models;
+using ATPTennisStat.Models.SqlServerModels;
 using ATPTennisStat.SQLServerData;
 
 namespace ATPTennisStat.Importers

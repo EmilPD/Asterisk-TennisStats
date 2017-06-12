@@ -6,7 +6,7 @@ using Ninject;
 using ATPTennisStat.Importers;
 using ATPTennisStat.ReportGenerators;
 using ATPTennisStat.SQLServerData;
-using ATPTennisStat.Models;
+using ATPTennisStat.Models.SqlServerModels;
 using ATPTennisStat.Repositories;
 using ATPTennisStat.SQLServerData.Migrations;
 using ATPTennisStat.Common;
@@ -36,7 +36,6 @@ namespace ATPTennisStat.ConsoleClient
             ///Control Flow -> choose either of the following methods
             ///</summary>
             //DbContextStart();
-            //ExcelImporter();
             //NinjectStart();
             //GeneratePdfReport();
 
@@ -116,17 +115,6 @@ namespace ATPTennisStat.ConsoleClient
             #endregion
         }
 
-        private static void ExcelImporter()
-        {
-            var kernel = new StandardKernel(new ATPTennisStatModules());
-
-            var excelImporter = kernel.Get<ExcelImporter>();
-            excelImporter.ImportPlayers();
-            excelImporter.ImportTournaments();
-            excelImporter.ImportPointDistributions();
-            excelImporter.ImportMatches();
-        }
-
         private static void GeneratePdfReport()
         {
             var kernel = new StandardKernel(new ATPTennisStatModules());
@@ -153,7 +141,7 @@ namespace ATPTennisStat.ConsoleClient
             dp.Cities.Add(new City
             {
                 Name = "Burgas",
-                Country = new Models.Country { Name = "Bulgaria" }
+                Country = new Models.SqlServerModels.Country { Name = "Bulgaria" }
             });
 
             dp.UnitOfWork.Finished();

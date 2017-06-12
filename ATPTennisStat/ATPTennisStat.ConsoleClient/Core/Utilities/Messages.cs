@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ATPTennisStat.ConsoleClient.Core.Utilities
+﻿namespace ATPTennisStat.ConsoleClient.Core.Utilities
 {
     public static class Messages
     {
@@ -24,8 +18,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
  [i] Import data
  [s] Tennis statistics menu
  [t] Ticket store menu
- [a] Team Asterisk info
-
+ [l] Show all logs
+ [i] Team Asterisk info
  [exit]";
         }
 

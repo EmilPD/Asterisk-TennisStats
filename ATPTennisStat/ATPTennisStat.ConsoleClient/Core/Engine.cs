@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
-using Bytes2you.Validation;
 using ATPTennisStat.ConsoleClient.Core.Utilities;
+using Bytes2you.Validation;
 
 namespace ATPTennisStat.ConsoleClient.Core
 {
@@ -90,7 +90,7 @@ namespace ATPTennisStat.ConsoleClient.Core
 
                 if (commandLine.ToLower() == "exit")
                 {
-                    this.writer.Write(builder.ToString());
+                    //this.writer.Write(builder.ToString()); -> exceptions duplications
                     this.writer.WriteLine("Program terminated.");
                     break;
                 }
@@ -104,7 +104,7 @@ namespace ATPTennisStat.ConsoleClient.Core
                 {
                     builder.AppendLine(ex.Message);
                     this.logger.Log(ex.Message);
-                    this.writer.Write(ex.Message); //possibly  WriteLine
+                    this.writer.WriteLine(ex.Message); 
                     
                     //need to re-add menu footer
                 }

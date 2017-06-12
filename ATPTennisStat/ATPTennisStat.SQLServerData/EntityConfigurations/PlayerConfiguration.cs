@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ATPTennisStat.Models;
+using ATPTennisStat.Models.SqlServerModels;
 
 namespace ATPTennisStat.SQLServerData.EntityConfigurations
 {

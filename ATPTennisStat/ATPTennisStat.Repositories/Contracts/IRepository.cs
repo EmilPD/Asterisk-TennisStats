@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq.Expressions;
 
 namespace ATPTennisStat.Repositories.Contracts
@@ -16,6 +15,5 @@ namespace ATPTennisStat.Repositories.Contracts
         void Add(TEntity entity);
 
         void Remove(TEntity entity);
-
     }
 }

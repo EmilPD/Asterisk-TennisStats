@@ -7,12 +7,13 @@ using ClosedXML.Excel;
 using System.IO;
 using ATPTennisStat.Importers.Contracts;
 using ATPTennisStat.SQLServerData;
-using ATPTennisStat.Models;
+using ATPTennisStat.Models.SqlServerModels;
 using ATPTennisStat.Factories;
 using System.Data;
 using ATPTennisStat.Factories.Contracts;
 using System.Collections;
 using ATPTennisStat.Importers.ImportModels;
+using ATPTennisStat.Importers.Contracts.Models;
 
 namespace ATPTennisStat.Importers
 {
@@ -23,6 +24,9 @@ namespace ATPTennisStat.Importers
         private string matchesFilePath;
         private string tournamentsFilePath;
         private string pointDistributionsFilePath;
+        private const string errorMessageInvalidHeders = "Invalid Data Error: Data should be formatted having the following headers in the first row of the worksheet:" +
+                                                    "\r\n";
+        private const string errorMessageNoDataInFirstSheet = "No data in the first sheet of the file";
 
         private ISqlServerDataProvider dataProvider;
         private IModelsFactory modelsFactory;
@@ -58,203 +62,142 @@ namespace ATPTennisStat.Importers
             }
             catch (Exception ex)
             {
-
-                //throw new ArgumentException("File opened by another program");
-                Console.WriteLine(ex.Message);
-                return null;
+                throw new ArgumentException(ex.Message);
             }
 
 
         }
 
-        public void ImportPointDistributions()
+        public IList<IPointDistributionExcelImportModel> ImportPointDistributions()
         {
             var dataRange = GenerateTableRangeFromFile(this.pointDistributionsFilePath);
 
             if (dataRange == null)
             {
-                //another exception handling possible
-                return;
+                throw new ArgumentException(errorMessageNoDataInFirstSheet);
             }
 
-            //TODO Exception Handling
-            var pointDistributions = dataRange.Rows()
-                            .Select(row => new
-                            {
-                                Category = row.Field("Category").GetString().Trim(),
-                                PlayersNumber = row.Field("PlayersNumber").GetString().Trim(),
-                                RoundName = row.Field("Round Name").GetString().Trim(),
-                                Points = row.Field("Points").GetString().Trim()
-                            })
-                            .ToList();
-
-
-
-            foreach (var pd in pointDistributions)
+            try
             {
-                try
-                {
-                    var newPointDistribution = modelsFactory.CreatePointDistribution(
-                     pd.Category,
-                     pd.PlayersNumber,
-                     pd.RoundName,
-                     pd.Points);
-
-                    this.dataProvider.PointDistributions.Add(newPointDistribution);
-
-                }
-                catch (ArgumentException ex)
-                {
-
-                    Console.WriteLine("Excel import problem: " + ex.Message);
-                }
+                var pointDistributions = dataRange.Rows()
+                    .Select(row => new PointDistributionExcelImportModel
+                    {
+                        Category = row.Field("Category").GetString().Trim(),
+                        PlayersNumber = row.Field("PlayersNumber").GetString().Trim(),
+                        RoundName = row.Field("Round Name").GetString().Trim(),
+                        Points = row.Field("Points").GetString().Trim()
+                    })
+                    .ToList<IPointDistributionExcelImportModel>();
+                return pointDistributions;
 
             }
-
-            this.dataProvider.UnitOfWork.Finished();
-
+            catch (Exception)
+            {
+                throw new ArgumentException(errorMessageInvalidHeders +
+                    "Category | PlayersNumber | Round Name| Points");
+            }
         }
 
-        public void ImportTournaments()
+        public IList<ITournamentExcelImportModel> ImportTournaments()
         {
             var dataRange = GenerateTableRangeFromFile(this.tournamentsFilePath);
 
             if (dataRange == null)
             {
-                //another exception handling possible
-                return;
+                throw new ArgumentException(errorMessageNoDataInFirstSheet);
             }
 
-            //TODO Exception Handling
-            var tournaments = dataRange.Rows()
-                            .Select(row => new
-                            {
-                                Name = row.Field("Name").GetString().Trim(),
-                                StartDate = row.Field("StartDate").GetString().Trim(),
-                                EndDate = row.Field("EndDate").GetString().Trim(),
-                                PrizeMoney = row.Field("PrizeMoney").GetString().Trim(),
-                                Category = row.Field("Category").GetString().Trim(),
-                                PlayersCount = row.Field("PlayersCount").GetString().Trim(),
-                                City = row.Field("City").GetString().Trim(),
-                                Country = row.Field("Country").GetString().Trim(),
-                                Surface = row.Field("Surface").GetString().Trim(),
-                                SurfaceSpeed = row.Field("Speed").GetString().Trim()
-                            })
-                            .ToList();
-
-
-
-            foreach (var t in tournaments)
+            try
             {
-                try
-                {
-                    var newTournament = modelsFactory.CreateTournament(
-                     t.Name,
-                     t.StartDate,
-                     t.EndDate,
-                     t.PrizeMoney,
-                     t.Category,
-                     t.PlayersCount,
-                     t.City,
-                     t.Country,
-                     t.Surface,
-                     t.SurfaceSpeed);
+                var tournaments = dataRange.Rows()
+                    .Select(row => new TournamentExcelImportModel
+                    {
+                        Name = row.Field("Name").GetString().Trim(),
+                        StartDate = row.Field("StartDate").GetString().Trim(),
+                        EndDate = row.Field("EndDate").GetString().Trim(),
+                        PrizeMoney = row.Field("PrizeMoney").GetString().Trim(),
+                        Category = row.Field("Category").GetString().Trim(),
+                        PlayersCount = row.Field("PlayersCount").GetString().Trim(),
+                        City = row.Field("City").GetString().Trim(),
+                        Country = row.Field("Country").GetString().Trim(),
+                        Surface = row.Field("Surface").GetString().Trim(),
+                        SurfaceSpeed = row.Field("Speed").GetString().Trim()
+                    })
+                    .ToList<ITournamentExcelImportModel>();
 
-                    this.dataProvider.Tournaments.Add(newTournament);
-
-                }
-                catch (ArgumentException ex)
-                {
-
-                    Console.WriteLine("Excel import problem: " + ex.Message);
-                }
-
+                return tournaments;
             }
-
-            this.dataProvider.UnitOfWork.Finished();
-
-
+            catch (Exception)
+            {
+                throw new ArgumentException(errorMessageInvalidHeders +
+                    "Name | StartDate | EndDate| PrizeMoney | Category| PlayersCount | City | Country| Surface | Speed");
+            }
         }
 
-        public void ImportMatches()
+        public IList<IMatchExcelImportModel> ImportMatches()
         {
 
             var dataRange = GenerateTableRangeFromFile(this.matchesFilePath);
 
             if (dataRange == null)
             {
-                //another exception handling possible
-                return;
+                throw new ArgumentException(errorMessageNoDataInFirstSheet);
             }
 
-            var matches = dataRange.Rows()
-                       .Select(row => new
-                       {
-                           DatePlayed = row.Field("DatePlayed").GetString().Trim(),
-                           Winner = row.Field("Winner").GetString().Trim(),
-                           Loser = row.Field("Loser").GetString().Trim(),
-                           Result = row.Field("Result").GetString().Trim(),
-                           TournamentName = row.Field("Tournament").GetString().Trim(),
-                           Round = row.Field("Round").GetString().Trim()
-                       })
-                        .ToList();
-
-            var i = 0;
-            foreach (var m in matches)
+            try
             {
-                try
-                {
-                    var newMatch = modelsFactory.CreateMatch(
-                         m.DatePlayed,
-                         m.Winner,
-                         m.Loser,
-                         m.Result,
-                         m.TournamentName,
-                         m.Round
-                     );
-
-
-
-                    this.dataProvider.Matches.Add(newMatch);
-                    i++;
-                    Console.WriteLine(i);
-
-                }
-                catch (ArgumentException ex)
-                {
-
-                    Console.WriteLine("Excel import problem: " + ex.Message);
-                }
-
+                var matches = dataRange.Rows()
+                    .Select(row => new MatchExcelImportModel
+                    {
+                        DatePlayed = row.Field("DatePlayed").GetString().Trim(),
+                        Winner = row.Field("Winner").GetString().Trim(),
+                        Loser = row.Field("Loser").GetString().Trim(),
+                        Result = row.Field("Result").GetString().Trim(),
+                        TournamentName = row.Field("Tournament").GetString().Trim(),
+                        Round = row.Field("Round").GetString().Trim()
+                    })
+                    .ToList<IMatchExcelImportModel>();
+                return matches;
             }
-
-            this.dataProvider.UnitOfWork.Finished();
+            catch (Exception)
+            {
+                throw new ArgumentException(errorMessageInvalidHeders +
+                                   "DatePlayed | Winner | Loser| Result | Tournament| Round");
+            }
         }
-        
+
         public IList<IPlayerExcelImportModel> ImportPlayers()
         {
             var dataRange = GenerateTableRangeFromFile(this.playersFilePath);
 
             if (dataRange == null)
             {
-                throw new ArgumentException("No data in the first sheet of the file");
+                throw new ArgumentException(errorMessageNoDataInFirstSheet);
             }
 
-            var players = dataRange.Rows()
-                .Select(row => new PlayerExcelImportModel
-                {
-                    FirstName = row.Field("FirstName").GetString().Trim(),
-                    LastName = row.Field("LastName").GetString().Trim(),
-                    Ranking = row.Field("Ranking").GetString().Trim(),
-                    Birthdate = row.Field("BirthDate").GetString().Trim(),
-                    Height = row.Field("Height").GetString().Trim(),
-                    Weight = row.Field("Weight").GetString().Trim(),
-                    City = row.Field("City").GetString().Trim(),
-                    Country = row.Field("Country").GetString().Trim()
+            try
+            {
+                var players = dataRange.Rows()
+                    .Select(row => new PlayerExcelImportModel
+                    {
+                        FirstName = row.Field("FirstName").GetString().Trim(),
+                        LastName = row.Field("LastName").GetString().Trim(),
+                        Ranking = row.Field("Ranking").GetString().Trim(),
+                        Birthdate = row.Field("BirthDate").GetString().Trim(),
+                        Height = row.Field("Height").GetString().Trim(),
+                        Weight = row.Field("Weight").GetString().Trim(),
+                        City = row.Field("City").GetString().Trim(),
+                        Country = row.Field("Country").GetString().Trim()
 
-                })
-                .ToList<IPlayerExcelImportModel>();
-            return players;
+                    })
+                    .ToList<IPlayerExcelImportModel>();
+                return players;
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException(errorMessageInvalidHeders +
+                                   "FirstName | LastName | Ranking| BirthDate | Height| Weight | City| Country");
+            }
         }
     }
 }

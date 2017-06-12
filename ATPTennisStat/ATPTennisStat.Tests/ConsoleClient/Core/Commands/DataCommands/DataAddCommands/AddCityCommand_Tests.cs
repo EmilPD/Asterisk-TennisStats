@@ -1,13 +1,13 @@
-﻿using ATPTennisStat.ConsoleClient.Core.Contracts;
-using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands;
-using ATPTennisStat.SQLServerData;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using Moq;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
+using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands;
+using ATPTennisStat.ConsoleClient.Core.Contracts;
+using ATPTennisStat.Models.SqlServerModels;
+using ATPTennisStat.SQLServerData;
 using ATPTennisStat.Tests.ConsoleClient.Mocks;
-using ATPTennisStat.Models;
-using System.Linq.Expressions;
 
 namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCommands
 {

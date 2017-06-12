@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 {
-    public class ImportPlayersCommand : ICommand
+    public class ImportTournamentsCommand : ICommand
     {
         private ISqlServerDataProvider dataProvider;
         private IModelsFactory modelsFactory;
@@ -18,7 +18,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
         private IWriter writer;
         private ILogger logger;
 
-        public ImportPlayersCommand(ISqlServerDataProvider dataProvider,
+        public ImportTournamentsCommand(ISqlServerDataProvider dataProvider,
                                     IModelsFactory modelsFactory,
                                     IExcelImporter excelImporter,
                                     IWriter writer,
@@ -32,38 +32,39 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
         }
 
-
         public string Execute(IList<string> parameters)
         {
-            var players = excelImporter.ImportPlayers();
+            var tournaments = excelImporter.ImportTournaments();
 
-            writer.WriteLine("Total records in dataset: " + players.Count);
+            writer.WriteLine("Total records in dataset: " + tournaments.Count);
 
             var counterAdded = 0;
             var counterDuplicates = 0;
 
             writer.Write("Importing...");
 
-
-            foreach (var p in players)
+            foreach (var t in tournaments)
             {
                 try
                 {
-                    var newPlayer = modelsFactory.CreatePlayer(
-                     p.FirstName,
-                     p.LastName,
-                     p.Ranking,
-                     p.Birthdate,
-                     p.Height,
-                     p.Weight,
-                     p.City,
-                     p.Country);
+                    var newTournament = modelsFactory.CreateTournament(
+                     t.Name,
+                     t.StartDate,
+                     t.EndDate,
+                     t.PrizeMoney,
+                     t.Category,
+                     t.PlayersCount,
+                     t.City,
+                     t.Country,
+                     t.Surface,
+                     t.SurfaceSpeed);
 
-                    this.dataProvider.Players.Add(newPlayer);
+                    this.dataProvider.Tournaments.Add(newTournament);
                     counterAdded++;
                 }
                 catch (ArgumentException ex)
                 {
+
                     //log(("Excel import problem: " + ex.Message)) PSEUDO CODE
                     counterDuplicates++;
                 }

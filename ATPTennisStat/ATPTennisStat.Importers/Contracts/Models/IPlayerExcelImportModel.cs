@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATPTennisStat.Importers.Contracts
+namespace ATPTennisStat.Importers.Contracts.Models
 {
     public interface IPlayerExcelImportModel
     {

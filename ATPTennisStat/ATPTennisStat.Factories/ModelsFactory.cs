@@ -1,6 +1,6 @@
 ﻿using ATPTennisStat.Common;
 using ATPTennisStat.Factories.Contracts;
-using ATPTennisStat.Models;
+using ATPTennisStat.Models.SqlServerModels;
 using ATPTennisStat.Models.Enums;
 using ATPTennisStat.SQLServerData;
 using System;
