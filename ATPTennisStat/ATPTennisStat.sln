@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.ConsoleClient", "ATPTennisStat.ConsoleClient\ATPTennisStat.ConsoleClient.csproj", "{E8A89F36-16CB-487E-8D99-38D981429D80}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.PostgreSqlData", "ATPTennisStat.PostgreSqlData\ATPTennisStat.PostgreSqlData.csproj", "{F06EFDFC-76C0-49E3-9519-347427486BDA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.SQLiteData", "ATPTennisStat.SQLiteData\ATPTennisStat.SQLiteData.csproj", "{B44CA568-61F8-4A31-A247-25E7DFED9A99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATPTennisStat.Tests", "ATPTennisStat.Tests\ATPTennisStat.Tests.csproj", "{5A428D0E-F34A-4A11-8511-A34573766DCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{B44CA568-61F8-4A31-A247-25E7DFED9A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B44CA568-61F8-4A31-A247-25E7DFED9A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B44CA568-61F8-4A31-A247-25E7DFED9A99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A428D0E-F34A-4A11-8511-A34573766DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A428D0E-F34A-4A11-8511-A34573766DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A428D0E-F34A-4A11-8511-A34573766DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A428D0E-F34A-4A11-8511-A34573766DCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

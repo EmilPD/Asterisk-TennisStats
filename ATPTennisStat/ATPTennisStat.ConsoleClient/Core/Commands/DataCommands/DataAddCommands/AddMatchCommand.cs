@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands
 {
-    class AddMatchCommand : ICommand
+    public class AddMatchCommand : ICommand
     {
         private ISqlServerDataProvider dp;
         private IWriter writer;
