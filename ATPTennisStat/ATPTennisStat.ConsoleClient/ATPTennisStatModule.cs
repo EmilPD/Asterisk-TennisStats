@@ -57,7 +57,7 @@ namespace ATPTennisStat.ConsoleClient
             {
                 x.FromAssembliesInPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
                     .SelectAllClasses()
-                    .Where(type => type != typeof(Engine))
+                    .Where(type => type != typeof(Engine) && type != typeof(ExcelImporter))
                     .BindDefaultInterface();
             });
 
@@ -71,13 +71,8 @@ namespace ATPTennisStat.ConsoleClient
             Bind<IWriter>().To<ConsoleWriter>().InSingletonScope();
             Bind<IParser>().To<CommandParser>().InSingletonScope();
             Bind<ILogger>().To<SqLiteLogger>().InSingletonScope();
-            //Bind<IPostgresDataProvider>().To<PostgresDataProvider>().InSingletonScope();
-            //Bind<ISqlServerDataProvider>().To<SqlServerDataProvider>().InSingletonScope();
             Bind<IReportGenerator>().To<PdfReportGenerator>().InSingletonScope();
-
-            //why is binding not necessary!?
-            //Bind<IExcelImporter>().To<ExcelImporter>().InSingletonScope();
-
+            Bind<IExcelImporter>().To<ExcelImporter>().InSingletonScope();
             Bind<ICommandFactory>().To<CommandFactory>().InSingletonScope();
         }
     }
