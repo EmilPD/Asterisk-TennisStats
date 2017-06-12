@@ -101,9 +101,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
             writer.Write("Importing players' data...");
 
-            //var collectDetails = logger.GenerateNewCollectionLogDetailsCollection();
-
-            var newLog = logger.CreateNewLog("importp");
+            var newLog = logger.CreateNewLog("Players import: ");
             
             foreach (var p in players)
             {
@@ -128,16 +126,16 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
                         "Excel import problem: " + ex.Message,
                         newLog);
 
-
                     counterDuplicates++;
                 }
 
             }
 
             this.dataProvider.UnitOfWork.Finished();
-            //var loggerMessage = String.Format("Players import: Records added: {0}, Duplicated records: {1}", counterAdded,  counterDuplicates);
             writer.Write(Environment.NewLine);
-            //logger.Log(loggerMessage);
+
+            newLog.TimeStamp = DateTime.Now;
+            newLog.Message = newLog.Message + String.Format("Records added: {0}, Duplicated records: {1}", counterAdded,  counterDuplicates);
             logger.Log(newLog);
             return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
         }
