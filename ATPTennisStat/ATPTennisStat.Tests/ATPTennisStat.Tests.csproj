@@ -64,6 +64,7 @@
     <Compile Include="ConsoleClient\Core\Commands\MenuCmmands\ReporterMenuCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\MenuCmmands\TeamInfoCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\MenuCmmands\TicketMenuCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\ReportCommands\CreateRankingPdf_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\TicketCommands\BuyTicketCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\ReportCommands\CreateMatchesPdf_Tests.cs" />
     <Compile Include="ConsoleClient\Mocks\CityMock.cs" />

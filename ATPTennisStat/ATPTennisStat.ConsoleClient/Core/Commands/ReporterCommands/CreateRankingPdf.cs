@@ -6,7 +6,7 @@ using ATPTennisStat.ReportGenerators.Contracts;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands
 {
-    class CreateRankingPdf : ICommand
+    public class CreateRankingPdf : ICommand
     {
         private const string Success = "Successfully created ranking report";
         private IReportGenerator reporter;
