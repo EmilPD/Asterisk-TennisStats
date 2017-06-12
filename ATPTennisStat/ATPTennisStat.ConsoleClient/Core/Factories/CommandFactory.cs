@@ -11,6 +11,7 @@ using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataDeleteCommands;
 using ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateCommands;
 using ATPTennisStat.ReportGenerators.Contracts;
 using ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands;
+using ATPTennisStat.Importers.Contracts;
 
 namespace ATPTennisStat.ConsoleClient.Core.Factories
 {
@@ -25,14 +26,16 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         private ILogger logger;
         private IReportGenerator reporter;
         private IModelsFactory modelsFactory;
+        private IExcelImporter excelImporter;
 
-        public CommandFactory(IReportGenerator reporter, 
-                              ILogger logger, 
-                              IReader reader, 
-                              IWriter writer, 
-                              IPostgresDataProvider pgDp, 
-                              ISqlServerDataProvider sqlDp, 
-                              IModelsFactory modelsFactory)
+        public CommandFactory(IReportGenerator reporter,
+                              ILogger logger,
+                              IReader reader,
+                              IWriter writer,
+                              IPostgresDataProvider pgDp,
+                              ISqlServerDataProvider sqlDp,
+                              IModelsFactory modelsFactory,
+                              IExcelImporter excelImporter)
         {
             this.pgDp = pgDp;
             this.sqlDp = sqlDp;
@@ -41,6 +44,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
             this.logger = logger;
             this.reporter = reporter;
             this.modelsFactory = modelsFactory;
+            this.excelImporter = excelImporter;
         }
 
         public ICommand CreateCommandFromString(string commandName)
@@ -102,6 +106,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                 // import
                 case "importsd":
                     return this.ImportSampleData();
+                case "importp":
+                    return this.ImportPlayers();
                 default:
                     //throw new ArgumentException(nameof(ICommand)); The bellow way is more informative!
                     throw new ArgumentException("InvalidCommand");
@@ -229,7 +235,12 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         // Import Commands
         public ICommand ImportSampleData()
         {
-            return new ImportSampleDataCommand(sqlDp, reader, writer);
+            return new ImportSampleDataCommand(sqlDp, excelImporter, writer, logger);
+        }
+
+        public ICommand ImportPlayers()
+        {
+            return new ImportPlayersCommand(sqlDp, modelsFactory, excelImporter, writer, logger);
         }
     }
 }

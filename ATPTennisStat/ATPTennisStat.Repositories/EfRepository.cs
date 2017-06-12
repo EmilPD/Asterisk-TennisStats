@@ -33,7 +33,10 @@ namespace ATPTennisStat.Repositories
 
         public IEnumerable<TEntity> GetAll()
         {
-            this.dbSet.Load();
+            if (this.dbSet.Local.Count == 0)
+            {
+                this.dbSet.Load();
+            }
 
             return this.dbSet.Local;
 
@@ -43,7 +46,7 @@ namespace ATPTennisStat.Repositories
         {
             return this.dbSet.Where(predicate).ToList();
         }
-        
+
         public void Add(TEntity entity)
         {
             this.dbSet.Add(entity);
@@ -61,7 +64,7 @@ namespace ATPTennisStat.Repositories
 
 
         }
-        
+
         public void Remove(TEntity entity)
         {
             this.dbSet.Remove(entity);

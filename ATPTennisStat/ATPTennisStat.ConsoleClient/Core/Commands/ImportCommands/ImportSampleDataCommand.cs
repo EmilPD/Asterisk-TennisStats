@@ -1,4 +1,5 @@
 ﻿using ATPTennisStat.ConsoleClient.Core.Contracts;
+using ATPTennisStat.Importers.Contracts;
 using ATPTennisStat.SQLServerData;
 using System;
 using System.Collections.Generic;
@@ -8,23 +9,29 @@ using System.Threading.Tasks;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 {
-    class ImportSampleDataCommand : ICommand
+    public class ImportSampleDataCommand : ICommand
     {
         private ISqlServerDataProvider dp;
-        private IReader reader;
+        private IExcelImporter excelImporter;
         private IWriter writer;
+        private ILogger logger;
 
-        public ImportSampleDataCommand(ISqlServerDataProvider sqlDP, IReader reader, IWriter writer)
+        public ImportSampleDataCommand(ISqlServerDataProvider sqlDP, 
+                                       IExcelImporter excelImporter, 
+                                       IWriter writer,
+                                       ILogger logger)
         {
             this.dp = sqlDP;
-            this.reader = reader;
+            this.excelImporter = excelImporter;
             this.writer = writer;
+            this.logger = logger;
+
         }
 
         public string Execute(IList<string> parameters)
         {
-            //var excelImporter = kernel.Get<ExcelImporter>();
-            //excelImporter.ImportPlayers();
+            var players = excelImporter.ImportPlayers();
+            //writer.WriteLine("hehe");
             //excelImporter.ImportTournaments();
             //excelImporter.ImportPointDistributions();
             //excelImporter.ImportMatches();

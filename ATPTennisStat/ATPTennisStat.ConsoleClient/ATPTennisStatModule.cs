@@ -16,6 +16,8 @@ using ATPTennisStat.SQLiteData;
 using ATPTennisStat.ReportGenerators.Contracts;
 using ATPTennisStat.ReportGenerators;
 using ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands;
+using ATPTennisStat.Importers.Contracts;
+using ATPTennisStat.Importers;
 
 namespace ATPTennisStat.ConsoleClient
 {
@@ -72,6 +74,9 @@ namespace ATPTennisStat.ConsoleClient
             //Bind<IPostgresDataProvider>().To<PostgresDataProvider>().InSingletonScope();
             //Bind<ISqlServerDataProvider>().To<SqlServerDataProvider>().InSingletonScope();
             Bind<IReportGenerator>().To<PdfReportGenerator>().InSingletonScope();
+
+            //why is binding not necessary!?
+            //Bind<IExcelImporter>().To<ExcelImporter>().InSingletonScope();
 
             Bind<ICommandFactory>().To<CommandFactory>().InSingletonScope();
         }

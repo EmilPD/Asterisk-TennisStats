@@ -16,5 +16,6 @@ namespace ATPTennisStat.Repositories.Contracts
         void Add(TEntity entity);
 
         void Remove(TEntity entity);
+
     }
 }

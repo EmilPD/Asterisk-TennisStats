@@ -11,10 +11,12 @@ using ATPTennisStat.Models;
 using ATPTennisStat.Factories;
 using System.Data;
 using ATPTennisStat.Factories.Contracts;
+using System.Collections;
+using ATPTennisStat.Importers.ImportModels;
 
 namespace ATPTennisStat.Importers
 {
-    public class ExcelImporter : IImporter
+    public class ExcelImporter : IImporter, IExcelImporter
     {
         private readonly string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
         private string playersFilePath;
@@ -31,10 +33,13 @@ namespace ATPTennisStat.Importers
             this.modelsFactory = modelsFactory;
 
 
-            this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
-            this.matchesFilePath = this.solutionDirectory + "\\Data\\Excel\\Matches-Full-Data.xlsx";
-            this.tournamentsFilePath = this.solutionDirectory + "\\Data\\Excel\\Tournaments-Full-Data.xlsx";
+            //this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
             this.pointDistributionsFilePath = this.solutionDirectory + "\\Data\\Excel\\TournamentCategoryPoints.xlsx";
+
+            this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Big Data\\players-2016.xlsx";
+
+            this.matchesFilePath = this.solutionDirectory + "\\Data\\Excel\\Big Data\\matches-2016.xlsx";
+            this.tournamentsFilePath = this.solutionDirectory + "\\Data\\Excel\\Big Data\\tournaments-2016.xlsx";
         }
 
         /// <summary>
@@ -51,11 +56,11 @@ namespace ATPTennisStat.Importers
 
                 return dataRange;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 //throw new ArgumentException("File opened by another program");
-                Console.WriteLine("File opened by another program");
+                Console.WriteLine(ex.Message);
                 return null;
             }
 
@@ -194,6 +199,7 @@ namespace ATPTennisStat.Importers
                        })
                         .ToList();
 
+            var i = 0;
             foreach (var m in matches)
             {
                 try
@@ -207,7 +213,11 @@ namespace ATPTennisStat.Importers
                          m.Round
                      );
 
+
+
                     this.dataProvider.Matches.Add(newMatch);
+                    i++;
+                    Console.WriteLine(i);
 
                 }
                 catch (ArgumentException ex)
@@ -219,73 +229,32 @@ namespace ATPTennisStat.Importers
             }
 
             this.dataProvider.UnitOfWork.Finished();
-
-            //NEED TO REFACTOR IN METHOD
-            this.dataProvider.Players
-                   .GetAll()
-                   .Select(p => new
-                   {
-                       p.FirstName,
-                       p.LastName,
-                       p.TotalPoints
-                   })
-                   .OrderByDescending(p => p.TotalPoints)
-                   .ForEach(p => Console.WriteLine("{0} {1}: {2}", p.FirstName, p.LastName, p.TotalPoints));
         }
-  
-        public void ImportPlayers()
+        
+        public IList<IPlayerExcelImportModel> ImportPlayers()
         {
             var dataRange = GenerateTableRangeFromFile(this.playersFilePath);
 
             if (dataRange == null)
             {
-                //another exception handling possible
-                return;
+                throw new ArgumentException("No data in the first sheet of the file");
             }
 
             var players = dataRange.Rows()
-                .Select(row => new
+                .Select(row => new PlayerExcelImportModel
                 {
                     FirstName = row.Field("FirstName").GetString().Trim(),
                     LastName = row.Field("LastName").GetString().Trim(),
                     Ranking = row.Field("Ranking").GetString().Trim(),
-                    BirthDate = row.Field("BirthDate").GetString().Trim(),
+                    Birthdate = row.Field("BirthDate").GetString().Trim(),
                     Height = row.Field("Height").GetString().Trim(),
                     Weight = row.Field("Weight").GetString().Trim(),
                     City = row.Field("City").GetString().Trim(),
                     Country = row.Field("Country").GetString().Trim()
 
                 })
-                .ToList();
-
-
-            foreach (var p in players)
-            {
-                try
-                {
-                    var newPlayer = modelsFactory.CreatePlayer(
-                     p.FirstName,
-                     p.LastName,
-                     p.Ranking,
-                     p.BirthDate,
-                     p.Height,
-                     p.Weight,
-                     p.City,
-                     p.Country);
-
-                    this.dataProvider.Players.Add(newPlayer);
-
-                }
-                catch (ArgumentException ex)
-                {
-
-                    Console.WriteLine("Excel import problem: " + ex.Message);
-                }
-
-            }
-
-            this.dataProvider.UnitOfWork.Finished();
+                .ToList<IPlayerExcelImportModel>();
+            return players;
         }
-
     }
 }
