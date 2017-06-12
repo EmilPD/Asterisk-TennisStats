@@ -64,7 +64,9 @@
     <Compile Include="ConsoleClient\Core\Commands\MenuCmmands\ReporterMenuCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\MenuCmmands\TeamInfoCommand_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\MenuCmmands\TicketMenuCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\ReportCommands\CreateRankingPdf_Tests.cs" />
     <Compile Include="ConsoleClient\Core\Commands\TicketCommands\BuyTicketCommand_Tests.cs" />
+    <Compile Include="ConsoleClient\Core\Commands\ReportCommands\CreateMatchesPdf_Tests.cs" />
     <Compile Include="ConsoleClient\Mocks\CityMock.cs" />
     <Compile Include="ConsoleClient\Mocks\CountryMock.cs" />
     <Compile Include="ConsoleClient\Mocks\SurfaceMock.cs" />
@@ -88,6 +90,10 @@
     <ProjectReference Include="..\ATPTennisStat.Models\ATPTennisStat.Models.csproj">
       <Project>{12de3fd9-6ebc-408d-af51-1a7f7c712108}</Project>
       <Name>ATPTennisStat.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATPTennisStat.ReportGenerators\ATPTennisStat.ReportGenerators.csproj">
+      <Project>{E890EDEB-D444-4C5D-8F66-49CC423BFED5}</Project>
+      <Name>ATPTennisStat.ReportGenerators</Name>
     </ProjectReference>
     <ProjectReference Include="..\ATPTennisStat.PostgreSqlData\ATPTennisStat.PostgreSqlData.csproj">
       <Project>{F06EFDFC-76C0-49E3-9519-347427486BDA}</Project>

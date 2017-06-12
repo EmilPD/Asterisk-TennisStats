@@ -21,7 +21,6 @@ namespace ATPTennisStat.Factories
             this.dataProvider = dataProvider;
         }
 
-
         public Match CreateMatch(string datePlayed,
                          string winnerName,
                          string loserName,

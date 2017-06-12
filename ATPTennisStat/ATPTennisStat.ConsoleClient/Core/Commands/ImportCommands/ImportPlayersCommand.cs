@@ -42,7 +42,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
             var counterAdded = 0;
             var counterDuplicates = 0;
 
-            writer.Write("Importing...");
+            writer.Write("Importing players' data...");
 
 
             foreach (var p in players)

@@ -63,5 +63,17 @@ namespace ATPTennisStat.ConsoleClient.Core.Contracts
         ICommand ShowMatches();
 
         ICommand ShowPlayers();
+
+        //Import commands
+        ICommand ImportSampleData();
+
+        ICommand ImportPlayers();
+
+        ICommand ImportTournaments();
+
+        ICommand ImportMatches();
+
+        ICommand ImportPointDistributions();
+
     }
 }
