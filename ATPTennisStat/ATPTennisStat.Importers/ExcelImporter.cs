@@ -140,10 +140,14 @@ namespace ATPTennisStat.Importers
             }
         }
 
-        public IList<IMatchExcelImportModel> ImportMatches()
+        public IList<IMatchExcelImportModel> ImportMatches(string filePath)
         {
+            if (filePath == "sampleDataImport")
+            {
+                filePath = this.matchesFilePath;
+            }
 
-            var dataRange = GenerateTableRangeFromFile(this.matchesFilePath);
+            var dataRange = GenerateTableRangeFromFile(filePath);
 
             if (dataRange == null)
             {
@@ -178,6 +182,7 @@ namespace ATPTennisStat.Importers
             {
                 filePath = this.playersFilePath;
             }
+
             var dataRange = GenerateTableRangeFromFile(filePath);
 
             if (dataRange == null)
