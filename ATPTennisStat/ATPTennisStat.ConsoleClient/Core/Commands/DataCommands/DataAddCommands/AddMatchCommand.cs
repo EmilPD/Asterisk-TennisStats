@@ -34,32 +34,43 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
             this.factory = factory;
         }
 
+        public string Execute()
+        {
+            return $@"Not enough parameters!
+Use this template [addm 1 2 3 4 5 6] and try again!
+1 - date played (yyyy/mm/dd)
+2 - winner names (provide 2 names)
+3 - loser names (provide 2 names)
+4 - result
+5 - tournament id
+6 - round
+
+[menu] [show] [add]";
+        }
+
         public string Execute(IList<string> parameters)
         {
             writer.Clear();
 
-            string datePlayed = string.Empty;
-            string wfirstName = string.Empty;
-            string wlastName = string.Empty;
-            string lfirstName = string.Empty;
-            string llastName = string.Empty;
-            string result = string.Empty;
-            int tournamentId = -1;
-            string round = string.Empty;
-
-            if (parameters.Count > 7)
+            if(parameters.Count < 8)
             {
-                datePlayed = parameters[0];
+                return this.Execute();
+            }
+            else
+            {
+                int tournamentId = -1;
 
-                wfirstName = parameters[1];
-                wlastName = parameters[2];
+                var datePlayed = parameters[0];
+
+                var wfirstName = parameters[1];
+                var wlastName = parameters[2];
                 string winner = $"{wfirstName} {wlastName}";
 
-                lfirstName = parameters[3];
-                llastName = parameters[4];
+                var lfirstName = parameters[3];
+                var llastName = parameters[4];
                 string loser = $"{lfirstName} {llastName}";
 
-                result = parameters[5];
+                var result = parameters[5];
 
                 tournamentId = int.Parse(parameters[6]);
                 string tournament = dp.Tournaments.Get(tournamentId).Name;
@@ -69,7 +80,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
                     throw new ArgumentNullException($"No tournament with id {tournamentId} found!");
                 }
 
-                round = parameters[7];
+                var round = parameters[7];
 
                 var match = factory.CreateMatch(datePlayed, winner, loser, result, tournament, round);
                 if (match != null)
@@ -82,19 +93,6 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
                 {
                     throw new ArgumentNullException("Match cannot be null!");
                 }
-            }
-            else
-            {
-                return $@"Not enough parameters!
-Use this template [addm 1 2 3 4 5 6] and try again!
-1 - date played (yyyy/mm/dd)
-2 - winner names (provide 2 names)
-3 - loser names (provide 2 names)
-4 - result
-5 - tournament id
-6 - round
-
-[menu] [show] [add]";
             }
         }
     }

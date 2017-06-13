@@ -113,7 +113,7 @@
     <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddCountryCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddTournamentCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddCityCommand.cs" />
-    <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddTennisDataMenuCommand.cs" />
+    <Compile Include="Core\Commands\MenuCommands\AddTennisDataMenuCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataDeleteCommands\DeleteMatchCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowDetailedLogsCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowLogsCommand.cs" />

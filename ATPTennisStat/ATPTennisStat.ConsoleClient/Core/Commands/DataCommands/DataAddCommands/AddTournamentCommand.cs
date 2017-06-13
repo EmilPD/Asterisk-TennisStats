@@ -36,54 +36,49 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
             this.factory = factory;
         }
 
+        public string Execute()
+        {
+            return $@"Not enough parameters!
+Use this template [addt 1 2 3 4 5 6 7 8 9] and try again!
+1 - name
+2 - surface (clay, hard, grass)
+3 - category
+4 - city
+5 - start (yyyy/mm/dd)
+6 - end (yyyy/mm/dd)
+7 - prize money
+8 - players
+9 - country
+
+[menu] [show] [add]";
+        }
+
         public string Execute(IList<string> parameters)
         {
             writer.Clear();
 
-            string name = string.Empty;
-            string startDate = string.Empty;
-            string endDate = string.Empty;
-            string prizeMoney = string.Empty;
-            string categoryName = string.Empty;
-            string playersCount = string.Empty;
-            string cityName = string.Empty;
-            string countryName = string.Empty;
-            string surfaceType = string.Empty;
-            string surfaceSpeed = string.Empty;
-
-            if (parameters.Count > 3)
+            if (parameters.Count < 9)
             {
-                name = parameters[0];
-                surfaceType = parameters[1];
-                categoryName = parameters[2];
-                cityName = parameters[3];
+                return this.Execute();
+            }
+            else
+            {
 
-                if (parameters.Count > 4)
-                {
-                    startDate = parameters[4];
-                }
+                var name = parameters[0];
+                var surfaceType = parameters[1];
+                var categoryName = parameters[2];
+                var cityName = parameters[3];
 
-                if (parameters.Count > 5)
-                {
-                    endDate = parameters[5];
-                }
+                var startDate = parameters[4];
+                var endDate = parameters[5];
 
-                if (parameters.Count > 6)
-                {
-                    prizeMoney = parameters[6];
-                }
+                var prizeMoney = parameters[6];
 
-                if (parameters.Count > 7)
-                {
-                    playersCount = parameters[7];
-                }
+                var playersCount = parameters[7];
 
-                if (parameters.Count > 8)
-                {
-                    countryName = parameters[8];
-                }
+                var countryName = parameters[8];
 
-                surfaceSpeed = dp.Surfaces
+                var surfaceSpeed = dp.Surfaces
                     .Find(s => s.Type == surfaceType)
                     .Select(t => t.Speed)
                     .FirstOrDefault();
@@ -108,22 +103,6 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
                 {
                     throw new ArgumentNullException("Tournament cannot be null!");
                 }
-            }
-            else
-            {
-                return $@"Not enough parameters!
-Use this template [addt 1 2 3 4 5 6 7 8 9] and try again!
-1 - name
-2 - surface (clay, hard, grass)
-3 - category
-4 - city
-5 - start (yyyy/mm/dd)
-6 - end (yyyy/mm/dd)
-7 - prize money (optional)
-8 - players (optional)
-9 - country (optional)
-
-[menu] [show] [add]";
             }
         }
     }
