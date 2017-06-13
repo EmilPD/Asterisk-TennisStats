@@ -52,12 +52,21 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
                 int.TryParse(parameters[0], out ticketId);
                 Guard.WhenArgument(ticketId, "Incorrect event Id!").IsLessThan(0).Throw();
 
-                var currentTickets = dp.Tickets.Find(t => t.Id == ticketId).FirstOrDefault();
+                var currentTickets = dp.Tickets.GetAllQuerable()
+                                    .Where(t => t.Id == ticketId)
+                                    .FirstOrDefault();
+
+                
                 if (currentTickets != null)
                 {
+                    var tennisEventName = dp.TennisEvents.GetAllQuerable()
+                                            .Where(te => te.Id == currentTickets.TennisEventId)
+                                            .Select(te => te.Name)
+                                            .FirstOrDefault();
+
                     currentTickets.Number--;
                     dp.UnitOfWork.Finished();
-                    result.AppendLine($"Successfully bought ticket for {currentTickets.TennisEvent.Name}!");
+                    result.AppendLine($"Successfully bought ticket for {tennisEventName}!");
                 }
                 else
                 {
