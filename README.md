@@ -14,6 +14,7 @@
 ATP Tennis Stats is a simple CLI program that stores and displays data for tennis events, players and matches with a variety of data for each item. It uses 3 different databases with Entity Framework to access them using code-first approach. All databases are created using thos approach and no need of DB management is required outside of the C# source code.
 
 This is how databases are used:
+
 | Database | Data stored |
 |:----:|:-----------------------|
 | [MS SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2016) | All tennis statistics tables |
@@ -100,6 +101,9 @@ This is how databases are used:
 - Full Sample data (all lists at once)
 #### With JSON Importer
 - List of all countries
+#### With XML Importer
+- Add data for tickets
+- Add data for tennis Events
 
 ### Data to be added with console application
 Simple ways to add data
@@ -160,6 +164,7 @@ Simple ways to add data
  [allt] Show all tickets
  [alle] Show all events
  [buyt (id)] buy a ticket with (id)
+ [importtk] import tickets data from XML file
 
  [menu]
 ```
