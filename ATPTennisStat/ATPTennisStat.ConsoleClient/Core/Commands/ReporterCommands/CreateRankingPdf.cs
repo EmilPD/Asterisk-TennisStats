@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.ReportGenerators.Enums;
 using ATPTennisStat.ReportGenerators.Contracts;
+using ATPTennisStat.ConsoleClient.Core.Utilities;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands
 {
@@ -28,16 +29,23 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ReporterCommands
             this.logger = logger;
         }
 
-        public string Execute(IList<string> parameters)
+        public string Execute()
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException("Execute parameters");
-            }
-
             this.reporter.GenerateReport(PdfReportType.Ranking);
             this.logger.Log(Success);
             return Success;
+        }
+
+        public string Execute(IList<string> parameters)
+        {
+            if (parameters.Count == 0)
+            {
+                return this.Execute();
+            }
+            else
+            {
+                throw new ArgumentException(Messages.ParametersWarning);
+            }
         }
     }
 }
