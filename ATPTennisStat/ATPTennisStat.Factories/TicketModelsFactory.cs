@@ -23,7 +23,7 @@ namespace ATPTennisStat.Factories
             int number = -1;
             int eventId = -1;
 
-            sector = (Sector) Enum.Parse(typeof(Sector), eventIdStr);
+            sector = (Sector) Enum.Parse(typeof(Sector), sectorStr);
             Decimal.TryParse(priceStr, out price);
             int.TryParse(numberStr, out number);
             int.TryParse(eventIdStr, out eventId);

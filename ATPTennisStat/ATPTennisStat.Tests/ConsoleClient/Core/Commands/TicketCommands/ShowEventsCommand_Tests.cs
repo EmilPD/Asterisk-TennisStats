@@ -40,20 +40,22 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.TicketCommands
             Assert.Throws<ArgumentNullException>(() => new ShowEventsCommand(providerMock.Object, null));
         }
 
-        //[Test]
-        //public void ExecuteShould_ClearTheScreenOneTIme()
-        //{
-        //    var providerMock = new Mock<IPostgresDataProvider>();
-        //    var writerMock = new Mock<IWriter>();
+        [Test]
+        public void ExecuteShould_ClearTheScreenOneTIme()
+        {
+            var providerMock = new Mock<IPostgresDataProvider>();
+            var writerMock = new Mock<IWriter>();
 
-        //    providerMock.Setup(p => p.TennisEvents.GetAll()).Returns(new TennisEvent[] { It.IsAny<TennisEvent>() });
-        //    providerMock.Setup(p => p.Tickets.Find(It.IsAny<Expression<Func<Ticket, bool>>>())).Returns(new Ticket[] { new TicketMock() { Number = 1 } });
+            providerMock.Setup(p => p.TennisEvents.GetAll()).Returns(new TennisEvent[] { It.IsAny<TennisEvent>() });
+            providerMock.Setup(p => p.Tickets.Find(It.IsAny<Expression<Func<Ticket, bool>>>())).Returns(new Ticket[] { new TicketMock() { Number = 1 } });
 
-        //    var command = new ShowEventsCommand(providerMock.Object, writerMock.Object);
-
-        //    command.Execute(new List<string>());
-
-        //    writerMock.Verify(x => x.Clear(), Times.Once);
-        //}
+            var command = new ShowEventsCommand(providerMock.Object, writerMock.Object);
+            try
+            {
+                command.Execute(new List<string>());
+            }
+            catch { }
+            writerMock.Verify(x => x.Clear(), Times.Once);
+        }
     }
 }

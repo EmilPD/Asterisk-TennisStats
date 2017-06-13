@@ -28,6 +28,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         private ILogger logger;
         private IReportGenerator reporter;
         private IModelsFactory modelsFactory;
+        private ITicketModelsFactory ticketFactory;
         private IExcelImporter excelImporter;
 
         public CommandFactory(IReportGenerator reporter,
@@ -38,6 +39,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                               ISqlServerDataProvider sqlDp,
                               ISqliteDataProvider sqliteDp,
                               IModelsFactory modelsFactory,
+                              ITicketModelsFactory ticketFactory,
                               IExcelImporter excelImporter)
         {
             this.pgDp = pgDp;
@@ -48,6 +50,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
             this.logger = logger;
             this.reporter = reporter;
             this.modelsFactory = modelsFactory;
+            this.ticketFactory = ticketFactory;
             this.excelImporter = excelImporter;
         }
 
@@ -79,6 +82,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
                     return this.ShowTicketsCommand();
                 case "buyt":
                     return this.BuyTicketsCommand();
+                case "importtk":
+                    return this.ImportTicketsListCommand();
                 // reporter commands
                 case "pdfm":
                     return this.CreateMatchesPdf();
@@ -182,6 +187,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
         public ICommand BuyTicketsCommand()
         {
             return new BuyTicketsCommand(pgDp, writer);
+        }
+
+        public ICommand ImportTicketsListCommand()
+        {
+            return new ImportTicketsListCommand(pgDp, writer, ticketFactory);
         }
 
         // Tennis Data menu commands

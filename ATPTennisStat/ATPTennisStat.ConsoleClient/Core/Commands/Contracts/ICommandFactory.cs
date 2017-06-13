@@ -26,6 +26,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Contracts
 
         ICommand BuyTicketsCommand();
 
+        ICommand ImportTicketsListCommand();
+
         // Reporter commands
 
         ICommand CreateMatchesPdf();

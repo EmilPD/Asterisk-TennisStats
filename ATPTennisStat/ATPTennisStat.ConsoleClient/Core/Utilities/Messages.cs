@@ -55,6 +55,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
  [allt] Show all tickets
  [alle] Show all events
  [buyt (id)] buy a ticket with (id)
+ [importtk] import tickets data from XML file
 
  [menu]";
         }

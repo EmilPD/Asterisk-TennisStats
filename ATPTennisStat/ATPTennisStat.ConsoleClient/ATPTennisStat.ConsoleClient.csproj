@@ -134,6 +134,7 @@
     <Compile Include="Core\Commands\MenuCommands\TicketMenuCommand.cs" />
     <Compile Include="Core\Commands\ReporterCommands\CreateRankingPdf.cs" />
     <Compile Include="Core\Commands\ReporterCommands\CreateMatchesPdf.cs" />
+    <Compile Include="Core\Commands\TicketCommands\ImportTicketsListCommand.cs" />
     <Compile Include="Core\Commands\TicketCommands\ShowEventsCommand.cs" />
     <Compile Include="Core\Commands\TicketCommands\ShowTicketsCommand.cs" />
     <Compile Include="Core\Commands\TicketCommands\BuyTicketsCommand.cs" />
