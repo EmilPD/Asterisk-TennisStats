@@ -19,14 +19,42 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
             this.writer = writer;
         }
 
-        public string Execute(IList<string> parameters)
+        public string Execute()
         {
             this.writer.Clear();
             var result = new StringBuilder();
             var tournaments = dp.Tournaments.GetAll();
 
-            if (parameters.Count > 0)
+            foreach (Tournament evt in tournaments)
             {
+                var matchesCount = dp
+                    .Matches
+                    .GetAll()
+                    .Where((t => t.Tournament.Id == evt.Id))
+                    .ToList().Count;
+
+                result.AppendLine($"Id: {evt.Id} | Name: {evt.Name} | Matches Played: {matchesCount}");
+            }
+
+            result.AppendLine("");
+            result.AppendLine("[menu] [show] [showt] [showp]");
+            return result.ToString();
+        }
+
+        public string Execute(IList<string> parameters)
+        {
+
+
+            if (parameters.Count == 0)
+            {
+                return this.Execute();
+            }
+            else
+            {
+                this.writer.Clear();
+                var result = new StringBuilder();
+                var tournaments = dp.Tournaments.GetAll();
+
                 int tournId = -1;
                 int.TryParse(parameters[0], out tournId);
                 if (tournId > 0)
@@ -55,30 +83,19 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
                     }
                     else
                     {
-                            throw new ArgumentException($"Sorry, no tournament with id {tournId} exists!");
+                        throw new ArgumentException($"Sorry, no tournament with id {tournId} exists!");
                     }
                 }
                 else
                 {
                     throw new ArgumentException($"Sorry, {tournId} is not a valid number!");
                 }
-            }
-            else
-            {
-                foreach (Tournament evt in tournaments)
-                {
-                    var matchesCount = dp
-                        .Matches
-                        .GetAll()
-                        .Where((t => t.Tournament.Id == evt.Id))
-                        .ToList().Count;
 
-                    result.AppendLine($"Id: {evt.Id} | Name: {evt.Name} | Matches Played: {matchesCount}");
-                }
+                result.AppendLine("");
+                result.AppendLine("[menu] [show] [showt] [showp]");
+                return result.ToString();
             }
-            result.AppendLine("");
-            result.AppendLine("[menu] [show] [showt] [showp]");
-            return result.ToString();
+
         }
     }
 }

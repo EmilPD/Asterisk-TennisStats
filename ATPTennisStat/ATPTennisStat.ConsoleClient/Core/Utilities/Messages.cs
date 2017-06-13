@@ -4,6 +4,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Utilities
 {
     public static class Messages
     {
+        internal const string ParametersWarning = "This command does not take any parameters";
+
         internal static string GenerateWelcomeMessage()
         {
             return @" < WELCOME TO ASTERISK - TENNIS STATS >

@@ -1,4 +1,5 @@
 ﻿using ATPTennisStat.ConsoleClient.Core.Contracts;
+using ATPTennisStat.ConsoleClient.Core.Utilities;
 using ATPTennisStat.SQLiteData;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
             }
             else
             {
-                throw new ArgumentException("This program does not take any parameters");
+                throw new ArgumentException(Messages.ParametersWarning);
             }
 
         }
