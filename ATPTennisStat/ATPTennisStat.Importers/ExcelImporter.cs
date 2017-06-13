@@ -68,9 +68,14 @@ namespace ATPTennisStat.Importers
 
         }
 
-        public IList<IPointDistributionExcelImportModel> ImportPointDistributions()
+        public IList<IPointDistributionExcelImportModel> ImportPointDistributions(string filePath)
         {
-            var dataRange = GenerateTableRangeFromFile(this.pointDistributionsFilePath);
+            if (filePath == "sampleDataImport")
+            {
+                filePath = this.pointDistributionsFilePath;
+            }
+
+            var dataRange = GenerateTableRangeFromFile(filePath);
 
             if (dataRange == null)
             {

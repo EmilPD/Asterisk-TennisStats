@@ -43,15 +43,15 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
             var importPlayersResult = commandsFactory.ImportPlayers().Execute(importString);
             writer.WriteLine(importPlayersResult);
             writer.WriteLine("------------------");
-            var importPointDistributionsResult = commandsFactory.ImportPointDistributions().Execute();
+            var importPointDistributionsResult = commandsFactory.ImportPointDistributions().Execute(importString);
             writer.WriteLine(importPointDistributionsResult);
             writer.WriteLine("------------------");
 
-            var importTournamentsResult = commandsFactory.ImportTournaments().Execute();
+            var importTournamentsResult = commandsFactory.ImportTournaments().Execute(importString);
             writer.WriteLine(importTournamentsResult);
             writer.WriteLine("------------------");
 
-            var importMatchesResult = commandsFactory.ImportMatches().Execute();
+            var importMatchesResult = commandsFactory.ImportMatches().Execute(importString);
             writer.WriteLine(importMatchesResult);
             writer.WriteLine("------------------");
 

@@ -32,57 +32,68 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
         }
 
+
+        public string Execute()
+        {
+            return $@"Not enough parameters!
+Use this template [importpd FILE_PATH] and try again!";
+        }
+
         public string Execute(IList<string> parameters)
         {
+
             if (parameters.Count == 0)
             {
                 return this.Execute();
             }
             else
             {
-                return "This command takes no parameters";
-            }
-        }
+                var pointDistributions = excelImporter.ImportPointDistributions(parameters[0]);
 
-        public string Execute()
-        {
-            var pointDistributions = excelImporter.ImportPointDistributions();
+                writer.WriteLine("Total records in dataset: " + pointDistributions.Count);
 
-            writer.WriteLine("Total records in dataset: " + pointDistributions.Count);
+                var counterAdded = 0;
+                var counterDuplicates = 0;
 
-            var counterAdded = 0;
-            var counterDuplicates = 0;
+                writer.Write("Importing point distributions' data...");
 
-            writer.Write("Importing point distributions' data...");
+                var newLog = logger.CreateNewLog("Point distributions import: ");
 
-
-            foreach (var pd in pointDistributions)
-            {
-                try
+                foreach (var pd in pointDistributions)
                 {
-                    var newPointDistribution = modelsFactory.CreatePointDistribution(
-                     pd.Category,
-                     pd.PlayersNumber,
-                     pd.RoundName,
-                     pd.Points);
+                    try
+                    {
+                        var newPointDistribution = modelsFactory.CreatePointDistribution(
+                         pd.Category,
+                         pd.PlayersNumber,
+                         pd.RoundName,
+                         pd.Points);
 
-                    this.dataProvider.PointDistributions.Add(newPointDistribution);
-                    counterAdded++;
+                        this.dataProvider.PointDistributions.Add(newPointDistribution);
+                        counterAdded++;
+
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        var logDetail = logger.CreateNewLogDetail(
+                                   "Excel import problem: " + ex.Message,
+                                   newLog);
+
+                        counterDuplicates++;
+                    }
 
                 }
-                catch (ArgumentException ex)
-                {
-                    //log(("Excel import problem: " + ex.Message)) PSEUDO CODE
-                    counterDuplicates++;
-                }
 
+                this.dataProvider.UnitOfWork.Finished();
+                writer.Write(Environment.NewLine);
+
+                newLog.TimeStamp = DateTime.Now;
+                newLog.Message = newLog.Message + String.Format("Records added: {0}, Duplicated records: {1}", counterAdded, counterDuplicates);
+                logger.Log(newLog);
+                return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
             }
 
-            this.dataProvider.UnitOfWork.Finished();
-            var loggerMessage = String.Format("Point distributions import: Records added: {0}, Duplicated records: {1}", counterAdded, counterDuplicates);
-            writer.Write(Environment.NewLine);
-            logger.Log(loggerMessage);
-            return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
+
         }
     }
 }

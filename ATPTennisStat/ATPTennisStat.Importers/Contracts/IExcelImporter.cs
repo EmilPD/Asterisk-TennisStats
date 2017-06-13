@@ -10,7 +10,7 @@ namespace ATPTennisStat.Importers.Contracts
 {
     public interface IExcelImporter
     {
-        IList<IPointDistributionExcelImportModel> ImportPointDistributions();
+        IList<IPointDistributionExcelImportModel> ImportPointDistributions(string filePath);
 
         IList<IPlayerExcelImportModel> ImportPlayers(string filePath);
 

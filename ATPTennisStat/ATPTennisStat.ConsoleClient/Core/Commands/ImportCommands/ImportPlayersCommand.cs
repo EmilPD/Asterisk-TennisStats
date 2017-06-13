@@ -32,6 +32,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
         }
 
+        public string Execute()
+        {
+            return $@"Not enough parameters!
+Use this template [importp FILE_PATH] and try again!";
+        }
 
         public string Execute(IList<string> parameters)
         {
@@ -89,12 +94,6 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
                 logger.Log(newLog);
                 return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
             }
-        }
-
-        public string Execute()
-        {
-            return $@"Not enough parameters!
-Use this template [importp FILE_PATH] and try again!";
         }
     }
 }
