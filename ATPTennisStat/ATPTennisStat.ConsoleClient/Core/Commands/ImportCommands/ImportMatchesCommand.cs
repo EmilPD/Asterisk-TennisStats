@@ -1,5 +1,4 @@
-﻿using ATPTennisStat.ConsoleClient.Core.Commands.Contracts;
-using ATPTennisStat.ConsoleClient.Core.Contracts;
+﻿using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.Factories.Contracts;
 using ATPTennisStat.Importers.Contracts;
 using ATPTennisStat.SQLServerData;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 {
-    public class ImportMatchesCommand : ICommandNoParameters
+    public class ImportMatchesCommand : ICommand
     {
         private ISqlServerDataProvider dataProvider;
         private IModelsFactory modelsFactory;

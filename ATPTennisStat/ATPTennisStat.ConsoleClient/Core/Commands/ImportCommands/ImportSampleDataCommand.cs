@@ -1,4 +1,5 @@
 ﻿using ATPTennisStat.ConsoleClient.Core.Contracts;
+using ATPTennisStat.ConsoleClient.Core.Utilities;
 using ATPTennisStat.Factories.Contracts;
 using ATPTennisStat.Importers.Contracts;
 using ATPTennisStat.SQLServerData;
@@ -35,9 +36,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
         }
 
-        public string Execute(IList<string> parameters)
+        public string Execute()
         {
-            
             var importPlayersResult = commandsFactory.ImportPlayers().Execute();
             writer.WriteLine(importPlayersResult);
             writer.WriteLine("------------------");
@@ -54,6 +54,19 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
             writer.WriteLine("------------------");
 
             return "Successfully (re-)added sample data";
+        }
+
+        public string Execute(IList<string> parameters)
+        {
+            if (parameters.Count==0)
+            {
+                return this.Execute();
+            }
+            else
+            {
+                throw new ArgumentException(Messages.ParametersWarning);
+            }
+
         }
     }
 }

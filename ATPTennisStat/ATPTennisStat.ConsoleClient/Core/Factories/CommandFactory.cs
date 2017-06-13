@@ -13,7 +13,6 @@ using ATPTennisStat.ReportGenerators.Contracts;
 using ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands;
 using ATPTennisStat.Importers.Contracts;
 using ATPTennisStat.SQLiteData;
-using ATPTennisStat.ConsoleClient.Core.Commands.Contracts;
 
 namespace ATPTennisStat.ConsoleClient.Core.Factories
 {
@@ -271,22 +270,22 @@ namespace ATPTennisStat.ConsoleClient.Core.Factories
             return new ImportSampleDataCommand(sqlDp, modelsFactory, excelImporter, writer, logger,this);
         }
 
-        public ICommandNoParameters ImportPlayers()
+        public ICommand ImportPlayers()
         {
             return new ImportPlayersCommand(sqlDp, modelsFactory, excelImporter, writer, logger);
         }
 
-        public ICommandNoParameters ImportTournaments()
+        public ICommand ImportTournaments()
         {
             return new ImportTournamentsCommand(sqlDp, modelsFactory, excelImporter, writer, logger);
         }
 
-        public ICommandNoParameters ImportMatches()
+        public ICommand ImportMatches()
         {
             return new ImportMatchesCommand(sqlDp, modelsFactory, excelImporter, writer, logger);
         }
 
-        public ICommandNoParameters ImportPointDistributions()
+        public ICommand ImportPointDistributions()
         {
             return new ImportPointDistributionsCommand(sqlDp, modelsFactory, excelImporter, writer, logger);
         }

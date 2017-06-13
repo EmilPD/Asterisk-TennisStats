@@ -6,6 +6,6 @@ namespace ATPTennisStat.ConsoleClient.Core.Contracts
     {
         string Execute(IList<string> parameters);
 
-        //string Execute();
+        string Execute();
     }
 }

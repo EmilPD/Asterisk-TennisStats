@@ -107,7 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ATPTennisStatModule.cs" />
-    <Compile Include="Core\Commands\Contracts\ICommandNoParameters.cs" />
     <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddPlayerCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddMatchCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataAddCommands\AddCountryCommand.cs" />

@@ -4,6 +4,7 @@ using System.Text;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.PostgreSqlData;
 using System;
+using ATPTennisStat.ConsoleClient.Core.Utilities;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
 {
@@ -28,7 +29,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
             this.writer = writer;
         }
 
-        public string Execute(IList<string> parameters)
+        public string Execute()
         {
             this.writer.Clear();
             var result = new StringBuilder();
@@ -47,6 +48,19 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
             }
             result.AppendLine("[menu] [alle] [allt] [buyt (id)]");
             return result.ToString();
+        }
+
+        public string Execute(IList<string> parameters)
+        {
+
+            if (parameters.Count == 0)
+            {
+                return this.Execute();
+            }
+            else
+            {
+                throw new ArgumentException(Messages.ParametersWarning);
+            }
         }
     }
 }
