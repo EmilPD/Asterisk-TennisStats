@@ -19,14 +19,40 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
             this.writer = writer;
         }
 
-        public string Execute(IList<string> parameters)
+        public string Execute()
         {
             this.writer.Clear();
             var result = new StringBuilder();
             var players = dp.Players.GetAll();
 
-            if (parameters.Count > 0)
+            foreach (Player player in players)
             {
+                var matchesCount = dp
+                            .Matches
+                            .Find((m => (m.Winner.Id == player.Id || m.Loser.Id == player.Id)))
+                            .ToList().Count;
+
+                result.AppendLine($"Id: {player.Id} | Name: {player.FirstName} {player.LastName} | Matches Played: {matchesCount}");
+            }
+
+            result.AppendLine("");
+            result.AppendLine("[menu] [show] [showt] [showm]");
+            return result.ToString();
+        }
+
+        public string Execute(IList<string> parameters)
+        {
+
+            if (parameters.Count == 0)
+            {
+                return this.Execute();
+            }
+            else
+            {
+                this.writer.Clear();
+                var result = new StringBuilder();
+                var players = dp.Players.GetAll();
+
                 int playerId = -1;
                 int.TryParse(parameters[0], out playerId);
                 if (playerId > 0)
@@ -106,22 +132,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
                 {
                     throw new ArgumentException($"Sorry, {playerId} is not a valid number!");
                 }
-            }
-            else
-            {
-                foreach (Player player in players)
-                {
-                    var matchesCount = dp
-                                .Matches
-                                .Find((m => (m.Winner.Id == player.Id || m.Loser.Id == player.Id)))
-                                .ToList().Count;
 
-                    result.AppendLine($"Id: {player.Id} | Name: {player.FirstName} {player.LastName} | Matches Played: {matchesCount}");
-                }
+                result.AppendLine("");
+                result.AppendLine("[menu] [show] [showt] [showm]");
+                return result.ToString();
             }
-            result.AppendLine("");
-            result.AppendLine("[menu] [show] [showt] [showm]");
-            return result.ToString();
         }
     }
 }

@@ -28,6 +28,8 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
             this.writer = writer;
         }
 
+        //public string Execute
+
         public string Execute(IList<string> parameters)
         {
             writer.Clear();
