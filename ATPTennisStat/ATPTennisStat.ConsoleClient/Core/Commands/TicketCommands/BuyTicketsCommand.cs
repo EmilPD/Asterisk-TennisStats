@@ -29,14 +29,26 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
             this.writer = writer;
         }
 
+        public string Execute()
+        {
+            throw new ArgumentException("You need to pass a parameter to this command");
+        }
+
         public string Execute(IList<string> parameters)
         {
-            this.writer.Clear();
-            var result = new StringBuilder();
-            int ticketId = -1;
 
-            if (parameters.Count > 0)
+            if (parameters.Count == 0)
             {
+                return this.Execute();
+            }
+
+            else
+            {
+                this.writer.Clear();
+
+                var result = new StringBuilder();
+                int ticketId = -1;
+
                 int.TryParse(parameters[0], out ticketId);
                 Guard.WhenArgument(ticketId, "Incorrect event Id!").IsLessThan(0).Throw();
 
@@ -51,14 +63,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
                 {
                     result.AppendLine($"Sorry no tickets with this Id: {ticketId} were found!");
                 }
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException("Parameter is missing!");
+
+                result.AppendLine("[menu] [alle] [allt] [buyt (id)]");
+                return result.ToString();
             }
 
-            result.AppendLine("[menu] [alle] [allt] [buyt (id)]");
-            return result.ToString();
         }
     }
 }
