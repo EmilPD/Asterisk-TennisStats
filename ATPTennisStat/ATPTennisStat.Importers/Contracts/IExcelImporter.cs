@@ -14,7 +14,7 @@ namespace ATPTennisStat.Importers.Contracts
 
         IList<IPlayerExcelImportModel> ImportPlayers(string filePath);
 
-        IList<ITournamentExcelImportModel> ImportTournaments();
+        IList<ITournamentExcelImportModel> ImportTournaments(string filePath);
 
         IList<IMatchExcelImportModel> ImportMatches();
 

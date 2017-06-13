@@ -32,62 +32,74 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
         }
 
+        public string Execute()
+        {
+            return $@"Not enough parameters!
+Use this template [importt FILE_PATH] and try again!";
+        }
+
         public string Execute(IList<string> parameters)
         {
+
+
             if (parameters.Count == 0)
             {
                 return this.Execute();
             }
             else
             {
-                return "This command takes no parameters";
-            }
-        }
+                var tournaments = excelImporter.ImportTournaments(parameters[0]);
 
-        public string Execute()
-        {
-            var tournaments = excelImporter.ImportTournaments();
+                writer.WriteLine("Total records in dataset: " + tournaments.Count);
 
-            writer.WriteLine("Total records in dataset: " + tournaments.Count);
+                var counterAdded = 0;
+                var counterDuplicates = 0;
 
-            var counterAdded = 0;
-            var counterDuplicates = 0;
+                writer.Write("Importing tournaments' data...");
 
-            writer.Write("Importing tournaments' data...");
+                var newLog = logger.CreateNewLog("Tournaments import: ");
 
-            foreach (var t in tournaments)
-            {
-                try
+                foreach (var t in tournaments)
                 {
-                    var newTournament = modelsFactory.CreateTournament(
-                     t.Name,
-                     t.StartDate,
-                     t.EndDate,
-                     t.PrizeMoney,
-                     t.Category,
-                     t.PlayersCount,
-                     t.City,
-                     t.Country,
-                     t.Surface,
-                     t.SurfaceSpeed);
+                    try
+                    {
+                        var newTournament = modelsFactory.CreateTournament(
+                         t.Name,
+                         t.StartDate,
+                         t.EndDate,
+                         t.PrizeMoney,
+                         t.Category,
+                         t.PlayersCount,
+                         t.City,
+                         t.Country,
+                         t.Surface,
+                         t.SurfaceSpeed);
 
-                    this.dataProvider.Tournaments.Add(newTournament);
-                    counterAdded++;
+                        this.dataProvider.Tournaments.Add(newTournament);
+                        counterAdded++;
+                    }
+                    catch (ArgumentException ex)
+                    {
+
+                        var logDetail = logger.CreateNewLogDetail(
+                            "Excel import problem: " + ex.Message,
+                            newLog);
+
+                        counterDuplicates++;
+                    }
+
                 }
-                catch (ArgumentException ex)
-                {
 
-                    //log(("Excel import problem: " + ex.Message)) PSEUDO CODE
-                    counterDuplicates++;
-                }
+                this.dataProvider.UnitOfWork.Finished();
+                writer.Write(Environment.NewLine);
 
+                newLog.TimeStamp = DateTime.Now;
+                newLog.Message = newLog.Message + String.Format("Records added: {0}, Duplicated records: {1}", counterAdded, counterDuplicates);
+                logger.Log(newLog);
+                return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
             }
 
-            this.dataProvider.UnitOfWork.Finished();
-            var loggerMessage = String.Format("Tournaments import: Records added: {0}, Duplicated records: {1}", counterAdded, counterDuplicates);
-            writer.Write(Environment.NewLine);
-            logger.Log(loggerMessage);
-            return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
+
         }
     }
 }

@@ -37,11 +37,8 @@ namespace ATPTennisStat.Importers
             this.modelsFactory = modelsFactory;
 
 
-            //this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Players-Full-Data.xlsx";
             this.pointDistributionsFilePath = this.solutionDirectory + "\\Data\\Excel\\Sample Data\\TournamentCategoryPoints.xlsx";
-
             this.playersFilePath = this.solutionDirectory + "\\Data\\Excel\\Sample Data\\players-2016.xlsx";
-
             this.matchesFilePath = this.solutionDirectory + "\\Data\\Excel\\Sample Data\\matches-2016.xlsx";
             this.tournamentsFilePath = this.solutionDirectory + "\\Data\\Excel\\Sample Data\\tournaments-2016.xlsx";
         }
@@ -64,8 +61,6 @@ namespace ATPTennisStat.Importers
             {
                 throw new ArgumentException(ex.Message);
             }
-
-
         }
 
         public IList<IPointDistributionExcelImportModel> ImportPointDistributions(string filePath)
@@ -103,9 +98,15 @@ namespace ATPTennisStat.Importers
             }
         }
 
-        public IList<ITournamentExcelImportModel> ImportTournaments()
+        public IList<ITournamentExcelImportModel> ImportTournaments(string filePath)
         {
-            var dataRange = GenerateTableRangeFromFile(this.tournamentsFilePath);
+
+            if (filePath == "sampleDataImport")
+            {
+                filePath = this.tournamentsFilePath;
+            }
+
+            var dataRange = GenerateTableRangeFromFile(filePath);
 
             if (dataRange == null)
             {
