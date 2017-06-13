@@ -51,6 +51,8 @@ Use this template [ld (logID)] and try again!";
 
                 var result = new StringBuilder();
 
+                result.AppendLine("--------");
+
                 var listOfLogDetails = this.dp.LogDetails.GetAllQuerable()
                                    .Where(ld => ld.LogId == id)
                                    .ToList();
@@ -67,6 +69,7 @@ Use this template [ld (logID)] and try again!";
                 {
                     result.AppendLine($"No detailed logs available for this log");
                 }
+                result.AppendLine("--------");
 
                 result.AppendLine($"Log ID: {log.Id}");
                 result.AppendLine($"Log Message: {log.Message}");

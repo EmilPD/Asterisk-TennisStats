@@ -80,15 +80,15 @@ namespace ATPTennisStat.Factories
                 throw new ArgumentException("Startdate cannot be parsed");
             }
 
-            bool matchExists = this.dataProvider.Matches.GetAll()
-                                .Any(m => m.Winner.FirstName.ToLower() == winnerFirstNameToLower &&
+            var matchFound = this.dataProvider.Matches.GetAll()
+                                .FirstOrDefault(m => m.Winner.FirstName.ToLower() == winnerFirstNameToLower &&
                                           m.Winner.LastName.ToLower() == winnerLastNameToLower &&
                                           m.Loser.FirstName.ToLower() == loserFirstNameToLower &&
                                           m.Loser.LastName.ToLower() == loserLastNameToLower &&
                                           m.DatePlayed == datePlayedParsed); // working?
-            if (matchExists)
+            if (matchFound != null)
             {
-                throw new ArgumentException("Match already in the database");
+                throw new ArgumentException($"Match between {matchFound.Winner.LastName} and {matchFound.Loser.LastName} played on {matchFound.DatePlayed} already exists in the database under id: {matchFound.Id}");
             }
 
 
@@ -163,7 +163,7 @@ namespace ATPTennisStat.Factories
             var tournament = dataProvider.Tournaments.GetAll()
                              .FirstOrDefault(t => t.Name.ToLower() == tournamentNameToLower);
 
-            if(tournament == null)
+            if (tournament == null)
             {
                 throw new ArgumentException("Tournament cannot be found - please import tournaments" + tournamentName);
             }
@@ -230,13 +230,13 @@ namespace ATPTennisStat.Factories
             }
 
 
-            bool pointDistributionExists = this.dataProvider.PointDistributions.GetAll()
-                    .Any(pd => pd.TournamentCategory.Category.ToLower() == categoryNameToLower &&
+            var foundPointDistribution = this.dataProvider.PointDistributions.GetAll()
+                    .FirstOrDefault(pd => pd.TournamentCategory.Category.ToLower() == categoryNameToLower &&
                                 pd.TournamentCategory.PlayersCount == playersNumberParsed &&
                                 pd.Round.Stage == roundNameParsed);
-            if (pointDistributionExists)
+            if (foundPointDistribution != null)
             {
-                throw new ArgumentException("Point distribution already exists in the database");
+                throw new ArgumentException($"Point distribution for already exists in the database under round id: {foundPointDistribution.RoundId} and tournament category id: {foundPointDistribution.TournamentCategoryId} ");
             }
 
             int pointsParsed;
@@ -309,11 +309,11 @@ namespace ATPTennisStat.Factories
 
             var nameToLower = name.ToLower();
 
-            bool tournamentExists = this.dataProvider.Tournaments.GetAll()
-                                .Any(t => t.Name.ToLower() == nameToLower);
-            if (tournamentExists)
+            var tournamentFound = this.dataProvider.Tournaments.GetAll()
+                                .FirstOrDefault(t => t.Name.ToLower() == nameToLower);
+            if (tournamentFound != null)
             {
-                throw new ArgumentException("Tournament with the same name already in the database");
+                throw new ArgumentException($"{tournamentFound.Name} already in the database under id {tournamentFound.Id}");
             }
 
             //START DATE
@@ -522,13 +522,13 @@ namespace ATPTennisStat.Factories
 
             var nameToLower = categoryName.ToLower();
 
-            bool tournamentCategoryExists = this.dataProvider.TournamentCategories.GetAll()
-                                .Any(tc => tc.Category.ToLower() == nameToLower &&
+            var tournamentCategoryFound = this.dataProvider.TournamentCategories.GetAll()
+                                .FirstOrDefault(tc => tc.Category.ToLower() == nameToLower &&
                                         tc.PlayersCount == playersCount);
 
-            if (tournamentCategoryExists)
+            if (tournamentCategoryFound != null)
             {
-                throw new ArgumentException("Category already in the database");
+                throw new ArgumentException($"{tournamentCategoryFound.Category} already exists in the database under id: {tournamentCategoryFound.Id}");
             }
 
             return new TournamentCategory
@@ -563,12 +563,12 @@ namespace ATPTennisStat.Factories
             var firstNameToLower = firstName.ToLower();
             var lastNameToLower = lastName.ToLower();
 
-            bool playerExists = this.dataProvider.Players.GetAll()
-                                .Any(p => p.FirstName.ToLower() == firstNameToLower &&
+            var playerFound = this.dataProvider.Players.GetAll()
+                                .FirstOrDefault(p => p.FirstName.ToLower() == firstNameToLower &&
                                             p.LastName.ToLower() == lastNameToLower);
-            if (playerExists)
+            if (playerFound != null)
             {
-                throw new ArgumentException("Player already in the database");
+                throw new ArgumentException($"{playerFound.FirstName} {playerFound.LastName} already in the database under id {playerFound.Id}");
             }
 
 
@@ -678,12 +678,12 @@ namespace ATPTennisStat.Factories
             }
 
             var nameToLower = name.ToLower();
-            bool countryExists = this.dataProvider.Countries.GetAll()
-                                .Any(c => c.Name.ToLower() == nameToLower);
+            var countryFound = this.dataProvider.Countries.GetAll()
+                                .FirstOrDefault(c => c.Name.ToLower() == nameToLower);
 
-            if (countryExists)
+            if (countryFound != null)
             {
-                throw new ArgumentException("Country already in the database");
+                throw new ArgumentException($"{countryFound.Name} already exists in the database under {countryFound.Id}");
             }
 
 
@@ -703,12 +703,12 @@ namespace ATPTennisStat.Factories
 
             var cityNameLowerCase = name.ToLower();
 
-            bool cityExists = this.dataProvider.Cities.GetAll()
-                                .Any(c => c.Name.ToLower() == cityNameLowerCase);
+            var cityFound = this.dataProvider.Cities.GetAll()
+                                .FirstOrDefault(c => c.Name.ToLower() == cityNameLowerCase);
 
-            if (cityExists)
+            if (cityFound != null)
             {
-                throw new ArgumentException("City already in the database");
+                throw new ArgumentException($"{cityFound.Name} already in the database under id: {cityFound.Id}");
             }
 
             if (String.IsNullOrEmpty(countryName))
