@@ -22,7 +22,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
             this.writer = writer;
         }
 
-        public string Execute(IList<string> parameters)
+        public string Execute()
         {
             this.writer.Clear();
             var result = new StringBuilder();
@@ -32,6 +32,18 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
             result.AppendLine("Zach - ZachD");
             result.AppendLine("[menu]");
             return result.ToString();
+        }
+
+        public string Execute(IList<string> parameters)
+        {
+            if (parameters.Count==0)
+            {
+                return this.Execute();
+            }
+            else
+            {
+                throw new ArgumentException(Messages.ParametersWarning);
+            }
         }
     }
 }

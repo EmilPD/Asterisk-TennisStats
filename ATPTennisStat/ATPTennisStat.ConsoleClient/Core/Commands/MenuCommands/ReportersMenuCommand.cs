@@ -22,12 +22,25 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.MenuCommands
             this.writer = writer;
         }
 
-        public string Execute(IList<string> parameters)
+        public string Execute()
         {
             this.writer.Clear();
             return
                 Messages.GenerateWelcomeMessage() +
                 Messages.GenerateReportersMenu();
+        }
+
+        public string Execute(IList<string> parameters)
+        {
+
+            if (parameters.Count == 0)
+            {
+                return this.Execute();
+            }
+            else
+            {
+                throw new ArgumentException(Messages.ParametersWarning);
+            }
         }
     }
 }
