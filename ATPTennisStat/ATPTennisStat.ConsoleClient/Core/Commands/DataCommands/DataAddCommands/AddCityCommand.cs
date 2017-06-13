@@ -28,19 +28,26 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
             this.writer = writer;
         }
 
-        //public string Execute
+        public string Execute()
+        {
+            return $@"Not enough parameters!
+Use this template [addct (name) (country)] and try again!
+
+[menu] [show] [add]";
+        }
 
         public string Execute(IList<string> parameters)
         {
             writer.Clear();
 
-            string name = string.Empty;
-            string countryName = string.Empty;
-
-            if (parameters.Count == 2)
+            if(parameters.Count != 2)
             {
-                name = parameters[0];
-                countryName = parameters[1];
+                return this.Execute();
+            }
+            else
+            {
+                var name = parameters[0];
+                var countryName = parameters[1];
 
                 var country = dp.Countries
                     .Find(c => c.Name == countryName)
@@ -79,13 +86,6 @@ Add new country with command [addct (name) (country)]!
 
 [menu] [show] [add]";
                 }
-            }
-            else
-            {
-                return $@"Not enough parameters!
-Use this template [addct (name) (country)] and try again!
-
-[menu] [show] [add]";
             }
         }
     }
