@@ -131,7 +131,7 @@
     <Compile Include="Core\Commands\MenuCommands\ReportersMenuCommand.cs" />
     <Compile Include="Core\Commands\DataCommands\DataShowCommands\ShowTennisDataMenuCommand.cs" />
     <Compile Include="Core\Commands\MenuCommands\TeamInfoCommand.cs" />
-    <Compile Include="Core\Commands\DataCommands\TennisDataMenuCommand.cs" />
+    <Compile Include="Core\Commands\MenuCommands\TennisDataMenuCommand.cs" />
     <Compile Include="Core\Commands\MenuCommands\TicketMenuCommand.cs" />
     <Compile Include="Core\Commands\ReporterCommands\CreateRankingPdf.cs" />
     <Compile Include="Core\Commands\ReporterCommands\CreateMatchesPdf.cs" />

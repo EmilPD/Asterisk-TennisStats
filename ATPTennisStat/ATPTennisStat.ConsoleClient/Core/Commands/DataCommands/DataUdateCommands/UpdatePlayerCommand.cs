@@ -20,11 +20,28 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateComman
             this.writer = writer;
         }
 
+        public string Execute()
+        {
+            return $@"Not enough parameters!
+Use this template [id param new-data].
+1 - first name
+2 - last name
+3 - height
+4 - weight
+5 - birthday (yyyy/mm/dd)
+6 - rank
+7 - city";
+        }
+
         public string Execute(IList<string> parameters)
         {
             writer.Clear();
 
-            if (parameters.Count == 3)
+            if (parameters.Count != 3)
+            {
+                return this.Execute();
+            }
+            else
             {
                 int id = -1;
                 bool parsed = int.TryParse(parameters[0], out id);
@@ -125,19 +142,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataUdateComman
                         throw new ArgumentOutOfRangeException("Parameter must be between 1 and 7!");
                 }
                 this.dp.UnitOfWork.Finished();
-                return $"Player {player.FirstName} {player.LastName} updated successfully!";
-            }
-            else
-            {
-                return $@"Not enough parameters!
-Use this template [id param new-data].
-1 - first name
-2 - last name
-3 - height
-4 - weight
-5 - birthday (yyyy/mm/dd)
-6 - rank
-7 - city";
+                return $"Player with {player.Id} updated successfully!";
             }
         }
     }
