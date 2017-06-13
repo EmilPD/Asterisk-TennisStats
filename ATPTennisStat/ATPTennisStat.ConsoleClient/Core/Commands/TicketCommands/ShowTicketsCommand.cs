@@ -5,6 +5,7 @@ using System.Text;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.Models.Enums;
 using ATPTennisStat.PostgreSqlData;
+using ATPTennisStat.ConsoleClient.Core.Utilities;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
 {
@@ -30,7 +31,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
             this.writer = writer;
         }
 
-        public string Execute(IList<string> parameters)
+        public string Execute()
         {
             this.writer.Clear();
             var result = new StringBuilder();
@@ -38,7 +39,6 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
 
             foreach (var evt in tevents)
             {
-                result.AppendLine($"* {evt.Name}");
 
                 var tList = dp
                     .Tickets
@@ -47,19 +47,29 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.TicketCommands
                     .ToList();
 
                 var tickets = String.Join("\n    ", tList);
-
                 if (tickets.Length > 0)
                 {
+                    result.AppendLine($"* {evt.Name}");
                     result.AppendLine("    " + tickets);
+                    result.AppendLine("");
                 }
-                else
-                {
-                    result.AppendLine("    " + NoTicketsMessage);
-                }
-                result.AppendLine("");   
+
             }
             result.AppendLine("[menu] [alle] [allt] [buyt (id)]");
             return result.ToString();
+        }
+
+        public string Execute(IList<string> parameters)
+        {
+
+            if (parameters.Count == 0)
+            {
+                return this.Execute();
+            }
+            else
+            {
+                throw new ArgumentException(Messages.ParametersWarning);
+            }
         }
     }
 }
