@@ -20,6 +20,13 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataDeleteComma
             this.reader = reader;
             this.writer = writer;
         }
+        
+        public string Execute()
+        {
+            return $@"Not enough parameters!
+Use this template [delm (id)] and try again!
+Id must be a valid number!";
+        }
 
         public string Execute(IList<string> parameters)
         {
@@ -57,9 +64,10 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataDeleteComma
                     throw new NullReferenceException("Index cannot be parsed!");
                 }
             }
-            return $@"Not enough parameters!
-Use this template [delm (id)] and try again!
-Id must be a valid number!";
+            else
+            {
+                return this.Execute();
+            }
         }
     }
 }

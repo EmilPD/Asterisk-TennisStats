@@ -74,7 +74,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
                     }
                     else
                     {
-                        throw new ArgumentException($"Sorry, no player with id {matchId} exists!");
+                        throw new ArgumentException($"Sorry, no match with id {matchId} exists!");
                     }
                 }
                 else
