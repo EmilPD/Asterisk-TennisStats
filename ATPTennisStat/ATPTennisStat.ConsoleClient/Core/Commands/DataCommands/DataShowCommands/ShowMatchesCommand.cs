@@ -8,7 +8,7 @@ using ATPTennisStat.SQLServerData;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands
 {
-    class ShowMatchesCommand : ICommand
+    public class ShowMatchesCommand : ICommand
     {
         private ISqlServerDataProvider dp;
         private IWriter writer;
@@ -19,14 +19,37 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
             this.writer = writer;
         }
 
-        public string Execute(IList<string> parameters)
+        public string Execute()
         {
             this.writer.Clear();
             var result = new StringBuilder();
             var matches = dp.Matches.GetAll();
 
-            if (parameters.Count > 0)
+            foreach (var match in matches)
             {
+                string winnerName = $"{match.Winner.FirstName} {match.Winner.LastName}";
+                string loserName = $"{match.Loser.FirstName} {match.Loser.LastName}";
+
+                result.AppendLine($"Id: {match.Id} | Date: {match.DatePlayed.ToString("d", DateTimeFormatInfo.InvariantInfo)} | {winnerName} : {loserName} | Result: {match.Result}");
+            }
+
+            result.AppendLine("");
+            result.AppendLine("[menu] [show] [showt] [showp]");
+            return result.ToString();
+        }
+
+        public string Execute(IList<string> parameters)
+        {
+            if (parameters.Count == 0)
+            {
+                return this.Execute();
+            }
+            else
+            {
+                this.writer.Clear();
+                var result = new StringBuilder();
+                var matches = dp.Matches.GetAll();
+
                 int matchId = -1;
                 int.TryParse(parameters[0], out matchId);
 
@@ -58,20 +81,11 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
                 {
                     throw new ArgumentException($"Sorry, {matchId} is not a valid number!");
                 }
-            }
-            else
-            {
-                foreach (var match in matches)
-                {
-                    string winnerName = $"{match.Winner.FirstName} {match.Winner.LastName}";
-                    string loserName = $"{match.Loser.FirstName} {match.Loser.LastName}";
 
-                    result.AppendLine($"Id: {match.Id} | Date: {match.DatePlayed.ToString("d", DateTimeFormatInfo.InvariantInfo)} | {winnerName} : {loserName} | Result: {match.Result}");
-                }
+                result.AppendLine("");
+                result.AppendLine("[menu] [show] [showt] [showp]");
+                return result.ToString();
             }
-            result.AppendLine("");
-            result.AppendLine("[menu] [show] [showt] [showp]");
-            return result.ToString();
         }
     }
 }
