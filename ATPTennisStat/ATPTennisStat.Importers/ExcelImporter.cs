@@ -168,7 +168,7 @@ namespace ATPTennisStat.Importers
 
         public IList<IPlayerExcelImportModel> ImportPlayers(string filePath)
         {
-            if(filePath == null)
+            if(filePath == "sampleDataImport")
             {
                 filePath = this.playersFilePath;
             }

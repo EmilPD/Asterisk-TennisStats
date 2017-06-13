@@ -38,7 +38,9 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
         public string Execute()
         {
-            var importPlayersResult = commandsFactory.ImportPlayers().Execute();
+            var importString = new List<string>() { "sampleDataImport" };
+
+            var importPlayersResult = commandsFactory.ImportPlayers().Execute(importString);
             writer.WriteLine(importPlayersResult);
             writer.WriteLine("------------------");
             var importPointDistributionsResult = commandsFactory.ImportPointDistributions().Execute();

@@ -40,7 +40,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
             {
                 return this.Execute();
             }
-            else if (parameters.Count == 1)
+            else
             {
                 var players = excelImporter.ImportPlayers(parameters[0]);
 
@@ -51,6 +51,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
 
                 writer.Write("Importing players' data...");
 
+                var newLog = logger.CreateNewLog("Players import: ");
 
                 foreach (var p in players)
                 {
@@ -71,72 +72,29 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.ImportCommands
                     }
                     catch (ArgumentException ex)
                     {
-                        //log(("Excel import problem: " + ex.Message)) PSEUDO CODE
+                        var logDetail = logger.CreateNewLogDetail(
+                            "Excel import problem: " + ex.Message,
+                            newLog);
+
                         counterDuplicates++;
                     }
 
                 }
 
                 this.dataProvider.UnitOfWork.Finished();
-                var loggerMessage = String.Format("Players import: Records added: {0}, Duplicated records: {1}", counterAdded, counterDuplicates);
                 writer.Write(Environment.NewLine);
-                logger.Log(loggerMessage);
+
+                newLog.TimeStamp = DateTime.Now;
+                newLog.Message = newLog.Message + String.Format("Records added: {0}, Duplicated records: {1}", counterAdded, counterDuplicates);
+                logger.Log(newLog);
                 return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
-            }
-            else
-            {
-                return "This command takes no parameters";
             }
         }
 
         public string Execute()
         {
-            var players = excelImporter.ImportPlayers(null);
-
-            writer.WriteLine("Total records in dataset: " + players.Count);
-
-            var counterAdded = 0;
-            var counterDuplicates = 0;
-
-            writer.Write("Importing players' data...");
-
-            var newLog = logger.CreateNewLog("Players import: ");
-            
-            foreach (var p in players)
-            {
-                try
-                {
-                    var newPlayer = modelsFactory.CreatePlayer(
-                     p.FirstName,
-                     p.LastName,
-                     p.Ranking,
-                     p.Birthdate,
-                     p.Height,
-                     p.Weight,
-                     p.City,
-                     p.Country);
-
-                    this.dataProvider.Players.Add(newPlayer);
-                    counterAdded++;
-                }
-                catch (ArgumentException ex)
-                {
-                    var logDetail = logger.CreateNewLogDetail(
-                        "Excel import problem: " + ex.Message,
-                        newLog);
-
-                    counterDuplicates++;
-                }
-
-            }
-
-            this.dataProvider.UnitOfWork.Finished();
-            writer.Write(Environment.NewLine);
-
-            newLog.TimeStamp = DateTime.Now;
-            newLog.Message = newLog.Message + String.Format("Records added: {0}, Duplicated records: {1}", counterAdded,  counterDuplicates);
-            logger.Log(newLog);
-            return String.Format("Records added: {0}{1}Duplicated records: {2}", counterAdded, Environment.NewLine, counterDuplicates);
+            return $@"Not enough parameters!
+Use this template [importp FILE_PATH] and try again!";
         }
     }
 }
