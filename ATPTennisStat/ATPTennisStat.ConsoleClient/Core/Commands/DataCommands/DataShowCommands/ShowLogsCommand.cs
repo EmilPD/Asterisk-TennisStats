@@ -3,7 +3,7 @@ using System.Text;
 using ATPTennisStat.ConsoleClient.Core.Contracts;
 using ATPTennisStat.SQLiteData;
 using System.Linq;
-
+using System;
 
 namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommands
 {
@@ -18,7 +18,7 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
             this.writer = writer;
         }
 
-        public string Execute(IList<string> parameters)
+        public string Execute()
         {
             this.writer.Clear();
             var result = new StringBuilder();
@@ -35,6 +35,18 @@ namespace ATPTennisStat.ConsoleClient.Core.Commands.DataCommands.DataShowCommand
             result.AppendLine("");
             result.AppendLine("[menu]");
             return result.ToString();
+
+        }
+        public string Execute(IList<string> parameters)
+        {
+            if (parameters.Count == 0)
+            {
+                return this.Execute();
+            }
+            else
+            {
+                throw new ArgumentException("This command does not take in any parameters");
+            }
         }
     }
 }
