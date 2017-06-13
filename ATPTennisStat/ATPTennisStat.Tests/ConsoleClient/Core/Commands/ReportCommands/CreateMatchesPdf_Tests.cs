@@ -45,7 +45,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
             var loggerMock = new Mock<ILogger>();
             var command = new CreateMatchesPdf(reporterMock.Object, loggerMock.Object);
 
-            string result = command.Execute(new List<string>() { "some" });
+            string result = command.Execute(new List<string>());
 
             Assert.That(result.Contains("Successfully created matches report"));
         }
@@ -57,7 +57,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
             var loggerMock = new Mock<ILogger>();
             var command = new CreateMatchesPdf(reporterMock.Object, loggerMock.Object);
 
-            string result = command.Execute(new List<string>() { "some" });
+            string result = command.Execute(new List<string>());
 
             reporterMock.Verify(x => x.GenerateReport(PdfReportType.Matches), Times.Once);
         }
@@ -69,7 +69,7 @@ namespace ATPTennisStat.Tests.ConsoleClient.Core.Commands.DataCommands.DataAddCo
             var loggerMock = new Mock<ILogger>();
             var command = new CreateMatchesPdf(reporterMock.Object, loggerMock.Object);
 
-            string result = command.Execute(new List<string>() { "some" });
+            string result = command.Execute(new List<string>());
 
             loggerMock.Verify(x => x.Log("Successfully created matches report"), Times.Once);
         }
